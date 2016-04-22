@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       },
       clientHTML: {
         src: ['./client/index.html'],
-        dest: './dist/index.html'
+        dest: './dist/built.html'
       }
 	  },
     jshint: {

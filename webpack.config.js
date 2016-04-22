@@ -49,7 +49,9 @@ module.exports = {
       'window.Tether':'tether',
     }),
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: path.join(__dirname,'/dist/built.html')
     })
   ]
 }
+
+
