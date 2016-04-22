@@ -1,3 +1,4 @@
+<<<<<<< aebd4db26f20e94f177b94f808b5d2d244cfc282
 //this is the intro server file
 
 var app = require('./server/configuration.js');
@@ -32,3 +33,5 @@ app.use(webpackHot(compiler));
 
 
 // app.use(express.static(path.join(__dirname, 'client/')));
+=======
+>>>>>>> working asynch api call to github
