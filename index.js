@@ -3,7 +3,7 @@ var app = require('./server/configuration.js');
 var port = process.env.PORT || 8000;
 
 var path = require('path');
-var express = require('express');
+// var express = require('express');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 var webpackMiddleware = require('webpack-dev-middleware');
