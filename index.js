@@ -1,5 +1,3 @@
-//this is the intro server file
-
 var app = require('./server/configuration.js');
 
 var port = process.env.PORT || 8000;
@@ -29,6 +27,3 @@ app.use(webpackMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath
 }));
 app.use(webpackHot(compiler));
-
-
-// app.use(express.static(path.join(__dirname, 'client/')));
