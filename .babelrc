@@ -1,7 +1,3 @@
-<<<<<<< aebd4db26f20e94f177b94f808b5d2d244cfc282
-=======
-
->>>>>>> working asynch api call to github
 {
   "presets":["es2015", "react"],
   "env": {
@@ -9,8 +5,4 @@
       "presets": ["react-hmre"]
     }
   }
-<<<<<<< aebd4db26f20e94f177b94f808b5d2d244cfc282
 }
-=======
-}
->>>>>>> working asynch api call to github
