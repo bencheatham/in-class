@@ -14,9 +14,9 @@ export default class User extends Component {
      }
    }
 
-   setInputValue(val) {
-    this.refs.input.value = val
-   }
+   // setInputValue(val) {
+   //  //this.refs.input.value = val
+   // }
 
    handleKeyUp(e) {
      if (e.keyCode === 13) {
@@ -29,18 +29,17 @@ export default class User extends Component {
    }
 
    render() {
-     return (
-       <div>
-         <p>Type a username</p>
-         <input size="40"
-                ref="input"
-                defaultValue={this.props.value}
-                onKeyUp={this.handleKeyUp} />
-         <button onClick={this.handleKeyUp}>
-           Get 'er Done!
-         </button>
-       </div>
-     )
+     // return (
+     //   <div>
+     //     <p>Type a username</p>
+     //     <input size="40"
+     //            defaultValue={this.props.value}
+     //            onKeyUp={this.handleKeyUp} />
+     //     <button onClick={this.handleKeyUp}>
+     //       Get 'er Done!
+     //     </button>
+     //   </div>
+     // )
    }
 }
 

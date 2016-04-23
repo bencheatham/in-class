@@ -4,9 +4,28 @@ import routes from '../../routes';
 import DevTools from './DevTools';
 import { Router } from 'react-router';
 
+// export default class Root extends Component {
+//   render() {
+//     const { store, history } = this.props;
+
+//     return (
+//       <Provider store={store}>
+//         <div>
+//           <Router history={history} routes={routes} />
+//           <DevTools />
+//         </div>
+//       </Provider>
+//     )
+//   };
+// };
+
 export default class Root extends Component {
+  
+
+
   render() {
-    const { store, history } = this.props
+    const { store, history } = this.props;
+
     return (
       <Provider store={store}>
         <div>
@@ -15,8 +34,19 @@ export default class Root extends Component {
         </div>
       </Provider>
     )
+
+    // return (
+    //     <div>
+    //       <Router history={history} routes={routes} store={store} />
+    //       <DevTools />
+    //     </div>
+    // )
+
+
   };
 };
+
+
 
 Root.propTypes = {
   store: PropTypes.object.isRequired,

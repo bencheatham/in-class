@@ -5,7 +5,7 @@ import User from '../components/User'
 import { resetErrorMessage } from '../actions'
 
 
-class Home extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props)
@@ -19,26 +19,23 @@ class Home extends Component {
   }
 
   handleChange(nextValue) {
-    browserHistory.push(`/${nextValue}`)
-  }
+    browserHistory.push(`/${nextValue}`);
+  };
 
   renderErrorMessage() {
     const { errorMessage } = this.props
     if (!errorMessage) {
-     return null
+     return null;
     }
 
     return (
       <p style={{ backgroundColor: '#e99', padding: 10 }}>
         <b>{ errorMessage } </b>
         {' '}
-        (<a href="#"
-           onClick={this.handleDismissClick}>
-           Dismiss
-         </a>)
+        ()
       </p>
-    )
- }
+    );
+ };
 
  render() {
    const { children, inputValue } = this.props
@@ -52,28 +49,28 @@ class Home extends Component {
        {children}
      </div>
    )
- }
+ };
 
 
 
-}
+};
 
-Home.propTypes = {
+App.propTypes = {
   // Injected by React Redux
   errorMessage: PropTypes.string,
   resetErrorMessage: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
   // Injected by React Router
   children: PropTypes.node
-}
+};
 
 function mapStateToProps(state, ownProps) {
   return {
     errorMessage: state.errorMessage,
     inputValue: ownProps.location.pathname.substring(1)
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, {
   resetErrorMessage
-})(Home)
+})(App);
