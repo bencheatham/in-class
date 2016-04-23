@@ -1,37 +1,25 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as QuizActions from '../actions/quiz';
+import React, { PropTypes } from 'react'
 
-class Quiz extends React.Component {
+export default class Quiz extends React.Component {
+
+  accept() {
+    console.log('accept')
+    // record the response, and go to next question
+  }
+
+  reject() {
+    console.log('reject')
+    // record the response, and go to next question
+  }
 
   render() {
-    const { quizes, actions } = this.props;
-
     return (
       <div>
         <h4>Quiz</h4>
         <div>Q1: state needed here</div>
-        <button className="btn btn-primary" onClick={actions.accept}>accept</button>
-        <button className="btn btn-primary" onClick={actions.reject}>reject</button>
+        <button className="btn btn-primary" onClick={this.accept}>accept</button>
+        <button className="btn btn-primary" onClick={this.reject}>reject</button>
       </div>
     );
   }
-};
-
-function mapStateToProps(state) {
-  return {
-    quizes: state.quizes
-  };
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(QuizActions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Quiz);
