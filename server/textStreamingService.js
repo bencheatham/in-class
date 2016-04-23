@@ -25,6 +25,10 @@ module.exports = function initializeChatStreaming (server) {
 	function stopTyping () { this.broadcast.emit('stop typing', { username: this.username }); }
 
 	function disconnect () {
+    delete connections[this.id];
+    console.log('Socket: ' + this.id + ' has disconnected');
+
+
 		if (!this.username) { return void 0; }
 	  --numUsers;
 	  // echo globally that this client has left
@@ -40,7 +44,12 @@ module.exports = function initializeChatStreaming (server) {
 	  'disconnect': disconnect
 	};
 
+	var connections = {};
+
 	io.on('connection', function (socket) {
+    console.log('Socket: ' + socket.id + ' has connected');
+    connections[socket.id] = socket;
+
 		for (var key in socketEvents) { socket.on(key, socketEvents[key].bind(socket)); }
 	});
 
