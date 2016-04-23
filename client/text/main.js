@@ -1,3 +1,5 @@
+/* globals $, window, io, prompt */
+
 
 $(function() {
 
@@ -5,7 +7,7 @@ $(function() {
   // Initialize variables
   var $window = $(window);
 
-  $inputMessage = $('.inputMessage');
+  var $inputMessage = $('.inputMessage');
   $inputMessage.on('keyup', function () { var message = $(this).val(); sendMessage(message); });
 
 
@@ -36,26 +38,26 @@ $(function() {
 
   function login (data) {
     connected = true;
-    var message = "Welcome to the chat stream – ";
+    var message = 'Welcome to the chat stream – ';
     console.log(message, data);
-  };
+  }
 
   function newMessage (data) {
     console.log('new message: ', data);
     $inputMessage.val(cleanInput(data.message));
-  };
+  }
 
   function userJoined (data) {
     console.log(data.username + ' joined', data);
-  };
+  }
 
   function userLeft (data) {
     console.log(data.username + ' left', data);
-  };
+  }
 
   function typing (data) {
     console.log('typing', data);
-  };
+  }
 
   function stopTyping (data) {
     console.log('stop typing', data);
