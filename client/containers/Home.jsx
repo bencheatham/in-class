@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
-import { resetErrorMessage } from '../actions'
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+import { resetErrorMessage } from '../actions';
 
 
 class Home extends Component {
@@ -23,7 +23,7 @@ class Home extends Component {
 
 
 
-}
+};
 
 
 export default Home;
