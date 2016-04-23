@@ -6,7 +6,7 @@ var hash = require('./hash.js');
 
 
 
-var db = new sqlite3.Database(path.join(__dirname, '../db/keeping-tabs.sqlite3'), function(err) {
+var db = new sqlite3.Database(path.join(__dirname, '../db/in-class.sqlite3'), function(err) {
   if(err) {
     console.error('Database connection error: ', err);
   }
