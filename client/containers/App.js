@@ -5,7 +5,7 @@ import User from '../components/User'
 import { resetErrorMessage } from '../actions'
 
 
-class App extends Component {
+class Home extends Component {
 
   constructor(props) {
     super(props)
@@ -58,7 +58,7 @@ class App extends Component {
 
 }
 
-App.propTypes = {
+Home.propTypes = {
   // Injected by React Redux
   errorMessage: PropTypes.string,
   resetErrorMessage: PropTypes.func.isRequired,
@@ -76,4 +76,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(mapStateToProps, {
   resetErrorMessage
-})(App)
+})(Home)

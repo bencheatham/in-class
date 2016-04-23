@@ -1,8 +1,8 @@
-import { CALL_API, Schemas } from '../../middleware/api'
+import { CALL_API, Schemas } from '../../middleware/api';
 
-export const USER_REQUEST = 'USER_REQUEST'
-export const USER_SUCCESS = 'USER_SUCCESS'
-export const USER_FAILURE = 'USER_FAILURE'
+export const USER_REQUEST = 'USER_REQUEST';
+export const USER_SUCCESS = 'USER_SUCCESS';
+export const USER_FAILURE = 'USER_FAILURE';
 
 
 function fetchUser(login) {
@@ -12,8 +12,8 @@ function fetchUser(login) {
      endpoint: `users/${login}`,
      schema: Schemas.USER
    }
-  }
-}
+  };
+};
 
 export function loadUser(login, requiredFields = []) {
   return (dispatch, getState) => {
@@ -22,14 +22,14 @@ export function loadUser(login, requiredFields = []) {
        return null
      }
 
-     return dispatch(fetchUser(login))
-  }
-}
+     return dispatch(fetchUser(login));
+  };
+};
 
-export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE'
+export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 
 export function resetErrorMessage() {
   return {
     type: RESET_ERROR_MESSAGE
-  }
-}
+  };
+};
