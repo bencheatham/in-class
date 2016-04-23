@@ -4,7 +4,7 @@ var server = require('http').createServer(app);
 var port = process.env.PORT || 8000;
 
 var path = require('path');
-require(path.join(__dirname,'server/chat.js'))(server); //initialize chat server
+require(path.join(__dirname,'server/textStreamingService.js'))(server); //initialize chat server
 // var express = require('express');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
