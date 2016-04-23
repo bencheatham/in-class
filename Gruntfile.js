@@ -52,6 +52,13 @@ module.exports = function(grunt) {
         dest: './dist/built.html'
       }
 	  },
+    copy: {
+      text: {
+        files: [
+          {expand: true, cwd: 'client/text', src: ['**'], dest: 'dist/text/'}
+        ]
+      }
+    },
     jshint: {
       options: {
         force: 'true',
@@ -65,7 +72,7 @@ module.exports = function(grunt) {
       },
       client: {
         files: {
-          src: ['./client/**/*.js']
+          src: ['./client/**/*.js', '!./client/text/socket.io.js']
         }
       }
     }
@@ -99,13 +106,15 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
     'mochaTest:server',
     'jshint:server',
-    'concat'
+    'concat',
+    'copy'
 	]);
   grunt.registerTask('build:client', [
     'mochaTest:client',
     'jshint:client',
     'concat:clientJS', 
-    'concat:clientHTML' 
+    'concat:clientHTML',
+    'copy:text' 
   ]);
 	/*grunt.registerTask('shellTask', [
     'shell'
