@@ -17,7 +17,7 @@ export default class Quiz extends React.Component {
       <div>
         <h4>Quiz</h4>
         <div>Q1: state needed here</div>
-        <button className="btn btn-primary" onClick={() => this.accept}>accept</button>
+        <button className="btn btn-primary" onClick={this.accept}>accept</button>
         <button className="btn btn-primary" onClick={this.reject}>reject</button>
       </div>
     );
