@@ -77,7 +77,7 @@ module.exports = function(grunt) {
       },
       client: {
         files: {
-          src: ['./client/**/*.js', '!./client/text/socket.io.js']
+          src: ['./client/**/*.js']
         }
       }
     }
