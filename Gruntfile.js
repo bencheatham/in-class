@@ -50,8 +50,20 @@ module.exports = function(grunt) {
       clientHTML: {
         src: ['./client/index.html'],
         dest: './dist/built.html'
+      },
+      text: {
+        src: ['./node_modules/socket.io/node_modules/socket.io-client/socket.io.js','./client/text/main.js'],
+        dest: './dist/text/built.js'
       }
+
 	  },
+    copy: {
+      text: {
+        files: [
+          {expand: true, cwd: 'client/text', src: ['**', '!main.js'], dest: 'dist/text/'}
+        ]
+      }
+    },
     jshint: {
       options: {
         force: 'true',
@@ -99,13 +111,16 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
     'mochaTest:server',
     'jshint:server',
+    'copy',
     'concat'
 	]);
   grunt.registerTask('build:client', [
     'mochaTest:client',
     'jshint:client',
+    'copy:text', 
+    'concat:text',
     'concat:clientJS', 
-    'concat:clientHTML' 
+    'concat:clientHTML'
   ]);
 	/*grunt.registerTask('shellTask', [
     'shell'

@@ -1,11 +1,11 @@
-//this is the intro server file
-
 var app = require('./server/configuration.js');
+var server = require('http').createServer(app);
 
 var port = process.env.PORT || 8000;
 
 var path = require('path');
-var express = require('express');
+require(path.join(__dirname,'server/textStreamingService.js'))(server); //initialize chat server
+// var express = require('express');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 var webpackMiddleware = require('webpack-dev-middleware');
@@ -15,8 +15,9 @@ var compiler = webpack(webpackConfig);
 if(module.parent) {
   module.exports = app; // so we can require in tests
 } else{
-  app.listen(port);
-  console.log('Server now listening on port ' + port);
+  // app.listen(port);
+  server.listen(port, () => { console.log('Server listening at port %d', port); });
+  // console.log('Server now listening on port ' + port);
 }
 
 app.use(webpackMiddleware(compiler, {
@@ -29,6 +30,3 @@ app.use(webpackMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath
 }));
 app.use(webpackHot(compiler));
-
-
-// app.use(express.static(path.join(__dirname, 'client/')));
