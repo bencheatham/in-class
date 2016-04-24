@@ -1,14 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import Root from './containers/root';
+import configureStore from './store/configureStore';
 
-class MyApp extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello World</h1>
-      </div>
-    );
-  }
-}
 
-ReactDOM.render(<MyApp />, document.getElementById('app'));
+const store = configureStore();
+const history = syncHistoryWithStore(hashHistory, store);
+
+render(
+  <Root store={store} history={history} />,
+  document.getElementById('root')
+);
