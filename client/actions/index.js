@@ -13,18 +13,18 @@ function fetchUser(login) {
      schema: Schemas.USER
    }
   };
-};
+}
 
 export function loadUser(login, requiredFields = []) {
   return (dispatch, getState) => {
-     const user = getState().entities.users[login]
+     const user = getState().entities.users[login];
      if(user && requiredFields.every(key => user.hasOwnProperty(key))) {
-       return null
+       return null;
      }
 
      return dispatch(fetchUser(login));
   };
-};
+}
 
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 
@@ -32,4 +32,4 @@ export function resetErrorMessage() {
   return {
     type: RESET_ERROR_MESSAGE
   };
-};
+}

@@ -8,22 +8,22 @@ import { resetErrorMessage } from '../actions';
 class App extends Component {
 
   constructor(props) {
-    super(props)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleDismissClick = this.handleDismissClick.bind(this)
-  };
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleDismissClick = this.handleDismissClick.bind(this);
+  }
 
   handleDismissClick(e) {
-    this.props.resetErrorMessage()
-    e.preventDefault()
-  };
+    this.props.resetErrorMessage();
+    e.preventDefault();
+  }
 
   handleChange(nextValue) {
     browserHistory.push(`/${nextValue}`);
-  };
+  }
 
   renderErrorMessage() {
-    const { errorMessage } = this.props
+    const { errorMessage } = this.props;
     if (!errorMessage) {
      return null;
     }
