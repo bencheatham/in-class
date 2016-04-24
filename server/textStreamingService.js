@@ -1,4 +1,4 @@
-
+var connections = {};
 
 module.exports = function initializeChatStreaming (server) {
 	var io = require('socket.io')(server);
@@ -43,8 +43,6 @@ module.exports = function initializeChatStreaming (server) {
 	  'stop typing': stopTyping,
 	  'disconnect': disconnect
 	};
-
-	var connections = {};
 
 	io.on('connection', function (socket) {
     console.log('Socket: ' + socket.id + ' has connected');
