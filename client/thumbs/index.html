@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO Chat Example</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Thumbs</h1>
+
+  <form name="loginForm" id="login" action="#">
+    <input type="text" name="username" id="username" placeholder="Pick a username!" />
+    <select id="select">
+      <option value="teacher">Teacher</option>
+      <option value="student">Student</option>
+      <option value="classroom">Classroom</option>
+    </select>
+    <input type="button" name="login_submit" id="login-submit" value="Log In">
+  </form>
+  <div id="student-thumbs"></div>
+
+  <input type="button" id="thumbs" name="thumbs" value="Thumb">
+  <script src="/vendors.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

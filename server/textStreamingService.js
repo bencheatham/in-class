@@ -2,7 +2,9 @@ var connections = {};
 
 module.exports = function initializeChatStreaming (server) {
 	var io = require('socket.io')(server);
-  var numUsers = 0;
+	
+  var students = [];
+  var teachers = [];
 
 	function newMessage (message) {
 	  // console.log('new message: ', message);
@@ -10,14 +12,21 @@ module.exports = function initializeChatStreaming (server) {
 	  this.broadcast.emit('new message', { username: this.username, message: message });
 	}
 
-	function addUser (username) {
+	function addUser (data) {
 	  // store the username in the socket session for this client
-	  this.username = username;
-	  ++numUsers;
-	  this.emit('login', { numUsers: numUsers });
+	  this.username = data.username;
+		this.type = data.type;
+
+	  if (this.type === 'student'){
+	  	students.push(this);
+	  	updateStudentList(this);
+	  } else if (this.type === 'teacher') {
+	  	teachers.push(this);
+	  }
+
 	  // echo globally (all clients) that a person has connected
-	  this.broadcast.emit('user joined', { username: this.username, numUsers: numUsers });
-	  console.log('add user: ', username, numUsers);
+	  // this.broadcast.emit('user joined', { username: this.username, numUsers: numUsers });
+	  console.log(data.username,'connected to server.', students.length + teachers.length, 'users online.');
 	}
 
 	function typing () { this.broadcast.emit('typing', { username: this.username }); }
@@ -30,25 +39,33 @@ module.exports = function initializeChatStreaming (server) {
 
 
 		if (!this.username) { return void 0; }
-	  --numUsers;
+	  
+	  if (this.type === 'student'){
+	  	students.count--;
+	  } else if (this.type === 'teacher') {
+	  	teachers.count--;
+	  }
 	  // echo globally that this client has left
-	  this.broadcast.emit('user left', { username: this.username, numUsers: numUsers });
-	  console.log('disconnect: ', this.username, numUsers);
+	  this.broadcast.emit('user left', { username: this.username});
+	  console.log('disconnect: ', this.username);
 	}
 
-	var socketEvents = {
+	var clientEvents = {
 	  'new message': newMessage,
-	  'add user': addUser,
+	  'login': addUser,
 	  'typing': typing,
 	  'stop typing': stopTyping,
 	  'disconnect': disconnect
 	};
 
 	io.on('connection', function (socket) {
-    console.log('Socket: ' + socket.id + ' has connected');
-    connections[socket.id] = socket;
-
-		for (var key in socketEvents) { socket.on(key, socketEvents[key].bind(socket)); }
+		for (var key in clientEvents) { socket.on(key, clientEvents[key].bind(socket)); }
 	});
+
+	function updateStudentList(newUser){
+		teachers.forEach(function(teacher){
+	  		teacher.emit('student-login', newUser.username);	
+	 	})	
+	};
 
 };
