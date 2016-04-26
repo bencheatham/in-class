@@ -1,4 +1,4 @@
-const db = require(__dirname + '/../database/database.js')(__dirname + '/../database/authentication.sqlite3');
+const db = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication.sqlite3');
 const jwt = require('jsonwebtoken');
 const hash = require('./hash.js');
 const secret = 'when in class... do as the students do';
