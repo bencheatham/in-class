@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router';
 //import { Provider } from 'react-redux';
-import Home from './client/containers/Home';
-import Thumbs from './client/containers/Thumbs';
-import UserPage from './client/containers/UserPage';
-import Quiz from './client/containers/Quiz'
-import App from './client/containers/App';
+import Home from './containers/Home';
+import Thumbs from './containers/Thumbs';
+import UserPage from './containers/UserPage';
+import Quiz from './containers/Quiz'
+import App from './containers/App';
 
 
 // let Wrapper = (component) => {
