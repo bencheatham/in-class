@@ -5,7 +5,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Root from './containers/root';
 import configureStore from './store/configureStore';
 
-
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
 
