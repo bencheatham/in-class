@@ -4,7 +4,7 @@ import { Route } from 'react-router';
 import Home from './containers/Home';
 import Thumbs from './containers/Thumbs';
 import UserPage from './containers/UserPage';
-import Quiz from './containers/Quiz'
+import Quiz from './containers/QuizPage'
 import App from './containers/App';
 
 
