@@ -25,12 +25,12 @@ function errorMessage(state = null, action) {
   return state;
 }
 
-
 const rootReducer = combineReducers({
   entities,
   quiz,
   errorMessage,
-  routing
+  routing,
+  quiz
 });
 
 export default rootReducer;
