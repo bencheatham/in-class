@@ -6,10 +6,12 @@ import * as QuizActions from '../actions/quiz';
 class Quiz extends React.Component {
 
   render() {
-    const { quizes, actions } = this.props;
+    var value = this.props.value.toString();
+    const { actions } = this.props;
 
     return (
       <div>
+        State: {value}
         <h4>Quiz</h4>
         <div>Q1: state needed here</div>
         <button className="btn btn-primary" onClick={actions.accept}>accept</button>
@@ -21,7 +23,7 @@ class Quiz extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    quizes: state.quizes
+    value: state.quiz.value
   };
 }
 
