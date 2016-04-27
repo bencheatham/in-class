@@ -3,19 +3,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-<<<<<<< HEAD
     nodemon: {
       app: {
         script: './index.js'
       }
     },
-=======
->>>>>>> 5814c0ecd42331b146e8627550ea6e20377b31f8
+
     mochaTest: {
       options: {
         reporter: 'spec'
       },
-<<<<<<< HEAD
       server: {
         src: [
           'server/spec/spec.js'
@@ -25,7 +22,12 @@ module.exports = function(grunt) {
         src: [
           'client/spec/spec.js'
         ]
-      }
+      }//,
+      // all: {
+      //   src: [
+      //     '**/spec/**/*.js'
+      //   ]
+      // }
     },
 
     watch: {
@@ -87,23 +89,10 @@ module.exports = function(grunt) {
         }
       }
     }
-
-
-
-
-=======
-      all: {
-        src: [
-          '**/spec/**/*.js'
-        ]
-      }
-    }
->>>>>>> 5814c0ecd42331b146e8627550ea6e20377b31f8
 	});
 
 
   grunt.registerTask('default', [
-<<<<<<< HEAD
     'mochaTest',
     'jshint',
     'build',
@@ -140,11 +129,4 @@ module.exports = function(grunt) {
 	/*grunt.registerTask('shellTask', [
     'shell'
 	]);*/
-
-
-=======
-    'mochaTest'
-  ]);
-
->>>>>>> 5814c0ecd42331b146e8627550ea6e20377b31f8
 };
