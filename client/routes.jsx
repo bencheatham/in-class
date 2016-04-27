@@ -5,7 +5,6 @@ import Home from './containers/Home';
 import Thumbs from './containers/Thumbs';
 import UserPage from './containers/UserPage';
 import Quiz from './containers/QuizPage';
-import App from './containers/App';
 
 
 // let Wrapper = (component) => {
