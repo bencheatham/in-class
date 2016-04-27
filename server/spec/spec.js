@@ -1,16 +1,22 @@
-var expect = require('chai').expect;
-var server = require('../../index.js');
-
-
-// var supertest = require('supertest');
-// var request = supertest.agent(server);
-// var db = require('../database.js');
 
 /*global beforeEach, afterEach, describe, expect, it, spyOn, xdescribe, xit */
 
+var chai = require('chai');
+var chaiAsPromised = require("chai-as-promised");
+var expect = chai.expect;
+chai.use(chaiAsPromised);
+var axios = require('axios');
 
-describe('server', function() {
-  it('should pass', function() {
-    expect(1 === 1).to.equal(true);
+describe('Server Unit Tests', function() {
+  beforeEach(function (done) {
+    done();
   });
+
+  it('should respond with landing page', function() {
+    return expect(
+      axios.get('http://localhost:8000')
+      .then(function (res) { return Promise.resolve(res.status); })
+    ).to.eventually.equal(200);
+  });
+  
 });
