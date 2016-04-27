@@ -1,25 +1,18 @@
-#Authentication Example Repository
+# InClass
+A tool for improving in-class student-teacher interactions
 
-This is a hello world using JSON Web Token
+## Team
 
-load the dependencies
-`npm install`
+Scrum Master - Louis Buchbinder
 
-start the server
-`node index.js`
+Product Owner - Ben Cheatham
 
-visit the landing page
-`http://localhost:8000`
+SoftWare Engineer - Stephen Sullivan
 
-sign-up and submit
-
-you will be brought to the protected page
+SoftWare Engineer - Jason Wu
 
 
+## Project Doc Links
 
-
-###NEXT STEPS: 
-1. The token should be set to expire after some time limit
-2. There should be a sign-out endpoint on the server to invalidate the token
-
+Look at the project [Style Guide] (/one-class/blob/master/_STYLE-GUIDE.md) for more information.
 
