@@ -1,4 +1,4 @@
-
+/* globals $, location*/
 function onSubmit () {
 	var username = $('.login > .username').val();
   var password = $('.login > .password').val();

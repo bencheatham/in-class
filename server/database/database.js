@@ -22,7 +22,7 @@ var openDatabase = function (path) {
     db.run('CREATE TABLE IF NOT EXISTS users_links_join (id INTEGER PRIMARY KEY ASC, userId INTEGER, linkId INTEGER, FOREIGN KEY(userId) REFERENCES users(id), FOREIGN KEY(id) REFERENCES links(id))');
   };
 
-  db.serialize(function() { db.initialize() });
+  db.serialize(function() { db.initialize(); });
 
 
 

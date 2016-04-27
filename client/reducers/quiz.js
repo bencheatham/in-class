@@ -8,6 +8,6 @@ function quiz(state = { value: false}, action) { // action = {type: QUIZ_ACCEPT 
     default:
       return state;
   }
-};
+}
 
 export default quiz;

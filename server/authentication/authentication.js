@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 
 
 var secret = 'when in class... do as the students do';
-exceptions = ['/', '/login', '/signup', '/app.js','/jquery.min.js'];
+var exceptions = [/*'/',*/ '/auth/index.html', '/auth/app.js','/login', '/signup', '/app.js', '/vendors.js', '/bundle.js'];
 
 
 
@@ -26,6 +26,6 @@ module.exports = function initializeJWTApp (app) {
   	  }
     }
   );
-} 
+}; 
 
 

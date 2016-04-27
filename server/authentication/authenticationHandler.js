@@ -1,5 +1,5 @@
 const db = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication.sqlite3');
-const db_test = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication-test.sqlite3');
+const dbTest = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication-test.sqlite3');
 const jwt = require('jsonwebtoken');
 const hash = require('./hash.js');
 const secret = 'when in class... do as the students do';
@@ -8,7 +8,7 @@ function handleLogin(req, res) {
   var username = req.body.username;
   var password =  req.body.password;
   var test = req.query.test;
-  var database = test ? db_test : db;
+  var database = test ? dbTest : db;
   // console.log();
   
   if (typeof username !== 'string' || typeof username !== 'string') {
@@ -26,7 +26,7 @@ function handleLogin(req, res) {
   })
   .then(function (bool) {
     if (bool) {
-      return Promise.resolve()
+      return Promise.resolve();
     }
     return Promise.reject('username and password do not match');
   })
@@ -44,7 +44,7 @@ function handleSignup(req, res) {
   var username = req.body.username;
   var password =  req.body.password;
   var test = req.query.test;
-  var database = test ? db_test : db;
+  var database = test ? dbTest : db;
 
   if (typeof username !== 'string' || typeof username !== 'string') {
     res.status(400).send('bad request');

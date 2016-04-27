@@ -1,6 +1,6 @@
 
 var chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
+var chaiAsPromised = require('chai-as-promised');
 var expect = chai.expect;
 chai.use(chaiAsPromised);
 
