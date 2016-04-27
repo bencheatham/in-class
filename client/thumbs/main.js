@@ -1,4 +1,4 @@
-/* globals $, window, io, prompt */
+/* globals $, window, io, socket, document, prompt */
 
 
 $(function() {
@@ -13,14 +13,14 @@ $(function() {
   var username, type;
   var thumb = true;
 
-  $('#login-submit').on("click", function(){
+  $('#login-submit').on('click', function(){
     console.log('log in click');
     login();
     if (type === 'student')
     $('#thumbs').css('display','block');
-  })
+  });
   
-  $('#thumbs').on("click", function(){
+  $('#thumbs').on('click', function(){
     if (thumb){
       $('#thumbs').css('background-color','red');
     } else {
@@ -28,7 +28,7 @@ $(function() {
     }
     thumb = !thumb;
     toggleThumb(username);
-  })
+  });
 
   // Sets the client's username
   function setUsername (username,type) { 
@@ -65,14 +65,14 @@ $(function() {
     return false;
   }
 
-  function newMessage (data) {
-    console.log('new message: ', data);
-    $inputMessage.val(cleanInput(data.message));
-  }
+  // function newMessage (data) {
+  //   console.log('new message: ', data);
+  //   $inputMessage.val(cleanInput(data.message));
+  // }
 
   function addStudent (data){
     console.log(data,'joined your class!');
-    $( ".container" ).append( document.createTextNode( data ) );
+    $( '.container' ).append( document.createTextNode( data ) );
 
   }
 
@@ -100,7 +100,6 @@ $(function() {
 
   var serverEvents = {
     'student-login': addStudent,
-    'new message': newMessage,
     'user joined': userJoined,
     'user left': userLeft,
     'typing': typing,

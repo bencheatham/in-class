@@ -28,8 +28,8 @@
     // assign a user type
     // on submit go to page with socket.io html
 
-  var user_type = "student";
-  var thumb = true; 
+  // var user_type = "student";
+  // var thumb = true; 
 
   // every message should send information
     // username:
@@ -37,17 +37,17 @@
     // thumb:    
 
   // store relationship between events and callback functions
-  var socketEvents = {
-    'thumbs': updateThumb
-  }
+  // var socketEvents = {
+  //   'thumbs': updateThumb
+  // }
 
-  // callback function for when event emitted
-  function updateThumb () { socket.emit('new message', {time: Date.now()}); }
+  // // callback function for when event emitted
+  // function updateThumb () { socket.emit('new message', {time: Date.now()}); }
 
-  // add event listenor 
-  for (var key in socketEvents) {
-    socket.on(key, socketEvents[key].bind(socket)); 
-  }
+  // // add event listenor 
+  // for (var key in socketEvents) {
+  //   socket.on(key, socketEvents[key].bind(socket)); 
+  // }
   
 
   // EVENTS

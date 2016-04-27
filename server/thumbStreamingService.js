@@ -65,7 +65,7 @@ module.exports = function initializeChatStreaming (server) {
   function updateStudentList(newUser){
     teachers.forEach(function(teacher){
         teacher.emit('student-login', newUser.username);  
-    })  
-  };
+    });
+  }
 
 };
