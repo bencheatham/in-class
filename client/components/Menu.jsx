@@ -21,7 +21,7 @@ class Menu extends React.Component {
         <button type="button" onClick={(this.show).bind(this)}>Show</button>
         <button type="button" onClick={(this.hide).bind(this)}>Hide</button>
 
-        <div className={ visibility ? "visibility" : ""}>
+        <div className={ visibility ? "visible" : ""}>
           {this.props.children}
         </div>
       </div>

@@ -14,8 +14,8 @@ class QuizPage extends Component {
   render() {
    return (
      <div>
-       <span><h1> Slide Menu </h1></span>
-       <Menu ref="menu">
+       <span><h1>Slide Menu</h1></span>
+       <Menu>
           <MenuPage></MenuPage>
           <MenuPage></MenuPage>
           <MenuPage></MenuPage>
