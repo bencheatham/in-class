@@ -15,15 +15,28 @@ class Menu extends React.Component {
 
   render() {
     const { visibility } = this.props;
+    let id = 0;
 
     return (
-      <div className="menu">
-        <button type="button" onClick={(this.show).bind(this)}>Show</button>
-        <button type="button" onClick={(this.hide).bind(this)}>Hide</button>
-
-        <div className={ visibility ? "visible" : ""}>
-          {this.props.children}
+      <div>
+        <div>
+          <button type="button" onClick={(this.show).bind(this)}>Show</button>
+          <button type="button" onClick={(this.hide).bind(this)}>Hide</button>
         </div>
+
+        <div className="menu">
+          <div id="controls" className={visibility ? " visible" : ""}>
+            <ul>
+              <li className="first">Questions</li>
+              <li className="last">Chat</li>
+            </ul>
+          </div>
+
+          <div id="panels" className={visibility ? " visible" : ""}>
+            {this.props.children}
+          </div>
+        </div>
+
       </div>
     );
   };

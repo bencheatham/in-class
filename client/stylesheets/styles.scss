@@ -1,20 +1,54 @@
 
 .menu {
   $menu-width: 250px;
-  height:100%;
+  $tabs-width: 100px;
 
-  >div {
+  #panels {
+    border-width: 1px;
     position: absolute;
     background:	#D3D3D3;
-    left: ($menu-width * -1);
+    right: ($menu-width * -1);
     width: $menu-width;
-    height:1000px;
-    transition: -webkit-transform ease 250ms;
-    transition: transform ease 250ms;
-
+    height:100%;
 
     &.visible {
-      transform: translate3d($menu-width, 0, 0);
+      transform: translate3d($menu-width*-1, 0, 0);
     }
   }
+
+  #controls {
+    float: right;
+
+    &.visible {
+      transform: translate3d($menu-width*-1, 0, 0);
+    }
+  }
+
+  >div {
+    transition: -webkit-transform ease 250ms;
+    transition: transform ease 250ms;
+    display: inline-block;
+  }
+
+  ul {
+    width: $tabs-width;
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      border: 1px solid;
+      border-color: #aaa;
+      padding: 6px 12px;
+      position: relative;
+    }
+
+    .first {
+      border-radius: 5px 0 0 0;
+    }
+
+    .last {
+      border-radius: 0 0 0 5px;
+    }
+  }
+
 }

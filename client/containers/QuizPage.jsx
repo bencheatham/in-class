@@ -6,6 +6,7 @@ import { show } from '../actions/quiz';
 
 import Menu from '../components/Menu';
 import MenuPage from '../components/MenuPage';
+import Quiz from '../components/Quiz';
 
 require('../stylesheets/styles.scss');
 
@@ -16,9 +17,7 @@ class QuizPage extends Component {
      <div>
        <span><h1>Slide Menu</h1></span>
        <Menu>
-          <MenuPage></MenuPage>
-          <MenuPage></MenuPage>
-          <MenuPage></MenuPage>
+        
        </Menu>
     </div>
    );
