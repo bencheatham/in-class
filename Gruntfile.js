@@ -8,6 +8,7 @@ module.exports = function(grunt) {
         script: './index.js'
       }
     },
+
     mochaTest: {
       options: {
         reporter: 'spec'
@@ -20,6 +21,11 @@ module.exports = function(grunt) {
       client: {
         src: [
           'client/spec/spec.js'
+        ]
+      },
+      all: {
+        src: [
+          '**/spec/**/*.js'
         ]
       }
     },
@@ -40,7 +46,6 @@ module.exports = function(grunt) {
 	      src: [
 	        './node_modules/jquery/dist/jquery.min.js',
 	        './node_modules/underscore/underscore-min.js',
-          './node_modules/socket.io-client/socket.io.js',
           './node_modules/socket.io/node_modules/socket.io-client/socket.io.js'
 	      ],
 	      dest: './dist/vendors.js'
@@ -63,7 +68,10 @@ module.exports = function(grunt) {
       text: {
         files: [
           {expand: true, cwd: 'client/text', src: ['**', '!main.js'], dest: 'dist/text/'},
-          {expand: true, cwd: 'client/thumbs', src: ['**'], dest: 'dist/thumbs/'}
+          {expand: true, cwd: 'client/thumbs', src: ['**'], dest: 'dist/thumbs/'},
+          {expand: true, cwd: 'client/protected', src: ['**'], dest: 'dist/protected/'},
+          {expand: true, cwd: 'client/authentication', src: ['**'], dest: 'dist/auth/'}
+
         ]
       }
     },
@@ -84,15 +92,11 @@ module.exports = function(grunt) {
         }
       }
     }
-
-
-
-
 	});
 
 
   grunt.registerTask('default', [
-    'mochaTest',
+    // 'mochaTest',
     'jshint',
     'build',
     'spawnWatch',
@@ -112,7 +116,7 @@ module.exports = function(grunt) {
 
 
 	grunt.registerTask('build', [
-    'mochaTest:server',
+    // 'mochaTest:server',
     'jshint:server',
     'copy',
     'concat'
@@ -128,6 +132,4 @@ module.exports = function(grunt) {
 	/*grunt.registerTask('shellTask', [
     'shell'
 	]);*/
-
-
 };
