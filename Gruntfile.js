@@ -40,7 +40,6 @@ module.exports = function(grunt) {
 	      src: [
 	        './node_modules/jquery/dist/jquery.min.js',
 	        './node_modules/underscore/underscore-min.js',
-          './node_modules/socket.io-client/socket.io.js',
           './node_modules/socket.io/node_modules/socket.io-client/socket.io.js'
 	      ],
 	      dest: './dist/vendors.js'
