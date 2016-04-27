@@ -5,13 +5,6 @@ var expect = chai.expect;
 chai.use(chaiAsPromised);
 var axios = require('axios');
 
-// axios.get('http://localhost:8000')
-// .then(function (response) { console.log(Object.keys(response)); console.log(response.status);})
-// .catch(function (response) { console.log(response); });
-
-
-
-
 describe('Server Unit Tests', function() {
   beforeEach(function (done) {
     done();

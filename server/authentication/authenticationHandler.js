@@ -1,4 +1,5 @@
 const db = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication.sqlite3');
+const db_test = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication-test.sqlite3');
 const jwt = require('jsonwebtoken');
 const hash = require('./hash.js');
 const secret = 'when in class... do as the students do';
@@ -6,9 +7,16 @@ const secret = 'when in class... do as the students do';
 function handleLogin(req, res) {
   var username = req.body.username;
   var password =  req.body.password;
+  var test = req.query.test;
+  var database = test ? db_test : db;
+  // console.log();
+  
+  if (typeof username !== 'string' || typeof username !== 'string') {
+    res.status(400).send('bad request');
+    return void 0;
+  }
 
-
-  db.fetchTable('users', 'password', 'username="' + username + '"')
+  database.fetchTable('users', 'password', 'username="' + username + '"')
   .then(function (user) {
     if (user.length === 1) {
       user = user[0];
@@ -35,9 +43,17 @@ function handleLogin(req, res) {
 function handleSignup(req, res) {
   var username = req.body.username;
   var password =  req.body.password;
+  var test = req.query.test;
+  var database = test ? db_test : db;
+
+  if (typeof username !== 'string' || typeof username !== 'string') {
+    res.status(400).send('bad request');
+    return void 0;
+  }
+
 
   // check if username is taken then create new user if the name is unique
-  db.fetchTable('users', '*', 'username = "' + username + '"')
+  database.fetchTable('users', '*', 'username = "' + username + '"')
   .then(function (existingUser) {
     if (existingUser.length > 0) {
       return Promise.reject('username already exists');
@@ -46,7 +62,7 @@ function handleSignup(req, res) {
     }
   })
   .then(function (hashed) {
-    return db.insertInto('users', [username, hashed, Date.now()], true);
+    return database.insertInto('users', [username, hashed, Date.now()], true);
   })
   .then(function () {
     var token = jwt.sign({username: username}, secret);
