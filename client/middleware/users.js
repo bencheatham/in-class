@@ -1,9 +1,10 @@
+/*globals $*/
 import io from 'socket.io/node_modules/socket.io-client';
 import { userJoinedClass } from '../actions/users';
 import { userLeftClass } from '../actions/users';
-import * as actions from '../actions/users'
+import * as actions from '../actions/users';
 
-const SERVER_URL = "http://localhost:8000";
+const SERVER_URL = 'http://localhost:8000';
 
 export default function(store) {
 
@@ -11,7 +12,7 @@ export default function(store) {
   let isTyping = false;
   let lastTypingTime;
 
-  console.log('MADE IT YO')
+  console.log('MADE IT YO');
   const socket = io.connect(`${SERVER_URL}`);
 
 
