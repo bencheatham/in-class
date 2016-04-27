@@ -3,6 +3,7 @@ import merge from 'lodash/merge';
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import quiz from './quiz';
+import menu from './menu';
 
 // Updates an entity cache in response to any action with response.entities.
 function entities(state = { users: {}, repos: {} }, action) {
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   quiz,
   errorMessage,
   routing,
-  quiz
+  quiz,
+  menu
 });
 
 export default rootReducer;

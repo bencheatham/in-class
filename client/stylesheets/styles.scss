@@ -1,0 +1,13 @@
+
+.menu {
+  display:block;
+  $menu-width: 250px;
+
+  >div {
+    right: $menu-width * -1;
+  }
+
+  .visible {
+    right: $menu-width;
+  }
+}
