@@ -25,21 +25,17 @@ var dummy_question =
 
 var initialState = {
   questions: [dummy_question],
-  chatMessages: [dummy_chatMessage],
 }
-
-console.log('initialState', initialState);
 
 export function questions(state = initialState, action){
 
   switch (action.type) {
     case QUESTION:
-      action.question.id = chatMessages.length;
-      var chatMessages_updated = state.chatMessages.concat(action.question)
+      
+      var newQuestions = state.questions.concat(action.question)
       
       return {
-        questions: state.questions,
-        chatMessages: chatMessages_updated,
+        questions: newQuestions,
       }
     case DOWNVOTE: 
       var updatedQuestions = _.map(state.questions.slice(), (question) => {
@@ -50,7 +46,6 @@ export function questions(state = initialState, action){
       });
       return {
         questions: updatedQuestions,
-        chatMessages: state.chatMessages,
       }
     case UPVOTE: 
       var updatedQuestions = _.map(state.questions.slice(), (question) => {
@@ -61,7 +56,6 @@ export function questions(state = initialState, action){
       });
       return {
         questions: updatedQuestions,
-        chatMessages: state.chatMessages,
       }
     default: 
       return state;

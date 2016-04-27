@@ -23,22 +23,32 @@ export function downvote(question_id) {
   };
 }
 
-export function submitChatMessage(chatMessage) {
-  return (dispatch, getState) => {
-     
-    return dispatch({
-      type: CHAT_MESSAGE,
-      chatMessage: chatMessage
-    });
-  };
+var dummy_question = 
+{
+  id: 12,
+  username : 'stephen',
+  text: 'I dont understand anything',
+  timestamp: 1461619497989,
+  upvotes: 3,
+  downvotes: 4
 }
 
-export function submitQuestion(question_id) {
+export function submitQuestion(text) {
   return (dispatch, getState) => {
-     
+    var user = getState().user.username;
+    var id = getState().questions.questions.length;
+    console.log(user);
+
     return dispatch({
       type: QUESTION,
-      question: question
+      question: {
+        username: user,
+        id: id++,
+        text: text,
+        timestamp: Date.now(),
+        upvotes: 0,
+        downvotes: 0
+      }
     });
   };
 }
