@@ -39,7 +39,9 @@ module.exports = function(grunt) {
 	    vendors: {
 	      src: [
 	        './node_modules/jquery/dist/jquery.min.js',
-	        './node_modules/underscore/underscore-min.js'
+	        './node_modules/underscore/underscore-min.js',
+          './node_modules/socket.io-client/socket.io.js',
+          './node_modules/socket.io/node_modules/socket.io-client/socket.io.js'
 	      ],
 	      dest: './dist/vendors.js'
 	    },
@@ -52,7 +54,7 @@ module.exports = function(grunt) {
         dest: './dist/built.html'
       },
       text: {
-        src: ['./node_modules/socket.io/node_modules/socket.io-client/socket.io.js','./client/text/main.js'],
+        src: ['./client/text/main.js'],
         dest: './dist/text/built.js'
       }
 
@@ -60,7 +62,8 @@ module.exports = function(grunt) {
     copy: {
       text: {
         files: [
-          {expand: true, cwd: 'client/text', src: ['**', '!main.js'], dest: 'dist/text/'}
+          {expand: true, cwd: 'client/text', src: ['**', '!main.js'], dest: 'dist/text/'},
+          {expand: true, cwd: 'client/thumbs', src: ['**'], dest: 'dist/thumbs/'}
         ]
       }
     },

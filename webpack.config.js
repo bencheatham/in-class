@@ -50,7 +50,7 @@ module.exports = {
       'window.Tether':'tether',
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname,'/dist/built.html')
+      template: path.join(__dirname,'/client/index.html')
     })
   ]
 }
