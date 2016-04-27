@@ -1,7 +1,7 @@
 
 var webpack = require('webpack');
 var path = require('path');
-var autoprefixer = require('autoprefixer')
+var autoprefixer = require('autoprefixer');
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -53,4 +53,4 @@ module.exports = {
       template: path.join(__dirname,'/client/index.html')
     })
   ]
-}
+};
