@@ -13,9 +13,8 @@ class QuizPage extends Component {
    return (
      <div>
        <span><h1>Slide Menu</h1></span>
-       <Menu>
-       </Menu>
-    </div>
+       <Menu />
+     </div>
    );
  };
 };
