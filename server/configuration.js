@@ -1,5 +1,7 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 var app = express();
 module.exports = app;
@@ -12,24 +14,23 @@ var handler = require('./requestHandler.js');
 // middleware
 /////*****/////*****/////*****/////*****/////*****
 
-// use the body parser to recognize json and url data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(
+  // function (req, res, next) {
+  //   console.log(req.url);
+  //   next();
+  // },
+  bodyParser.json(),
+  bodyParser.urlencoded({extended: true}),
+  cookieParser()  
+);
+
+require(__dirname + '/authentication/authentication.js')(app); // initialize the JWT App
+var authenticationHandler = require(__dirname + '/authentication/authenticationHandler.js');
 
 // use express static to set the statically hosted files to the serve from the client directory
 app.use('/', express.static(__dirname + '/../dist/'));
 
-/////*****/////*****/////*****/////*****/////*****
-// middleware
-/////*****/////*****/////*****/////*****/////*****
+app.post('/signup', authenticationHandler.signup);
+app.post('/login', authenticationHandler.login);
 
 
-/////*****/////*****/////*****/////*****
-// set request paths below
-/////*****/////*****/////*****/////*****
-
-// app.get('/', handler.index.get);
-
-/////*****/////*****/////*****/////*****
-// set request paths above
-/////*****/////*****/////*****/////*****

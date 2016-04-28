@@ -1,14 +1,14 @@
 
 var webpack = require('webpack');
 var path = require('path');
-var autoprefixer = require('autoprefixer')
+var autoprefixer = require('autoprefixer');
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var ROOT_PATH = path.resolve(__dirname);
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: '#cheap-module-eval-source-map',
   entry: [
     'bootstrap-loader',
     'tether',
@@ -50,8 +50,7 @@ module.exports = {
       'window.Tether':'tether',
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname,'/dist/built.html')
+      template: path.join(__dirname,'/client/index.html')
     })
   ]
-}
-
+};
