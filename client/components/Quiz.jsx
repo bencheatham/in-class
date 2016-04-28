@@ -8,7 +8,6 @@ class Quiz extends React.Component {
   render() {
     var value = this.props.value.toString();
     const { actions } = this.props;
-
     return (
       <div>
         State: {value}
@@ -23,7 +22,7 @@ class Quiz extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    value: state.quiz.value
+    value: state.Quiz.value
   };
 }
 
