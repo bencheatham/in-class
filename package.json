@@ -11,7 +11,7 @@
     "test": "mocha **/spec/*.js && mocha **/**/spec/*.js",
     "MYjshint": "jshint **/*.js --show-non-errors",
     "oldBuild": "npm run copy && npm run concat",
-    "copy": "cp -r client/text dist/ && cp -r client/thumbs dist/ && cp -r client/protected dist/ && cp -r client/authentication dist/auth",
+    "copy": "cp -r client/text dist/ && cp -r client/thumbs dist/ && cp -r client/protected dist/ && cp -r client/authentication dist/auth && cp -r client/text dist/text",
     "concat": "(cat node_modules/jquery/dist/jquery.min.js; echo '\n'; cat node_modules/underscore/underscore-min.js; echo '\n'; cat node_modules/socket.io/node_modules/socket.io-client/socket.io.js; echo '\n';) >> dist/vendors.js"
   },
   "engines" : { "npm" : "2.15.3" }, 
