@@ -12,9 +12,9 @@ class QuizPage extends Component {
   render() {
    return (
      <div>
-       <span><h1>Slide Menu</h1></span>
+       <span><h1>Slide Menu</h1></span> 
        <Drawer />
-     </div>
+     </div> 
    );
  };
 };
