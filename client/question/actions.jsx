@@ -4,7 +4,7 @@ export function upvote(id,username) {
   return {
     type: UPVOTE,
     id: id,
-    username
+    username: username
   };
 }
 

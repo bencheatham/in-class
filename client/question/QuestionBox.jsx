@@ -28,7 +28,7 @@ class QuestionBox extends Component {
 
   render(){
     var { user, questions } = this.props;
-    questions = questions.sort((a,b) => b.upvotes - a.upvotes)
+    questions = questions.sort((a,b) => b.upvotes.length - a.upvotes.length)
       .map((question,idx)=>{
         return <Question key={idx} index={idx} question={question} />;
       });

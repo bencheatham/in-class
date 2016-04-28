@@ -1,6 +1,6 @@
 
 
-function userReducer(state = {username: 'sterv'}, action){
+function userReducer(state = {username: ''}, action){
   switch (action.type){
     case 'LOGIN':
       return { username: action.username };
