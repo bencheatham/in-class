@@ -1,1 +1,1 @@
-web: npm install && node index.js
+web: npm run oldBuild && node index.js
