@@ -7,3 +7,7 @@ export function show() {
 export function hide() {
   return { type: types.MENU_HIDE };
 }
+
+export function display(panel) {
+  return { type: types.MENU_DISPLAY, panel: panel };
+}
