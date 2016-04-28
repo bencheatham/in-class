@@ -2,8 +2,31 @@ export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
 export const CHAT_MESSAGE = 'CHAT_MESSAGE';
 export const QUESTION = 'QUESTION';
+var socket = require('socket.io-client');
+
+export var socket = socket().connect('http://localhost:8000');
+
+var serverEvents = {
+  'question-submitted': updateQuestionsList,
+  'upvote': updateVotes
+};
+
+var dummy_question = {
+  id: 12,
+  username : 'stephen',
+  text: 'I dont understand anything',
+  timestamp: 1461619497989,
+  upvotes: 3,
+  downvotes: 4
+}
 
 export function upvote(question_id) {
+  // socket.emit('upvote', 
+  //   {
+  //     username: username,
+  //     thumb: thumb   
+  //   });
+
   return (dispatch, getState) => {
      
     return dispatch({
@@ -23,32 +46,49 @@ export function downvote(question_id) {
   };
 }
 
-var dummy_question = 
-{
-  id: 12,
-  username : 'stephen',
-  text: 'I dont understand anything',
-  timestamp: 1461619497989,
-  upvotes: 3,
-  downvotes: 4
-}
+export function submitQuestion(text, question) {
 
-export function submitQuestion(text) {
-  return (dispatch, getState) => {
-    var user = getState().user.username;
-    var id = getState().questions.questions.length;
-    console.log(user);
-
-    return dispatch({
+    if (text !== null){
+      var question = {
+          username: 'sterv',
+          id: 1,
+          text: text,
+          timestamp: Date.now(),
+          upvotes: 0,
+          downvotes: 0
+        };
+        console.log('about to emit question');
+      emitNewQuestion(question);
+    }
+    
+    console.log('about to update question state',question)
+    return {
       type: QUESTION,
-      question: {
-        username: user,
-        id: id++,
-        text: text,
-        timestamp: Date.now(),
-        upvotes: 0,
-        downvotes: 0
-      }
-    });
-  };
+      question: question,
+    }
 }
+
+export const initializeWebSockets = () => {
+  for (var key in serverEvents) { 
+    socket.on(key, serverEvents[key].bind(socket)); 
+  }
+};
+
+function emitNewQuestion(question){
+  socket.emit('question-submitted',question);
+};
+
+function updateQuestionsList(question){
+  console.log('client received event => question-submitted',question.question)
+  submitQuestion(null,question.question);
+}
+
+function updateVotes(){
+  // upvote 
+}
+
+
+
+
+
+

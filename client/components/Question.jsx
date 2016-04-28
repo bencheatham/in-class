@@ -13,7 +13,7 @@ class Question extends React.Component{
     var { question, actions, index } = this.props;
     return (<div>
       <span onClick={() => actions.upvote(question.id)}> [UPVOTE]</span>
-      {index + 1}: {question.text} ---
+      {index + 1}. {question.username}: {question.text} ---
       votes: {question.upvotes}
       
       </div>)

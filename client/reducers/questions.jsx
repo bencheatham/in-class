@@ -13,18 +13,8 @@ var dummy_chatMessage =
   timestamp: 1461619497989,
 }
 
-var dummy_question = 
-{
-  id: 12,
-  username : 'stephen',
-  text: 'I dont understand anything',
-  timestamp: 1461619497989,
-  upvotes: 3,
-  downvotes: 4
-}
-
 var initialState = {
-  questions: [dummy_question],
+  questions: [],
 }
 
 export function questions(state = initialState, action){
