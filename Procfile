@@ -1,1 +1,1 @@
-web: NODE_ENV=production && npm run build && node index.js
+web: npm run build && NODE_ENV='production' node index.js
