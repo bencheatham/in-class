@@ -5,7 +5,6 @@ import { resetErrorMessage } from '../actions'
 import { show } from '../actions/quiz';
 
 import Menu from '../containers/Menu';
-
 require('../stylesheets/styles.scss');
 
 class QuizPage extends Component {
