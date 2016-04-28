@@ -16,7 +16,7 @@ var handler = require('./requestHandler.js');
 
 app.use(
   // function (req, res, next) {
-  //   console.log(req.headers);
+  //   console.log(req.url);
   //   next();
   // },
   bodyParser.json(),

@@ -7,7 +7,6 @@ class Quiz extends React.Component {
 
   render() {
     const { actions } = this.props;
-
     return (
       <div>
         <h4>Quiz</h4>
