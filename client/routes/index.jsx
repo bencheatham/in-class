@@ -3,7 +3,7 @@ import { Route } from 'react-router';
 //import { Provider } from 'react-redux';
 import Home from '../containers/Home';
 import Thumbs from '../containers/Thumbs';
-import QuestionContainer from './question/container';
+import QuestionContainer from '../question/container';
 import LoginView from '../views/LoginView';
 import Quiz from '../containers/QuizPage';
 
