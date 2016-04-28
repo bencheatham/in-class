@@ -1,1 +1,1 @@
-web: node index.js
+web: npm install -prod && node index.js
