@@ -5,11 +5,11 @@
   "description": "A tool for improving in-class student-teacher interactions",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && npm run jshint && ((sleep 15 && npm test) & nodemon index.js)",
+    "start": "npm run build && npm run MYjshint && ((sleep 15 && npm test) & nodemon index.js)",
     "clean": "rm -rf dist/*",
     "build": "npm run clean && npm run oldBuild && webpack --progress",
     "test": "mocha **/spec/*.js && mocha **/**/spec/*.js",
-    "jshint": "jshint **/*.js --show-non-errors",
+    "MYjshint": "jshint **/*.js --show-non-errors",
     "oldBuild": "npm run copy && npm run concat",
     "copy": "cp -r client/text dist/ && cp -r client/thumbs dist/ && cp -r client/protected dist/ && cp -r client/authentication dist/auth",
     "concat": "(cat node_modules/jquery/dist/jquery.min.js; echo '\n'; cat node_modules/underscore/underscore-min.js; echo '\n'; cat node_modules/socket.io/node_modules/socket.io-client/socket.io.js; echo '\n';) >> dist/vendors.js"
@@ -49,6 +49,7 @@
     "react-router-redux": "^4.0.2",
     "redux": "^3.5.1",
     "redux-logger": "^2.6.1",
+    "redux-promise": "^0.5.3",
     "redux-thunk": "^2.0.1",
     "resolve-url-loader": "^1.4.3",
     "sass-loader": "^3.2.0",
