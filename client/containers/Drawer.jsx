@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as MenuActions from '../actions/menu';
+import * as DrawerActions from '../actions/drawer';
 
 import Quiz from '../components/Quiz';
 
-class Menu extends React.Component {
+class Drawer extends React.Component {
   show() {
     this.props.actions.show();
   }
@@ -38,7 +38,7 @@ class Menu extends React.Component {
 
     return (
       <div>
-        <div className="menu">
+        <div className="drawer">
           <div id="controls" className={visibility ? " visible" : ""}>
             <ul>
               <li className="first" onClick={() => actions.display(PANEL_QUIZ) }> Quiz </li>
@@ -59,18 +59,18 @@ class Menu extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    visibility: state.menu.visibility,
-    panel: state.menu.panel
+    visibility: state.drawer.visibility,
+    panel: state.drawer.panel
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(MenuActions, dispatch)
+    actions: bindActionCreators(DrawerActions, dispatch)
   }
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Menu);
+)(Drawer);

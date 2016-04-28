@@ -1,18 +1,18 @@
 
-.menu {
-  $menu-width: 400px;
+.drawer {
+  $drawer-width: 400px;
   $tabs-width: 100px;
 
   #panels {
     border-width: 1px;
     position: absolute;
     background:	#D3D3D3;
-    right: ($menu-width * -1);
-    width: $menu-width;
+    right: ($drawer-width * -1);
+    width: $drawer-width;
     height:100%;
 
     &.visible {
-      transform: translate3d($menu-width*-1, 0, 0);
+      transform: translate3d($drawer-width*-1, 0, 0);
     }
   }
 
@@ -20,7 +20,7 @@
     float: right;
 
     &.visible {
-      transform: translate3d($menu-width*-1, 0, 0);
+      transform: translate3d($drawer-width*-1, 0, 0);
     }
   }
 

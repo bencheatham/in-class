@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 import { resetErrorMessage } from '../actions'
 import { show } from '../actions/quiz';
 
-import Menu from '../containers/Menu';
+import Drawer from '../containers/Drawer';
 require('../stylesheets/styles.scss');
 
 class QuizPage extends Component {
@@ -13,7 +13,7 @@ class QuizPage extends Component {
    return (
      <div>
        <span><h1>Slide Menu</h1></span>
-       <Menu />
+       <Drawer />
      </div>
    );
  };
