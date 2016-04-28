@@ -24,8 +24,6 @@ class Drawer extends React.Component {
 
   display(id) {
     const { actions } = this.props;
-    console.log('id', {id});
-    console.log('this', this);
   }
 
   render() {
