@@ -27,19 +27,9 @@ export function questions(state = initialState, action){
       return {
         questions: newQuestions,
       }
-    case DOWNVOTE: 
-      var updatedQuestions = _.map(state.questions.slice(), (question) => {
-        if (question.id === action.question_id){
-          question.downvotes++;
-        }
-        return question; 
-      });
-      return {
-        questions: updatedQuestions,
-      }
     case UPVOTE: 
       var updatedQuestions = _.map(state.questions.slice(), (question) => {
-        if (question.id === action.question_id){
+        if (question.id === action.id){
           question.upvotes++;
         }
         return question; 

@@ -1,6 +1,10 @@
 
 
-function userReducer(state = {username: 'sterv', type: 'student'}, action){
+function userReducer(state = {username: 'sterv'}, action){
+  switch (action.type){
+    case 'LOGIN':
+      return { username: action.username };
+  }
   return state;
 };
 

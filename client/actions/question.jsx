@@ -11,29 +11,12 @@ var serverEvents = {
   'upvote': updateVotes
 };
 
-var dummy_question = {
-  id: 12,
-  username : 'stephen',
-  text: 'I dont understand anything',
-  timestamp: 1461619497989,
-  upvotes: 3,
-  downvotes: 4
-}
-
-export function upvote(question_id) {
-  // socket.emit('upvote', 
-  //   {
-  //     username: username,
-  //     thumb: thumb   
-  //   });
-
-  return (dispatch, getState) => {
+export function upvote(id) {
      
-    return dispatch({
+    return {
       type: UPVOTE,
-      question_id: question_id
-    });
-  };
+      id: id
+    };
 }
 
 export function downvote(question_id) {
@@ -47,25 +30,11 @@ export function downvote(question_id) {
 }
 
 export function submitQuestion(text, question) {
-
-    if (text !== null){
-      var question = {
-          username: 'sterv',
-          id: 1,
-          text: text,
-          timestamp: Date.now(),
-          upvotes: 0,
-          downvotes: 0
-        };
-        console.log('about to emit question');
-      emitNewQuestion(question);
-    }
     
-    console.log('about to update question state',question)
-    return {
-      type: QUESTION,
-      question: question,
-    }
+  return {
+    type: QUESTION,
+    question: question,
+  }
 }
 
 export const initializeWebSockets = () => {

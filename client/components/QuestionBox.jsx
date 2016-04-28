@@ -4,20 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as questionActions from '../actions/question';
 import Question from './Question';
 import { socket } from '../actions/question'
-// var socket = require('socket.io-client');
-
-// socket = socket().connect('http://localhost:8000');
-
-// var serverEvents = {
-//   'question-submitted': updateQuestionsList,
-//   'upvote': updateVotes,
-// };
-
-// var initializeWebSockets = () => {
-//   for (var key in serverEvents) { 
-//     socket.on(key, serverEvents[key].bind(socket)); 
-//   }
-// };
 
 class QuestionBox extends Component {
 
@@ -33,25 +19,38 @@ class QuestionBox extends Component {
     socket.on('question-submitted', data => {
       this.props.actions.submitQuestion(null,data.question)
     });
+    socket.on('questionWithID', data => {
+      this.props.actions.submitQuestion(null,data.question)
+    });
+    socket.on('upvote', data => {
+      this.props.actions.upvote(data.id.id)
+    });
   }
   
   handleEnter(e) {
     if (e.keyCode === 13){
-      this.props.actions.submitQuestion(e.target.value);
+      socket.emit('question-submitted', {
+        username : this.props.user.username,
+        text: e.target.value,
+        timestamp: Date.now(),
+        upvotes: 0,
+      });
+      
       e.target.value = '';
     }
   };
 
   render(){
+    var { user } = this.props;
     var questions = this.props.questions.sort((a,b) => b.upvotes - a.upvotes)
     .map((question,idx)=>{
       return <Question key={idx} index={idx} question={question} />;
     })
-    // console.log(socket);
 
     return (
       <div>
-        <input type="text" onKeyDown={this.handleEnter}></input>
+        {user.username} is logged in...
+        Ask: <input type="text" onKeyDown={this.handleEnter}></input>
         {questions}
       </div>);
   }
@@ -59,7 +58,8 @@ class QuestionBox extends Component {
 
 function mapStateToProps(state) {
   return {
-    questions: state.questions.questions
+    questions: state.questions.questions,
+    user: state.user
   }
 }
 
