@@ -14,6 +14,7 @@
     "copy": "cp -r client/text dist/ && cp -r client/thumbs dist/ && cp -r client/protected dist/ && cp -r client/authentication dist/auth",
     "concat": "(cat node_modules/jquery/dist/jquery.min.js; echo '\n'; cat node_modules/underscore/underscore-min.js; echo '\n'; cat node_modules/socket.io/node_modules/socket.io-client/socket.io.js; echo '\n';) >> dist/vendors.js"
   },
+  "engines" : { "npm" : "2.15.3" }, 
   "author": "Louis Buchbinder, Ben Cheatham, Steven Sullivan, and Jason Wu",
   "license": "ISC",
   "dependencies": {
