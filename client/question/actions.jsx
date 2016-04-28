@@ -1,0 +1,24 @@
+import { UPVOTE, DOWNVOTE, QUESTION } from './constants';
+
+export function upvote(id,username) {  
+  return {
+    type: UPVOTE,
+    id: id,
+    username
+  };
+}
+
+export function downvote(question_id) {
+  return {
+    type: DOWNVOTE,
+    question_id: question_id
+  }
+}
+
+export function submitQuestion(text, question) {
+    
+  return {
+    type: QUESTION,
+    question: question,
+  }
+}

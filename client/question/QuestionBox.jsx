@@ -1,51 +1,37 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as questionActions from '../actions/question';
+import * as questionActions from './actions';
+import { socket } from '../common/socket'
+import { initializeWebSockets, emitNewQuestion } from './socket'
 import Question from './Question';
-import { socket } from '../actions/question'
 
 class QuestionBox extends Component {
 
   constructor(props) {
     super(props);
-    this.handleEnter = this.handleEnter.bind(this);  
+    this.handleEnter = this.handleEnter.bind(this);
+    this.initializeWebSockets = initializeWebSockets.bind(this);  
+    this.emitNewQuestion = emitNewQuestion.bind(this);
   }
 
   componentDidMount() {
-    // initializeWebSockets();
-    socket.emit('add user', {username: 'sterv'});
-    console.log('mounting component')
-    socket.on('question-submitted', data => {
-      this.props.actions.submitQuestion(null,data.question)
-    });
-    socket.on('questionWithID', data => {
-      this.props.actions.submitQuestion(null,data.question)
-    });
-    socket.on('upvote', data => {
-      this.props.actions.upvote(data.id.id)
-    });
+    this.initializeWebSockets();
   }
   
-  handleEnter(e) {
-    if (e.keyCode === 13){
-      socket.emit('question-submitted', {
-        username : this.props.user.username,
-        text: e.target.value,
-        timestamp: Date.now(),
-        upvotes: 0,
-      });
-      
-      e.target.value = '';
+  handleEnter(event) {
+    if (event.keyCode === 13){
+      this.emitNewQuestion(event,this.props.user.username);
+      event.target.value = '';
     }
   };
 
   render(){
-    var { user } = this.props;
-    var questions = this.props.questions.sort((a,b) => b.upvotes - a.upvotes)
-    .map((question,idx)=>{
-      return <Question key={idx} index={idx} question={question} />;
-    })
+    var { user, questions } = this.props;
+    questions = questions.sort((a,b) => b.upvotes - a.upvotes)
+      .map((question,idx)=>{
+        return <Question key={idx} index={idx} question={question} />;
+      });
 
     return (
       <div>

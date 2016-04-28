@@ -1,4 +1,4 @@
-var questionsModule = require('./questionSocket').module;
+var questionsModule = require('../client/question/server.jsx').module;
 var _ = require('underscore');
 
 module.exports = function initializeChatStreaming (server) {

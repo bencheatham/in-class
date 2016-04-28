@@ -1,21 +1,29 @@
-var socket = require('socket.io-client');
+import { socket } from '../common/socket';
 
-export var socket = socket().connect('http://localhost:8000');
-
-var serverEvents = {
-  'question-submitted': updateQuestionsList,
-  'upvote': updateVotes
+export function initializeWebSockets() {
+  socket.on('question-submitted', data => {
+    this.props.actions.submitQuestion(null,data.question);
+  });
+  socket.on('questionWithID', data => {
+    this.props.actions.submitQuestion(null,data.question);
+  });
+  socket.on('upvote', data => {
+    console.log('upvote received',data);
+    this.props.actions.upvote(data.id, data.username);
+  });
 };
 
-function initiateWebSocketListeners(){
-
+export function emitNewQuestion(event,name){
+  socket.emit('question-submitted', {
+      username : name,
+      text: event.target.value,
+      timestamp: Date.now(),
+      upvotes: [],
+    });
 }
-socket.on('question-submitted', data => {
-  this.props.actions.submitQuestion(null,data.question)
-});
-socket.on('questionWithID', data => {
-  this.props.actions.submitQuestion(null,data.question)
-});
-socket.on('upvote', data => {
-  this.props.actions.upvote(data.id.id)
-});
+
+export function emitUpvote(id,username){
+  console.log(id,username);
+  socket.emit('upvote', {id: id, username: username});
+}
+  
