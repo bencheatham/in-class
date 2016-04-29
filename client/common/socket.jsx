@@ -1,3 +1,3 @@
-var socket = require('socket.io-client');
+import socket from 'socket.io-client';
 
-export var socket = socket().connect('http://localhost:8010');
+export var socket = socket().connect('http://localhost:8000');
