@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { userJoinedClass } from '../actions/users';
 import { userLeftClass } from '../actions/users';
 import * as actions from '../actions/users';
-import { SERVER_URL } from '../constants/ActionTypes';
+//import { SERVER_URL } from '../constants/ActionTypes';
 
 const SERVER_URL = 'http://inclass-co.herokuapp.com/';//'http://localhost:8000';
 //const SERVER_URL = 'http://localhost:8000';
