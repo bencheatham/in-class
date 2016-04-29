@@ -15,10 +15,10 @@ var handler = require('./requestHandler.js');
 /////*****/////*****/////*****/////*****/////*****
 
 app.use(
-  function (req, res, next) {
-    console.log(req.headers.cookie);
-    next();
-  },
+  // function (req, res, next) {
+  //   console.log(req.headers.cookie);
+  //   next();
+  // },
   bodyParser.json(),
   bodyParser.urlencoded({extended: true}),
   cookieParser()  

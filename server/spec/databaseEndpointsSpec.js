@@ -7,26 +7,11 @@ const axios = require('axios');
 const db = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication-test.sqlite3');
 
 const data = {text: 'this is some text', color: 'orange'};
-var cookie;
+const cookie = 'authorization=Bearer%20eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImxvdWllIiwiaWF0IjoxNDYxOTQxMDk2fQ.gXOajV8KhpJRWocRBnfIrFBvJG6ZbNpWvF1QWurlvQU';
 
 describe('Database Endpoint Unit Tests', function() {
   beforeEach(function (done) {
     done();
-  });
-
-  it('should wipe the test database before the following tests', function () {
-    db.initialize(true); // reset the tables;
-    expect(true).to.equal(true);
-  });
-
-   it('should create a session token and save it as a cookie', function () {
-    return expect(
-      axios.post('http://localhost:8000/signup?test=true', {username: 'louie', password: 'password123'})
-      .then(function (res) { 
-        cookie = res.headers['set-cookie'][0].split(';')[0];
-        return Promise.resolve(res.status);
-      })
-    ).to.eventually.equal(200);
   });
 
   it('should use the cookie to access the protected page', function () {
@@ -36,7 +21,6 @@ describe('Database Endpoint Unit Tests', function() {
       .then(function (res) { return Promise.resolve(res.status); })
     ).to.eventually.equal(200);
   });
-
 
 
   // it('should respond with 400 for a bad request to /save', function() {
