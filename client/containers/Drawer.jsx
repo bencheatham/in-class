@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as DrawerActions from '../actions/drawer';
 import Quiz from '../components/Quiz';
 require('../stylesheets/drawer.scss');
+import QuestionContainer from '../question/container';
 
 class Drawer extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Drawer extends React.Component {
 
     const PANEL_QUIZ = 'PANEL_QUIZ';
     const PANEL_THUMB = 'PANEL_THUMB';
+    const PANEL_QUESTIONS = 'PANEL_QUESTIONS';
 
     let id = 0;
 
@@ -29,13 +31,13 @@ class Drawer extends React.Component {
           <div id="controls" className={visibility ? " visible" : ""}>
             <ul>
               <li className="first" onClick={() => actions.display(PANEL_QUIZ) }> Quiz </li>
-              <li className="last" onClick={() => actions.display(PANEL_THUMB) }> Chat </li>
+              <li className="last" onClick={() => actions.display(PANEL_QUESTIONS) }> Questions </li>
             </ul>
           </div>
 
           <div id="panels" className={visibility ? " visible" : ""}>
             <div style={{display: panel === PANEL_QUIZ ? '' : 'none'}}><Quiz/></div>
-            <div style={{display: panel === PANEL_THUMB ? '' : 'none'}}>Thumbs</div>
+            <div style={{display: panel === PANEL_QUESTIONS ? '' : 'none'}}><QuestionContainer/></div>
           </div>
         </div>
 
