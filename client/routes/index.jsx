@@ -10,6 +10,8 @@ import Quiz from '../containers/QuizPage';
 import StudentClassView from '../views/StudentClassView';
 import UserPage from '../containers/UserPage';
 import axios from 'axios';
+import QuizContainer from '../quiz/container';
+
 
 export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ; 
 
@@ -24,8 +26,6 @@ function checkAuthentication (next, previous, callback) {
   })
   .catch((error) => { console.log('not authorized'); previous('/login'); callback(); });
 }
-
- 
 
 export default (
   <Route>
@@ -50,6 +50,9 @@ export default (
            onEnter={checkAuthentication}/>
     <Route path="/user"
            component={UserPage} 
+           onEnter={checkAuthentication}/>
+     <Route path="/create-quiz"
+           component={QuizContainer}
            onEnter={checkAuthentication}/>
   </Route>
 );
