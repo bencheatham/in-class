@@ -8,6 +8,7 @@ class QuizContainer extends Component {
 
 
  render() {
+  console.log(this.props.quiz.quizSize);
    return (
      <div>
       <span><h1>Create a quiz</h1></span>
@@ -17,4 +18,16 @@ class QuizContainer extends Component {
  };
 }
 
-export default QuizContainer;
+function mapStateToProps(state){
+  return {
+    user: state.user,
+    quiz: state.quiz,
+  }
+}
+
+// function mapStateToProps(dispatch){
+//   actions: bindActionCreators({ submitQuiz },dispatch)
+  
+// }
+
+export default connect(mapStateToProps)(QuizContainer);
