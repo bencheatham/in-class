@@ -28,7 +28,7 @@ describe('Database Endpoint Unit Tests', function() {
 
   it('should save data to the database', function() {
     return expect(
-      axios.post('http://localhost:8000/save', {file: 'test', data: data}, {headers: {cookie: cookie}})
+      axios.post('http://localhost:8000/save', {file: 'test', data: data, update: 'true'}, {headers: {cookie: cookie}})
       .then(function (res) { return Promise.resolve(res.status); })
     ).to.eventually.equal(201);
   });
