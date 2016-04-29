@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router';
-//import { Provider } from 'react-redux';
 import Home from '../containers/Home';
 import Thumbs from '../containers/Thumbs';
 import QuestionContainer from '../question/container';
@@ -9,15 +8,6 @@ import Quiz from '../containers/QuizPage';
 import StudentClassView from '../views/StudentClassView';
 import UserPage from '../containers/UserPage';
 
-
-
-// let Wrapper = (component) => {
-//   return (...props) => (
-//     <Provider >
-//       <component {...props} />
-//     </Provider>
-//   );
-// };
  
 
 export default (
@@ -33,6 +23,9 @@ export default (
            component={QuestionContainer} />
     <Route path="/student-class"
            component={StudentClassView} />
+
+    <Route path="/user"
+           component={UserPage} />
   </Route>
 );
 

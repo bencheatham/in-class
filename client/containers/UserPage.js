@@ -71,6 +71,11 @@ class UserPage extends Component {
         {this.renderUserList(this.props.users)}
 
         </ul>
+      <div>
+        <VideoContainer username={this.props.username} />
+
+      </div>
+
 
       </div>
 

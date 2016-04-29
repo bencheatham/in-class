@@ -22,13 +22,13 @@ export default class VideoContainer extends Component {
    }
 
 
-      appendIt(){
-        console.log('IN APPEND IT')
-            console.log((this.state.videoSession.src))
+  appendIt(){
+    console.log('IN APPEND IT')
+        console.log((this.state.videoSession.src))
 
-         $('#vid-box').append(this.state.videoSession.outerHTML);
-      };
-     
+     $('#vid-box').append(this.state.videoSession.outerHTML);
+  };
+ 
 
 
   login(user, changeSession) {
