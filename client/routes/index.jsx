@@ -6,6 +6,7 @@ import Thumbs from '../containers/Thumbs';
 import QuestionContainer from '../question/container';
 import LoginView from '../views/LoginView';
 import Quiz from '../containers/QuizPage';
+import StudentClassView from '../views/StudentClassView';
 
 
 
@@ -29,6 +30,8 @@ export default (
            component={Thumbs} />
     <Route path="/question"
            component={QuestionContainer} />
+    <Route path="/student-class"
+           component={StudentClassView} />
   </Route>
 );
 

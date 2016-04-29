@@ -4,9 +4,10 @@ import { bindActionCreators } from 'redux';
 import { userLogin } from '../actions/users';
 import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
+import VideoContainer from '../containers/VideoContainer';
  
 
-class UserPage extends Component {
+class StudentClassview extends Component {
 
   constructor(props) {
     super(props);
@@ -53,22 +54,15 @@ class UserPage extends Component {
     return (
       <div>
 
-        <form onSubmit={this.onFormSubmit} className="input-group">
-          <input
-            placeholder="Username"
-            className="form-control"
-            value={this.state.term}
-            onChange={this.onInputChange} />
-
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Submit</button>
-          </span>
-        </form>
-
         <ul>
         {this.renderUserList(this.props.users)}
 
         </ul>
+
+        <div>
+        <VideoContainer />
+        </div>
+
 
       </div>
 
@@ -96,7 +90,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentClassview);
 
 
 

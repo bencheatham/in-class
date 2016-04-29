@@ -41,7 +41,7 @@ class UserPage extends Component {
           className="list-group-item">
           {user} Joined the Class.</li>
       );
-  });
+    });
   }
 
 
@@ -51,6 +51,7 @@ class UserPage extends Component {
   console.log('did username get in', this.props.actions )
 
     return (
+
       <div>
 
         <form onSubmit={this.onFormSubmit} className="input-group">
@@ -65,12 +66,35 @@ class UserPage extends Component {
           </span>
         </form>
 
+
+
+
+      <div className='col-xs-12 col-md-6 col-md-offset-3'>
+          <h3>Log in to view protected content!</h3>
+          <p>Hint: hello@test.com / test</p>
+          <form role='form'>
+          <div className='form-group'>
+              <input type='text'
+                className='form-control input-lg'
+           //     valueLink={this.linkState('email')}
+                placeholder='Email' />
+              </div>
+            <div className='form-group'>
+              <input type='password'
+                className='form-control input-lg'
+               // valueLink={this.linkState('password')}
+                placeholder='Password' />
+            </div>
+            <button type='submit'
+              className='btn btn-lg'
+              onClick={'hello'}>Submit</button>
+        </form>
+      </div>
         <ul>
         {this.renderUserList(this.props.users)}
 
         </ul>
-
-      </div>
+    </div>
 
 
     );
