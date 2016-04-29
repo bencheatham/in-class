@@ -1,9 +1,10 @@
-
+var questionsModule = require('../client/question/server.jsx').module;
+var _ = require('underscore');
 
 module.exports = function initializeChatStreaming (server) {
 	var io = require('socket.io')(server);
   var numUsers = 0;
-
+  
 	function newMessage (message) {
 	  // console.log('new message: ', message);
 	  // tell the client to execute 'new message'
@@ -40,8 +41,10 @@ module.exports = function initializeChatStreaming (server) {
 	  'disconnect': disconnect
 	};
 
+	var allSocketEvents = _.extend(socketEvents,questionsModule.questionEvents);
+
 	io.on('connection', function (socket) {
-		for (var key in socketEvents) { socket.on(key, socketEvents[key].bind(socket)); }
+		for (var key in allSocketEvents) { socket.on(key, allSocketEvents[key].bind(socket)); }
 	});
 
 };
