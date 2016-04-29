@@ -30,6 +30,13 @@ var authenticationHandler = require(__dirname + '/authentication/authenticationH
 // use express static to set the statically hosted files to the serve from the client directory
 app.use('/', express.static(__dirname + '/../dist/'));
 
+
+
+require('./webpack.js')(app);
+
+
+
+
 app.post('/signup', authenticationHandler.signup);
 app.post('/login', authenticationHandler.login);
 
