@@ -47,6 +47,8 @@ export function userLogin(user) {
 
 
 export function selectUser(user){
+  
+  console.log('IN selectUser: ', user);
 
  return {
    type: types.SELECT_USER,

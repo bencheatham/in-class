@@ -4,8 +4,12 @@ import { bindActionCreators } from 'redux';
 import { userLogin } from '../actions/users';
 import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
-import VideoContainer from '../containers/VideoContainer';
- 
+import * as VideoActions from '../modules/video/actions';
+
+import VideoContainer from '../modules/video/containers/VideoContainer';
+
+import { initializeWebSockets, emitNewVideoUser } from '../modules/video/api/socket';
+
 
 class LoginView extends Component {
 
@@ -16,7 +20,14 @@ class LoginView extends Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.videoCallUser = this.videoCallUser.bind(this);
+    //this.initializeWebSockets = initializeWebSockets.bind(this);  
+
   }
+
+  // componentDidMount() {
+  //   this.initializeWebSockets();
+  // }
 
   onInputChange(event) {
     this.setState({ term: event.target.value });
@@ -24,11 +35,23 @@ class LoginView extends Component {
   }
 
   onFormSubmit(event) {
-    const actions = this.props.actions;
+    const userActions = this.props.userActions;
 
     event.preventDefault();
-    actions.userLogin(this.state.term);
-    //actions.userLogin(username);
+    userActions.userLogin(this.state.term);
+  }
+
+  videoCallUser(user){
+    const videoActions = this.props.videoActions;
+
+    let ball = {
+      calledUser: user,
+      callingUser: this.props.username
+    }
+
+
+    // console.log(`${this.props.username} called ${user}!!!!`)
+    videoActions.studentCallStudent(ball);
   }
 
 
@@ -38,7 +61,7 @@ class LoginView extends Component {
       return (
         <li 
           key={user}
-          //onClick={() => this.props.selectUser(user)}
+          onClick={() => this.videoCallUser(user)}
           className="list-group-item">
           {user} Joined the Class.</li>
       );
@@ -88,15 +111,15 @@ function mapStateToProps(state) {
 
   return {
     users: state.Users.users,
-    username: state.Users.username
+    username: state.Users.username,
+    calledUser: state.video.calledUser
   };
 }
 
 function mapDispatchToProps(dispatch) {
-
   return {
-
-   actions: bindActionCreators(UserActions, dispatch)
+   userActions: bindActionCreators(UserActions, dispatch),
+   videoActions: bindActionCreators(VideoActions, dispatch)
   }
 }
 

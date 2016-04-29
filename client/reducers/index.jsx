@@ -15,6 +15,16 @@ const rootReducer = combineReducers({
   drawer,
   user,
   userVideoModal
+import video from '../modules/video/reducers/reducer_sessions';
+
+const rootReducer = combineReducers({
+ routing,
+ quiz,
+ Users,
+ questions,
+ drawer,
+ user,
+ video
 });
 
 export default rootReducer;

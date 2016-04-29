@@ -1,19 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as UserActions from '../actions/users';
+
 
 export default class VideoContainer extends Component {
 
    constructor(props) {
     super(props);
 
-    // console.log('Props Are: ')
-
-    // console.log(props)
     this.state = { 
      videoSession: '',
-     phone: window.phone
+     phone: window.phone,
+     calledUser: ''
     };
 
     this.changeSession = this.changeSession.bind(this);
@@ -81,7 +79,6 @@ export default class VideoContainer extends Component {
   makeCall(form) {
     if (!window.phone) alert("Login First!");
     else phone.dial("Fred");
-    //return false;
   }
 
   render() {

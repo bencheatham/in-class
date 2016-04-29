@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { userLogin } from '../actions/users';
 import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
-import VideoContainer from '../containers/VideoContainer';
+import VideoContainer from '../modules/video/containers/VideoContainer';
  
 
 class StudentClassview extends Component {

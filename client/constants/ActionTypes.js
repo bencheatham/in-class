@@ -13,3 +13,6 @@ export const USER_VIDEO_MODAL_SHOW = 'USER_VIDEO_MODAL_SHOW';
 export const USER_VIDEO_MODAL_HIDE = 'USER_VIDEO_MODAL_HIDE';
 
 export const SERVER_URL = 'http://192.168.1.40:8000';
+
+export const SELECT_USER = 'SELECT_USER';
+
