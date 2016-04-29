@@ -6,24 +6,13 @@ import * as DrawerActions from '../actions/drawer';
 import Quiz from '../components/Quiz';
 
 class Drawer extends React.Component {
-  show() {
-    this.props.actions.show();
+  constructor(props) {
+    super(props);
+    this.hide = this.hide.bind(this);
   }
 
   hide() {
     this.props.actions.hide();
-  }
-
-  toggle() {
-    if (this.props.visibility) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
-
-  display(id) {
-    const { actions } = this.props;
   }
 
   render() {
