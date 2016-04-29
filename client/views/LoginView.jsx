@@ -8,7 +8,7 @@ import * as VideoActions from '../modules/video/actions';
 
 import VideoContainer from '../modules/video/containers/VideoContainer';
 
-import { initializeWebSockets, emitNewVideoUser } from '../modules/video/api/socket';
+//import { initializeWebSockets, emitNewVideoUser } from '../modules/video/api/socket';
 
 
 class LoginView extends Component {
