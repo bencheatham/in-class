@@ -1,4 +1,3 @@
-console.log('environment: ', process.env);
 
 var app = require('./server/configuration.js');
 var server = require('http').createServer(app);
