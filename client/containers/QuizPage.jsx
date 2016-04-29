@@ -5,14 +5,14 @@ import { browserHistory } from 'react-router'
 import { show } from '../actions/quiz';
 
 import Drawer from '../containers/Drawer';
-import TeacherControlPanel from '../containers/TeacherControlPanel';
+import TeacherPanel from '../containers/TeacherPanel';
 
 class QuizPage extends Component {
   render() {
    return (
      <div>
        <Drawer />
-       <TeacherControlPanel />
+       <TeacherPanel />
      </div>
    );
  };
