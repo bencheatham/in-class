@@ -51,6 +51,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname,'/client/index.html')
-    })
+    }),
+    new webpack.EnvironmentPlugin(['NODE_ENV'])
   ]
 };
