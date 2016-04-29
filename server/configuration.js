@@ -16,7 +16,7 @@ var handler = require('./requestHandler.js');
 
 app.use(
   // function (req, res, next) {
-  //   console.log(req.url);
+  //   console.log(req.headers.cookie);
   //   next();
   // },
   bodyParser.json(),
@@ -30,7 +30,15 @@ var authenticationHandler = require(__dirname + '/authentication/authenticationH
 // use express static to set the statically hosted files to the serve from the client directory
 app.use('/', express.static(__dirname + '/../dist/'));
 
+
+
+require('./webpack.js')(app);
+
+
+
+
 app.post('/signup', authenticationHandler.signup);
 app.post('/login', authenticationHandler.login);
 
+require('./databaseEndpoints.js')(app);
 

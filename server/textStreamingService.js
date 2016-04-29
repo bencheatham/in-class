@@ -2,6 +2,7 @@ var questionsModule = require('../client/question/server.jsx').module;
 var _ = require('underscore');
 
 module.exports = function initializeChatStreaming (server) {
+	
 	var io = require('socket.io')(server);
   var numUsers = 0;
   
