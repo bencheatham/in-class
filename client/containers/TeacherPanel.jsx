@@ -1,12 +1,9 @@
-require('../stylesheets/styles.scss');
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
-
-
 import { show } from '../actions/userVideoModal';
 import UserVideoModal from './UserVideoModal';
+require('../stylesheets/styles.scss');
 
 class TeacherPanel extends React.Component {
 

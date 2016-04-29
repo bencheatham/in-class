@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as DrawerActions from '../actions/drawer';
-
 import Quiz from '../components/Quiz';
+require('../stylesheets/drawer.scss');
 
 class Drawer extends React.Component {
   constructor(props) {
