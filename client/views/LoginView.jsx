@@ -4,9 +4,10 @@ import { bindActionCreators } from 'redux';
 import { userLogin } from '../actions/users';
 import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
+import VideoContainer from '../containers/VideoContainer';
  
 
-class UserPage extends Component {
+class LoginView extends Component {
 
   constructor(props) {
     super(props);
@@ -66,34 +67,15 @@ class UserPage extends Component {
           </span>
         </form>
 
-
-
-
-      <div className='col-xs-12 col-md-6 col-md-offset-3'>
-          <h3>Log in to view protected content!</h3>
-          <p>Hint: hello@test.com / test</p>
-          <form role='form'>
-          <div className='form-group'>
-              <input type='text'
-                className='form-control input-lg'
-           //     valueLink={this.linkState('email')}
-                placeholder='Email' />
-              </div>
-            <div className='form-group'>
-              <input type='password'
-                className='form-control input-lg'
-               // valueLink={this.linkState('password')}
-                placeholder='Password' />
-            </div>
-            <button type='submit'
-              className='btn btn-lg'
-              onClick={'hello'}>Submit</button>
-        </form>
-      </div>
         <ul>
         {this.renderUserList(this.props.users)}
 
         </ul>
+      <div>
+        <VideoContainer username={this.props.username} />
+
+      </div>
+
     </div>
 
 
@@ -103,8 +85,6 @@ class UserPage extends Component {
 }
 
 function mapStateToProps(state) {
-
-   console.log('LETS LOOK AT STATE: ', state)
 
   return {
     users: state.Users.users,
@@ -120,7 +100,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
 
 
 

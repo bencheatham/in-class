@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { userLogin } from '../actions/users';
 import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
+import VideoContainer from './VideoContainer';
+
  
 
 class UserPage extends Component {

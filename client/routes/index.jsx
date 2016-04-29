@@ -7,6 +7,7 @@ import QuestionContainer from '../question/container';
 import LoginView from '../views/LoginView';
 import Quiz from '../containers/QuizPage';
 import StudentClassView from '../views/StudentClassView';
+import UserPage from '../containers/UserPage';
 
 
 

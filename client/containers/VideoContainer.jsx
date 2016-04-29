@@ -3,21 +3,37 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as UserActions from '../actions/users';
 
-class VideoContainer extends Component {
+export default class VideoContainer extends Component {
 
    constructor(props) {
     super(props);
+
+    // console.log('Props Are: ')
+
+    // console.log(props)
     this.state = { 
      videoSession: '',
      phone: window.phone
     };
 
+    this.changeSession = this.changeSession.bind(this);
+    this.appendIt = this.appendIt.bind(this);
 
    }
 
-  login(user) {
 
-    console.log('in video login: ', this.props.username);
+      appendIt(){
+        console.log('IN APPEND IT')
+            console.log((this.state.videoSession.src))
+
+         $('#vid-box').append(this.state.videoSession.outerHTML);
+      };
+     
+
+
+  login(user, changeSession) {
+
+    console.log('in video login: ', user);
 
 
     window.phone = PHONE({
@@ -32,13 +48,35 @@ class VideoContainer extends Component {
       //form.username.style.background="#55ff5b";
     });
     phone.receive(function(session){
-        session.connected(function(session) {this.setState({ videoSession: session.video});});
-        session.ended(function(session) {this.setState({ videoSession: ''});});
+        session.connected(function(session) {
+
+          console.log('INNNNN HERERERRERE')
+          console.log(this)
+
+          changeSession(session.video);
+
+          });
+
+          //this.setState({ videoSession: session.video});});
+        session.ended(function(session) {
+          
+          changeSession(session.video);
+
+         // this.setState({ videoSession: ''});
+
+        });
     });
 
     //return false;   // So the form does not submit.
   }
 
+  changeSession(session, appendIt){
+    console.log('WE ARE CHANGING SESSIONS!')
+    console.log(session)
+    {this.setState({ videoSession: session })}
+
+
+  }
   
   makeCall(form) {
     if (!window.phone) alert("Login First!");
@@ -47,15 +85,20 @@ class VideoContainer extends Component {
   }
 
   render() {
+    console.log('DURRRRRR', this.changeSession)
 
-    this.login(this.props.username);
+    this.login(this.props.username, this.changeSession);
 
+    this.appendIt();
 
     return (
       <div>
         <div id="vid-box">
-          {videoSession}
+
         </div>
+        <span className="input-group-btn">
+            <button type="submit" onClick={this.makeCall} className='btn btn-lg'>Start Video</button>
+        </span>
 
 
       </div>
@@ -64,15 +107,7 @@ class VideoContainer extends Component {
 };
 
 
-function mapStateToProps(state) {
 
-   console.log('LETS LOOK AT STATE: ', state)
-
-  return {
-    users: state.Users.users,
-    username: state.Users.username
-  };
-}
 
 
 
