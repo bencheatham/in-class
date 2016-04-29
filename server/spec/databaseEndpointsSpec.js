@@ -1,32 +1,25 @@
-
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const expect = chai.expect;
 chai.use(chaiAsPromised);
-const axios = require('axios');
-const db = require(__dirname + '/../../database/database.js')(__dirname + '/../../../database/authentication-test.sqlite3');
 
+const axios = require('axios');
+const db = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication-test.sqlite3');
+
+const data = {text: 'this is some text', color: 'orange'};
 var cookie;
 
-describe('Authentication Unit Tests', function() {
+describe('Database Endpoint Unit Tests', function() {
   beforeEach(function (done) {
     done();
   });
 
-  it('should block the protected page', function() {
-    return expect(
-      axios.get('http://localhost:8000/protected')
-      .catch(function (error) { return Promise.resolve(error); })
-      .then(function (res) { return Promise.resolve(res.status); })
-    ).to.eventually.equal(400);
-  });
-  
   it('should wipe the test database before the following tests', function () {
     db.initialize(true); // reset the tables;
     expect(true).to.equal(true);
   });
 
-  it('should create a session token and save it as a cookie', function () {
+   it('should create a session token and save it as a cookie', function () {
     return expect(
       axios.post('http://localhost:8000/signup?test=true', {username: 'louie', password: 'password123'})
       .then(function (res) { 
@@ -46,10 +39,22 @@ describe('Authentication Unit Tests', function() {
 
 
 
+  // it('should respond with 400 for a bad request to /save', function() {
+
+
+  it('should save data to the database', function() {
+    return expect(
+      axios.post('http://localhost:8000/save', {file: 'test', data: data}, {headers: {cookie: cookie}})
+      .then(function (res) { return Promise.resolve(res.status); })
+    ).to.eventually.equal(201);
+  });
+
+  it('should fetch data from the database', function() {
+    return expect(
+      axios.get('http://localhost:8000/fetch', {params: {file: 'test'}, headers: {cookie: cookie}})
+      .then(function (res) { return Promise.resolve({status: res.status, data: res.data}); })
+    ).to.eventually.deep.equal({status: 200, data: data});
+  });
+  
 });
-
-
-
-// const axios = require('axios');
-// axios.get('http://localhost:8000/protected').then(function (val) {console.log(val);});
 

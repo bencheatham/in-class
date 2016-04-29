@@ -15,10 +15,10 @@ var handler = require('./requestHandler.js');
 /////*****/////*****/////*****/////*****/////*****
 
 app.use(
-  // function (req, res, next) {
-  //   console.log(req.url);
-  //   next();
-  // },
+  function (req, res, next) {
+    console.log(req.headers.cookie);
+    next();
+  },
   bodyParser.json(),
   bodyParser.urlencoded({extended: true}),
   cookieParser()  
@@ -33,4 +33,5 @@ app.use('/', express.static(__dirname + '/../dist/'));
 app.post('/signup', authenticationHandler.signup);
 app.post('/login', authenticationHandler.login);
 
+require('./databaseEndpoints.js')(app);
 
