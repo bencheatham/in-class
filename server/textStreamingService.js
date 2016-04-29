@@ -35,7 +35,7 @@ module.exports = function initializeChatStreaming (server) {
 	}
 
  function tellUsersStudentIsOnVideo (userPac) {
-   this.broadcast.emit('newClassVideoUser', userPac )
+   this.broadcast.emit('newClassVideoUser', userPac );
 
  }
 

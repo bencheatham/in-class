@@ -6,16 +6,8 @@ import Users from './user';
 import questions from '../question/reducer';
 import user from '../login/reducer';
 import userVideoModal from './userVideoModal';
-
-const rootReducer = combineReducers({
-  routing,
-  quiz,
-  Users,
-  questions,
-  drawer,
-  user,
-  userVideoModal
 import video from '../modules/video/reducers/reducer_sessions';
+  
 
 const rootReducer = combineReducers({
  routing,
@@ -24,7 +16,8 @@ const rootReducer = combineReducers({
  questions,
  drawer,
  user,
- video
+ video,
+ userVideoModal
 });
 
 export default rootReducer;

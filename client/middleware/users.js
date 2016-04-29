@@ -24,7 +24,7 @@ export default function(store) {
 
   // Sets teacher-selected video user and session
   function setTeacherSelectedVideoUser (userPac) {
-    socket.emit('teacherSelectedVideoUser', userPac);}
+    socket.emit('teacherSelectedVideoUser', userPac);
   }
 
   // Sends a chat message
