@@ -9,7 +9,7 @@ import Drawer from '../containers/Drawer';
 import TeacherPanel from '../containers/TeacherPanel';
 
 import VideoContainer from '../modules/video/containers/VideoContainer';
-
+require('../stylesheets/styles.scss');
 //import { initializeWebSockets, emitNewVideoUser } from '../modules/video/api/socket';
 
 
@@ -62,7 +62,7 @@ class LoginView extends Component {
         <li 
           key={user}
           onClick={() => this.videoCallUser(user)}
-          className="list-group-item">
+          className="list-group-item user-video-link">
           {user} Joined the Class.</li>
       );
     });
