@@ -15,7 +15,7 @@ function fetchManifest () {
     fs.readdir(__dirname + '/../database/json/', (error, files) => { 
       if (error) reject(error); 
       else resolve(files); 
-    })
+    });
   })
   .then((files) => { console.log(files); return files; });
 }
