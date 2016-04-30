@@ -5,7 +5,7 @@ const port = process.env.PORT || 8000;
 
 
 var path = require('path');
-// var io = require(path.join(__dirname,'server/textStreamingService.js'))(server); //initialize chat server
+var io = require(path.join(__dirname,'server/textStreamingService.js'))(server); //initialize chat server
 
 
 // console.log(io);
