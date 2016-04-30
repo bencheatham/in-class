@@ -4,9 +4,16 @@ import { bindActionCreators } from 'redux';
 import { userLogin } from '../actions/users';
 import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
- 
+import * as VideoActions from '../modules/video/actions';
+import Drawer from '../containers/Drawer';
+import TeacherPanel from '../containers/TeacherPanel';
 
-class UserPage extends Component {
+import VideoContainer from '../modules/video/containers/VideoContainer';
+require('../stylesheets/styles.scss');
+//import { initializeWebSockets, emitNewVideoUser } from '../modules/video/api/socket';
+
+
+class LoginView extends Component {
 
   constructor(props) {
     super(props);
@@ -15,7 +22,14 @@ class UserPage extends Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.videoCallUser = this.videoCallUser.bind(this);
+    //this.initializeWebSockets = initializeWebSockets.bind(this);  
+
   }
+
+  // componentDidMount() {
+  //   this.initializeWebSockets();
+  // }
 
   onInputChange(event) {
     this.setState({ term: event.target.value });
@@ -23,11 +37,21 @@ class UserPage extends Component {
   }
 
   onFormSubmit(event) {
-    const actions = this.props.actions;
+    const userActions = this.props.userActions;
 
     event.preventDefault();
-    actions.userLogin(this.state.term);
-    //actions.userLogin(username);
+    userActions.userLogin(this.state.term);
+  }
+
+  videoCallUser(user){
+    const videoActions = this.props.videoActions;
+
+    let ball = {
+      calledUser: user,
+      callingUser: this.props.username
+    };
+
+    videoActions.userCallUser(ball);
   }
 
 
@@ -37,11 +61,11 @@ class UserPage extends Component {
       return (
         <li 
           key={user}
-          //onClick={() => this.props.selectUser(user)}
-          className="list-group-item">
+          onClick={() => this.videoCallUser(user)}
+          className="list-group-item user-video-link">
           {user} Joined the Class.</li>
       );
-  });
+    });
   }
 
 
@@ -51,6 +75,7 @@ class UserPage extends Component {
   console.log('did username get in', this.props.actions )
 
     return (
+
       <div>
 
         <form onSubmit={this.onFormSubmit} className="input-group">
@@ -69,8 +94,14 @@ class UserPage extends Component {
         {this.renderUserList(this.props.users)}
 
         </ul>
+      <div>
+        <Drawer />
+        <TeacherPanel />
+        <VideoContainer username={this.props.username} />
 
       </div>
+
+    </div>
 
 
     );
@@ -80,23 +111,21 @@ class UserPage extends Component {
 
 function mapStateToProps(state) {
 
-   console.log('LETS LOOK AT STATE: ', state)
-
   return {
     users: state.Users.users,
-    username: state.Users.username
+    username: state.Users.username,
+    calledUser: state.video.calledUser
   };
 }
 
 function mapDispatchToProps(dispatch) {
-
   return {
-
-   actions: bindActionCreators(UserActions, dispatch)
+   userActions: bindActionCreators(UserActions, dispatch),
+   videoActions: bindActionCreators(VideoActions, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
 
 
 
