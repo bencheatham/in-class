@@ -28,7 +28,9 @@ export default function(state = {
     console.log("TEACHER_SELECT_STUDENT_VIDEO in reducer", action)
 
     return Object.assign({}, state, {
-      teacherSelectedUser: action.payload.teacherSelectedUser
+      teacherSelectedUser: action.payload.teacherSelectedUser,
+      teacherCall: true,
+      teacherID: action.payload.callingUser
     });
 
   case ADD_VIDEO_SESSION:

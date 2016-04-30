@@ -79,12 +79,21 @@ class VideoContainer extends Component {
     this.login(this.changeSession, this.props.videoActions);
 
 
-    if(this.props.calledUser !== null){
+    if (this.props.calledUser !== null){
       setTimeout(this.makeCall, 3000);
     }
-    if(this.props.videoSession !== null){
+    if (this.props.videoSession !== null){
       this.appendIt();
+      if (this.props.teacherCall) {
+        let classVideoPac = {
+          speaker: this.props.calledUser,
+          teacher: this.props.teacher,
+          videoSession: this.props.videoSession
+        }
+        this.props.videoActions.emitTeacherVideoSession(classVideoPac);
+      }
     }
+
 
     return (
       <div>
@@ -109,7 +118,8 @@ function mapStateToProps(state) {
     calledUser: state.video.calledUser,
     callingUser: state.video.callingUser,
     videoSession: state.video.videoSession,
-    phone: state.video.phone
+    phone: state.video.phone,
+    teacherCall: state.video.teacherCall
   };
 }
 

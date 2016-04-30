@@ -32,14 +32,19 @@ export function studentCallStudent(callers) {
  };
 }
 
-export function teacherSelectStudentVideo(userPac) {
+export function teacherSelectStudentVideo(selectionDetails) {
 
- worker['teacherSelectedVideoUser'](userPac);
 
  return {
    type: types.TEACHER_SELECT_STUDENT_VIDEO,
-   payload: userPac
+   payload: selectionDetails
  };
+}
+
+export function emitTeacherVideoSession(classUserPac) {
+
+  worker['teacherSelectedVideoUser'](classUserPac);
+
 }
 
 

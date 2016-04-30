@@ -23,8 +23,8 @@ export default function(store) {
   function setUsername (username) { socket.emit('add user', username); }
 
   // Sets teacher-selected video user and session
-  function setTeacherSelectedVideoUser (userPac) {
-    socket.emit('teacherSelectedVideoUser', userPac);
+  function setTeacherSelectedVideoUser (classUserPac) {
+    socket.emit('teacherSelectedVideoUser', classUserPac);
   }
 
   // Sends a chat message
