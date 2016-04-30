@@ -13,7 +13,7 @@ import UserPage from '../containers/UserPage';
 export default (
   <Route>
     <Route path="/" component={Home} />
-    <Route path="/login"
+    <Route path="/video"
            component={LoginView} />
     <Route path="/quiz"
            component={Quiz} />
