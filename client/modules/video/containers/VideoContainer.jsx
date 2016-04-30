@@ -113,16 +113,23 @@ class VideoContainer extends Component {
 
         console.log(stringVideoSession.session);
 
-
-        let classVideoPac = {
-          speaker: this.props.calledUser,
-          teacher: this.props.teacherName,
-          videoSession: stringVideoSession.session
+        if(this.props.classVideoSession === null){
+          let classVideoPac = {
+            speaker: this.props.calledUser,
+            teacher: this.props.teacherName,
+            videoSession: stringVideoSession.session
+          }
+            
+          console.log(classVideoPac);
+          this.props.videoActions.emitTeacherVideoSession(classVideoPac);
         }
-          
-        console.log(classVideoPac);
-        //this.props.videoActions.emitTeacherVideoSession(classVideoPac);
+
       }
+    }
+
+    if (this.props.videoSession === null && this.props.classVideoSession !== null) {
+      console.log('Here Adding the Teaches Vid: ', this.props.classVideoSession)
+      this.props.videoActions.addVideoSession(this.props.classVideoSession);
     }
 
 

@@ -8,7 +8,11 @@ import { ADD_CLASS_VIDEO_SESSION } from '../constants/VideoConstants';
 export default function(state = {
   calledUser: null, 
   callingUser: null,
-  videoSession: null
+  videoSession: null,
+  classVideoSession: null,
+  classVideoSpeaker: null,
+  classVideoTeacher: null
+
 }, action) {
 
 
@@ -45,11 +49,16 @@ export default function(state = {
 
   case ADD_CLASS_VIDEO_SESSION:
 
-    return Object.assign({}, state, {
-      classVideoSession: action.payload.videoSession,
-      classVideoSpeaker: action.payload.presenter,
-      classVideoTeacher: action.payload.teacher
-    })
+    if(state.classVideoSession === null){
+      let obj = Object.assign({}, state, {
+            classVideoSession: action.payload.videoSession,
+            classVideoSpeaker: action.payload.presenter,
+            classVideoTeacher: action.payload.teacher
+          });
+
+      return obj;
+    }
+    return state;
 
 
   }
