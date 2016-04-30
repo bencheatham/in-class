@@ -5,6 +5,8 @@ import { userLogin } from '../actions/users';
 import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
 import * as VideoActions from '../modules/video/actions';
+import Drawer from '../containers/Drawer';
+import TeacherPanel from '../containers/TeacherPanel';
 
 import VideoContainer from '../modules/video/containers/VideoContainer';
 
@@ -93,6 +95,8 @@ class LoginView extends Component {
 
         </ul>
       <div>
+        <Drawer />
+        <TeacherPanel />
         <VideoContainer username={this.props.username} />
 
       </div>

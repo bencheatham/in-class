@@ -4,17 +4,35 @@ import { bindActionCreators } from 'redux';
 
 import { Modal, Button } from 'react-bootstrap';
 import * as ModalActions from '../actions/userVideoModal';
+import * as VideoActions from '../modules/video/actions';
+
 
 class UserVideoModal extends React.Component {
 
   constructor(props){
     super(props);
+
     this.hide = this.hide.bind(this);
+    this.teacherVideoCallUser = this.teacherVideoCallUser.bind(this);
   };
 
   hide() {
     this.props.actions.hide();
   };
+
+  teacherVideoCallUser(user){
+    const videoActions = this.props.videoActions;
+
+    let ball = {
+      teacherSelectedUser: user,
+      teacherID: this.props.username,
+    };
+
+    videoActions.teacherSelectStudentVideo(ball);
+
+    setTimeout(this.hide, 3000);
+  } 
+
 
   render() {
     const { visible } = this.props;
@@ -26,8 +44,16 @@ class UserVideoModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <ul>
-            <li>Person A</li>
-            <li>Person B</li>
+            <li
+              key={"Fred"}
+              onClick={() => this.teacherVideoCallUser("Fred")}
+              className="list-group-item">
+              Fred</li>
+            <li              
+              key={"Mary"}
+              onClick={() => this.teacherVideoCallUser("Mary")}
+              className="list-group-item">
+              Mary</li>
           </ul>
         </Modal.Body>
         <Modal.Footer>
@@ -40,13 +66,16 @@ class UserVideoModal extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    visible: state.userVideoModal.visible
+    visible: state.userVideoModal.visible,
+    session: state.video.videoSession,
+    username: state.Users.username
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(ModalActions, dispatch)
+    actions: bindActionCreators(ModalActions, dispatch),
+    videoActions: bindActionCreators(VideoActions, dispatch)
   };
 }
 

@@ -4,6 +4,14 @@ import initializeUsers from '../../../middleware/users';
 const worker = initializeUsers();
 
 
+export function addPhone(phone) {
+
+ return {
+   type: types.ADD_PHONE_FROM_WINDOW,
+   payload: phone
+ };
+}
+
 export function addVideoSession(session) {
 
 
