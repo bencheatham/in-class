@@ -34,12 +34,20 @@ module.exports = function initializeChatStreaming (server) {
 	  console.log('disconnect: ', this.username, numUsers);
 	}
 
+ function tellUsersStudentIsOnVideo (userPac) {
+   this.broadcast.emit('newClassVideoUser', userPac );
+
+ }
+
+
+
 	var socketEvents = {
 	  'new message': newMessage,
 	  'add user': addUser,
 	  'typing': typing,
 	  'stop typing': stopTyping,
-	  'disconnect': disconnect
+	  'disconnect': disconnect,
+	  'teacherSelectedVideoUser' : tellUsersStudentIsOnVideo
 	};
 
 	var allSocketEvents = _.extend(socketEvents,questionsModule.questionEvents);

@@ -1,10 +1,12 @@
 /*globals $*/
-import io from 'socket.io-client';
+import io from 'socket.io/node_modules/socket.io-client';
 import { userJoinedClass } from '../actions/users';
 import { userLeftClass } from '../actions/users';
 import * as actions from '../actions/users';
+import { SERVER_URL } from '../constants/ActionTypes';
 
-const SERVER_URL = 'http://in-class.herokuapp.com/';//'http://localhost:8000';
+//const SERVER_URL = 'http://inclass-co.herokuapp.com/';//'http://localhost:8000';
+//const SERVER_URL = 'http://localhost:8000';
 
 export default function(store) {
 
@@ -13,11 +15,17 @@ export default function(store) {
   let lastTypingTime;
 
   console.log('MADE IT YO');
+  console.log(store)
   const socket = io.connect(`${SERVER_URL}`);
 
 
   // Sets the client's username
   function setUsername (username) { socket.emit('add user', username); }
+
+  // Sets teacher-selected video user and session
+  function setTeacherSelectedVideoUser (classUserPac) {
+    socket.emit('teacherSelectedVideoUser', classUserPac);
+  }
 
   // Sends a chat message
   function sendMessage (message) { socket.emit('new message', cleanInput(message)); }
@@ -25,6 +33,11 @@ export default function(store) {
 
   // Prevents input from having injected markup
   function cleanInput (input) { return $('<div/>').text(input).text(); }
+
+  function newClassVideoUser(userPac) {
+    console.log(userPac.username + 'isOnVideoChat', userPac)
+    store.dispatch(actions.addVideoSession(userPac));
+  }
 
 
   function login (data) {
@@ -60,7 +73,9 @@ export default function(store) {
   var clientActions = {
     'set username': setUsername,
     'send message': sendMessage,
-    'clean input': cleanInput
+    'clean input': cleanInput,
+    'teacherSelectedVideoUser': setTeacherSelectedVideoUser
+
   };
 
 
@@ -70,7 +85,8 @@ export default function(store) {
     'user joined': userJoined,
     'user left': userLeft,
     'typing': typing,
-    'stop typing': stopTyping
+    'stop typing': stopTyping,
+    'newClassVideoUser': newClassVideoUser
   };
 
   for (var key in socketEvents) {
