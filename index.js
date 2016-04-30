@@ -20,19 +20,19 @@ if (module.parent) {
 }
 
 
-process.stdin.resume();//so the program will not close instantly
+// process.stdin.resume();//so the program will not close instantly
 
-function exitHandler(options, err) {
-    if (options.cleanup) console.log('clean');
-    if (err) console.log(err.stack);
-    if (options.exit) {console.log('\n...user ended'); process.exit();}
-}
+// function exitHandler(options, err) {
+//     if (options.cleanup) console.log('clean');
+//     if (err) console.log(err.stack);
+//     if (options.exit) {console.log('\n...user ended'); process.exit();}
+// }
 
-//do something when app is closing
-process.on('exit', exitHandler.bind(null,{cleanup:true}));
+// //do something when app is closing
+// process.on('exit', exitHandler.bind(null,{cleanup:true}));
 
-//catches ctrl+c event
-process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+// //catches ctrl+c event
+// process.on('SIGINT', exitHandler.bind(null, {exit:true}));
 
-//catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+// //catches uncaught exceptions
+// process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
