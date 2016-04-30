@@ -7,12 +7,9 @@ export function initializeWebSockets() {
   });
 };
 
-// export function emitNewQuestion(event,name){
-//   socket.emit('question-submitted', {
-//       username : name,
-//       text: event.target.value,
-//       timestamp: Date.now(),
-//       upvotes: [],
-//     });
-// }
+export function emitQuiz(quizName){
+  socket.emit('pop-quiz', {
+      file: quizName
+    });
+}
 

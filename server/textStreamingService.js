@@ -1,4 +1,5 @@
-var questionsModule = require('../client/question/server.jsx').module;
+var questionSocketEvents = require('../client/question/server.jsx').module.questionEvents;
+var quizSocketEvents = require('../client/quiz/server.jsx').module.quizEvents;
 var _ = require('underscore');
 
 module.exports = function initializeChatStreaming (server) {
@@ -62,7 +63,7 @@ module.exports = function initializeChatStreaming (server) {
 	  'teacherSelectedVideoUser' : tellUsersStudentIsOnVideo
 	};
 
-	var allSocketEvents = _.extend(socketEvents,questionsModule.questionEvents);
+	var allSocketEvents = _.extend(socketEvents,questionSocketEvents, quizSocketEvents);
 
 	io.on('connection', function (socket) {
 		for (var key in allSocketEvents) { socket.on(key, allSocketEvents[key].bind(socket)); }

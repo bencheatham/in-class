@@ -12,6 +12,7 @@ import UserPage from '../containers/UserPage';
 import axios from 'axios';
 import QuizContainer from '../quiz/container';
 import StudentQuiz from '../quiz/StudentQuiz';
+import TeacherQuiz from '../quiz/TeacherQuiz';
 
 export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ; 
 
@@ -56,6 +57,8 @@ export default (
      <Route path="/pop-quiz"
            component={StudentQuiz}
            onEnter={checkAuthentication}/>
-
+      <Route path="/send-quiz"
+           component={TeacherQuiz} />
+           onEnter={checkAuthentication}/>
   </Route>
 );

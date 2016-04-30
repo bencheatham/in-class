@@ -14,7 +14,7 @@ export function questions(state = initialState, action){
 
   switch (action.type) {
     case QUESTION:
-      cnosole.log(action);
+      
       var newQuestions = state.questions.concat(action.question)
       
       return {
