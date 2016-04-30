@@ -1,24 +1,59 @@
 import axios from 'axios';
 import _ from 'underscore';
-import { QUIZ_SUBMISSION, QUIZ_FETCH } from './constants';
+import { ADD_QUIZFORM, QUIZ_SUBMISSION, QUIZ_FETCH, UPDATE_QUIZ } from './constants';
 
-export function submitQuiz (formData) {
+export function submitQuiz (quizTitle,formData) {
   
-  // axios.post('/save', JSON.stringify(formData)).then(function(data)){
-  //   console.log(data);
-  //   if (data.response.status === 201){
-  //     return _.extend(formData,{type: 'QUIZ'});
-  //   }
-  // }
-  // _.extend(formData,{type: QUIZ_SUBMISSION});
+  return axios.post('/save', JSON.stringify(formData)).then(function(response){
+    console.log('response from API',response);
+    if (response.status === 201){
+      return {
+        type: QUIZ_SUBMISSION, 
+        form: formData, 
+        title: quizTitle
+      };
+    }
+  })
+  .catch(function(response){
+      console.log('error',response);
+      return {
+        type: QUIZ_SUBMISSION, 
+        form: formData, 
+        title: quizTitle
+      }
+  });
 }
 
-export function fetchQuiz (id) {
+export function fetchQuiz () {
   
-  // axios.get('/fetch').then(function(data)){
-  //   return {
-  //     type: QUIZ_FETCH,
-  //     message: data,
-  //   }
-  // }
+  return axios.get('/fetch', {
+    data: 'all'
+  })
+  .then(function(data){
+    console.log(data);
+    return {
+      type: QUIZ_FETCH,
+      message: data,
+    }
+  })
+  .catch(function(response){
+    console.log('fetch error',response);
+    return {
+      type: QUIZ_FETCH,
+    }
+  })
+}
+
+export function addQuizForm () {
+  return {
+    type: ADD_QUIZFORM,
+  }
+}
+
+export function updateQuiz (formData) {
+
+ return {
+  type: UPDATE_QUIZ,
+  formData: formData,
+ }
 }

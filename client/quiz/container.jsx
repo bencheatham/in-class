@@ -1,20 +1,48 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Login from '../login/Login'
 import QuizForm from '../quiz/QuizForm'
 import Drawer from '../containers/Drawer'
+import { addQuizForm, submitQuiz, fetchQuiz} from './actions'
 
 class QuizContainer extends Component {
+  constructor (props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmission = this.handleSubmission.bind(this);
+    this.handleFetch = this.handleFetch.bind(this);
+  }
 
+  handleClick (){
+    this.props.actions.addQuizForm();
+  }
 
- render() {
-  console.log(this.props.quiz.quizSize);
-   return (
-     <div>
-      <span><h1>Create a quiz</h1></span>
-      <QuizForm />
-    </div>
-   );
+  handleSubmission (){
+    this.props.actions.submitQuiz(this.refs.title.value,this.props.quiz.quizzes);
+  }
+
+  handleFetch(){
+    this.props.actions.fetchQuiz();
+    console.log('fetch!')
+  }
+
+  render() {
+    var quizForms = [];
+    for (var i = 0; i < this.props.quiz.questionForms; i++){
+      quizForms.push(<QuizForm handleSubmission={this.handleSubmission} key={i} id={i} />);
+    }
+    return (
+      <div>
+      <button onClick={this.handleFetch} >Fetch Your Quizzes</button>
+        <span><h1>Create a new quiz.</h1></span>
+        <span>Quiz title:</span>
+        <input type="text" ref="title"></input>
+        <button onClick={this.handleSubmission}> Create Quiz</button>
+        {quizForms}
+        <div onClick={this.handleClick}>[ + + + + +]</div>
+      </div>
+     );
  };
 }
 
@@ -25,9 +53,10 @@ function mapStateToProps(state){
   }
 }
 
-// function mapStateToProps(dispatch){
-//   actions: bindActionCreators({ submitQuiz },dispatch)
-  
-// }
+function mapDispatchToProps(dispatch){
+  return {
+    actions: bindActionCreators({ addQuizForm, submitQuiz, fetchQuiz },dispatch)  
+  }
+}
 
-export default connect(mapStateToProps)(QuizContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(QuizContainer);

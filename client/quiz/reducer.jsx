@@ -1,49 +1,43 @@
-import const { QUIZ_SUBMISSION, QUIZ_FETCH, ADD_QUIZ} from './constants';
+import { QUIZ_SUBMISSION, QUIZ_FETCH, ADD_QUIZFORM, UPDATE_QUIZ} from './constants';
 
 var initialState = {
   quizzes: [],
-  quizSize: 1,
+  questionForms: 1,
 }
 
-var example = [
-  {
-    question: "What color is the blowfish",
-    options: ['red','blue','green','orange'],
-    answer: 2,
-  },
-  {
-    question: "What color is the blowfish",
-    options: ['red','blue','green','orange'],
-    answer: 2,
-  }
-];
-
-
-function quiz(state = initialState, action){
+export default function quiz(state = initialState, action){
 
   switch (action.type) {
     case QUIZ_SUBMISSION:
+      // var newQuizzes = state.quizzes.concat(action.formData);
+      return {
+        quizzes: state.quizzes,
+        questionForms: state.questionForms,
+      }
+    case UPDATE_QUIZ:
+      var updatedQuizzes;
+      if (state.quizzes.length < state.questionForms){
+        updatedQuizzes = state.quizzes.concat(action.formData);  
+      } else {
+        updatedQuizzes = state.quizzes.map(function(quiz){
+          if (quiz.id === action.formData.id){
+            return action.formData;
+          }
+            return quiz;
+          })
+        }
       
       return {
-        quizzes: state.quizzes,
-        quizSize: state.quizSize,
+        quizzes: updatedQuizzes,
+        questionForms: state.questionForms,
       }
-    case QUIZ_FETCH: 
-      
+    case ADD_QUIZFORM:   
+      var newCount = state.questionForms + 1;
       return {
         quizzes: state.quizzes,
-        quizSize: state.quizSize,
-      }
-    case ADD_QUIZ}:   
-      var newCount = state.quizSize++;
-      return {
-        quizzes: state.quizzes,
-        quizSize: newCount,
+        questionForms: newCount,
       }
     default: 
       return state;
   }
 } 
-
-export default quiz;
-

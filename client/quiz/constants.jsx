@@ -1,3 +1,4 @@
 export const QUIZ_SUBMISSION = 'QUIZ-SUBMISSION';
 export const QUIZ_FETCH = 'QUIZ-FETCH';
-export const ADD_QUIZ = 'ADD_QUIZ';
+export const ADD_QUIZFORM = 'ADD_QUIZFORM';
+export const UPDATE_QUIZ = 'UPDATE_QUIZ';

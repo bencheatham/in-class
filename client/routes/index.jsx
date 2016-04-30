@@ -11,10 +11,7 @@ import StudentClassView from '../views/StudentClassView';
 import UserPage from '../containers/UserPage';
 import axios from 'axios';
 import QuizContainer from '../quiz/container';
-
-
 export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ; 
-
 
 function checkAuthentication (next, previous, callback) {
   console.log(SERVER_URL);
