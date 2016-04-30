@@ -25,7 +25,6 @@ export default function(state = {users: [], username: ""}, action) {
     if(action.payload !== state.username){
       return Object.assign({}, state, {
         users: [action.payload, ...state.users],
-        username: action.payload
       });
     }
     return state;
