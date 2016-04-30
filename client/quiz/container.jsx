@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Login from '../login/Login'
-import QuizForm from '../quiz/QuizForm'
+import CreateQuiz from '../quiz/CreateQuiz'
 import Drawer from '../containers/Drawer'
 import { addQuizForm, submitQuiz, fetchQuiz} from './actions'
 
@@ -24,7 +24,7 @@ class QuizContainer extends Component {
 
   handleFetch(){
     this.props.actions.fetchQuiz();
-    console.log('fetch!')
+  
   }
 
   render() {
@@ -34,7 +34,7 @@ class QuizContainer extends Component {
     }
     return (
       <div>
-      <button onClick={this.handleFetch} >Fetch Your Quizzes</button>
+        <button onClick={this.handleFetch}>Fetch Your Quizzes</button>  
         <span><h1>Create a new quiz.</h1></span>
         <span>Quiz title:</span>
         <input type="text" ref="title"></input>
@@ -50,6 +50,7 @@ function mapStateToProps(state){
   return {
     user: state.user,
     quiz: state.quiz,
+    storedQuizzes: state.storedQuizzes
   }
 }
 

@@ -8,7 +8,7 @@ import Drawer from '../containers/Drawer'
 import { submitQuiz, updateQuiz } from './actions'
 
 
-class QuizForm extends Component {
+class CreateQuiz extends Component {
 
   constructor(props){
     super(props);
@@ -18,7 +18,7 @@ class QuizForm extends Component {
   handleChange (e) {
     console.log(e);
     var form = {
-      title: this.refs.title.value,
+      question: this.refs.title.value,
       answer: this.refs.answer.value,
       choice1: this.refs.choice1.value,
       choice2: this.refs.choice2.value,
@@ -58,4 +58,4 @@ function mapDispatchToProps(dispatch){
   
   
 }
-export default connect(mapStateToProps,mapDispatchToProps)(QuizForm);
+export default connect(mapStateToProps,mapDispatchToProps)(CreateQuiz);

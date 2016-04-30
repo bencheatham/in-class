@@ -8,12 +8,6 @@ var initialState = {
 export default function quiz(state = initialState, action){
 
   switch (action.type) {
-    case QUIZ_SUBMISSION:
-      // var newQuizzes = state.quizzes.concat(action.formData);
-      return {
-        quizzes: state.quizzes,
-        questionForms: state.questionForms,
-      }
     case UPDATE_QUIZ:
       var updatedQuizzes;
       if (state.quizzes.length < state.questionForms){
@@ -26,7 +20,6 @@ export default function quiz(state = initialState, action){
             return quiz;
           })
         }
-      
       return {
         quizzes: updatedQuizzes,
         questionForms: state.questionForms,
