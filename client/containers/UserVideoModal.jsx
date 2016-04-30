@@ -17,6 +17,7 @@ class UserVideoModal extends React.Component {
   };
 
   hide() {
+    console.log('hiding')
     this.props.actions.hide();
   };
 
@@ -25,12 +26,12 @@ class UserVideoModal extends React.Component {
 
     let ball = {
       teacherSelectedUser: user,
-      teacherID: this.props.username,
+      teacherName: this.props.username,
     };
 
     videoActions.teacherSelectStudentVideo(ball);
 
-    setTimeout(this.hide, 3000);
+    setTimeout(this.hide, 1500);
   } 
 
 

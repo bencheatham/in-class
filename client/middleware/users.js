@@ -36,7 +36,7 @@ export default function(store) {
 
   function newClassVideoUser(userPac) {
     console.log(userPac.username + 'isOnVideoChat', userPac)
-    store.dispatch(actions.teacherSelectStudentVideo(userPac));
+    store.dispatch(actions.addVideoSession(userPac));
   }
 
 

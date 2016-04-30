@@ -51,7 +51,7 @@ class LoginView extends Component {
       callingUser: this.props.username
     };
 
-    videoActions.studentCallStudent(ball);
+    videoActions.userCallUser(ball);
   }
 
 

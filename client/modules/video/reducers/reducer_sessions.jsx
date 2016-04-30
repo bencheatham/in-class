@@ -1,7 +1,6 @@
-import { STUDENT_CALL_STUDENT } from '../constants/VideoConstants';
+import { USER_CALL_USER } from '../constants/VideoConstants';
 import { TEACHER_SELECT_STUDENT_VIDEO } from '../constants/VideoConstants';
 import { ADD_VIDEO_SESSION } from '../constants/VideoConstants';
-import { ADD_PHONE_FROM_WINDOW } from '../constants/VideoConstants';
 
 
 
@@ -9,15 +8,14 @@ export default function(state = {
   calledUser: null, 
   callingUser: null,
   videoSession: null,
-  phone: null
 }, action) {
 
 
   console.log('HERE IN ACTIONS: ', action)
 
   switch(action.type) {
-  case STUDENT_CALL_STUDENT:
-    console.log("STUDENT_CALL_STUDENT in reducer", action)
+  case USER_CALL_USER:
+    console.log("USER_CALL_USER in reducer", action)
 
     return Object.assign({}, state, {
       calledUser: action.payload.calledUser,
@@ -30,7 +28,7 @@ export default function(state = {
     return Object.assign({}, state, {
       teacherSelectedUser: action.payload.teacherSelectedUser,
       teacherCall: true,
-      teacherID: action.payload.callingUser
+      teacherName: action.payload.teacherName
     });
 
   case ADD_VIDEO_SESSION:
@@ -39,13 +37,7 @@ export default function(state = {
     return Object.assign({}, state, {
       videoSession: action.payload
     });
+  }
 
-  case ADD_PHONE_FROM_WINDOW:
-
-    return Object.assign({}, state, {
-      phone: action.payload
-    });
-
-  } 
   return state;
 }

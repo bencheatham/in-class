@@ -82,6 +82,15 @@ class VideoContainer extends Component {
     if (this.props.calledUser !== null){
       setTimeout(this.makeCall, 3000);
     }
+
+    if (this.props.teacherSelectedUser) {
+      let ball = {
+        calledUser: this.props.teacherSelectedUser,
+        callingUser: this.props.teacherName
+      };
+      this.props.videoActions.userCallUser(ball);
+    }
+
     if (this.props.videoSession !== null){
       this.appendIt();
       if (this.props.teacherCall) {
@@ -89,7 +98,8 @@ class VideoContainer extends Component {
           speaker: this.props.calledUser,
           teacher: this.props.teacher,
           videoSession: this.props.videoSession
-        }
+        };
+        console.log(classVideoPac)
         this.props.videoActions.emitTeacherVideoSession(classVideoPac);
       }
     }
@@ -118,8 +128,9 @@ function mapStateToProps(state) {
     calledUser: state.video.calledUser,
     callingUser: state.video.callingUser,
     videoSession: state.video.videoSession,
-    phone: state.video.phone,
-    teacherCall: state.video.teacherCall
+    teacherCall: state.video.teacherCall,
+    teacherSelectedUser: state.video.teacherSelectedUser,
+    teacherName: state.video.teacherName
   };
 }
 
