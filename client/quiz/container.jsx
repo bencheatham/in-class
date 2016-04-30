@@ -11,7 +11,6 @@ class QuizContainer extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmission = this.handleSubmission.bind(this);
-    this.handleFetch = this.handleFetch.bind(this);
   }
 
   handleClick (){
@@ -22,11 +21,6 @@ class QuizContainer extends Component {
     this.props.actions.submitQuiz(this.refs.title.value,this.props.quiz.quizzes);
   }
 
-  handleFetch(){
-    this.props.actions.fetchQuiz();
-  
-  }
-
   render() {
     var quizForms = [];
     for (var i = 0; i < this.props.quiz.questionForms; i++){
@@ -34,7 +28,6 @@ class QuizContainer extends Component {
     }
     return (
       <div>
-        <button onClick={this.handleFetch}>Fetch Your Quizzes</button>  
         <span><h1>Create a new quiz.</h1></span>
         <span>Quiz title:</span>
         <input type="text" ref="title"></input>
