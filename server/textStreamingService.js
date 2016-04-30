@@ -32,20 +32,43 @@ module.exports = function initializeChatStreaming (server) {
 	  // echo globally that this client has left
 	  this.broadcast.emit('user left', { username: this.username, numUsers: numUsers });
 	  console.log('disconnect: ', this.username, numUsers);
+	  this.disconnect();
+	  // console.log(this);
 	}
+
+
+	// function ping () {
+	// 	console.log('ping socket: ', this.id);
+ //    this.emit('ping', {message: 'Are you still there?'});
+	// }
+
+	// function pong (message) {
+	// 	console.log('socket active', this.id);
+	// }
+
+ function tellUsersStudentIsOnVideo (userPac) {
+   this.broadcast.emit('newClassVideoUser', userPac );
+
+ }
+
 
 	var socketEvents = {
 	  'new message': newMessage,
 	  'add user': addUser,
 	  'typing': typing,
 	  'stop typing': stopTyping,
-	  'disconnect': disconnect
+	  // 'pong': pong,
+	  'disconnect': disconnect,
+	  'teacherSelectedVideoUser' : tellUsersStudentIsOnVideo
 	};
 
 	var allSocketEvents = _.extend(socketEvents,questionsModule.questionEvents);
 
 	io.on('connection', function (socket) {
 		for (var key in allSocketEvents) { socket.on(key, allSocketEvents[key].bind(socket)); }
+		// var pingInterval = setInterval(ping.bind(socket), 60000);
 	});
+
+	return io;
 
 };

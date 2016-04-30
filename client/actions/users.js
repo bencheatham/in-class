@@ -1,5 +1,7 @@
 import * as types from '../constants/ActionTypes';
 import initializeUsers from '../middleware/users';
+//import { pushState } from 'redux-router';
+
 
 const worker = initializeUsers();
 
@@ -14,7 +16,39 @@ export function userLogin(user) {
  };
 }
 
+
+
+
+// export function userLogin(username, password, redirect="/student-class-view") {
+//     return function(dispatch) {
+//         dispatch(loginUserRequest());
+//         return fetch('http://localhost:8000/auth/getToken/', {
+//             method: 'post',
+//             credentials: 'include',
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//                 body: JSON.stringify({username: username, password: password})
+//             })
+//             .then(
+//               dispatch(pushState(null, redirect));
+//                worker['set username'](user);
+//             )
+//             .then(
+//                return {
+//                  type: types.USER_LOGIN,
+//                  payload: user
+//                };
+//               )
+//     }
+// }
+
+
+
 export function selectUser(user){
+  
+  console.log('IN selectUser: ', user);
 
  return {
    type: types.SELECT_USER,

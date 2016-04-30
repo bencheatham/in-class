@@ -32,7 +32,7 @@ app.use('/', express.static(__dirname + '/../dist/'));
 
 
 
-require('./webpack.js')(app);
+if (process.env.NODE_ENV !== 'production') { require('./webpack.js')(app); }
 
 
 
