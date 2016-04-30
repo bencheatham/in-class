@@ -63,6 +63,10 @@ $(function() {
     console.log('stop typing', data);
   }
 
+  // function ping (data) {
+  //   console.log('ping: ' + data ? data.message : data + '\n' + 'pong: ' + 'Yes I am!');
+  //   this.emit('pong', {message: 'Yes I am!'});
+  // }
 
 
   var clientActions = {
@@ -77,7 +81,8 @@ $(function() {
     'user joined': userJoined,
     'user left': userLeft,
     'typing': typing,
-    'stop typing': stopTyping
+    'stop typing': stopTyping//,
+    // ping: ping
   };
 
 
