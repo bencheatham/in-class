@@ -51,11 +51,11 @@ class Login extends Component {
   }
   
   handleEnter(event) {
-    if (event.keyCode === 13){
-      emitLogin(event);
-      this.props.actions.login(event.target.value)
-      event.target.value = '';
-    }
+    // if (event.keyCode === 13){
+    //   emitLogin(event);
+    //   this.props.actions.login(event.target.value)
+    //   event.target.value = '';
+    // }
   }
 
   handleSubmit(form) {
