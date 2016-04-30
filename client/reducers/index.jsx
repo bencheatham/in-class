@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   drawer,
   user,
   video,
-  userVideoModal
+  userVideoModal,
   studentQuiz,
 });
 

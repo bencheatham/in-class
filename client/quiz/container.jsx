@@ -30,7 +30,7 @@ class QuizContainer extends Component {
   render() {
     var quizForms = [];
     for (var i = 0; i < this.props.quiz.questionForms; i++){
-      quizForms.push(<QuizForm handleSubmission={this.handleSubmission} key={i} id={i} />);
+      quizForms.push(<CreateQuiz handleSubmission={this.handleSubmission} key={i} id={i} />);
     }
     return (
       <div>
