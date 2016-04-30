@@ -3,7 +3,19 @@ import initializeUsers from '../../../middleware/users';
 
 const worker = initializeUsers();
 
-export function stundentCallStudent(callers) {
+
+export function addVideoSession(session) {
+
+
+ return {
+   type: types.ADD_VIDEO_SESSION,
+   payload: session
+ };
+}
+
+
+
+export function studentCallStudent(callers) {
 
 
  return {

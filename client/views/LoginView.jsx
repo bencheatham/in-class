@@ -47,10 +47,8 @@ class LoginView extends Component {
     let ball = {
       calledUser: user,
       callingUser: this.props.username
-    }
+    };
 
-
-    // console.log(`${this.props.username} called ${user}!!!!`)
     videoActions.studentCallStudent(ball);
   }
 
