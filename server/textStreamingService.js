@@ -48,4 +48,6 @@ module.exports = function initializeChatStreaming (server) {
 		for (var key in allSocketEvents) { socket.on(key, allSocketEvents[key].bind(socket)); }
 	});
 
+	return io;
+
 };
