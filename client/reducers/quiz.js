@@ -1,4 +1,3 @@
-
 import { QUIZ_ACCEPT, QUIZ_REJECT } from '../constants/ActionTypes';
 
 const initState = {

@@ -50,4 +50,6 @@ describe('Authentication Unit Tests', function() {
 
 
 
+// const axios = require('axios');
+// axios.get('http://localhost:8000/protected').then(function (val) {console.log(val);});
 
