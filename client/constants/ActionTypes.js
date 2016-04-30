@@ -12,7 +12,7 @@ export const USER_LEFT_CLASS = 'USER_LEFT_CLASS';
 export const USER_VIDEO_MODAL_SHOW = 'USER_VIDEO_MODAL_SHOW';
 export const USER_VIDEO_MODAL_HIDE = 'USER_VIDEO_MODAL_HIDE';
 
-export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'http://in-class.herokuapp.com' : 'http://localhost:8000' ; 
+export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com' : 'http://localhost:8000' ; 
 
 
 export const SELECT_USER = 'SELECT_USER';
