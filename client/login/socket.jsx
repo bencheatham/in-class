@@ -1,4 +1,4 @@
-import { socket } from '../common/socket';
+import {socket} from '../common/socket';
 
 export function initializeWebSockets() {
   socket.on('login', data => {

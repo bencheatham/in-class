@@ -15,7 +15,7 @@ describe('Authentication Unit Tests', function() {
 
   it('should block the protected page', function() {
     return expect(
-      axios.get('http://localhost:8000/protected')
+      axios.get('http://localhost:8000/authentication')
       .catch(function (error) { return Promise.resolve(error); })
       .then(function (res) { return Promise.resolve(res.status); })
     ).to.eventually.equal(400);

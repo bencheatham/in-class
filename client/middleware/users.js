@@ -4,7 +4,8 @@ import { userJoinedClass } from '../actions/users';
 import { userLeftClass } from '../actions/users';
 import * as actions from '../actions/users';
 
-const SERVER_URL = 'http://in-class.herokuapp.com/';//'http://localhost:8000';
+// const SERVER_URL = 'http://in-class.herokuapp.com/';
+const SERVER_URL = 'http://localhost:8000';
 
 export default function(store) {
 

@@ -28,9 +28,12 @@ function postCredentials (username, password, url) {
 	});
 }
 
-function navigateToProtected (authorization) {
+function navigateToProtected () {
   return Promise.resolve(location.href = '/protected');
 }
+
+
+
 
 
 

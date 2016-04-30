@@ -3,12 +3,12 @@ var jwt = require('jsonwebtoken');
 
 
 var secret = 'when in class... do as the students do';
-var exceptions = [/*'/',*/ '/auth/index.html', '/auth/app.js','/login', '/signup', '/app.js', '/vendors.js', '/bundle.js'];
+var exceptions = [];//[/*'/',*/ '/auth/index.html', '/auth/app.js','/login', '/signup', '/app.js', '/vendors.js', '/bundle.js'];
 
 
 
 module.exports = function initializeJWTApp (app) {
-  app.use(
+  app.use('/authentication',
     function extendHeaderWithAuthCookie(req, res, next) {
       // extend the headers with the authorization cookie 
       var auth = req.cookies.authorization;
@@ -26,6 +26,8 @@ module.exports = function initializeJWTApp (app) {
   	  }
     }
   );
+
+  app.get('/authentication', (request, response) => response.status(200).send('authenticated'));
 }; 
 
 
