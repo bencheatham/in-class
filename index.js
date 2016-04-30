@@ -1,34 +1,38 @@
-console.log('environment: ', process.env);
 
-var app = require('./server/configuration.js');
-var server = require('http').createServer(app);
+const app = require('./server/configuration.js');
+const server = require('http').createServer(app);
+const port = process.env.PORT || 8000;
 
-var port = process.env.PORT || 8000;
 
 var path = require('path');
-require(path.join(__dirname,'server/textStreamingService.js'))(server); //initialize chat server
-// var express = require('express');
-var webpack = require('webpack');
-var webpackConfig = require('./webpack.config');
-var webpackMiddleware = require('webpack-dev-middleware');
-var webpackHot = require('webpack-hot-middleware');
-var compiler = webpack(webpackConfig);
+var io = require(path.join(__dirname,'server/textStreamingService.js'))(server); //initialize chat server
 
-if(module.parent) {
+
+// console.log(io);
+// io.close(function () {console.log(io)});
+
+
+
+if (module.parent) {
   module.exports = app; // so we can require in tests
-} else{
-  // app.listen(port);
+} else {
   server.listen(port, () => { console.log('Server listening at port %d', port); });
-  // console.log('Server now listening on port ' + port);
 }
 
-app.use(webpackMiddleware(compiler, {
-  quiet: true,
-  noInfo: true,
-  stats: {
-    colors: true,
-    reasons: true
-  },
-  publicPath: webpackConfig.output.publicPath
-}));
-app.use(webpackHot(compiler));
+
+// process.stdin.resume();//so the program will not close instantly
+
+// function exitHandler(options, err) {
+//     if (options.cleanup) console.log('clean');
+//     if (err) console.log(err.stack);
+//     if (options.exit) {console.log('\n...user ended'); process.exit();}
+// }
+
+// //do something when app is closing
+// process.on('exit', exitHandler.bind(null,{cleanup:true}));
+
+// //catches ctrl+c event
+// process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+
+// //catches uncaught exceptions
+// process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
