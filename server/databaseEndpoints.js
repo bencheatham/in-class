@@ -51,7 +51,7 @@ function fetchManifest (username) {
   return new Promise((resolve, reject) => {
     fs.readdir(__dirname + '/../database/json/' + username, (error, files) => { 
       if (error) reject(error); 
-      else resolve(files); 
+      else resolve(files.map((file) => file.slice(0,-5))); 
     });
   })
   .catch((error) => []);
