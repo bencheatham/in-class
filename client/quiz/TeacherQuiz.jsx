@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Login from '../login/Login'
-import Drawer from '../containers/Drawer'
+import QuizItem from '../quiz/QuizItem'
 import * as quizActions from './actions'
 import {initializeWebSockets} from './socket';
 
@@ -10,6 +9,8 @@ class TeacherQuiz extends Component {
   constructor (props){
     super(props);
     this.initializeWebSockets = initializeWebSockets.bind(this);
+    this.handleFetch = this.handleFetch.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   componentWillMount (){
     initializeWebSockets();
@@ -17,19 +18,24 @@ class TeacherQuiz extends Component {
 
   handleClick (e){
     var {storedQuizzes, status, actions} = this.props;
+    console.log(e)
   }
 
   handleFetch(){
-    //this.props.actions.startQuiz(quizName);
+    this.props.actions.getQuizzes();
   }
 
   render() {
-    var {storedQuizzes, status} = this.props;
-   
+    var {quizzes, status} = this.props;
+    var self = this;
+    var quizArray = quizzes.map((quiz,idx)=> {
+      return <QuizItem name={quiz} key={idx} /> 
+    });
+
     return (
       <div>
-        <button onClick={this.handleFetch}>Fetch Your Quizzes</button>  
-        {quizzes}
+        <button onClick={this.handleFetch}>Download Quizzes</button>  
+        {quizArray}
       </div>
      );
  };
@@ -39,7 +45,7 @@ function mapStateToProps(state){
   return {
     user: state.user,
     quiz: state.quiz,
-    storedQuizzes: state.studentQuiz.storedQuizzes,
+    quizzes: state.quiz.quizzes,
     status: state.studentQuiz.status
   }
 }

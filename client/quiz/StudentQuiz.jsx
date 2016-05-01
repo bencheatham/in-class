@@ -12,9 +12,10 @@ class StudentQuiz extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleFetch = this.handleFetch.bind(this);
     this.initializeWebSockets = initializeWebSockets.bind(this);
+    
   }
   componentWillMount (){
-    initializeWebSockets();
+    this.initializeWebSockets();
   }
 
   handleClick (e){
@@ -24,7 +25,7 @@ class StudentQuiz extends Component {
   }
 
   handleFetch(){
-    let quizName = 'quiz2';
+    let quizName = 'Hello';
     this.props.actions.startQuiz(quizName);
     console.log('fetch!')
   }

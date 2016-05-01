@@ -1,13 +1,16 @@
 import { socket } from '../common/socket';
-import { storePopQuiz } from './actions';
 
 export function initializeWebSockets() {
+
   socket.on('pop-quiz', data => {
-    this.props.actions.storePopQuiz(data);
+    console.log(data);
+
+    this.props.actions.startQuiz('Quiz2');
   });
 };
 
 export function emitQuiz(quizName){
+  console.log('emit!')
   socket.emit('pop-quiz', {
       file: quizName
     });

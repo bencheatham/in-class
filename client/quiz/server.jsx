@@ -6,6 +6,7 @@ var quizEvents = {
 }
 
 function broadcastPopQuiz(quizName){
+  console.log('pop quiz!!!',quizName);
   this.broadcast.emit('pop-quiz', { file: quizName})
 }
 

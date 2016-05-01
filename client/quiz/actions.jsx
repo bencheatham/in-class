@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'underscore';
-import { START_QUIZ, ANSWER_QUESTION, ADD_QUIZFORM, QUIZ_SUBMISSION, QUIZ_FETCH, UPDATE_QUIZ } from './constants';
+import { START_QUIZ, ALL_QUIZZES, ANSWER_QUESTION, ADD_QUIZFORM, QUIZ_SUBMISSION, QUIZ_FETCH, UPDATE_QUIZ } from './constants';
 
 export function submitQuiz (quizTitle,formData) {
   
@@ -24,8 +24,27 @@ export function submitQuiz (quizTitle,formData) {
   });
 }
 
+export function getQuizzes (){
+  return axios.get('/fetch', {params: {file: 'manifest'}})
+  .then(function(response){
+    console.log('response from API',response);
+      return {
+        type: ALL_QUIZZES,
+        quizzes: response.data
+      };
+    
+  })
+  .catch(function(response){
+      console.log('error',response);
+      return {
+        type: ALL_QUIZZES,
+      }
+  });
+}
+
 export function storePopQuiz (data){
   // student fetches list of all his or her quizzes
+  console.log('data')
   return {
     type: QUIZ_FETCH,
     quiz: data,
@@ -46,6 +65,7 @@ export function startQuiz (quizName) {
     console.log('fetch error',response);
     return {
       type: START_QUIZ,
+      storedQuizzes: downloadedQuizzes,
     }
   })
 }

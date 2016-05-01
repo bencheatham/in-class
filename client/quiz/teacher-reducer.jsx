@@ -8,6 +8,11 @@ var initialState = {
 export default function quiz(state = initialState, action){
 
   switch (action.type) {
+    case 'ALL_QUIZZES': 
+      return {
+        quizzes: action.quizzes,
+        questionForms: state.questionForms
+      };
     case UPDATE_QUIZ:
       var updatedQuizzes;
       if (state.quizzes.length < state.questionForms){

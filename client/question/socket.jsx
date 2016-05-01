@@ -1,14 +1,17 @@
 import { socket } from '../common/socket';
 
 export function initializeWebSockets() {
+
   socket.on('question-submitted', data => {
+    console.log('init websockets ... question-submitted',this)
     this.props.actions.submitQuestion(null,data.question);
   });
   socket.on('questionWithID', data => {
+    console.log('init websockets... questionWithID',this)
     this.props.actions.submitQuestion(null,data.question);
   });
   socket.on('upvote', data => {
-    console.log('upvote received',data);
+    console.log('init websockets... UPVOTE',this)
     this.props.actions.upvote(data.id, data.username);
   });
 };
