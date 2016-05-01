@@ -3,12 +3,14 @@ const jwt = require('jsonwebtoken');
 const secret = 'when in class... do as the students do';
 
 function verifyUsername (request, response) {
-  var token = request.headers.authorization.slice(7);
+  var auth = request.headers.authorization; 
+  var token = auth ? auth.slice(7) : '';
   // console.log(token);
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, (error, payload) => {
       if (error) reject(error);
-      resolve(payload.username);
+      if (!payload) reject(error);
+      else resolve(payload.username);
     });
   })
   .catch((error) => error);
@@ -49,7 +51,7 @@ function fetchManifest (username) {
   return new Promise((resolve, reject) => {
     fs.readdir(__dirname + '/../database/json/' + username, (error, files) => { 
       if (error) reject(error); 
-      else resolve(files); 
+      else resolve(files.map((file) => file.slice(0,-5))); 
     });
   })
   .catch((error) => []);

@@ -32,7 +32,7 @@ function handleLogin(req, res) {
   })
   .then(function () {
     var token = jwt.sign({username: username}, secret);
-    res.cookie('authorization', 'Bearer ' + token).status(200).send();
+    res.cookie('authorization', 'Bearer ' + token).status(200).send({cookie: 'authorization=Bearer ' + token, username: username});
   })
   .catch(function (error){
     console.error(error);
@@ -66,7 +66,7 @@ function handleSignup(req, res) {
   })
   .then(function () {
     var token = jwt.sign({username: username}, secret);
-    res.cookie('authorization', 'Bearer ' + token).status(200).send();
+    res.cookie('authorization', 'Bearer ' + token).status(200).send({cookie: 'authorization=Bearer ' + token, username: username});
     return Promise.resolve();
   })
   .catch(function (error){

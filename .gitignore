@@ -1,5 +1,5 @@
 node_modules
 **/*.sqlite3
 dist
-
+database/*
 .DS_Store
