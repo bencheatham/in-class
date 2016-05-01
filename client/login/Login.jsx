@@ -8,6 +8,7 @@ import axios from 'axios';
 
 
 function postCredentials (username, password, url) {
+  console.log('username: ' + username, 'password: ' + password, 'url: ' + url);
   return new Promise(function (resolve, reject) {
     axios.post(url, {username: username, password: password})
     .then((response) => resolve(response.data))
@@ -51,26 +52,28 @@ class Login extends Component {
   }
   
   handleEnter(event) {
-    // if (event.keyCode === 13){
-    //   emitLogin(event);
-    //   this.props.actions.login(event.target.value)
-    //   event.target.value = '';
-    // }
+    if (event.keyCode === 13){
+      emitLogin(event);
+      this.props.actions.login(event.target.value)
+      event.target.value = '';
+    }
   }
 
-  handleSubmit(form) {
-  console.log('form was submitted', form);
+  handleSubmit(event) {
+    event.preventDefault();
+  // console.log('form was submitted', this.refs);
 
   var username = this.refs.username.value;
   var password = this.refs.password.value;
   var url = '/' + this.refs.actions.value;
 
   postCredentials(username, password, url)
+  .then((val=>{console.log('credentials posted: ', val); return val;}))
   .then(setStorage)
   .then(setState)
   .then(navigateToProtected)
   .catch(function (error) {
-    console.error(error);
+    console.error('WHAT IS THE ERROR: ', error);
   });
 
   return false;
