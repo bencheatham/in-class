@@ -3,17 +3,19 @@ const jwt = require('jsonwebtoken');
 const secret = 'when in class... do as the students do';
 
 function verifyUsername (request, response) {
-  var auth = request.headers.authorization; 
+  console.log(request.cookies);
+  var auth = request.cookies.authorization; 
+  console.log(auth);
   var token = auth ? auth.slice(7) : '';
-  // console.log(token);
+  console.log(token);
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, (error, payload) => {
       if (error) reject(error);
       if (!payload) reject(error);
       else resolve(payload.username);
     });
-  })
-  .catch((error) => error);
+  });
+  // .catch((error) => 'error');
 }
 
 function makeDirectory (path) {
