@@ -8,5 +8,5 @@ export function initializeWebSockets(actions) {
 
 
 export function emitAddNewUser(username) {
-  socket.emit('questionModal_addNewUser', { username });
+  io.emit('questionModal_addNewUser', { username });
 }
