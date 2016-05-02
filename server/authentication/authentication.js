@@ -8,7 +8,8 @@ var exceptions = [];//[/*'/',*/ '/auth/index.html', '/auth/app.js','/login', '/s
 
 
 module.exports = function initializeJWTApp (app) {
-  app.use('/authentication',
+  // app.use('/authentication',
+  app.use('/NO-AUTHENTICATION',
     function extendHeaderWithAuthCookie(req, res, next) {
       // extend the headers with the authorization cookie 
       var auth = req.cookies.authorization;
