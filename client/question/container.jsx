@@ -12,8 +12,6 @@ class QuestionContainer extends Component {
  render() {
    return (
      <div>
-      <span><h1>In class...</h1></span>
-      <Login />
       <QuestionBox />
     </div>
    );

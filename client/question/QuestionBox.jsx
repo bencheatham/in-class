@@ -21,7 +21,7 @@ class QuestionBox extends Component {
   
   handleEnter(event) {
     if (event.keyCode === 13){
-      this.emitNewQuestion(event,this.props.user.username);
+      this.emitNewQuestion(event.target.value,this.props.user.username);
       event.target.value = '';
     }
   };
@@ -35,9 +35,8 @@ class QuestionBox extends Component {
 
     return (
       <div>
-        {user.username} is logged in...
-        Ask: <input type="text" onKeyDown={this.handleEnter}></input>
         {questions}
+        <input type="text" onKeyDown={this.handleEnter}></input> Ask
       </div>);
   }
 }
