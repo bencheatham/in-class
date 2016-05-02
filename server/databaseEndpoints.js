@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken');
 const secret = 'when in class... do as the students do';
 
 function verifyUsername (request, response) {
-  console.log(request.cookies);
+  // console.log(request.cookies);
   var auth = request.cookies.authorization; 
-  console.log(auth);
+  // console.log(auth);
   var token = auth ? auth.slice(7) : '';
-  console.log(token);
+  // console.log(token);
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, (error, payload) => {
       if (error) reject(error);
@@ -20,7 +20,7 @@ function verifyUsername (request, response) {
 
 function makeDirectory (path) {
   return new Promise((resolve, reject) => {
-    console.log('make directory');
+    // console.log('make directory');
     fs.mkdir(path, (error, folder) => {
       if (error) reject(error);
       resolve(true);
@@ -66,14 +66,14 @@ module.exports = (app) => {
     var file = request.body.file;
     var update = request.body.update;
 
-    console.log(file);
+    // console.log(file);
 
     verifyUsername(request,response)
     .then((username) => {
       var directory = __dirname + '/../database/json/' + username + '/';
       var filePath = directory + file + '.json';
 
-      console.log('directory: ', directory);
+      // console.log('directory: ', directory);
 
   // file must be a string
   // data must be an object
@@ -82,13 +82,13 @@ module.exports = (app) => {
 
       directoryExists(directory)
       .then(function (bool) {
-        console.log('directory exists: ', bool);
+        // console.log('directory exists: ', bool);
         if (!bool) return makeDirectory(directory);
         return true;
       })
-      .then((bool) => { console.log('created', bool); return fileExists(filePath);})
+      .then((bool) => { /*console.log('created', bool);*/ return fileExists(filePath);})
       .then((bool) => {
-        console.log('file exists', bool);
+        // console.log('file exists', bool);
         if (bool && !update) { response.status(400).send('error: ' + 'File name is not unique. Please use the update flag to overwrite.'); return void 0; }
         fs.writeFile(
           filePath, 

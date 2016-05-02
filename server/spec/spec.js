@@ -12,7 +12,7 @@ describe('Server Unit Tests', function() {
     done();
   });
 
-  xit('should respond with landing page', function() {
+  it('should respond with landing page', function() {
     return expect(
       axios.get('http://localhost:8000')
       .then(function (res) { return Promise.resolve(res.status); })
