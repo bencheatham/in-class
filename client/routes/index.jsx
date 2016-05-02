@@ -11,8 +11,11 @@ import StudentClassView from '../views/StudentClassView';
 import UserPage from '../containers/UserPage';
 import axios from 'axios';
 
+export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com' : 'http://localhost:8000' ; 
+
+
 function checkAuthentication (next, previous, callback) {
-  return axios.get('http://localhost:8000/authentication')
+  return axios.get(SERVER_URL)
   .then((response) => {
     if (response.status === 200) { callback(); console.log('authorized'); return Promise.resolve('authorized'); }
     else Promise.reject('not authorized');
