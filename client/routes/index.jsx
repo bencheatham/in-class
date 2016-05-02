@@ -29,7 +29,8 @@ function checkAuthentication (next, previous, callback) {
 
 export default (
   <Route>
-    <Route path="/" component={Home} />
+    // <Route path="/" component={Home} />
+    <Route path="/" component={Login}/>
     <Route  path="/login"
             component={Login} />
     <Route path="/video"

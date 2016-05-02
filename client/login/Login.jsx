@@ -7,6 +7,7 @@ import { initializeWebSockets, emitLogin} from './socket';
 import axios from 'axios';
 
 
+
 function postCredentials (username, password, url) {
   console.log('username: ' + username, 'password: ' + password, 'url: ' + url);
   return new Promise(function (resolve, reject) {
@@ -17,7 +18,7 @@ function postCredentials (username, password, url) {
 }
 
 function navigateToProtected () {
-  return Promise.resolve(location.href = '/');
+  return Promise.resolve(location.href = '/#/video');
 }
 
 function setStorage (object) {
@@ -32,6 +33,8 @@ function setStorage (object) {
 function setState (object) {
   // in progress
   // set the state here
+  this.props.actions.login(object.username, '');
+
   return Promise.resolve();
 }
 
@@ -61,22 +64,20 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-  // console.log('form was submitted', this.refs);
+    var username = this.refs.username.value;
+    var password = this.refs.password.value;
+    var url = '/' + this.refs.actions.value;
 
-  var username = this.refs.username.value;
-  var password = this.refs.password.value;
-  var url = '/' + this.refs.actions.value;
+    postCredentials(username, password, url)
+    .then((val=>{console.log('credentials posted: ', val); return val;}))
+    .then(setStorage)
+    .then(setState.bind(this))
+    .then(navigateToProtected)
+    .catch(function (error) {
+      console.error('WHAT IS THE ERROR: ', error);
+    });
 
-  postCredentials(username, password, url)
-  .then((val=>{console.log('credentials posted: ', val); return val;}))
-  .then(setStorage)
-  .then(setState)
-  .then(navigateToProtected)
-  .catch(function (error) {
-    console.error('WHAT IS THE ERROR: ', error);
-  });
-
-  return false;
+    return false;
   }
 
   render(){
