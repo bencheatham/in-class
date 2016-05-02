@@ -1,24 +1,20 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
-import QuestionBox from './QuestionBox'
-import Login from '../login/Login'
-import Video from '../video/Video'
+import ChatBox from './ChatBox'
 import Drawer from '../containers/Drawer'
 
-class QuestionContainer extends Component {
+class ChatContainer extends Component {
 
 
  render() {
    return (
      <div>
-      <span><h1>In class...</h1></span>
-      <Login />
-      <QuestionBox />
+      <span><h1>Chat message</h1></span>
+      <ChatBox />
     </div>
    );
  };
 }
 
 
-export default QuestionContainer;
+export default ChatContainer;

@@ -21,7 +21,7 @@ class QuestionBox extends Component {
   
   handleEnter(event) {
     if (event.keyCode === 13){
-      this.emitNewQuestion(event.target.value,this.props.user.username);
+      this.emitNewQuestion(event.target.value,this.props.user);
       event.target.value = '';
     }
   };
@@ -44,7 +44,8 @@ class QuestionBox extends Component {
 function mapStateToProps(state) {
   return {
     questions: state.questions.questions,
-    user: state.user
+    user: state.Users.username
+
   }
 }
 

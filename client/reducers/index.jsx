@@ -8,6 +8,7 @@ import questions from '../question/reducer';
 import user from '../login/reducer';
 import userVideoModal from './userVideoModal';
 import video from '../modules/video/reducers/reducer_sessions';
+import {chatReducer as chat } from '../chat/reducer';
   
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   video,
   userVideoModal,
   studentQuiz,
+  chat,
 });
 
 export default rootReducer;

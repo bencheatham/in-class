@@ -3,7 +3,7 @@ import { USER_JOINED_CLASS } from '../constants/ActionTypes';
 import { USER_LEFT_CLASS } from '../constants/ActionTypes';
 
 
-export default function(state = {users: [], username: ""}, action) {
+export default function(state = {users: [], username: "a"}, action) {
   
   console.log('HERE IN ACTIONS: ', action)
 

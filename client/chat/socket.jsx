@@ -2,28 +2,21 @@ import { socket } from '../common/socket';
 
 export function initializeWebSockets() {
 
-  socket.on('question-submitted', data => {
-    this.props.actions.submitQuestion(data.question);
+  socket.on('chatMessage-submitted', data => {
+    console.log ('received chat');
+    this.props.actions.submitChat(data.chatMessage);
   });
-  socket.on('questionWithID', data => {
-    this.props.actions.submitQuestion(data.question);
+  socket.on('chatMessage-returned-with-id', data => {
+    this.props.actions.submitChat(data.chatMessage);
   });
-  socket.on('upvote', data => {    
-    this.props.actions.upvote(data.id, data.username);
-  });
+
 };
 
-export function emitNewQuestion(event,name){
-  socket.emit('question-submitted', {
+export function emitChatMessage(text,name){
+  console.log ('emit');
+  socket.emit('chatMessage-submitted', {
       username : name,
-      text: event.target.value,
+      text: text,
       timestamp: Date.now(),
-      upvotes: [],
     });
 }
-
-export function emitUpvote(id,username){
-  console.log(id,username);
-  socket.emit('upvote', {id: id, username: username});
-}
-  
