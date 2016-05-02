@@ -7,9 +7,10 @@ import Users from './user';
 import questions from '../question/reducer';
 import user from '../login/reducer';
 import userVideoModal from './userVideoModal';
+import questionModal from '../modules/questionModal/reducer'
 import video from '../modules/video/reducers/reducer_sessions';
 import {chatReducer as chat } from '../chat/reducer';
-  
+
 
 const rootReducer = combineReducers({
   routing,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   user,
   video,
   userVideoModal,
+  questionModal,
   studentQuiz,
   chat,
 });

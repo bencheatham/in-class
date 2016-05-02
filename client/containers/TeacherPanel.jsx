@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
 import { show } from '../actions/userVideoModal';
+import * as QuestionModalActions from '../modules/questionModal/actions';
+
+import QuestionModal from '../modules/questionModal/QuestionModal';
 import UserVideoModal from './UserVideoModal';
+
 require('../stylesheets/styles.scss');
 
 class TeacherPanel extends React.Component {
@@ -10,10 +14,15 @@ class TeacherPanel extends React.Component {
   constructor(props) {
     super(props);
     this.showStudentVideo = this.showStudentVideo.bind(this);
+    this.showQuestionModal = this.showQuestionModal.bind(this);
   };
 
   showStudentVideo() {
     this.props.dispatch(show());
+  };
+
+  showQuestionModal() {
+    this.props.dispatch(QuestionModalActions.show());
   };
 
   render() {
@@ -23,11 +32,13 @@ class TeacherPanel extends React.Component {
             onClick={this.showStudentVideo}>
            <Glyphicon glyph="glyphicon glyphicon-film" />
         </Button>
-        <Button className="btn-danger btn-circle btn-xl">
+        <Button className="btn-danger btn-circle btn-xl"
+            onClick={this.showQuestionModal}>
            <Glyphicon glyph="glyphicon glyphicon-question-sign" />
         </Button>
 
         <UserVideoModal />
+        <QuestionModal />
       </div>
     );
   };
