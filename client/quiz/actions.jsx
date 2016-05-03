@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'underscore';
-import { START_QUIZ, ALL_QUIZZES, ANSWER_QUESTION, ADD_QUIZFORM, QUIZ_SUBMISSION, QUIZ_FETCH, UPDATE_QUIZ } from './constants';
+import { EDIT_QUIZ, START_QUIZ, ALL_QUIZZES, ANSWER_QUESTION, ADD_QUIZFORM, QUIZ_SUBMISSION, QUIZ_FETCH, UPDATE_QUIZ } from './constants';
 
 export function submitQuiz (quizTitle,formData) {
   
@@ -81,6 +81,29 @@ export function updateQuiz (formData) {
  return {
   type: UPDATE_QUIZ,
   formData: formData,
+ }
+}
+
+export function editQuiz (quizName) {
+
+  return axios.get('/fetch', {params: {file: quizName}})
+  .then(function(response){
+    var downloadedQuiz = response.data;
+    return {
+      type: EDIT_QUIZ,
+      quiz: downloadedQuiz,
+    }
+  })
+  .catch(function(response){
+    console.log('fetch error',response);
+    return {
+      type: EDIT_QUIZ,
+      quiz: downloadedQuiz,
+    }
+  })
+
+ return {
+  
  }
 }
 

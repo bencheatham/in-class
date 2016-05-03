@@ -1,8 +1,10 @@
-import { QUIZ_SUBMISSION, QUIZ_FETCH, ADD_QUIZFORM, UPDATE_QUIZ} from './constants';
+import { EDIT_QUIZ, QUIZ_SUBMISSION, QUIZ_FETCH, ADD_QUIZFORM, UPDATE_QUIZ} from './constants';
 
 var initialState = {
   quizzes: [],
   questionForms: 1,
+  editingQuiz: false,
+  quizToEdit: [],
 }
 
 export default function quiz(state = initialState, action){
@@ -11,7 +13,9 @@ export default function quiz(state = initialState, action){
     case 'ALL_QUIZZES': 
       return {
         quizzes: action.quizzes,
-        questionForms: state.questionForms
+        questionForms: state.questionForms,
+        editingQuiz: state.editingQuiz,
+        quizToEdit: state.quizToEdit,
       };
     case UPDATE_QUIZ:
       var updatedQuizzes;
@@ -28,12 +32,24 @@ export default function quiz(state = initialState, action){
       return {
         quizzes: updatedQuizzes,
         questionForms: state.questionForms,
+        editingQuiz: state.editingQuiz,
+        quizToEdit: state.quizToEdit,
       }
     case ADD_QUIZFORM:   
       var newCount = state.questionForms + 1;
       return {
         quizzes: state.quizzes,
         questionForms: newCount,
+        editingQuiz: state.editingQuiz,
+        quizToEdit: state.quizToEdit,
+      }
+    case EDIT_QUIZ:   
+      var newQuizToEdit = state.quizToEdit.concat(action.quiz);
+      return {
+        quizzes: state.quizzes,
+        questionForms: state.questionForms,
+        editingQuiz: !state.editingQuiz,
+        quizToEdit: newQuizToEdit,
       }
     default: 
       return state;
