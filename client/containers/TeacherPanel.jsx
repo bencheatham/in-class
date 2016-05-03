@@ -29,7 +29,7 @@ class TeacherPanel extends React.Component {
   render() {
     return(
       <div className="TeacherControlPanel">
-        <Button className="btn-directory btn-circle btn-xl"
+        <Button className="btn-success btn-circle btn-xl"
             onClick={this.showStudentVideo}>
            <Glyphicon glyph="glyphicon glyphicon-film" />
         </Button>
