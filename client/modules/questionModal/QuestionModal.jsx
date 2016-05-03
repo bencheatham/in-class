@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from './actions';
+
 
 class QuestionModal extends React.Component {
 
@@ -22,7 +23,10 @@ class QuestionModal extends React.Component {
     console.log('user list', users);
     return users.map((user) => {
       return (
-        <li>{user}</li>
+        <li>
+          <Glyphicon glyph="glyphicon glyphicon-user" />
+          {user}
+        </li>
       );
     });
   };
