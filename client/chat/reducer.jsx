@@ -11,7 +11,7 @@ var dummyChat = {
 }
 
 var initialState = {
-  chatMessages: [dummyChat],
+  chatMessages: [],
 }
 
 
@@ -19,7 +19,24 @@ export function chatReducer(state = initialState, action){
 
   switch (action.type) {
     case CHAT_MESSAGE:
-      var newChatMessages = state.chatMessages.concat(action.chatMessage)
+    console.log('chat messages')
+
+      // var duplicateMesssage = (function () {
+      //   _.each(state.chatMessages, (message) => {
+      //     if (message.id === action.chatMessage.id){
+      //       return true
+      //     }
+      //   })
+      //   return false;
+      // })()
+      
+      // if (duplicateMesssage){
+      //   var newChatMessages = state.chatMessages.concat(action.chatMessage);  
+      // } else {
+      //   newChatMessages = state.chatMessages;
+      // }
+        var newChatMessages = state.chatMessages.concat(action.chatMessage);  
+
       return {
         chatMessages: newChatMessages,
       }

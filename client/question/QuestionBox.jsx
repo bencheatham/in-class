@@ -12,7 +12,7 @@ class QuestionBox extends Component {
     super(props);
     this.handleEnter = this.handleEnter.bind(this);
     this.initializeWebSockets = initializeWebSockets.bind(this);  
-    this.emitNewQuestion = emitNewQuestion.bind(this);
+    this.emitNewQuestion = emitNewQuestion.bind(this)
   }
 
   componentDidMount() {

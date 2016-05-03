@@ -8,13 +8,12 @@ var chatEvents = {
 
 function chatSubmitted(chatMessage){
   console.log('chat submitted',chatMessage);
-  console.log('chat submitted');
-
+  
   chatMessage = _.extend(chatMessage,{
     id: chatLog.length
   })
   
-  this.emit('chatMessage-returned-with-id', { chatMessage: chatMessage});
+  this.emit('chatMessage-submitted', { chatMessage: chatMessage});
   this.broadcast.emit('chatMessage-submitted', { chatMessage: chatMessage});
   chatLog.push(chatMessage);
 }

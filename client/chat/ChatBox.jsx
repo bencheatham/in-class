@@ -27,7 +27,6 @@ class ChatBox extends Component {
 
   render(){
     var { username, chatMessages } = this.props;
-    console.log('chatmessages', chatMessages);
     chatMessages = chatMessages.map((message,idx)=>{
         return <ChatMessage key={idx} index={idx} message={message} />;
       });

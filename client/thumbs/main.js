@@ -95,7 +95,7 @@ $(function() {
   var clientEvents = {
     'set username': setUsername,
     'send message': sendMessage,
-    'clean input': cleanInput
+    'clean input': cleanInput,
   };
 
   var serverEvents = {
