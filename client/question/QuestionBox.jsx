@@ -21,13 +21,13 @@ class QuestionBox extends Component {
   
   handleEnter(event) {
     if (event.keyCode === 13){
-      this.emitNewQuestion(event.target.value,this.props.user);
+      this.emitNewQuestion(event.target.value,this.props.username);
       event.target.value = '';
     }
   };
 
   render(){
-    var { user, questions } = this.props;
+    var { username, questions } = this.props;
     questions = questions.sort((a,b) => b.upvotes.length - a.upvotes.length)
       .map((question,idx)=>{
         return <Question key={idx} index={idx} question={question} />;
@@ -44,7 +44,7 @@ class QuestionBox extends Component {
 function mapStateToProps(state) {
   return {
     questions: state.questions.questions,
-    user: state.Users.username
+    username: state.user.username
 
   }
 }
