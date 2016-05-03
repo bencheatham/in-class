@@ -1,7 +1,3 @@
+import io from 'socket.io-client';
 
-import socket from 'socket.io-client';
-if (process.env.NODE_ENV === 'production') {var io = socket().connect('https://in-class.herokuapp.com');}
-else {var io = socket().connect('http://localhost:8000');}
-
-export {io};
-
+export var socket = (process.env.NODE_ENV === 'production')? io().connect('https://in-class.herokuapp.com'): io().connect('http://localhost:8000');

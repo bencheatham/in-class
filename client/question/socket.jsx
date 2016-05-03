@@ -1,22 +1,23 @@
 import { socket } from '../common/socket';
 
 export function initializeWebSockets() {
+
   socket.on('question-submitted', data => {
-    this.props.actions.submitQuestion(null,data.question);
+    this.props.actions.submitQuestion(data.question);
   });
-  socket.on('questionWithID', data => {
-    this.props.actions.submitQuestion(null,data.question);
+
+  socket.on('question-returned-with-id', data => {
+    this.props.actions.submitQuestion(data.question);
   });
-  socket.on('upvote', data => {
-    console.log('upvote received',data);
+  socket.on('upvote', data => {    
     this.props.actions.upvote(data.id, data.username);
   });
 };
 
-export function emitNewQuestion(event,name){
+export function emitNewQuestion(text,name){
   socket.emit('question-submitted', {
       username : name,
-      text: event.target.value,
+      text: text,
       timestamp: Date.now(),
       upvotes: [],
     });

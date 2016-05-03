@@ -12,7 +12,7 @@ class QuestionBox extends Component {
     super(props);
     this.handleEnter = this.handleEnter.bind(this);
     this.initializeWebSockets = initializeWebSockets.bind(this);  
-    this.emitNewQuestion = emitNewQuestion.bind(this);
+    this.emitNewQuestion = emitNewQuestion.bind(this)
   }
 
   componentDidMount() {
@@ -21,13 +21,13 @@ class QuestionBox extends Component {
   
   handleEnter(event) {
     if (event.keyCode === 13){
-      this.emitNewQuestion(event,this.props.user.username);
+      this.emitNewQuestion(event.target.value,this.props.username);
       event.target.value = '';
     }
   };
 
   render(){
-    var { user, questions } = this.props;
+    var { username, questions } = this.props;
     questions = questions.sort((a,b) => b.upvotes.length - a.upvotes.length)
       .map((question,idx)=>{
         return <Question key={idx} index={idx} question={question} />;
@@ -35,9 +35,8 @@ class QuestionBox extends Component {
 
     return (
       <div>
-        {user.username} is logged in...
-        Ask: <input type="text" onKeyDown={this.handleEnter}></input>
         {questions}
+        <input type="text" onKeyDown={this.handleEnter}></input> Ask
       </div>);
   }
 }
@@ -45,7 +44,8 @@ class QuestionBox extends Component {
 function mapStateToProps(state) {
   return {
     questions: state.questions.questions,
-    user: state.user
+    username: state.user.username
+
   }
 }
 

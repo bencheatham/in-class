@@ -11,26 +11,17 @@ class Question extends React.Component{
     super(props)
   }
 
-  handleClick (id){
-    emitUpvote(id,this.props.user.username);
-  }
-
   render() {
-    var { question, actions, index, user } = this.props;
-    return (<div>
-      
-      <span onClick={() => this.handleClick(question.id)}> 
-      <span className="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></span>
-       {question.username}: {question.text} ---
-      votes: {question.upvotes.length}
-      
+    var { message, actions, index, user } = this.props;
+    return (
+      <div>
+       {message.username}: {message.text}
       </div>)
   }
 }
 
 function mapStateToProps(state) {
   return {
-    questions: state.questions.questions, 
     user: state.user,
   }
 }

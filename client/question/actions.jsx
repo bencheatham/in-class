@@ -15,7 +15,7 @@ export function downvote(question_id) {
   }
 }
 
-export function submitQuestion(text, question) {
+export function submitQuestion(question) {
     
   return {
     type: QUESTION,

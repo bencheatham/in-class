@@ -9,8 +9,7 @@ class Thumbs extends Component {
  render() {
    return (
      <div>
-       <span><h1>In class...</h1></span>
-       <Login />
+       <span><h1>In thumbs...</h1></span>
     </div>
 
    );
