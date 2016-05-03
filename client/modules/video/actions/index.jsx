@@ -20,7 +20,11 @@ export function addVideoSession(session) {
  };
 }
 
-
+export function switchVideoByUsername(username) {
+  return {
+    type: types.GET_USER_VIDEO, username
+  }
+}
 
 export function userCallUser(callers) {
 

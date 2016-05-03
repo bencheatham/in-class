@@ -9,9 +9,11 @@
     right: ($drawer-width * -1);
     width: $drawer-width;
     height:100%;
+    display: none;
 
     &.visible {
       transform: translate3d($drawer-width*-1, 0, 0);
+      display: inline-block;
     }
   }
 

@@ -15,3 +15,7 @@ export function addUser(username) {
 export function addUsers(users) {
   return { type: types.QUESTION_MODAL_ADD_USERS, users };
 }
+
+export function dequeueUser(user) {
+  return { type: types.QUESTION_MODAL_DEQUEUE, user };
+}

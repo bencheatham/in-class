@@ -30,7 +30,10 @@ class LoginView extends Component {
   }
 
   componentDidMount() {
-    this.initQuestionModalSocket(this.props.userModalActions);
+    this.initQuestionModalSocket({
+      modalActions: this.props.userModalActions,
+      videoActions: this.props.videoActions
+    });
   }
 
   onInputChange(event) {

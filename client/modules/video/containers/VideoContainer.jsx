@@ -16,18 +16,12 @@ class VideoContainer extends Component {
    }
 
   appendIt(){
-    console.log('IN APPEND IT')
-        console.log((this.props.videoSession))
     if(this.props.videoSession){
      $('#vid-box').append(this.props.videoSession.outerHTML);
     }
   };
- 
-  login(changeSession, videoActions) {
-    
-    console.log('in video login: ', this.props);
-    console.log(this.props.changeSession);
 
+  login(changeSession, videoActions) {
     window.phone = PHONE({
         number        : this.props.username || "Anonymous", // listen on username line else Anonymous
         publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
@@ -35,34 +29,30 @@ class VideoContainer extends Component {
         ssl : (('https:' == document.location.protocol) ? true : false)
     });
 
-    phone.ready(function(){ 
+    phone.ready(function(){
+      // TODO change this later
       //form.username.style.background="#55ff5b";
     });
 
+    // receives phone conversation back from PubNub
     phone.receive(function(session){
-        session.connected(function(session) {
+      session.connected(function(session) {
+        console.log('INNNNN HERERERRERE');
+        console.log(session.video);
 
-          console.log('INNNNN HERERERRERE');
-          console.log(session.video);
+        changeSession(session.video, videoActions);
+      });
 
-          changeSession(session.video, videoActions);
-
-          });
-
-        session.ended(function(session) {
-          
-          changeSession(session.video, videoActions);
-
-        });
+      session.ended(function(session) {
+        changeSession(session.video, videoActions);
+      });
     });
   }
 
   changeSession(session, videoActions){
-    console.log('WE ARE CHANGING SESSIONS!');
-    console.log(session);
     videoActions.addVideoSession(session);
   }
-  
+
   makeCall() {
     console.log('IN MAKE CALL, ', this.props.calledUser);
       if (!window.phone) alert("Login First!");
@@ -141,8 +131,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoContainer);
-
-
-
-
-

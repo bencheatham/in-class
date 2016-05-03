@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from './actions';
+import * as ModalSockets from './socket';
 
 require('../../stylesheets/questionModal.scss');
 
@@ -12,6 +13,7 @@ class QuestionModal extends React.Component {
     super(props);
     this.hide = this.hide.bind(this);
     this.getUserList = this.getUserList.bind(this);
+    this.getNextUser = this.getNextUser.bind(this);
   };
 
   hide() {
@@ -19,11 +21,13 @@ class QuestionModal extends React.Component {
   };
 
   getNextUser() {
-    // TODO get next user session
+    ModalSockets.dequeueUser();
   };
 
   getUserList(){
     let users = this.props.users;
+    
+    if (!users) return;
     return users.map((user) => {
       return (
         <div className="user">
