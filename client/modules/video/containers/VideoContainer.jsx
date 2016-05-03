@@ -7,37 +7,33 @@ class VideoContainer extends Component {
 
   constructor(props) {
     super(props);
-
     this.changeSession = this.changeSession.bind(this);
     this.appendIt = this.appendIt.bind(this);
     this.login = this.login.bind(this);
     this.makeCall = this.makeCall.bind(this);
-
+    this.swapVideo = this.swapVideo.bind(this);
   }
-
-  // componentWillMount() {
-  //   console.log('at componentWillMount');
-  //   console.log('this.changeSession', this.changeSession);
-  //   console.log('this.props.videoActions', this.props.videoActions);
-  //   this.login(this.changeSession, this.props.videoActions);
-  // }
-  //
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('nextProps', nextProps);
-  //   console.log('nextState', nextState);
-  //   // console.log('nextProps session', nextProps.videoSession);
-  //   // console.log('current session', this.props.videoSession);
-  //
-  //   console.log('nextProps user', nextProps.calledUser);
-  //   console.log('current user', this.props.calledUser);
-  //
-  //   return nextProps.calledUser !== this.props.calledUser;
-  // }
 
   appendIt(){
     if(this.props.videoSession){
-     $('#vid-box').append(this.props.videoSession.outerHTML);
+      $('#vid-box').append(this.props.videoSession.outerHTML);
     }
+  };
+
+  swapVideo() {
+    // TODO swap the video if current session is not the same as the others
+    if (!this.props.videoSession) {
+      return;
+    }
+
+    let id = $('#vid-box video').attr('data-number');
+    let newId = this.props.videoSession.getAttribute('data-number');
+
+    // if not the same, just swap it
+    if (newId !== id) {
+      $('#vid-box').empty();
+    }
+    this.appendIt();
   };
 
   login(changeSession, videoActions) {
@@ -74,24 +70,16 @@ class VideoContainer extends Component {
 
   makeCall() {
     console.log('IN MAKE CALL, ', this.props.calledUser);
-      if (!window.phone) alert("Login First!");
-      else {
-        console.log('dialing');
-        phone.dial(this.props.calledUser);
-      }
+    if (!window.phone) alert("Login First!");
+    else {
+      console.log('dialing');
+      phone.dial(this.props.calledUser);
+    }
   }
 
   render() {
-
     console.log('In Render');
-
     this.login(this.changeSession, this.props.videoActions);
-
-    // TODO do not makeCall unless if i told you so
-    if (this.props.calledUser !== null){
-      setTimeout(this.makeCall, 3000);
-
-    }
 
     if (this.props.teacherSelectedUser) {
       let ball = {
@@ -102,7 +90,10 @@ class VideoContainer extends Component {
     }
 
     if (this.props.videoSession !== null){
-      this.appendIt();
+      // TODO swap this video first
+      // this.appendIt();
+      this.swapVideo();
+
       if (this.props.teacherCall) {
         let classVideoPac = {
           speaker: this.props.calledUser,
@@ -117,14 +108,7 @@ class VideoContainer extends Component {
 
     return (
       <div>
-        <div id="vid-box">
-
-        </div>
-        <span className="input-group-btn">
-            <button type="submit" onClick={this.makeCall} className='btn btn-lg'>Start Video</button>
-        </span>
-
-
+        <div id="vid-box"></div>
       </div>
     );
   }

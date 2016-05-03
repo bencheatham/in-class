@@ -29,7 +29,6 @@ export default function(state = initState, action) {
   switch(action.type) {
     case USER_CALL_USER:
 
-      console.log('jason: call user');
       return Object.assign({}, state, {
         calledUser: action.payload.calledUser,
         callingUser: action.payload.callingUser,
@@ -51,18 +50,11 @@ export default function(state = initState, action) {
       });
     case GET_USER_VIDEO:
       let username = action.username;
-      console.log('get user video', username);
-
-      var _session = getVideoByUsername(username);
-      console.log('session', _session);
+      var _session = getVideoByUsername(state.videos, username);
 
       return Object.assign({}, state, {
         videoSession: _session
       });
-
-      // TODO select videos from state
-      // TODO update the current session to selected video
-      // TODO return state
     case MAKE_CALL:
       return Object.assign({}, state, {
         makeCall: action.isAllow

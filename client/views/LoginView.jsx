@@ -48,6 +48,15 @@ class LoginView extends Component {
     userActions.userLogin(this.state.term);
   }
 
+
+  makeCall(user) {
+    if (!window.phone) alert("Login First!");
+    else {
+      console.log('dialing muther urker');
+      window.phone.dial(user);
+    }
+  }
+
   videoCallUser(user){
     const videoActions = this.props.videoActions;
 
@@ -57,11 +66,13 @@ class LoginView extends Component {
     };
 
     videoActions.userCallUser(ball);
+
+    // TODO can I make the call here instead to avoid memory leak?
+    this.makeCall(user);
   }
 
 
   renderUserList(users) {
-   console.log('HEREERERE', users)
     return users.map((user) => {
       return (
         <li

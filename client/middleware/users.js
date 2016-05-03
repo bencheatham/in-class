@@ -15,8 +15,6 @@ export default function(store) {
   let isTyping = false;
   let lastTypingTime;
 
-  console.log('MADE IT YO');
-  console.log(store)
   const socket = io.connect(`${SERVER_URL}`);
 
 
