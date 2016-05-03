@@ -26,38 +26,67 @@ class VideoContainer extends Component {
     }
   };
  
-  login(changeSession, videoActions) {
-    
-    console.log('in video login: ', this.props);
-    console.log(this.props.changeSession);
+  login(changeSession, videoActions, props) {
+    return new Promise(function(resolve, reject) {
 
-    window.phone = PHONE({
-        number        : this.props.username || "Anonymous", // listen on username line else Anonymous
-        publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
-        subscribe_key : 'sub-c-107b4e72-082d-11e6-996b-0619f8945a4f',
-        ssl : (('https:' == document.location.protocol) ? true : false)
-    });
 
-    phone.ready(function(){ 
-      //form.username.style.background="#55ff5b";
-    });
+      console.log('in video login: ', props);
+      console.log(props.changeSession);
 
-    phone.receive(function(session){
-        session.connected(function(session) {
+      window.phone = PHONE({
+          number        : props.username || "Anonymous", // listen on username line else Anonymous
+          publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
+          subscribe_key : 'sub-c-107b4e72-082d-11e6-996b-0619f8945a4f',
+          ssl : (('https:' == document.location.protocol) ? true : false),
+          media : { audio : true, video : true }
+      });
+      console.log('window phone')
+      console.log(window.phone)
 
-          console.log('INNNNN HERERERRERE');
-          console.log(session.video);
 
-          changeSession(session.video, videoActions);
+     let ctrl = window.ctrl = CONTROLLER(phone);
+
+     // Called when ready to receive call
+      ctrl.ready(function(){
+     //   form.username.style.background="#55ff5b"; // Turn input green
+      //  form.login_submit.hidden="true";  // Hide login button
+     //   ctrl.addLocalStream(vid_thumb);   // Place local stream in div
+      });        
+     //  console.log(ctrl)
+
+
+      ctrl.receive(function(session){
+          // if too many users on the line, than should not be able to connect
+
+          session.connected(function(session){ 
+       //     video_out.appendChild(session.video)
+            console.log('INNNNN HERERERRERE');
+            console.log(session.video);
+
+            changeSession(session.video, videoActions);
 
           });
+          session.ended(function(session) {
+              changeSession(session.video, videoActions);
 
-        session.ended(function(session) {
-          
-          changeSession(session.video, videoActions);
+    //        ctrl.getVideoElement(session.number).remove(); 
+          });
 
-        });
-    });
+      });// Called on incoming call/call ended
+      ctrl.videoToggled(function(session, isEnabled){
+        ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
+      });
+      
+      ctrl.audioToggled(function(session, isEnabled){
+        ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
+      });
+
+      if (ctrl){
+        resolve(ctrl)
+      }
+
+      });
+
   }
 
   changeSession(session, videoActions){
@@ -78,19 +107,22 @@ class VideoContainer extends Component {
   }
  
   end(){
+    console.log('in here!')
     ctrl.hangup();
+    //phone.stop();
+    window.phone = null;
   }
 
   mute(){
     var audio = ctrl.toggleAudio();
-    if (!audio) $("#mute").html("Unmute");
-    else $("#mute").html("Mute");
+    // if (!audio) $("#mute").html("Unmute");
+    // else $("#mute").html("Mute");
   }
 
   pause(){
     var video = ctrl.toggleVideo();
-    if (!video) $('#pause').html('Unpause');
-    else $('#pause').html('Pause');
+    // if (!video) $('#pause').html('Unpause');
+    // else $('#pause').html('Pause');
   }
 
 
@@ -98,8 +130,10 @@ class VideoContainer extends Component {
 
     console.log('In Render');
 
-    this.login(this.changeSession, this.props.videoActions);
-
+    this.login(this.changeSession, this.props.videoActions, this.props).then(function(){
+      console.log('it is a promise!!')
+      console.log(window.ctrl)
+    })
 
     if (this.props.calledUser !== null && this.props.videoSession === null){
       console.log('oops HERERERRERE')
@@ -118,20 +152,9 @@ class VideoContainer extends Component {
      // this.appendIt();
       if (this.props.teacherCall) {
 
-        console.log('Time to Experiment: ')
-        console.log(this.props.videoSession)
-
-        // let vid = this.props.videoSession.outerHTML;
-        // console.log(vid);
-        // console.log(typeof vid);
-        // let vid2 = $(vid)[0];
-        // console.log(vid2);
-
         let stringVideoSession = Object.assign({}, this.props.videSession, {
           session: this.props.videoSession.outerHTML
         });
-
-        console.log(stringVideoSession.session);
 
         if(this.props.classVideoSession === null){
           let classVideoPac = {
@@ -156,6 +179,12 @@ class VideoContainer extends Component {
     return (
       <div>
         <VideoPlayer data={this.props}/>
+
+        <div id="inCall">
+            <button id="end" onClick={this.end}>End</button> 
+            <button id="mute" onClick={this.mute}>Mute</button> 
+            <button id="pause" onClick={this.pause}>Pause</button>
+        </div>
 
         <span className="input-group-btn">
             <button type="submit" onClick={this.makeCall} className='btn btn-lg'>Start Video</button>
