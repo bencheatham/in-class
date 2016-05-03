@@ -1,13 +1,14 @@
 import { USER_CALL_USER } from '../constants/VideoConstants';
 import { TEACHER_SELECT_STUDENT_VIDEO } from '../constants/VideoConstants';
 import { ADD_VIDEO_SESSION } from '../constants/VideoConstants';
-
+import { EMIT_TEACHER_VIDEO_SESSION } from '../constants/VideoConstants';
+import { ADD_CLASS_VIDEO_SESSION } from '../constants/VideoConstants';
 
 
 export default function(state = {
   calledUser: null, 
   callingUser: null,
-  videoSession: null,
+  videoSession: null
 }, action) {
 
 
@@ -37,6 +38,20 @@ export default function(state = {
     return Object.assign({}, state, {
       videoSession: action.payload
     });
+
+  case EMIT_TEACHER_VIDEO_SESSION:
+
+    return state;
+
+  case ADD_CLASS_VIDEO_SESSION:
+
+    return Object.assign({}, state, {
+      classVideoSession: action.payload.videoSession,
+      classVideoSpeaker: action.payload.presenter,
+      classVideoTeacher: action.payload.teacher
+    })
+
+
   }
 
   return state;

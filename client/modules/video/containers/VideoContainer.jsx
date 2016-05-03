@@ -60,7 +60,9 @@ class VideoContainer extends Component {
   changeSession(session, videoActions){
     console.log('WE ARE CHANGING SESSIONS!');
     console.log(session);
-    videoActions.addVideoSession(session);
+    if(session){
+      videoActions.addVideoSession(session);
+    }
   }
   
   makeCall() {
@@ -79,7 +81,8 @@ class VideoContainer extends Component {
     this.login(this.changeSession, this.props.videoActions);
 
 
-    if (this.props.calledUser !== null){
+    if (this.props.calledUser !== null && this.props.videoSession === null){
+      console.log('oops HERERERRERE')
       setTimeout(this.makeCall, 3000);
     }
 
@@ -91,16 +94,34 @@ class VideoContainer extends Component {
       this.props.videoActions.userCallUser(ball);
     }
 
-    if (this.props.videoSession !== null){
+    if (this.props.videoSession !== null && this.props.videoSession !== undefined){
       this.appendIt();
       if (this.props.teacherCall) {
+
+        console.log('Time to Experiment: ')
+        console.log(this.props.videoSession)
+
+        // let vid = this.props.videoSession.outerHTML;
+        // console.log(vid);
+        // console.log(typeof vid);
+        // let vid2 = $(vid)[0];
+        // console.log(vid2);
+
+        let stringVideoSession = Object.assign({}, this.props.videSession, {
+          session: this.props.videoSession.outerHTML
+        });
+
+        console.log(stringVideoSession.session);
+
+
         let classVideoPac = {
           speaker: this.props.calledUser,
-          teacher: this.props.teacher,
-          videoSession: this.props.videoSession
-        };
-        console.log(classVideoPac)
-        this.props.videoActions.emitTeacherVideoSession(classVideoPac);
+          teacher: this.props.teacherName,
+          videoSession: stringVideoSession.session
+        }
+          
+        console.log(classVideoPac);
+        //this.props.videoActions.emitTeacherVideoSession(classVideoPac);
       }
     }
 
@@ -130,7 +151,10 @@ function mapStateToProps(state) {
     videoSession: state.video.videoSession,
     teacherCall: state.video.teacherCall,
     teacherSelectedUser: state.video.teacherSelectedUser,
-    teacherName: state.video.teacherName
+    teacherName: state.video.teacherName,
+    classVideoSession: state.video.classVideoSession,
+    classVideoSpeaker: state.video.classVideoPresenter,
+    classVideoTeacher: state.video.classVideoTeacher
   };
 }
 

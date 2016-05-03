@@ -97,7 +97,7 @@ class LoginView extends Component {
       <div>
         <Drawer />
         <TeacherPanel />
-        <VideoContainer username={this.props.username} />
+        <VideoContainer />
 
       </div>
 

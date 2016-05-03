@@ -39,17 +39,8 @@ module.exports = function initializeChatStreaming (server) {
 	}
 
 
-	// function ping () {
-	// 	console.log('ping socket: ', this.id);
- //    this.emit('ping', {message: 'Are you still there?'});
-	// }
-
-	// function pong (message) {
-	// 	console.log('socket active', this.id);
-	// }
-
- function tellUsersStudentIsOnVideo (userPac) {
-   this.broadcast.emit('newClassVideoUser', userPac );
+ function tellUsersStudentIsOnVideo (classUserPac) {
+   this.broadcast.emit('newClassVideoUser', classUserPac );
 
  }
 

@@ -20,7 +20,13 @@ export function addVideoSession(session) {
  };
 }
 
+export function addClassVideoSession(userPac) {
 
+  return {
+    type: types.ADD_CLASS_VIDEO_SESSION,
+    payload: userPac
+  }
+}
 
 export function userCallUser(callers) {
 
@@ -44,8 +50,13 @@ export function teacherSelectStudentVideo(selectionDetails) {
 }
 
 export function emitTeacherVideoSession(classUserPac) {
+  
+  worker['teacherSelectedVideoUser'](classUserPac);
 
-//  worker['teacherSelectedVideoUser'](classUserPac);
+  return {
+    type: types.EMIT_TEACHER_VIDEO_SESSION
+  }
+  
 
 }
 
