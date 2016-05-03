@@ -18,6 +18,10 @@ class QuestionModal extends React.Component {
     this.props.actions.hide();
   };
 
+  getNextUser() {
+    // TODO get next user session
+  };
+
   getUserList(){
     let users = this.props.users;
     return users.map((user) => {
@@ -29,6 +33,13 @@ class QuestionModal extends React.Component {
       );
     });
   };
+
+  getNextButton(){
+    // TODO if teacher view -> return 'next'; else, return nothing;
+    return (
+      <Button bsStyle="primary" onClick={this.getNextUser}>Next</Button>
+    );
+  }
 
   render() {
     const { visible } = this.props;
@@ -46,6 +57,7 @@ class QuestionModal extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.hide}>Close</Button>
+          {this.getNextButton()}
         </Modal.Footer>
       </Modal>
     );

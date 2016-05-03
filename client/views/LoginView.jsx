@@ -93,10 +93,13 @@ class LoginView extends Component {
           {this.renderUserList(this.props.users)}
         </ul>
         <div>
-          <Drawer />
-          <TeacherPanel />
           <VideoContainer username={this.props.username} />
         </div>
+
+        <button onClick={this.addUserToUserModal}>Post Question</button>
+        <Drawer />
+        <TeacherPanel />
+
       </div>
     );
   };

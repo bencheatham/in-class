@@ -13,7 +13,7 @@ export function addPhone(phone) {
 }
 
 export function addVideoSession(session) {
- 
+
  return {
    type: types.ADD_VIDEO_SESSION,
    payload: session
@@ -34,9 +34,6 @@ export function userCallUser(callers) {
 }
 
 export function teacherSelectStudentVideo(selectionDetails) {
-
-     
-
   return {
     type: types.TEACHER_SELECT_STUDENT_VIDEO,
     payload: selectionDetails
@@ -48,9 +45,3 @@ export function emitTeacherVideoSession(classUserPac) {
 //  worker['teacherSelectedVideoUser'](classUserPac);
 
 }
-
-
-
-
-
-

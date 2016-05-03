@@ -4,7 +4,11 @@
 .TeacherControlPanel {
   position: absolute;
   bottom: 20px;
-  left: 20px;
+  left: 10px;
+
+  button {
+    margin-left: 10px;
+  }
 }
 
 .user-video-link {
