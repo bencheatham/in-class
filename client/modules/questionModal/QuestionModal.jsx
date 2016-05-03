@@ -20,7 +20,6 @@ class QuestionModal extends React.Component {
 
   getUserList(){
     let users = this.props.users;
-    console.log('user list', users);
     return users.map((user) => {
       return (
         <li>
