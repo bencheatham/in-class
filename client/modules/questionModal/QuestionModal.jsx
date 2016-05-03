@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux';
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from './actions';
 
+require('../../stylesheets/questionModal.scss');
 
 class QuestionModal extends React.Component {
-
   constructor(props){
     super(props);
     this.hide = this.hide.bind(this);
@@ -22,10 +22,10 @@ class QuestionModal extends React.Component {
     let users = this.props.users;
     return users.map((user) => {
       return (
-        <li>
-          <Glyphicon glyph="glyphicon glyphicon-user" />
-          {user}
-        </li>
+        <div className="user">
+          <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
+          <span className="userName">{user}</span>
+        </div>
       );
     });
   };
@@ -34,15 +34,15 @@ class QuestionModal extends React.Component {
     const { visible } = this.props;
 
     return (
-      <Modal id="UserVideoModal" show={visible} onHide={this.hide}>
+      <Modal className="question_modal" show={visible} onHide={this.hide}>
         <Modal.Header>
           <Modal.Title>Upcoming Questions</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Next:</h4>
-          <ol>
+          <div>
             {this.getUserList()}
-          </ol>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.hide}>Close</Button>
