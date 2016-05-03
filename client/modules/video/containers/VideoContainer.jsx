@@ -15,16 +15,24 @@ class VideoContainer extends Component {
     this.appendIt = this.appendIt.bind(this);
     this.login = this.login.bind(this);
     this.makeCall = this.makeCall.bind(this);
+    this.end = this.end.bind(this);
+    this.hide = this.hide.bind(this);
+    this.removeIt = this.removeIt.bind(this);
 
    }
 
-  appendIt(){
+  appendIt(videoSession){
     console.log('IN APPEND IT')
-        console.log((this.props.videoSession))
-    if(this.props.videoSession){
-     $('#vid-box').append(this.props.videoSession.outerHTML);
+        console.log((videoSession))
+    if(videoSession){
+     $('#vid-box').append(videoSession.outerHTML);
     }
   };
+
+  removeIt(){
+    console.log('IN REMOVE IT');
+    $('#vid-box').html(" ");
+  }
  
   login(changeSession, videoActions, props) {
     return new Promise(function(resolve, reject) {
@@ -107,22 +115,34 @@ class VideoContainer extends Component {
   }
  
   end(){
-    console.log('in here!')
+    console.log('in call end!')
     ctrl.hangup();
     //phone.stop();
     window.phone = null;
   }
 
   mute(){
+    console.log('in call mute!')
+
     var audio = ctrl.toggleAudio();
     // if (!audio) $("#mute").html("Unmute");
     // else $("#mute").html("Mute");
   }
 
   pause(){
+        console.log('in call pause !')
+
     var video = ctrl.toggleVideo();
     // if (!video) $('#pause').html('Unpause');
     // else $('#pause').html('Pause');
+  }
+
+  hide(){
+        console.log('in video hide !');
+    this.end();
+    this.props.videoActions.addVideoSession("");
+    this.removeIt(" ")
+
   }
 
 
@@ -178,13 +198,16 @@ class VideoContainer extends Component {
 
     return (
       <div>
-        <VideoPlayer data={this.props}/>
 
         <div id="inCall">
             <button id="end" onClick={this.end}>End</button> 
             <button id="mute" onClick={this.mute}>Mute</button> 
             <button id="pause" onClick={this.pause}>Pause</button>
+            <button id="hide" onClick={this.hide}>Hide</button>
         </div>
+        <br></br>
+        <VideoPlayer data={this.props}/>
+
 
         <span className="input-group-btn">
             <button type="submit" onClick={this.makeCall} className='btn btn-lg'>Start Video</button>

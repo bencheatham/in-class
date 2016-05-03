@@ -151,7 +151,7 @@ export default class VideoPlayer extends Component {
    console.log('in video container')
     console.log(this.props)
     if (videoSession !== null && videoSession !== undefined){
-      this.appendIt();
+      this.appendIt(videoSession);
     }
 
 
