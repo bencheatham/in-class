@@ -13,7 +13,26 @@ class VideoContainer extends Component {
     this.login = this.login.bind(this);
     this.makeCall = this.makeCall.bind(this);
 
-   }
+  }
+
+  // componentWillMount() {
+  //   console.log('at componentWillMount');
+  //   console.log('this.changeSession', this.changeSession);
+  //   console.log('this.props.videoActions', this.props.videoActions);
+  //   this.login(this.changeSession, this.props.videoActions);
+  // }
+  //
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('nextProps', nextProps);
+  //   console.log('nextState', nextState);
+  //   // console.log('nextProps session', nextProps.videoSession);
+  //   // console.log('current session', this.props.videoSession);
+  //
+  //   console.log('nextProps user', nextProps.calledUser);
+  //   console.log('current user', this.props.calledUser);
+  //
+  //   return nextProps.calledUser !== this.props.calledUser;
+  // }
 
   appendIt(){
     if(this.props.videoSession){
@@ -68,9 +87,10 @@ class VideoContainer extends Component {
 
     this.login(this.changeSession, this.props.videoActions);
 
-
+    // TODO do not makeCall unless if i told you so
     if (this.props.calledUser !== null){
       setTimeout(this.makeCall, 3000);
+
     }
 
     if (this.props.teacherSelectedUser) {
@@ -120,7 +140,8 @@ function mapStateToProps(state) {
     videoSession: state.video.videoSession,
     teacherCall: state.video.teacherCall,
     teacherSelectedUser: state.video.teacherSelectedUser,
-    teacherName: state.video.teacherName
+    teacherName: state.video.teacherName,
+    makeCall: state.video.makeCall
   };
 }
 

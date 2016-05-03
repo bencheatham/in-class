@@ -18,7 +18,13 @@ export function initializeWebSockets(actions) {
 
     } else {
       console.log('possible error detected');
+      return;
     }
+
+    // TODO grab the user name produce video selection
+    // ACTIONS needed to update the video session here!
+    modalActions.dequeueUser(data.user);
+    videoActions.switchVideoByUsername(data.user);
   });
 }
 

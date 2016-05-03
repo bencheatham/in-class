@@ -20,10 +20,17 @@ export function addVideoSession(session) {
  };
 }
 
+export function allowMakeCall(isAllow) {
+  return {
+    type: types.MAKE_CALL,
+    isAllow: isAllow
+  };
+}
+
 export function switchVideoByUsername(username) {
   return {
     type: types.GET_USER_VIDEO, username
-  }
+  };
 }
 
 export function userCallUser(callers) {
