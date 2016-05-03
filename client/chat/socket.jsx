@@ -7,6 +7,10 @@ export function initializeWebSockets() {
     this.props.actions.submitChat(data.chatMessage);
   });
 
+  socket.on('init-chat', data => {
+    console.log('downloading chats')
+    this.props.actions.loadChatMessages(data.chatLog);
+  });
 };
 
 export function emitChatMessage(text,name){
@@ -16,4 +20,8 @@ export function emitChatMessage(text,name){
       text: text,
       timestamp: Date.now(),
     });
+}
+
+export function loadChatMessages(text,name){
+  socket.emit('init-chat', {});
 }

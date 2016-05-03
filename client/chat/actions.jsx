@@ -7,3 +7,11 @@ export function submitChat(chatMessage) {
     chatMessage: chatMessage,
   }
 }
+
+export function loadChatMessages(chatLog) {
+    
+  return {
+    type: CHAT_MESSAGE,
+    chatMessage: chatLog,
+  }
+}

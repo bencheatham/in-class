@@ -22,3 +22,11 @@ export function submitQuestion(question) {
     question: question,
   }
 }
+
+export function loadQuestions(questionLog) {
+    
+  return {
+    type: QUESTION,
+    question: questionLog,
+  }
+}

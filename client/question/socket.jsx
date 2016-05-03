@@ -2,6 +2,10 @@ import { socket } from '../common/socket';
 
 export function initializeWebSockets() {
 
+  socket.on('init-questions', (data) => {
+    this.props.actions.loadQuestions(data.questionLog);
+  });
+
   socket.on('question-submitted', data => {
     this.props.actions.submitQuestion(data.question);
   });
@@ -9,6 +13,7 @@ export function initializeWebSockets() {
   socket.on('question-returned-with-id', data => {
     this.props.actions.submitQuestion(data.question);
   });
+
   socket.on('upvote', data => {    
     this.props.actions.upvote(data.id, data.username);
   });
@@ -24,7 +29,10 @@ export function emitNewQuestion(text,name){
 }
 
 export function emitUpvote(id,username){
-  console.log(id,username);
   socket.emit('upvote', {id: id, username: username});
+}
+
+export function loadQuestions(){
+  socket.emit('init-questions', {});
 }
   
