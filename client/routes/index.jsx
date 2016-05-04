@@ -14,47 +14,41 @@ import QuizContainer from '../quiz/container';
 import StudentQuiz from '../quiz/StudentQuiz';
 import TeacherQuiz from '../quiz/TeacherQuiz';
 import ChatContainer from '../chat/container';
-import RequireAuth from '../login/auth'
-
-function checkAuthentication (a,b,cb){ cb()}
+import RequireAuth from '../login/auth';
+import SignUp from '../login/SignUp';
+import SignOut from '../login/SignOut';
+import About from '../login/About';
 
 export default (
   <Route>
-    // <Route path="/" component={Home} />
-    <Route path="/" component={Login}/>
-    <Route  path="/login"
-            component={Login} />
-    <Route  path="/sign-out"
-            component={Login} />  
+    <Route path="/" component={RequireAuth(About)}/>
+    <Route path="/sign-in"
+            component={RequireAuth(Login)} />
+    <Route path="/sign-up"
+            component={RequireAuth(SignUp)} />
+    <Route path="/sign-out"
+            component={RequireAuth(SignOut)} />  
+    <Route path="/about"
+            component={RequireAuth(About)} />  
     <Route path="/video"
-           component={LoginView}
-           onEnter={checkAuthentication}/>
+           component={LoginView} />
     <Route path="/quiz"
-           component={Quiz} 
-           />
+           component={RequireAuth(Quiz)}/>
     <Route path="/thumbs"
-           component={RequireAuth(Thumbs)} 
-           />
+           component={RequireAuth(Thumbs)}/>
     <Route path="/question"
-           component={QuestionContainer}
-           onEnter={checkAuthentication}/>
+           component={QuestionContainer}/>
     <Route path="/student-class"
-           component={StudentClassView}
-           onEnter={checkAuthentication}/>
+           component={StudentClassView}/>
     <Route path="/user"
-           component={UserPage}
-           onEnter={checkAuthentication}/>
+           component={UserPage}/>
      <Route path="/create-quiz"
-           component={QuizContainer}
-           onEnter={checkAuthentication}/>
+           component={QuizContainer}/>
      <Route path="/pop-quiz"
-           component={StudentQuiz}
-           onEnter={checkAuthentication}/>
+           component={StudentQuiz}/>
       <Route path="/send-quiz"
            component={TeacherQuiz} />
-           onEnter={checkAuthentication}/>
       <Route path="/chat"
            component={ChatContainer} />
-           onEnter={checkAuthentication}/>
   </Route>
 );

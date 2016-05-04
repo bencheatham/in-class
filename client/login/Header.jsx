@@ -15,14 +15,25 @@ class Header extends Component {
 
   renderLinks(){
     if (this.props.authenticated){
-      return 'Sign in'
+      return (
+        <div>
+          <Link to="about">About </Link>
+          <Link to="sign-out">Sign Out</Link>
+        </div>
+      )
     } else {
-      return <Link to="quiz">Sign In</Link>
+      return (
+        <div>
+          <Link to="about">About </Link>
+          <Link to="sign-in">Sign in </Link>
+          <Link to="sign-up">Sign up </Link>
+        </div>
+      )
     }
   }
   render(){
     return (
-      <div> This is the header {this.renderLinks()}
+      <div>{this.renderLinks()}
       </div>);
   }
 }

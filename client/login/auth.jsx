@@ -12,16 +12,10 @@ export default function(ComposedComponent) {
     }
 
     componentWillMount() {
-      if (!this.props.authenticated) {
+      var freeRoutes = ['/','sign-in','sign-out','sign-up','about'];
+      var requireAuth = (freeRoutes.indexOf(this.props.location.pathname) === -1);
+      if (!this.props.authenticated && requireAuth){
         this.props.actions.checkAuth();
-        // hashHistory.push('/login');
-      }
-    }
-
-    componentWillUpdate(nextProps) {
-      if (!nextProps.authenticated) {
-        this.props.actions.checkAuth();
-        // hashHistory.push('/login');
       }
     }
 
@@ -31,7 +25,7 @@ export default function(ComposedComponent) {
   }
 
   function mapStateToProps(state) {
-    return { authenticated: state.user.authenticated };
+    return { authenticated: state.user.authenticated, username: state.user.username };
   }
 
   function mapDispatchToProps(dispatch) {
