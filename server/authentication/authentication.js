@@ -30,7 +30,6 @@ module.exports = function initializeJWTApp (app) {
 
   app.get('/authentication', (request, response) => {
     var token = request.headers.authorization.slice(7);
-    console.log(token);
     jwt.verify(token, secret, (error, payload) => {
       if (error) {
         response.status(400).send('ivalid token...')
