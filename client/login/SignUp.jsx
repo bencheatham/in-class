@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, signinUser } from './actions';
+import { login, signinUser, signupUser } from './actions';
 import { socket } from '../common/socket';
 import { initializeWebSockets, emitLogin} from './socket';
 import axios from 'axios';
@@ -9,35 +9,24 @@ import {returnStore} from '../main';
 import { push } from 'react-router-redux'
 import Header from './Header';
 
-class Login extends Component {
+class SignUp extends Component {
 
   constructor(props) {
     super(props);
-    this.handleEnter = this.handleEnter.bind(this);  
-    this.initializeWebSockets = initializeWebSockets.bind(this);  
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderAlert = this.renderAlert;
-  }
-
-  componentDidMount() {
-    this.initializeWebSockets();
-  }
-  
-  handleEnter(event) {
-    if (event.keyCode === 13){
-      emitLogin(event);
-      this.props.actions.login(event.target.value)
-      event.target.value = '';
-    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
     var username = this.refs.username.value;
     var password = this.refs.password.value;
-    this.props.actions.signinUser(username, password);
+    var usertype = this.refs.usertype.value;
+    console.log(usertype)
+    this.props.actions.signupUser(username, password,usertype);
     return false;
   }
+
   renderAlert(){
     if (this.props.errorMessage) {
       return (
@@ -54,7 +43,11 @@ class Login extends Component {
         <form className="login" onSubmit={this.handleSubmit}>
           <input className="username" ref="username" type="text" placeholder="username"/>
           <input className="password" ref="password" type="password" placeholder="password"/>          
-          <input type="submit" value="Sign in"name="Login"></input>
+          <select ref="usertype">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+          <input type="submit" value="Sign up" name="SignUp"></input>
           {this.renderAlert()}
         </form>
       </div>);
@@ -69,8 +62,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({login, signinUser}, dispatch)
+    actions: bindActionCreators({login, signinUser, signupUser}, dispatch)
   };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp);
