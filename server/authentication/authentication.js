@@ -8,8 +8,8 @@ var exceptions = [];//[/*'/',*/ '/auth/index.html', '/auth/app.js','/login', '/s
 
 
 module.exports = function initializeJWTApp (app) {
-  // app.use('/authentication',
-  app.use('/NO-AUTHENTICATION',
+  app.use('/authentication',
+  // app.use('/NO-AUTHENTICATION',
     function extendHeaderWithAuthCookie(req, res, next) {
       // extend the headers with the authorization cookie 
       var auth = req.cookies.authorization;
@@ -28,7 +28,17 @@ module.exports = function initializeJWTApp (app) {
     }
   );
 
-  app.get('/authentication', (request, response) => response.status(200).send('authenticated'));
+  app.get('/authentication', (request, response) => {
+    var token = request.headers.authorization.slice(7);
+    console.log(token);
+    jwt.verify(token, secret, (error, payload) => {
+      if (error) {
+        response.status(400).send('ivalid token...')
+      } else {
+        response.status(200).send(payload);
+      }
+    });
+  });
 }; 
 
 
