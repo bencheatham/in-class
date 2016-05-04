@@ -32,8 +32,8 @@ class Drawer extends React.Component {
         <div className="drawer">
           <div id="controls" className={visibility ? " visible" : ""}>
             <ul>
-              <li className="first" onClick={() => actions.display(PANEL_CHAT) }> Chat </li>
-              <li className="last" onClick={() => actions.display(PANEL_QUESTIONS) }> Questions </li>
+              <li onClick={() => actions.display(PANEL_CHAT) }> Chat </li>
+              <li onClick={() => actions.display(PANEL_QUESTIONS) }> Questions </li>
             </ul>
           </div>
 

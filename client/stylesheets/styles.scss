@@ -1,6 +1,10 @@
 @import 'bootstrap';
 @import 'drawer';
 
+body {
+  overflow-x: hidden;
+}
+
 .TeacherControlPanel {
   position: absolute;
   bottom: 20px;
