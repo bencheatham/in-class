@@ -98,8 +98,8 @@ module.exports = (app) => {
     return database.deleteFrom('questions', 'title=\'' + title + '\'')
     .then(() => database.deleteFrom('users_quizes_join', 'title=\'' + title + '\''))
     .then(() => database.deleteFrom('quizes', 'title=\'' + title + '\''))
-    .then(response.status(200).send('deleted quiz'))
-    .catch(response.status(400).send('error: ' + 'some issue deleting the quiz...'));
+    .then(() => response.status(200).send('deleted quiz'))
+    .catch(() => response.status(400).send('error: ' + 'some issue deleting the quiz...'));
   });
 
   app.post('/save', (request, response) => {
