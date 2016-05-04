@@ -31,7 +31,7 @@ module.exports = function (test) {
 
   function makeQueries (queries, client, done, callback) {
     client.query(queries.shift(), function (error, result) {
-      if (error) { return console.log('error in query: ', error); }
+      if (error) { return void 0; }
       if (queries.length > 0) { return makeQueries(queries, client, done, callback); }
       done();
       callback();
@@ -73,7 +73,7 @@ module.exports = function (test) {
           return console.error('error fetching client from pool', error);
         }
         client.query(statement, values, function (error, results) {
-          if (error) { reject('error: ' + error); return console.log('error in query: ', error); }
+          if (error) { return reject('error: ' + error); }
           done();
           resolve('saved');
         });
@@ -95,7 +95,7 @@ module.exports = function (test) {
           return console.error('error fetching client from pool', error);
         }
         client.query(statement, function (error, results) {
-          if (error) { reject('error: ' + error); return console.log('error in query: ', error); }
+          if (error) { return reject('error: ' + error); }
           done();
           resolve(results.rows);
 
@@ -117,7 +117,7 @@ module.exports = function (test) {
           return console.error('error fetching client from pool', error);
         }
         client.query(statement, function (error, results) {
-          if (error) { reject('error: ' + error); return console.log('error in query: ', error); }
+          if (error) { return reject('error: ' + error); }
           done();
           resolve(results.rows);
 
@@ -139,7 +139,7 @@ module.exports = function (test) {
           return console.error('error fetching client from pool', error);
         }
         client.query(statement, function (error, results) {
-          if (error) { reject('error: ' + error); return console.log('error in query: ', error); }
+          if (error) { return reject('error: ' + error); }
           done();
           resolve(results.rows);
 

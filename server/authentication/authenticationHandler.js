@@ -16,8 +16,9 @@ function handleLogin(req, res) {
     return void 0;
   }
 
-  database.fetch('users', 'password', 'username="' + username + '"')
+  database.fetch('users', 'password', 'username=\'' + username + '\'')
   .then(function (user) {
+    console.log(user);
     if (user.length === 1) {
       user = user[0];
       return hash.checkHash(password, user.password);
@@ -76,9 +77,15 @@ function handleSignup(req, res) {
   });
 }
 
+function handleLogout (request, response) {
+  response.cookie('authorization', '').status(200).send('logout successful')
+}
+
+
 
 module.exports =  {
                     login: handleLogin,
-                    signup: handleSignup
+                    signup: handleSignup,
+                    logout: handleLogout
                   };
 
