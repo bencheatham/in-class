@@ -19,10 +19,10 @@ class UserVideoModal extends React.Component {
     this.startClass = this.startClass.bind(this);
     this.makeCall = this.makeCall.bind(this);
     this.videoCallUser = this.videoCallUser.bind(this);
+    this.getUserVideo = this.getUserVideo.bind(this);
   };
 
   hide() {
-    console.log('hiding')
     this.props.actions.hide();
   };
 
@@ -40,9 +40,9 @@ class UserVideoModal extends React.Component {
   }
 
   makeCall(user) {
-    if (!window.phone) alert("Login First!");
-    else {
-      console.log('dialing here');
+    if (!window.phone) {
+      alert("Login First!");
+    } else {
       window.phone.dial(user);
     }
   }
@@ -71,7 +71,14 @@ class UserVideoModal extends React.Component {
     });
   };
 
-  getUserList(){
+  getUserVideo(user) {
+    let videos = this.props.videoState.videos;
+    if (videos[user]) {
+      this.props.videoActions.switchVideoByUsername(user);
+    }
+  };
+
+  getUserList() {
     let users = this.props.userState.users;
     if (!users) return;
     return users.map((user) => {
@@ -87,7 +94,6 @@ class UserVideoModal extends React.Component {
 
   render() {
     const { visible } = this.props;
-
     return (
       <Modal show={visible}>
         <Modal.Header>
@@ -112,7 +118,8 @@ function mapStateToProps(state) {
     visible: state.userVideoModal.visible,
     session: state.video.videoSession,
     username: state.Users.username,
-    userState: state.Users
+    userState: state.Users,
+    videoState: state.video
   };
 }
 
