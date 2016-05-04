@@ -16,7 +16,7 @@ function handleLogin(req, res) {
     return void 0;
   }
 
-  database.fetchTable('users', 'password', 'username="' + username + '"')
+  database.fetch('users', 'password', 'username="' + username + '"')
   .then(function (user) {
     if (user.length === 1) {
       user = user[0];
@@ -53,7 +53,8 @@ function handleSignup(req, res) {
 
 
   // check if username is taken then create new user if the name is unique
-  database.fetchTable('users', '*', 'username = "' + username + '"')
+  database.fetch('users', '*', 'username = "' + username + '"')
+  .catch((error) => [])
   .then(function (existingUser) {
     if (existingUser.length > 0) {
       return Promise.reject('username already exists');
@@ -62,7 +63,7 @@ function handleSignup(req, res) {
     }
   })
   .then(function (hashed) {
-    return database.insertInto('users', [username, hashed, Date.now()], true);
+    return database.insertInto('users', {username: username, password: hashed, created: Date.now()}, true);
   })
   .then(function () {
     var token = jwt.sign({username: username}, secret);
