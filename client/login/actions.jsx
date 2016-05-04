@@ -16,7 +16,7 @@ export function signinUser(username, password,url){
       hashHistory.push('/quiz');
     })
     .catch((error)=>{
-    console.log('login error',error)    
+    // console.log('login error',error)    
       dispatch(authError(error.data));
     });
   }
@@ -41,7 +41,7 @@ export function checkAuth() {
   
   return axios.get(SERVER_URL)
   .then((response) => {
-    console.log('check auth',response.status)
+    // console.log('check auth',response.status)
     if (response.status === 200) {
       return { type: 'AUTH_USER', username: response.data.username }
     }
