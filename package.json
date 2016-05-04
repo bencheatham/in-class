@@ -5,8 +5,8 @@
   "description": "A tool for improving in-class student-teacher interactions",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --progress && node index.js",
-    "start-dev": "npm run build && npm run MYjshint && ((sleep 25 && npm test) & nodemon index.js)",
+    "start": "pg_ctl start --pgdata=database/inclass --log=logfile && webpack --progress && node index.js",
+    "start-dev": "pg_ctl start --pgdata=database/inclass --log=logfile && npm run build && npm run MYjshint && ((sleep 25 && npm test) & nodemon index.js)",
     "clean": "rm -rf dist/*",
     "build": "npm run clean && npm run oldBuild",
     "test": "mocha server/spec/**/*.js server/database/spec/**/*.js server/authentication/spec/**/*.js",
