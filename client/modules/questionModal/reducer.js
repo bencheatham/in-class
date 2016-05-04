@@ -3,11 +3,12 @@ import merge from 'lodash/merge';
 
 const initState = {
   visible: false,
-  users: []
+  users: [],
+  dequeue: null
 };
 
 function userVideoModal(state=initState, action){
-  let users = state.users.slice();
+  var users = state.users.slice();
 
   switch(action.type) {
     case actions.QUESTION_MODAL_SHOW:
@@ -19,6 +20,12 @@ function userVideoModal(state=initState, action){
       return merge({}, state, { users: users });
     case actions.QUESTION_MODAL_ADD_USERS:
       return merge({}, state, { users: action.users });
+    case actions.QUESTION_MODAL_DEQUEUE:
+      // TODO hacky: refactor this later
+      let dequeue = (action.user && action.user === users[0]) ? users.shift() : null;
+      let ret = merge({}, state, {dequeue});
+      if (ret.users.length > 0) ret.users.shift();
+      return dequeue !== null ? ret : state;
     default:
       return state;
   };

@@ -1,7 +1,8 @@
 var _ = require('underscore');
 
 var socketEvents = {
-  'questionModal_addNewUser': addNewUser
+  'questionModal_addNewUser': addNewUser,
+  'questionModal_dequeueUser': dequeueUser
 };
 
 var users = [];
@@ -13,6 +14,12 @@ function addNewUser(user) {
   this.emit('questionModal_updateNewUser', { users: users });
   this.broadcast.emit('questionModal_updateNewUser', { users: users });
 };
+
+function dequeueUser() {
+  var user = users.shift();
+  this.emit('questionModal_getNextUser', {user: user});
+  this.broadcast.emit('questionModal_getNextUser', {user: user});
+}
 
 exports.module = {
   socketEvents: socketEvents

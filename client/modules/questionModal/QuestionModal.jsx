@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from './actions';
+import * as ModalSockets from './socket';
 
 require('../../stylesheets/questionModal.scss');
 
@@ -12,14 +13,21 @@ class QuestionModal extends React.Component {
     super(props);
     this.hide = this.hide.bind(this);
     this.getUserList = this.getUserList.bind(this);
+    this.getNextUser = this.getNextUser.bind(this);
   };
 
   hide() {
     this.props.actions.hide();
   };
 
+  getNextUser() {
+    ModalSockets.dequeueUser();
+  };
+
   getUserList(){
     let users = this.props.users;
+    
+    if (!users) return;
     return users.map((user) => {
       return (
         <div className="user">
@@ -29,6 +37,13 @@ class QuestionModal extends React.Component {
       );
     });
   };
+
+  getNextButton(){
+    // TODO if teacher view -> return 'next'; else, return nothing;
+    return (
+      <Button bsStyle="primary" onClick={this.getNextUser}>Next</Button>
+    );
+  }
 
   render() {
     const { visible } = this.props;
@@ -46,6 +61,7 @@ class QuestionModal extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.hide}>Close</Button>
+          {this.getNextButton()}
         </Modal.Footer>
       </Modal>
     );

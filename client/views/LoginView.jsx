@@ -30,7 +30,10 @@ class LoginView extends Component {
   }
 
   componentDidMount() {
-    this.initQuestionModalSocket(this.props.userModalActions);
+    this.initQuestionModalSocket({
+      modalActions: this.props.userModalActions,
+      videoActions: this.props.videoActions
+    });
   }
 
   onInputChange(event) {
@@ -45,6 +48,16 @@ class LoginView extends Component {
     userActions.userLogin(this.state.term);
   }
 
+  // @deprecated
+  makeCall(user) {
+    if (!window.phone) alert("Login First!");
+    else {
+      console.log('dialing here');
+      window.phone.dial(user);
+    }
+  }
+
+  // @deprecated
   videoCallUser(user){
     const videoActions = this.props.videoActions;
 
@@ -54,11 +67,11 @@ class LoginView extends Component {
     };
 
     videoActions.userCallUser(ball);
+    this.makeCall(user);
   }
 
-
+  // @deprecated
   renderUserList(users) {
-   console.log('HEREERERE', users)
     return users.map((user) => {
       return (
         <li
@@ -89,16 +102,14 @@ class LoginView extends Component {
           </span>
         </form>
 
-        <ul>
-          {this.renderUserList(this.props.users)}
-        </ul>
         <div>
-          <button onClick={this.addUserToUserModal}>Post Question</button>
-
-          <Drawer />
-          <TeacherPanel />
           <VideoContainer username={this.props.username} />
         </div>
+
+        <button onClick={this.addUserToUserModal}>Post Question</button>
+        <Drawer />
+        <TeacherPanel />
+
       </div>
     );
   };

@@ -13,14 +13,25 @@ export function addPhone(phone) {
 }
 
 export function addVideoSession(session) {
- 
+
  return {
    type: types.ADD_VIDEO_SESSION,
    payload: session
  };
 }
 
+export function allowMakeCall(isAllow) {
+  return {
+    type: types.MAKE_CALL,
+    isAllow: isAllow
+  };
+}
 
+export function switchVideoByUsername(username) {
+  return {
+    type: types.GET_USER_VIDEO, username
+  };
+}
 
 export function userCallUser(callers) {
 
@@ -34,9 +45,6 @@ export function userCallUser(callers) {
 }
 
 export function teacherSelectStudentVideo(selectionDetails) {
-
-     
-
   return {
     type: types.TEACHER_SELECT_STUDENT_VIDEO,
     payload: selectionDetails
@@ -48,9 +56,3 @@ export function emitTeacherVideoSession(classUserPac) {
 //  worker['teacherSelectedVideoUser'](classUserPac);
 
 }
-
-
-
-
-
-

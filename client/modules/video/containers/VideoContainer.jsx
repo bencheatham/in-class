@@ -7,27 +7,36 @@ class VideoContainer extends Component {
 
   constructor(props) {
     super(props);
-
     this.changeSession = this.changeSession.bind(this);
     this.appendIt = this.appendIt.bind(this);
     this.login = this.login.bind(this);
     this.makeCall = this.makeCall.bind(this);
-
-   }
+    this.swapVideo = this.swapVideo.bind(this);
+  }
 
   appendIt(){
-    console.log('IN APPEND IT')
-        console.log((this.props.videoSession))
     if(this.props.videoSession){
-     $('#vid-box').append(this.props.videoSession.outerHTML);
+      $('#vid-box').append(this.props.videoSession.outerHTML);
     }
   };
- 
-  login(changeSession, videoActions) {
-    
-    console.log('in video login: ', this.props);
-    console.log(this.props.changeSession);
 
+  swapVideo() {
+    // TODO swap the video if current session is not the same as the others
+    if (!this.props.videoSession) {
+      return;
+    }
+
+    let id = $('#vid-box video').attr('data-number');
+    let newId = this.props.videoSession.getAttribute('data-number');
+
+    // if not the same, just swap it
+    if (newId !== id) {
+      $('#vid-box').empty();
+    }
+    this.appendIt();
+  };
+
+  login(changeSession, videoActions) {
     window.phone = PHONE({
         number        : this.props.username || "Anonymous", // listen on username line else Anonymous
         publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
@@ -35,53 +44,43 @@ class VideoContainer extends Component {
         ssl : (('https:' == document.location.protocol) ? true : false)
     });
 
-    phone.ready(function(){ 
+    phone.ready(function(){
+      // TODO change this later
       //form.username.style.background="#55ff5b";
     });
 
+    // receives phone conversation back from PubNub
     phone.receive(function(session){
-        session.connected(function(session) {
+      session.connected(function(session) {
+        console.log('INNNNN HERERERRERE');
+        console.log(session.video);
 
-          console.log('INNNNN HERERERRERE');
-          console.log(session.video);
+        changeSession(session.video, videoActions);
+      });
 
-          changeSession(session.video, videoActions);
-
-          });
-
-        session.ended(function(session) {
-          
-          changeSession(session.video, videoActions);
-
-        });
+      session.ended(function(session) {
+        changeSession(session.video, videoActions);
+      });
     });
   }
 
   changeSession(session, videoActions){
-    console.log('WE ARE CHANGING SESSIONS!');
-    console.log(session);
     videoActions.addVideoSession(session);
   }
-  
+
+  // @deprecated
   makeCall() {
     console.log('IN MAKE CALL, ', this.props.calledUser);
-      if (!window.phone) alert("Login First!");
-      else {
-        console.log('dialing');
-        phone.dial(this.props.calledUser);
-      }
+    if (!window.phone) alert("Login First!");
+    else {
+      console.log('dialing');
+      phone.dial(this.props.calledUser);
+    }
   }
 
   render() {
-
     console.log('In Render');
-
     this.login(this.changeSession, this.props.videoActions);
-
-
-    if (this.props.calledUser !== null){
-      setTimeout(this.makeCall, 3000);
-    }
 
     if (this.props.teacherSelectedUser) {
       let ball = {
@@ -92,7 +91,8 @@ class VideoContainer extends Component {
     }
 
     if (this.props.videoSession !== null){
-      this.appendIt();
+      this.swapVideo();
+
       if (this.props.teacherCall) {
         let classVideoPac = {
           speaker: this.props.calledUser,
@@ -107,14 +107,7 @@ class VideoContainer extends Component {
 
     return (
       <div>
-        <div id="vid-box">
-
-        </div>
-        <span className="input-group-btn">
-            <button type="submit" onClick={this.makeCall} className='btn btn-lg'>Start Video</button>
-        </span>
-
-
+        <div id="vid-box"></div>
       </div>
     );
   }
@@ -130,7 +123,8 @@ function mapStateToProps(state) {
     videoSession: state.video.videoSession,
     teacherCall: state.video.teacherCall,
     teacherSelectedUser: state.video.teacherSelectedUser,
-    teacherName: state.video.teacherName
+    teacherName: state.video.teacherName,
+    makeCall: state.video.makeCall
   };
 }
 
@@ -141,8 +135,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoContainer);
-
-
-
-
-

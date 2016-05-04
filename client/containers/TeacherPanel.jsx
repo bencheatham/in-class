@@ -34,13 +34,7 @@ class TeacherPanel extends React.Component {
            <Glyphicon glyph="glyphicon glyphicon-film" />
         </Button>
 
-        <Button className="btn-danger btn-circle btn-xl"
-            onClick={this.showQuestionModal}>
-            <Glyphicon glyph="glyphicon glyphicon-question-sign" />
-        </Button>
-
         <UserVideoModal />
-        <QuestionModal />
       </div>
     );
   };

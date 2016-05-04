@@ -4,8 +4,6 @@ import { USER_LEFT_CLASS } from '../constants/ActionTypes';
 
 
 export default function(state = {users: [], username: "a"}, action) {
-  
-  console.log('HERE IN ACTIONS: ', action)
 
   let userObj = {};
   userObj.users = [];
@@ -39,7 +37,6 @@ export default function(state = {users: [], username: "a"}, action) {
     return userObj;
 
 
-  } 
-  //state.username = 'username';
+  }
   return state;
 }
