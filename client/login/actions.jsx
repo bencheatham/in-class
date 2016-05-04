@@ -41,14 +41,18 @@ export function checkAuth() {
   
   return axios.get(SERVER_URL)
   .then((response) => {
-    // console.log('check auth',response.status)
+    console.log('check auth',response.status)
     if (response.status === 200) {
       return { type: 'AUTH_USER', username: response.data.username }
     }
     else {
+      hashHistory.push('/login');
       return { type: 'UNAUTH_USER' } 
     }
   })
-  .catch((error) => { type: 'UNAUTH_USER' } );
+  .catch((error) => {
+    hashHistory.push('/login');
+    return { type: 'UNAUTH_USER' }
+  });
 }
 
