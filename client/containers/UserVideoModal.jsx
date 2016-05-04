@@ -15,6 +15,10 @@ class UserVideoModal extends React.Component {
     this.hide = this.hide.bind(this);
     this.teacherVideoCallUser = this.teacherVideoCallUser.bind(this);
     this.getUserList = this.getUserList.bind(this);
+
+    this.startClass = this.startClass.bind(this);
+    this.makeCall = this.makeCall.bind(this);
+    this.videoCallUser = this.videoCallUser.bind(this);
   };
 
   hide() {
@@ -35,6 +39,38 @@ class UserVideoModal extends React.Component {
     setTimeout(this.hide, 1500);
   }
 
+  makeCall(user) {
+    if (!window.phone) alert("Login First!");
+    else {
+      console.log('dialing here');
+      window.phone.dial(user);
+    }
+  }
+
+  videoCallUser(user){
+    const videoActions = this.props.videoActions;
+
+    let ball = {
+      calledUser: user,
+      callingUser: this.props.username
+    };
+
+    videoActions.userCallUser(ball);
+
+    // TODO can I make the call here instead to avoid memory leak?
+    this.makeCall(user);
+  }
+
+  startClass() {
+    let users = this.props.userState.users;
+    let currentUser = this.props.userState.username;
+
+    users.forEach((user) => {
+      if(currentUser === user) return;
+      this.videoCallUser(user);
+    });
+  };
+
   getUserList(){
     let users = this.props.userState.users;
     if (!users) return;
@@ -53,7 +89,7 @@ class UserVideoModal extends React.Component {
     const { visible } = this.props;
 
     return (
-      <Modal show={visible} onBlur={this.hide} >
+      <Modal show={visible}>
         <Modal.Header>
           <Modal.Title>User Videos</Modal.Title>
         </Modal.Header>
@@ -64,7 +100,7 @@ class UserVideoModal extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.hide}>Close</Button>
-          <Button bsStyle="success" onClick={this.hide}>Start Class</Button>
+          <Button bsStyle="success" onClick={this.startClass}>Start Class</Button>
         </Modal.Footer>
       </Modal>
     );
