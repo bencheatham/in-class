@@ -56,8 +56,6 @@ class UserVideoModal extends React.Component {
     };
 
     videoActions.userCallUser(ball);
-
-    // TODO can I make the call here instead to avoid memory leak?
     this.makeCall(user);
   }
 
@@ -72,8 +70,9 @@ class UserVideoModal extends React.Component {
   };
 
   getUserVideo(user) {
+    let currentUser = this.props.userState.username;
     let videos = this.props.videoState.videos;
-    if (videos[user]) {
+    if (videos[user] && currentUser !== user) {
       this.props.videoActions.switchVideoByUsername(user);
     }
   };
@@ -83,7 +82,7 @@ class UserVideoModal extends React.Component {
     if (!users) return;
     return users.map((user) => {
       return (
-        <li className="list-group-item" >
+        <li className="list-group-item" onClick={this.getUserVideo.bind(this, user)}>
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
           <span className="userId">{user}</span>
         </li>
