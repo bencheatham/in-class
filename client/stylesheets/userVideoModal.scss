@@ -1,0 +1,18 @@
+li {
+  cursor: pointer;
+  cursor: hand;
+
+  span.userId {
+    padding-left: 10px;
+  }
+}
+
+
+.list-group-item {
+  margin-bottom: 0px;
+}
+
+.list-group-item:hover {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
+}
