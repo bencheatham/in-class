@@ -52,7 +52,7 @@ class LoginView extends Component {
   makeCall(user) {
     if (!window.phone) alert("Login First!");
     else {
-      console.log('dialing muther urker');
+      console.log('dialing here');
       window.phone.dial(user);
     }
   }

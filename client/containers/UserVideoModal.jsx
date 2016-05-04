@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from '../actions/userVideoModal';
 import * as VideoActions from '../modules/video/actions';
 
@@ -14,6 +14,7 @@ class UserVideoModal extends React.Component {
 
     this.hide = this.hide.bind(this);
     this.teacherVideoCallUser = this.teacherVideoCallUser.bind(this);
+    this.getUserList = this.getUserList.bind(this);
   };
 
   hide() {
@@ -32,7 +33,20 @@ class UserVideoModal extends React.Component {
     videoActions.teacherSelectStudentVideo(ball);
 
     setTimeout(this.hide, 1500);
-  } 
+  }
+
+  getUserList(){
+    let users = this.props.userState.users;
+    if (!users) return;
+    return users.map((user) => {
+      return (
+        <li className="list-group-item" >
+          <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
+          <span className="userId">{user}</span>
+        </li>
+      )
+    });
+  };
 
 
   render() {
@@ -45,20 +59,12 @@ class UserVideoModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <ul>
-            <li
-              key={"Fred"}
-              onClick={() => this.teacherVideoCallUser("Fred")}
-              className="list-group-item">
-              Fred</li>
-            <li              
-              key={"Mary"}
-              onClick={() => this.teacherVideoCallUser("Mary")}
-              className="list-group-item">
-              Mary</li>
+            {this.getUserList()}
           </ul>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.hide}>Close</Button>
+          <Button bsStyle="success" onClick={this.hide}>Start Class</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -69,7 +75,8 @@ function mapStateToProps(state) {
   return {
     visible: state.userVideoModal.visible,
     session: state.video.videoSession,
-    username: state.Users.username
+    username: state.Users.username,
+    userState: state.Users
   };
 }
 
