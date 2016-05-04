@@ -6,6 +6,7 @@ import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from '../actions/userVideoModal';
 import * as VideoActions from '../modules/video/actions';
 
+require('../stylesheets/userVideoModal.scss');
 
 class UserVideoModal extends React.Component {
 
@@ -20,6 +21,7 @@ class UserVideoModal extends React.Component {
     this.makeCall = this.makeCall.bind(this);
     this.videoCallUser = this.videoCallUser.bind(this);
     this.getUserVideo = this.getUserVideo.bind(this);
+    this.getStartClassButton = this.getStartClassButton.bind(this);
   };
 
   hide() {
@@ -69,6 +71,15 @@ class UserVideoModal extends React.Component {
     });
   };
 
+  getStartClassButton() {
+    let users = this.props.userState.users;
+    if(!users || users.length === 0) return;
+
+    return (
+      <Button bsStyle="success" onClick={this.startClass}>Start Class</Button>
+    );
+  };
+
   getUserVideo(user) {
     let currentUser = this.props.userState.username;
     let videos = this.props.videoState.videos;
@@ -79,7 +90,10 @@ class UserVideoModal extends React.Component {
 
   getUserList() {
     let users = this.props.userState.users;
-    if (!users) return;
+    if (!users || users.length === 0) {
+      return (<div>Room is empty...</div>);
+    }
+
     return users.map((user) => {
       return (
         <li className="list-group-item" onClick={this.getUserVideo.bind(this, user)}>
@@ -105,7 +119,7 @@ class UserVideoModal extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.hide}>Close</Button>
-          <Button bsStyle="success" onClick={this.startClass}>Start Class</Button>
+          {this.getStartClassButton()}
         </Modal.Footer>
       </Modal>
     );
