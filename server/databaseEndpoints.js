@@ -26,36 +26,36 @@ function verifyUsername (request, response) {
   // .catch((error) => 'error');
 }
 
-function makeDirectory (path) {
-  return new Promise((resolve, reject) => {
-    // console.log('make directory');
-    fs.mkdir(path, (error, folder) => {
-      if (error) reject(error);
-      resolve(true);
-    });
-  });
-  // let errors fall through to a later catch    
-}
+// function makeDirectory (path) {
+//   return new Promise((resolve, reject) => {
+//     // console.log('make directory');
+//     fs.mkdir(path, (error, folder) => {
+//       if (error) reject(error);
+//       resolve(true);
+//     });
+//   });
+//   // let errors fall through to a later catch    
+// }
 
-function directoryExists (path) {
-  return new Promise((resolve, reject) => {
-    fs.stat(path, (error, stats) => {
-      if (error) reject(error);
-      else resolve(stats.isDirectory());
-    });
-  })
-  .catch((error) => {console.log(error); Promise.resolve(false);});  
-}
+// function directoryExists (path) {
+//   return new Promise((resolve, reject) => {
+//     fs.stat(path, (error, stats) => {
+//       if (error) reject(error);
+//       else resolve(stats.isDirectory());
+//     });
+//   })
+//   .catch((error) => {console.log(error); Promise.resolve(false);});  
+// }
 
-function fileExists (path) {
-  return new Promise((resolve, reject) => {
-    fs.stat(path, (error, stats) => {
-      if (error) reject(error);
-      else resolve(stats.isFile());
-    });
-  })
-  .catch((error) => Promise.resolve(false));
-}
+// function fileExists (path) {
+//   return new Promise((resolve, reject) => {
+//     fs.stat(path, (error, stats) => {
+//       if (error) reject(error);
+//       else resolve(stats.isFile());
+//     });
+//   })
+//   .catch((error) => Promise.resolve(false));
+// }
 
 function fetchManifest (db, username) {
   return db.fetch('users_quizes_join', 'title', 'username=\'' + username + '\'')
@@ -91,9 +91,19 @@ var question = questions.shift();
 
 module.exports = (app) => {
 
+  app.post('/delete', (request, response) => {
+    var title = request.body.title;
+    var test = request.body.test;
+    var database = test ? dbTest : db;
+    return database.deleteFrom('questions', 'title=\'' + title + '\'')
+    .then(() => database.deleteFrom('users_quizes_join', 'title=\'' + title + '\''))
+    .then(() => database.deleteFrom('quizes', 'title=\'' + title + '\''))
+    .then(response.status(200).send('deleted quiz'))
+    .catch(response.status(400).send('error: ' + 'some issue deleting the quiz...'));
+  });
+
   app.post('/save', (request, response) => {
-    // var data = request.body.data;
-    // var file = request.body.file;
+
     var quiz = request.body.quiz;
     var update = request.body.update;
 
@@ -124,13 +134,9 @@ module.exports = (app) => {
         // console.log('existing');
         if (existing.length > 0) {
           if (update) {
-            // console.log('update');
             return database.deleteFrom('questions', 'title=\'' + quiz.title + '\'')
-            // .then(()=>console.log('deleted from questions'))
             .then(() => database.deleteFrom('users_quizes_join', 'title=\'' + quiz.title + '\''))
-            // .then(()=>console.log('deleted from users_quizes_join'))
             .then(() => database.deleteFrom('quizes', 'title=\'' + quiz.title + '\''));
-            // .then(()=>console.log('deleted from quizes'));
           }
           return Promise.reject('quiz name is not unique');
         }

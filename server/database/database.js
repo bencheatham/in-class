@@ -119,7 +119,7 @@ module.exports = function (test) {
         client.query(statement, function (error, results) {
           if (error) { return reject('error: ' + error); }
           done();
-          resolve(results.rows);
+          resolve('delete successful');
 
         });
       });

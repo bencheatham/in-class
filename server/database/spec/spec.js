@@ -19,6 +19,13 @@ describe('Database Unit Tests', function() {
     .to.eventually.equal('saved');
   });
 
+  it('should delete items from the database', function() {
+    return expect(
+      db.insertInto('users', {username: 'louie', password: 'pass', created: String(Date.now())})
+      .then(() => db.deleteFrom('users', 'username=\'louie\''))
+    ).to.eventually.equal('delete successful');
+  });
+
   it('should insert quizes into and fetch quizes from the database', function() {
     var username = 'louie';
     var quiz = {title: 'myQuiz', questions: [

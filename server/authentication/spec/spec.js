@@ -13,7 +13,7 @@ describe('Authentication Unit Tests', function() {
     done();
   });
 
-  xit('should block the protected page', function() {
+  it('should block the protected page', function() {
     return expect(
       axios.get('http://localhost:8000/authentication')
       .catch(function (error) { return Promise.resolve(error); })

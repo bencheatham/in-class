@@ -38,9 +38,16 @@ describe('Database Endpoint Unit Tests', function() {
 
   it('should fetch data from the database', function() {
     return expect(
-      axios.get('http://localhost:8000/fetch', {params: {title: 'test', test: true}, headers: {cookie: cookie}})
+      axios.get('http://localhost:8000/fetch', {params: {title: quiz.title, test: true}, headers: {cookie: cookie}})
       .then(function (res) { return Promise.resolve({status: res.status, quiz: res.data}); })
     ).to.eventually.deep.equal({status: 200, quiz: quiz});
+  });
+
+  it('should delete data from the database', function() {
+    return expect(
+      axios.post('http://localhost:8000/delete', {title: quiz.title, test: true}, {headers: {cookie: cookie}})
+      .then(function (res) { return Promise.resolve({status: res.status, message: res.data}); })
+    ).to.eventually.deep.equal({status: 200, message: 'deleted quiz'});
   });
   
 });
