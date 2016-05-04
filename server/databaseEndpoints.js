@@ -1,6 +1,14 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const secret = 'when in class... do as the students do';
+const db = require(__dirname + '/database/database.js')();
+const dbTest = require(__dirname + '/database/database.js')('test');
+
+
+
+// db.initialize(true);
+// dbTest.initialize(true);
+
 
 function verifyUsername (request, response) {
   // console.log(request.cookies);
@@ -49,87 +57,122 @@ function fileExists (path) {
   .catch((error) => Promise.resolve(false));
 }
 
-function fetchManifest (username) {
-  return new Promise((resolve, reject) => {
-    fs.readdir(__dirname + '/../database/json/' + username, (error, files) => { 
-      if (error) reject(error); 
-      else resolve(files.map((file) => file.slice(0,-5))); 
-    });
-  })
+function fetchManifest (db, username) {
+  return db.fetch('users_quizes_join', 'title', 'username=\'' + username + '\'')
+  .then((results) => results.map((result) => result.title))
+  // return new Promise((resolve, reject) => {
+  //   fs.readdir(__dirname + '/../database/json/' + username, (error, files) => { 
+  //     if (error) reject(error); 
+  //     else resolve(files.map((file) => file.slice(0,-5))); 
+  //   });
+  // })
   .catch((error) => []);
 }
+
+
+//////////  //////////  //////////  //////////  
+      //////////  //////////  //////////  //////////  
+//////////  //////////  //////////  //////////  
+      //////////  //////////  //////////  //////////        
+//////////  //////////  //////////  //////////  
+
+
+function insertQuestions (db, title, questions, username) {
+var question = questions.shift();
+  return db.insertInto('questions', {username: username, title: title, index: question.index, question: question.question, choices: question.choices.join('+++'), answer: question.answer})
+  .then(() => {
+    if (questions.length > 0) {
+      return insertQuestions(db, title, questions, username);
+    }
+    return 'questions inserted';
+  });
+}
+
 
 module.exports = (app) => {
 
   app.post('/save', (request, response) => {
-    var data = request.body.data;
-    var file = request.body.file;
+    // var data = request.body.data;
+    // var file = request.body.file;
+    var quiz = request.body.quiz;
     var update = request.body.update;
+
+    var test = request.body.test;
+
+    var database = test ? dbTest : db;
+
 
     // console.log(file);
 
     verifyUsername(request,response)
+    .catch((error) => response.status(400).send('error: ' + 'invalid token...'))
     .then((username) => {
-      var directory = __dirname + '/../database/json/' + username + '/';
-      var filePath = directory + file + '.json';
+      
+
+      // var directory = __dirname + '/../database/json/' + username + '/';
+      // var filePath = directory + file + '.json';
 
       // console.log('directory: ', directory);
 
   // file must be a string
   // data must be an object
       
-      if (file === 'manifest') { response.status(400).send('error: ' + 'manifest is a reserved filename'); return void 0; }
-
-      directoryExists(directory)
-      .then(function (bool) {
-        // console.log('directory exists: ', bool);
-        if (!bool) return makeDirectory(directory);
-        return true;
-      })
-      .then((bool) => { /*console.log('created', bool);*/ return fileExists(filePath);})
-      .then((bool) => {
-        // console.log('file exists', bool);
-        if (bool && !update) { response.status(400).send('error: ' + 'File name is not unique. Please use the update flag to overwrite.'); return void 0; }
-        fs.writeFile(
-          filePath, 
-          JSON.stringify(data), 
-          (error) => {
-            if (error) response.status(400).send('error: ' + error);
-            else response.status(201).send('created'); 
+      if (quiz.title === 'manifest') { response.status(400).send('error: ' + 'manifest is a reserved filename'); return void 0; }
+      database.fetch('quizes', '*', 'title=\'' + quiz.title + '\'')
+      .catch((error) => [])
+      .then((existing) => {
+        // console.log('existing');
+        if (existing.length > 0) {
+          if (update) {
+            // console.log('update');
+            return database.deleteFrom('questions', 'title=\'' + quiz.title + '\'')
+            // .then(()=>console.log('deleted from questions'))
+            .then(() => database.deleteFrom('users_quizes_join', 'title=\'' + quiz.title + '\''))
+            // .then(()=>console.log('deleted from users_quizes_join'))
+            .then(() => database.deleteFrom('quizes', 'title=\'' + quiz.title + '\''));
+            // .then(()=>console.log('deleted from quizes'));
           }
-        ); 
-      });
+          return Promise.reject('quiz name is not unique');
+        }
+        return 'quiz name is unique. So continue';
+      })
+      .then(() => database.insertInto('quizes', {username: username, title: quiz.title, created: Date.now()}))
+      .then(() => database.insertInto('users_quizes_join', {username: username, title: quiz.title}))
+      .then(() => insertQuestions(database, quiz.title, quiz.questions.slice(), username))
+      .then(() => response.status(201).send('created'))
+      .catch((error) => response.status(400).send('error: ' + 'some issue saving the quiz... Use the update flag to overwrite old quizes'));
 
 
-    })
-    .catch((error) => response.status(400).send('error: ' + 'invalid token...'));
-
-
-
+    });
         
   });
 
   app.get('/fetch', (request, response) => {
-    var file = request.query.file;
+    var title = request.query.title;
+    var test = request.query.test;
+    var database = test ? dbTest : db;
 // file must be a string
 
+
     verifyUsername(request,response)
+    .catch((error) => response.status(400).send('error: ' + 'invalid token...'))
     .then((username) => {
-      if (file === 'manifest') { 
-        fetchManifest(username)
+      // console.log('hello');
+      if (title === 'manifest') { 
+        // console.log('fetch manifest');
+        fetchManifest(database, username)
         .then((files) => response.status(200).send(files));
         return void 0;
       }
-
-      fs.readFile(
-        __dirname + '/../database/json/'+ username + '/' + file + '.json', 
-        (error, data) => {
-          if (error) response.status(400).send('error: ' + error);
-          else response.status(200).send(data);
-        }
-      );
+      return database.fetch('questions', '*', 'username=\'' + username + '\' and title=\'' + title + '\'')
+      .then((results) => {
+        var quiz = {title: results[0].title};
+        quiz.questions = results.map((result) => { return {index: result.index, question: result.question, choices: result.choices.split('+++'), answer: result.answer};});
+        return quiz;
+      })
+      .then((quiz) => response.status(200).send(quiz));
     })
-    .catch((error) => response.status(400).send('error: ' + 'invalid token...'));
+    .catch((error) => response.status(400).send('error: ' + 'some issue fetching the quiz...'));
 
   });
 

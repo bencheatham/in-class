@@ -4,9 +4,12 @@ const expect = chai.expect;
 chai.use(chaiAsPromised);
 
 const axios = require('axios');
-const db = require(__dirname + '/../database/database.js')(__dirname + '/../../database/authentication-test.sqlite3');
+const db = require(__dirname + '/../database/database.js')('test');
 
-const data = {text: 'this is some text', color: 'orange'};
+const quiz = {title:'test', questions: [
+  {index: 0, question: 'How are you?', choices:['fine, thanks', 'ok', 'bad', 'good'], answer: 'good'},
+  {index: 0, question: 'Who are you?', choices:['me', 'you', 'her', 'god'], answer: 'you'}
+]};
 const cookie = 'authorization=Bearer%20eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImxvdWllIiwiaWF0IjoxNDYxOTQxMDk2fQ.gXOajV8KhpJRWocRBnfIrFBvJG6ZbNpWvF1QWurlvQU';
 
 describe('Database Endpoint Unit Tests', function() {
@@ -28,16 +31,16 @@ describe('Database Endpoint Unit Tests', function() {
 
   it('should save data to the database', function() {
     return expect(
-      axios.post('http://localhost:8000/save', {file: 'test', data: data, update: 'true'}, {headers: {cookie: cookie}})
+      axios.post('http://localhost:8000/save', {quiz: quiz, update: true, test: true}, {headers: {cookie: cookie}})
       .then(function (res) { return Promise.resolve(res.status); })
     ).to.eventually.equal(201);
   });
 
   it('should fetch data from the database', function() {
     return expect(
-      axios.get('http://localhost:8000/fetch', {params: {file: 'test'}, headers: {cookie: cookie}})
-      .then(function (res) { return Promise.resolve({status: res.status, data: res.data}); })
-    ).to.eventually.deep.equal({status: 200, data: data});
+      axios.get('http://localhost:8000/fetch', {params: {title: 'test', test: true}, headers: {cookie: cookie}})
+      .then(function (res) { return Promise.resolve({status: res.status, quiz: res.data}); })
+    ).to.eventually.deep.equal({status: 200, quiz: quiz});
   });
   
 });

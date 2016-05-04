@@ -23,7 +23,7 @@ module.exports = function (test) {
     'CREATE TABLE IF NOT EXISTS users (PRIMARY KEY(username), username TEXT UNIQUE, password TEXT,created TEXT)',
     'CREATE TABLE IF NOT EXISTS quizes (PRIMARY KEY(title), username TEXT, title TEXT, created TEXT)',
     'CREATE TABLE IF NOT EXISTS answers (PRIMARY KEY(username, title), username TEXT, title TEXT, answers TEXT, created TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizes(title))',
-    'CREATE TABLE IF NOT EXISTS questions (title TEXT, index INTEGER, question TEXT, choices TEXT, answer TEXT, FOREIGN KEY(title) REFERENCES quizes(title))',
+    'CREATE TABLE IF NOT EXISTS questions (username TEXT, title TEXT, index INTEGER, question TEXT, choices TEXT, answer TEXT, FOREIGN KEY(title) REFERENCES quizes(title))',
     'CREATE TABLE IF NOT EXISTS users_links_join (PRIMARY KEY(username, url), username TEXT, url TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(url) REFERENCES links(url))',
     'CREATE TABLE IF NOT EXISTS users_quizes_join (PRIMARY KEY(username, title), username TEXT, title TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizes(title))'
   ];
@@ -87,7 +87,7 @@ module.exports = function (test) {
     // columns should be a string of the column names
     // where should be a sql string of the conditional options
     var statement = 'SELECT ' + ( columns ? columns : '*' ) + ' FROM ' + table + ' WHERE ' + ( where ? where : '1 = 1');
-
+// console.log(statement);
     return new Promise(function (resolve, reject) {
       pg.connect(conString, function(error, client, done) {
         if(error) {
@@ -103,6 +103,28 @@ module.exports = function (test) {
       });
     });
   };
+
+  function deleteFrom (table, where) {
+    // table should be a string of the table name
+    // columns should be a string of the column names
+    // where should be a sql string of the conditional options
+    var statement = 'DELETE FROM ' + table + ' WHERE ' + ( where ? where : '1 = 1');
+
+    return new Promise(function (resolve, reject) {
+      pg.connect(conString, function(error, client, done) {
+        if(error) {
+          reject('error: ' + error);
+          return console.error('error fetching client from pool', error);
+        }
+        client.query(statement, function (error, results) {
+          if (error) { reject('error: ' + error); return console.log('error in query: ', error); }
+          done();
+          resolve(results.rows);
+
+        });
+      });
+    });    
+  }
 
   function join (table1, table2, conditional, joinType, columns) {
     // table should be a string of the table name
@@ -130,6 +152,7 @@ module.exports = function (test) {
     initialize: initialize,
     insertInto: insertInto,
     fetch: fetch,
+    deleteFrom: deleteFrom,
     join: join
   }
 }
