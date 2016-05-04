@@ -39,6 +39,7 @@ if (process.env.NODE_ENV !== 'production') { require('./webpack.js')(app); }
 
 app.post('/signup', authenticationHandler.signup);
 app.post('/login', authenticationHandler.login);
+app.post('/logout', authenticationHandler.logout);
 
 require('./databaseEndpoints.js')(app);
 

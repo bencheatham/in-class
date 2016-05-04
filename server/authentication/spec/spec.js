@@ -4,7 +4,7 @@ const chaiAsPromised = require('chai-as-promised');
 const expect = chai.expect;
 chai.use(chaiAsPromised);
 const axios = require('axios');
-const db = require(__dirname + '/../../database/database.js')(__dirname + '/../../../database/authentication-test.sqlite3');
+const db = require(__dirname + '/../../database/database.js')('test');
 
 var cookie;
 
