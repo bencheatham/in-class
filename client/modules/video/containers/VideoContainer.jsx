@@ -68,6 +68,7 @@ class VideoContainer extends Component {
     videoActions.addVideoSession(session);
   }
 
+  // @deprecated
   makeCall() {
     console.log('IN MAKE CALL, ', this.props.calledUser);
     if (!window.phone) alert("Login First!");
@@ -90,8 +91,6 @@ class VideoContainer extends Component {
     }
 
     if (this.props.videoSession !== null){
-      // TODO swap this video first
-      // this.appendIt();
       this.swapVideo();
 
       if (this.props.teacherCall) {

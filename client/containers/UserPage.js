@@ -6,10 +6,7 @@ import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
 import VideoContainer from '../modules/video/containers/VideoContainer';
 
-
-
 class UserPage extends Component {
-
   constructor(props) {
     super(props);
     this.state = { term: '' };

@@ -4,7 +4,7 @@ import { USER_LEFT_CLASS } from '../constants/ActionTypes';
 
 
 export default function(state = {users: [], username: "a"}, action) {
-  
+
   let userObj = {};
   userObj.users = [];
 
@@ -38,6 +38,5 @@ export default function(state = {users: [], username: "a"}, action) {
 
 
   }
-  //state.username = 'username';
   return state;
 }

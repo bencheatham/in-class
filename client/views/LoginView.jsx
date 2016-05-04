@@ -48,7 +48,7 @@ class LoginView extends Component {
     userActions.userLogin(this.state.term);
   }
 
-  // DEPRECATED
+  // @deprecated
   makeCall(user) {
     if (!window.phone) alert("Login First!");
     else {
@@ -57,7 +57,7 @@ class LoginView extends Component {
     }
   }
 
-  // DEPRECATED
+  // @deprecated
   videoCallUser(user){
     const videoActions = this.props.videoActions;
 
@@ -70,7 +70,7 @@ class LoginView extends Component {
     this.makeCall(user);
   }
 
-  // DEPREATED 
+  // @deprecated
   renderUserList(users) {
     return users.map((user) => {
       return (

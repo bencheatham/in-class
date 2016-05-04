@@ -35,8 +35,6 @@ export default function(state = initState, action) {
       });
 
     case TEACHER_SELECT_STUDENT_VIDEO:
-      console.log("TEACHER_SELECT_STUDENT_VIDEO in reducer", action)
-
       return Object.assign({}, state, {
         teacherSelectedUser: action.payload.teacherSelectedUser,
         teacherCall: true,
@@ -48,6 +46,7 @@ export default function(state = initState, action) {
         videoSession: action.payload,
         videos: addVideoSession(state.videos, action.payload)
       });
+
     case GET_USER_VIDEO:
       let username = action.username;
       var _session = getVideoByUsername(state.videos, username);
@@ -55,10 +54,12 @@ export default function(state = initState, action) {
       return Object.assign({}, state, {
         videoSession: _session
       });
+
     case MAKE_CALL:
       return Object.assign({}, state, {
         makeCall: action.isAllow
       });
+      
     default:
       return state;
   }
