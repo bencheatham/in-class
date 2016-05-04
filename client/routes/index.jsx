@@ -15,17 +15,23 @@ import StudentQuiz from '../quiz/StudentQuiz';
 import TeacherQuiz from '../quiz/TeacherQuiz';
 import ChatContainer from '../chat/container';
 
-export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ; 
+export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ;
 
 function checkAuthentication (next, previous, callback) {
   console.log(SERVER_URL);
   return axios.get(SERVER_URL)
   .then((response) => {
-    if (response.status === 200) { callback(); console.log('authorized'); return Promise.resolve('authorized'); }
-    else Promise.reject('not authorized');
-    
+    if (response.status === 200) {
+      callback(); console.log('authorized');
+      return Promise.resolve('authorized');
+    } else {
+      Promise.reject('not authorized');
+    };
   })
-  .catch((error) => { console.log('not authorized'); previous('/login'); callback(); });
+  .catch((error) => {
+    console.log('not authorized');
+    previous('/login'); callback();
+  });
 }
 
 export default (
@@ -35,22 +41,22 @@ export default (
     <Route  path="/login"
             component={Login} />
     <Route path="/video"
-           component={LoginView} 
+           component={LoginView}
            onEnter={checkAuthentication}/>
     <Route path="/quiz"
-           component={Quiz} 
+           component={Quiz}
            onEnter={checkAuthentication}/>
     <Route path="/thumbs"
-           component={Thumbs} 
+           component={Thumbs}
            onEnter={checkAuthentication}/>
     <Route path="/question"
-           component={QuestionContainer} 
+           component={QuestionContainer}
            onEnter={checkAuthentication}/>
     <Route path="/student-class"
-           component={StudentClassView} 
+           component={StudentClassView}
            onEnter={checkAuthentication}/>
     <Route path="/user"
-           component={UserPage} 
+           component={UserPage}
            onEnter={checkAuthentication}/>
      <Route path="/create-quiz"
            component={QuizContainer}
@@ -63,6 +69,6 @@ export default (
            onEnter={checkAuthentication}/>
       <Route path="/chat"
            component={ChatContainer} />
-           onEnter={checkAuthentication}/>     
+           onEnter={checkAuthentication}/>
   </Route>
 );
