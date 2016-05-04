@@ -1,45 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login } from './actions';
+import { login, signinUser } from './actions';
 import { socket } from '../common/socket';
 import { initializeWebSockets, emitLogin} from './socket';
 import axios from 'axios';
-
-
-
-function postCredentials (username, password, url) {
-  console.log('username: ' + username, 'password: ' + password, 'url: ' + url);
-  return new Promise(function (resolve, reject) {
-    axios.post(url, {username: username, password: password})
-    .then((response) => resolve(response.data))
-    .catch(reject);
-  });
-}
-
-function navigateToProtected () {
-  return Promise.resolve(location.href = '/#/video');
-}
-
-function setStorage (object) {
-  var temp = localStorage.inClass ? JSON.parse(localStorage.inClass) : {} ;
-  for (var key in object) {
-    temp[key] = object[key];
-  }
-  localStorage.inClass = JSON.stringify(temp);
-  return Promise.resolve(object);
-}
-
-function setState (object) {
-  // in progress
-  // set the state here
-  this.props.actions.login(object.username, '');
-
-  return Promise.resolve();
-}
-
-
-
+import {returnStore} from '../main';
+import { push } from 'react-router-redux'
+import Header from './Header';
 
 class Login extends Component {
 
@@ -48,6 +16,7 @@ class Login extends Component {
     this.handleEnter = this.handleEnter.bind(this);  
     this.initializeWebSockets = initializeWebSockets.bind(this);  
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderAlert = this.renderAlert;
   }
 
   componentDidMount() {
@@ -67,53 +36,45 @@ class Login extends Component {
     var username = this.refs.username.value;
     var password = this.refs.password.value;
     var url = '/' + this.refs.actions.value;
-
-    postCredentials(username, password, url)
-    .then((val=>{console.log('credentials posted: ', val); return val;}))
-    .then(setStorage)
-    .then(setState.bind(this))
-    .then(navigateToProtected)
-    .catch(function (error) {
-      console.error('WHAT IS THE ERROR: ', error);
-    });
-
+    this.props.actions.signinUser(username, password,url);
     return false;
   }
-
+  renderAlert(){
+    if (this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger"> 
+          <strong> Oops! </strong> {this.props.errorMessage}
+        </div> 
+      )
+    }
+  }
   render(){
     return (
       <div>
-
+        <Header />
         <form className="login" onSubmit={this.handleSubmit}>
           <select className="actions" ref="actions">
             <option value="login">Log In</option>
             <option value="signup">Sign Up</option>
           </select>
-          <br/>
           <input className="username" ref="username" type="text" placeholder="username"/>
-          <br/>
-          <input className="password" ref="password" type="password" placeholder="password"/>
-          <br/>
+          <input className="password" ref="password" type="password" placeholder="password"/>          
           <input type="submit" name="Login"/>
+          {this.renderAlert()}
         </form>
-
-<br/>
-<br/>
-
-        Login: <input type="text" onKeyDown={this.handleEnter}></input>
       </div>);
   }
 }
 
 function mapStateToProps(state) {
   return {
-    
+    errorMessage: state.user.errorMessage,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({login}, dispatch)
+    actions: bindActionCreators({login, signinUser}, dispatch)
   };
 }
 
