@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as questionActions from './actions';
 import { socket } from '../common/socket'
-import { initializeWebSockets, emitNewQuestion } from './socket'
+import { initializeWebSockets, emitNewQuestion,loadQuestions } from './socket'
 import Question from './Question';
 
 class QuestionBox extends Component {
@@ -13,10 +13,12 @@ class QuestionBox extends Component {
     this.handleEnter = this.handleEnter.bind(this);
     this.initializeWebSockets = initializeWebSockets.bind(this);  
     this.emitNewQuestion = emitNewQuestion.bind(this)
+    this.loadQuestions = loadQuestions.bind(this);
   }
 
   componentDidMount() {
     this.initializeWebSockets();
+    this.loadQuestions();
   }
   
   handleEnter(event) {

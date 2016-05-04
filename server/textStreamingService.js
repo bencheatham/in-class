@@ -2,6 +2,8 @@ var questionSocketEvents = require('../client/question/server.jsx').module.quest
 var quizSocketEvents = require('../client/quiz/server.jsx').module.quizEvents;
 var chatSocketEvents = require('../client/chat/server.jsx').module.chatEvents;
 var questionModal = require('./sockets/questionModal.js').module;
+var thumbSocketEvents = require('../client/thumbs/server.jsx').module.thumbEvents;
+
 var _ = require('underscore');
 
 module.exports = function initializeChatStreaming (server) {
@@ -68,7 +70,8 @@ module.exports = function initializeChatStreaming (server) {
 		questionSocketEvents,
 		quizSocketEvents,
 		chatSocketEvents,
-		questionModal.socketEvents
+		questionModal.socketEvents,
+		thumbSocketEvents
 	];
 
 	var allSocketEvents = _.reduce(socketList, function(memo, eventList){

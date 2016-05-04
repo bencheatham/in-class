@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import QuizItem from '../quiz/QuizItem'
+// import Modal from '../quiz/Modal'
 import * as quizActions from './actions'
 import {initializeWebSockets} from './socket';
 
@@ -13,7 +14,7 @@ class TeacherQuiz extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   componentWillMount (){
-    initializeWebSockets();
+    this.initializeWebSockets();
   }
 
   handleClick (e){
@@ -31,6 +32,14 @@ class TeacherQuiz extends Component {
     var quizArray = quizzes.map((quiz,idx)=> {
       return <QuizItem name={quiz} key={idx} /> 
     });
+    
+    var editing;
+    //if (this.props.quiz.editingQuiz){
+      console.log(this.props.quiz.quizToEdit);
+    //}
+    var editingQuiz = this.props.quiz.quizToEdit.map((quiz)=>{
+      return <div>{quiz.question}></div>
+    })
 
     return (
       <div>

@@ -5,16 +5,12 @@ var questionLog = [];
 var questionEvents = {
   'question-submitted': questionSubmitted,
   'upvote': upvote,
-  'login': login,
+  'init-questions': initializeQuestions,
 }
 
-function login (data){
-  this.emit('login', {
-    username: data.username
-  })
-  this.broadcast.emit('login', {
-    username: data.username
-  })
+function initializeQuestions (){
+  console.log('sending all questions')
+  this.emit('init-questions', { questionLog: questionLog});
 }
 
 function upvote (data){

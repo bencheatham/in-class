@@ -1,0 +1,2 @@
+export const THUMB_CHECK = 'THUMB_CHECK';
+export const THUMB_SUBMITTED = 'THUMB_SUBMITTED';

@@ -14,25 +14,9 @@ import QuizContainer from '../quiz/container';
 import StudentQuiz from '../quiz/StudentQuiz';
 import TeacherQuiz from '../quiz/TeacherQuiz';
 import ChatContainer from '../chat/container';
+import RequireAuth from '../login/auth'
 
-export const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ;
-
-function checkAuthentication (next, previous, callback) {
-  console.log(SERVER_URL);
-  return axios.get(SERVER_URL)
-  .then((response) => {
-    if (response.status === 200) {
-      callback(); console.log('authorized');
-      return Promise.resolve('authorized');
-    } else {
-      Promise.reject('not authorized');
-    };
-  })
-  .catch((error) => {
-    console.log('not authorized');
-    previous('/login'); callback();
-  });
-}
+function checkAuthentication (a,b,cb){ cb()}
 
 export default (
   <Route>
@@ -40,15 +24,17 @@ export default (
     <Route path="/" component={Login}/>
     <Route  path="/login"
             component={Login} />
+    <Route  path="/sign-out"
+            component={Login} />  
     <Route path="/video"
            component={LoginView}
            onEnter={checkAuthentication}/>
     <Route path="/quiz"
-           component={Quiz}
-           onEnter={checkAuthentication}/>
+           component={Quiz} 
+           />
     <Route path="/thumbs"
-           component={Thumbs}
-           onEnter={checkAuthentication}/>
+           component={RequireAuth(Thumbs)} 
+           />
     <Route path="/question"
            component={QuestionContainer}
            onEnter={checkAuthentication}/>

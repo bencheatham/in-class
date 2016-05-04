@@ -4,6 +4,12 @@ var chatLog = [];
 
 var chatEvents = {
   'chatMessage-submitted': chatSubmitted,
+  'init-chat': initializeChat,
+}
+
+function initializeChat (){
+  console.log('sending all chats')
+  this.emit('init-chat', { chatLog: chatLog});
 }
 
 function chatSubmitted(chatMessage){
