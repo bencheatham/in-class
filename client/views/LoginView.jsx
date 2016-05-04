@@ -48,7 +48,7 @@ class LoginView extends Component {
     userActions.userLogin(this.state.term);
   }
 
-
+  // DEPRECATED
   makeCall(user) {
     if (!window.phone) alert("Login First!");
     else {
@@ -57,6 +57,7 @@ class LoginView extends Component {
     }
   }
 
+  // DEPRECATED
   videoCallUser(user){
     const videoActions = this.props.videoActions;
 
@@ -66,12 +67,10 @@ class LoginView extends Component {
     };
 
     videoActions.userCallUser(ball);
-
-    // TODO can I make the call here instead to avoid memory leak?
     this.makeCall(user);
   }
 
-
+  // DEPREATED 
   renderUserList(users) {
     return users.map((user) => {
       return (
@@ -103,9 +102,6 @@ class LoginView extends Component {
           </span>
         </form>
 
-        <ul>
-          {this.renderUserList(this.props.users)}
-        </ul>
         <div>
           <VideoContainer username={this.props.username} />
         </div>
