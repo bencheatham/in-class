@@ -2,5 +2,7 @@ node_modules
 dist
 database/**/*.sqlite3
 database/json/**/*.json
-
+database/inclass
+logfile
 .DS_Store
+server/database_old
