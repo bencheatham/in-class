@@ -22,11 +22,12 @@ class LoginView extends Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.videoCallUser = this.videoCallUser.bind(this);
 
     this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
     this.addUserToUserModal = this.addUserToUserModal.bind(this);
+
+    this.initializeWebSockets = UserActions.initializeWebSockets.bind(this);
   }
 
   componentDidMount() {
@@ -34,8 +35,19 @@ class LoginView extends Component {
       modalActions: this.props.userModalActions,
       videoActions: this.props.videoActions
     });
+    console.log('here 0.5');
 
-    // TODO make a socket call to inform others you're online 
+    this.initializeWebSockets({
+      userActions: this.props.userActions
+    });
+    console.log('here 0');
+
+    // TODO make a socket call to inform others you're online
+    let username = this.props.loginState.username;
+    console.log('here 1');
+    this.props.userActions.userLogin(username);
+    console.log('here 2');
+    this.props.userActions.getOnlineUsers();
   }
 
   onInputChange(event) {
@@ -48,41 +60,6 @@ class LoginView extends Component {
     event.preventDefault();
     userActions.userLogin(this.state.term);
   }
-
-  // @deprecated
-  makeCall(user) {
-    if (!window.phone) alert("Login First!");
-    else {
-      console.log('dialing here');
-      window.phone.dial(user);
-    }
-  }
-
-  // @deprecated
-  videoCallUser(user){
-    const videoActions = this.props.videoActions;
-
-    let ball = {
-      calledUser: user,
-      callingUser: this.props.username
-    };
-
-    videoActions.userCallUser(ball);
-    this.makeCall(user);
-  }
-
-  // @deprecated
-  renderUserList(users) {
-    return users.map((user) => {
-      return (
-        <li
-          key={user}
-          onClick={() => this.videoCallUser(user)}
-          className="list-group-item user-video-link">
-          {user} Joined the Class.</li>
-      );
-    });
-  };
 
   addUserToUserModal() {
     if (!this.props.username.trim()) return;
@@ -107,7 +84,6 @@ class LoginView extends Component {
           <VideoContainer username={this.props.username} />
         </div>
 
-        <button onClick={this.addUserToUserModal}>Post Question</button>
         <Drawer />
         <TeacherPanel />
 
@@ -121,7 +97,8 @@ function mapStateToProps(state) {
   return {
     users: state.Users.users,
     username: state.Users.username,
-    calledUser: state.video.calledUser
+    calledUser: state.video.calledUser,
+    loginState: state.user
   };
 }
 

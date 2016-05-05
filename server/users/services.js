@@ -16,8 +16,8 @@ function getUsers() {
   return users;
 };
 
-module.export = {
-  'addUser': addUser,
-  'removeUser': removeUser,
-  'getUsers': getUsers
+module.exports = {
+  addUser: addUser,
+  removeUser: removeUser,
+  getUsers: getUsers
 }
