@@ -65,7 +65,12 @@ class VideoContainer extends Component {
   }
 
   changeSession(session, videoActions){
-    videoActions.addVideoSession(session);
+
+    console.log('WE ARE CHANGING SESSIONS!');
+    console.log(session);
+    if(session){
+      videoActions.addVideoSession(session);
+    }
   }
 
   // @deprecated
@@ -82,6 +87,13 @@ class VideoContainer extends Component {
     console.log('In Render');
     this.login(this.changeSession, this.props.videoActions);
 
+
+
+    if (this.props.calledUser !== null && this.props.videoSession === null){
+      console.log('oops HERERERRERE')
+      setTimeout(this.makeCall, 3000);
+    }
+
     if (this.props.teacherSelectedUser) {
       let ball = {
         calledUser: this.props.teacherSelectedUser,
@@ -92,15 +104,36 @@ class VideoContainer extends Component {
 
     if (this.props.videoSession !== null){
       this.swapVideo();
+    }
 
+    if (this.props.videoSession !== null && this.props.videoSession !== undefined){
+      this.appendIt();
       if (this.props.teacherCall) {
+
+        console.log('Time to Experiment: ')
+        console.log(this.props.videoSession)
+
+        // let vid = this.props.videoSession.outerHTML;
+        // console.log(vid);
+        // console.log(typeof vid);
+        // let vid2 = $(vid)[0];
+        // console.log(vid2);
+
+        let stringVideoSession = Object.assign({}, this.props.videSession, {
+          session: this.props.videoSession.outerHTML
+        });
+
+        console.log(stringVideoSession.session);
+
+
         let classVideoPac = {
           speaker: this.props.calledUser,
-          teacher: this.props.teacher,
-          videoSession: this.props.videoSession
-        };
-        console.log(classVideoPac)
-        this.props.videoActions.emitTeacherVideoSession(classVideoPac);
+          teacher: this.props.teacherName,
+          videoSession: stringVideoSession.session
+        }
+          
+        console.log(classVideoPac);
+        //this.props.videoActions.emitTeacherVideoSession(classVideoPac);
       }
     }
 
@@ -124,7 +157,10 @@ function mapStateToProps(state) {
     teacherCall: state.video.teacherCall,
     teacherSelectedUser: state.video.teacherSelectedUser,
     teacherName: state.video.teacherName,
-    makeCall: state.video.makeCall
+    makeCall: state.video.makeCall,
+    classVideoSession: state.video.classVideoSession,
+    classVideoSpeaker: state.video.classVideoPresenter,
+    classVideoTeacher: state.video.classVideoTeacher
   };
 }
 

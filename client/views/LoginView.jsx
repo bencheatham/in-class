@@ -102,13 +102,12 @@ class LoginView extends Component {
           </span>
         </form>
 
-        <div>
-          <VideoContainer username={this.props.username} />
-        </div>
+
 
         <button onClick={this.addUserToUserModal}>Post Question</button>
         <Drawer />
         <TeacherPanel />
+        <VideoContainer />
 
       </div>
     );
