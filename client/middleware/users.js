@@ -4,6 +4,8 @@ import { userJoinedClass } from '../actions/users';
 import { userLeftClass } from '../actions/users';
 import * as actions from '../actions/users';
 import { SERVER_URL } from '../constants/ActionTypes';
+import * as vidActions from '../modules/video/actions';
+
 
 
 //const SERVER_URL = 'http://inclass-co.herokuapp.com/';//'http://localhost:8000';
@@ -35,9 +37,11 @@ export default function(store) {
   function cleanInput (input) { return $('<div/>').text(input).text(); }
 
   function newClassVideoUser(userPac) {
-    //userPac.videoSession = $(userPac.videoSession)[0]
+    userPac.videoSession = $(userPac.videoSession)[0]
     console.log(userPac.speaker + ' isOnVideoChat', userPac)
-    //store.dispatch(actions.addClassVideoSession(userPac));
+    if(store){
+      store.dispatch(vidActions.addClassVideoSession(userPac));
+    }
 
   }
 

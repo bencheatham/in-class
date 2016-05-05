@@ -14,6 +14,7 @@ function addVideoSession(videos, session) {
   return ret;
 }
 
+
 function getVideoByUsername(videos, username) {
   return videos[username];
 }
@@ -23,7 +24,10 @@ let initState = {
   callingUser: null,
   videoSession: null,
   videos: {},
-  makeCall: true
+  makeCall: true,   
+  classVideoSession: null,
+  classVideoSpeaker: null,
+  classVideoTeacher: null
 }
 
 
@@ -69,11 +73,17 @@ export default function(state = initState, action) {
 
   case ADD_CLASS_VIDEO_SESSION:
 
-    return Object.assign({}, state, {
-      classVideoSession: action.payload.videoSession,
-      classVideoSpeaker: action.payload.presenter,
-      classVideoTeacher: action.payload.teacher
-    });
+    if(state.classVideoSession === null){
+      let obj = Object.assign({}, state, {
+            classVideoSession: action.payload.videoSession,
+            classVideoSpeaker: action.payload.presenter,
+            classVideoTeacher: action.payload.teacher
+          });
+
+      return obj;
+    }
+    return state;
+
 
       
     default:
