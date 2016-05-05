@@ -58,7 +58,7 @@ function verifyUsername (request, response) {
 // }
 
 function fetchManifest (db, username) {
-  return db.fetch('users_quizes_join', 'title', 'username=\'' + username + '\'')
+  return db.fetch('users_quizzes_join', 'title', 'username=\'' + username + '\'')
   .then((results) => results.map((result) => result.title))
   // return new Promise((resolve, reject) => {
   //   fs.readdir(__dirname + '/../database/json/' + username, (error, files) => { 
@@ -96,8 +96,8 @@ module.exports = (app) => {
     var test = request.body.test;
     var database = test ? dbTest : db;
     return database.deleteFrom('questions', 'title=\'' + title + '\'')
-    .then(() => database.deleteFrom('users_quizes_join', 'title=\'' + title + '\''))
-    .then(() => database.deleteFrom('quizes', 'title=\'' + title + '\''))
+    .then(() => database.deleteFrom('users_quizzes_join', 'title=\'' + title + '\''))
+    .then(() => database.deleteFrom('quizzes', 'title=\'' + title + '\''))
     .then(() => response.status(200).send('deleted quiz'))
     .catch(() => response.status(400).send('error: ' + 'some issue deleting the quiz...'));
   });
@@ -128,25 +128,25 @@ module.exports = (app) => {
   // data must be an object
       
       if (quiz.title === 'manifest') { response.status(400).send('error: ' + 'manifest is a reserved filename'); return void 0; }
-      database.fetch('quizes', '*', 'title=\'' + quiz.title + '\'')
+      database.fetch('quizzes', '*', 'title=\'' + quiz.title + '\'')
       .catch((error) => [])
       .then((existing) => {
         // console.log('existing');
         if (existing.length > 0) {
           if (update) {
             return database.deleteFrom('questions', 'title=\'' + quiz.title + '\'')
-            .then(() => database.deleteFrom('users_quizes_join', 'title=\'' + quiz.title + '\''))
-            .then(() => database.deleteFrom('quizes', 'title=\'' + quiz.title + '\''));
+            .then(() => database.deleteFrom('users_quizzes_join', 'title=\'' + quiz.title + '\''))
+            .then(() => database.deleteFrom('quizzes', 'title=\'' + quiz.title + '\''));
           }
           return Promise.reject('quiz name is not unique');
         }
         return 'quiz name is unique. So continue';
       })
-      .then(() => database.insertInto('quizes', {username: username, title: quiz.title, created: Date.now()}))
-      .then(() => database.insertInto('users_quizes_join', {username: username, title: quiz.title}))
+      .then(() => database.insertInto('quizzes', {username: username, title: quiz.title, created: Date.now()}))
+      .then(() => database.insertInto('users_quizzes_join', {username: username, title: quiz.title}))
       .then(() => insertQuestions(database, quiz.title, quiz.questions.slice(), username))
       .then(() => response.status(201).send('created'))
-      .catch((error) => response.status(400).send('error: ' + 'some issue saving the quiz... Use the update flag to overwrite old quizes'));
+      .catch((error) => response.status(400).send('error: ' + 'some issue saving the quiz... Use the update flag to overwrite old quizzes'));
 
 
     });
