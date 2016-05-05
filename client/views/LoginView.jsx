@@ -44,7 +44,7 @@ class LoginView extends Component {
   onFormSubmit(event) {
     const userActions = this.props.userActions;
 
-    event.preventDefault();
+   // event.preventDefault();
     userActions.userLogin(this.state.term);
   }
 
