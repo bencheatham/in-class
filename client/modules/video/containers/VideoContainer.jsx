@@ -70,22 +70,12 @@ class VideoContainer extends Component {
 
      let ctrl = window.ctrl = CONTROLLER(phone);
 
-     // Called when ready to receive call
-      ctrl.ready(function(){
-     //   form.username.style.background="#55ff5b"; // Turn input green
-      //  form.login_submit.hidden="true";  // Hide login button
-     //   ctrl.addLocalStream(vid_thumb);   // Place local stream in div
-      });        
-     //  console.log(ctrl)
-
+  
 
       ctrl.receive(function(session){
           // if too many users on the line, than should not be able to connect
 
           session.connected(function(session){ 
-       //     video_out.appendChild(session.video)
-            console.log('INNNNN HERERERRERE');
-            console.log(session.video);
 
             changeSession(session.video, videoActions);
 
@@ -115,8 +105,6 @@ class VideoContainer extends Component {
 
   changeSession(session, videoActions){
 
-    console.log('WE ARE CHANGING SESSIONS!');
-    console.log(session);
     if(session){
       videoActions.addVideoSession(session);
     }
@@ -124,39 +112,30 @@ class VideoContainer extends Component {
 
   // @deprecated
   makeCall() {
-    console.log('IN MAKE CALL, ', this.props.calledUser);
     if (!window.phone) alert("Login First!");
     else {
-      console.log('dialing');
       phone.dial(this.props.calledUser);
     }
   }
  
   end(){
-    console.log('in call end!')
     ctrl.hangup();
-    //phone.stop();
     window.phone = null;
   }
 
   mute(){
-    console.log('in call mute!')
 
     var audio = ctrl.toggleAudio();
-    // if (!audio) $("#mute").html("Unmute");
-    // else $("#mute").html("Mute");
+
   }
 
   pause(){
-        console.log('in call pause !')
 
     var video = ctrl.toggleVideo();
-    // if (!video) $('#pause').html('Unpause');
-    // else $('#pause').html('Pause');
+
   }
 
   hide(){
-        console.log('in video hide !');
     this.end();
     this.props.videoActions.addVideoSession("");
     this.removeIt(" ")
@@ -165,19 +144,12 @@ class VideoContainer extends Component {
 
 
   render() {
-    console.log('In Render');
 
 
     this.login(this.changeSession, this.props.videoActions, this.props).then(function(){
-      console.log('it is a promise!!')
-      console.log(window.ctrl)
+
     })
 
-
-    if (this.props.calledUser !== null && this.props.videoSession === null){
-      console.log('oops HERERERRERE')
-      setTimeout(this.makeCall, 3000);
-    }
 
     if (this.props.teacherSelectedUser) {
       let ball = {
@@ -206,7 +178,6 @@ class VideoContainer extends Component {
             videoSession: stringVideoSession.session
           }
             
-          console.log(classVideoPac);
           this.props.videoActions.emitTeacherVideoSession(classVideoPac);
         }
 
@@ -214,7 +185,6 @@ class VideoContainer extends Component {
     }
 
     if (this.props.videoSession === null && this.props.classVideoSession !== null) {
-      console.log('Here Adding the Teaches Vid: ', this.props.classVideoSession)
       this.props.videoActions.addVideoSession(this.props.classVideoSession);
     }
 

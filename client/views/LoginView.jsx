@@ -21,10 +21,10 @@ export default class LoginView extends Component {
     this.state = { term: '' };
 
 
-    // this.onInputChange = this.onInputChange.bind(this);
-    // this.onFormSubmit = this.onFormSubmit.bind(this);
-    // this.videoCallUser = this.videoCallUser.bind(this);
-    // //this.initializeWebSockets = initializeWebSockets.bind(this);  
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.videoCallUser = this.videoCallUser.bind(this);
+    //this.initializeWebSockets = initializeWebSockets.bind(this);  
 
     this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
@@ -37,48 +37,48 @@ export default class LoginView extends Component {
       videoActions: this.props.videoActions
     });
   }
-  // // componentDidMount() {
-  // //   this.initializeWebSockets();
-  // // }
-
-  // onInputChange(event) {
-  //   this.setState({ term: event.target.value });
-
+  // componentDidMount() {
+  //   this.initializeWebSockets();
   // }
 
-  // onFormSubmit(event) {
-  //   const userActions = this.props.userActions;
+  onInputChange(event) {
+    this.setState({ term: event.target.value });
 
-  //  // event.preventDefault();
-  //   userActions.userLogin(this.state.term);
-  // }
+  }
 
+  onFormSubmit(event) {
+    const userActions = this.props.userActions;
 
-  // videoCallUser(user){
-  //   const videoActions = this.props.videoActions;
-
-  //   let ball = {
-  //     calledUser: user,
-  //     callingUser: this.props.username
-  //   };
+   // event.preventDefault();
+    userActions.userLogin(this.state.term);
+  }
 
 
-  //   videoActions.userCallUser(ball);
-  // }
+  videoCallUser(user){
+    const videoActions = this.props.videoActions;
+
+    let ball = {
+      calledUser: user,
+      callingUser: this.props.username
+    };
 
 
-  // renderUserList(users) {
-  //  console.log('HEREERERE', users)
-  //   return users.map((user) => {
-  //     return (
-  //       <li 
-  //         key={user}
-  //         onClick={() => this.videoCallUser(user)}
-  //         className="list-group-item user-video-link">
-  //         {user} Joined the Class.</li>
-  //     );
-  //   });
-  // }
+    videoActions.userCallUser(ball);
+  }
+
+
+  renderUserList(users) {
+   console.log('HEREERERE', users)
+    return users.map((user) => {
+      return (
+        <li 
+          key={user}
+          onClick={() => this.videoCallUser(user)}
+          className="list-group-item user-video-link">
+          {user} Joined the Class.</li>
+      );
+    });
+  }
 
   addUserToUserModal() {
     if (!this.props.username.trim()) return;

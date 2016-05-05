@@ -86,6 +86,9 @@ class UserVideoModal extends React.Component {
     if (videos[user] && currentUser !== user) {
       this.props.videoActions.switchVideoByUsername(user);
     }
+    // TODO if we want to make individual instead everybody
+    this.videoCallUser(user);
+
   };
 
   getUserList() {
