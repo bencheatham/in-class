@@ -3,16 +3,18 @@ import { routerMiddleware, push } from 'react-router-redux'
 import { returnStore } from '../main';
 import { hashHistory } from 'react-router';
 import axios from 'axios';
-const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ; 
+const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ;
 
 export function signinUser(username, password){
-  
+
   return function(dispatch, getState){
-    
+
     axios.post('login', {username: username, password: password})
     .then(response => {
       console.log(response.data);
       dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
+      // TODO need to broadcast online users
+
       dispatch(authError(''));
       if (response.data.type === 'student'){
         hashHistory.push('/class/student');
@@ -28,10 +30,9 @@ export function signinUser(username, password){
 }
 
 export function signupUser(username, password,usertype){
-  
+
   return function(dispatch, getState){
 
-    
     axios.post('signup', { username:username, password:password, usertype: usertype})
     .then(response => {
       console.log(response.data);
