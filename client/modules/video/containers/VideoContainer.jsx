@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as VideoActions from '../../../modules/video/actions';
 
+import VideoPlayer from '../components/VideoPlayer';
+
+
 class VideoContainer extends Component {
 
   constructor(props) {
@@ -82,6 +85,23 @@ class VideoContainer extends Component {
       phone.dial(this.props.calledUser);
     }
   }
+ 
+  end(){
+    ctrl.hangup();
+  }
+
+  mute(){
+    var audio = ctrl.toggleAudio();
+    if (!audio) $("#mute").html("Unmute");
+    else $("#mute").html("Mute");
+  }
+
+  pause(){
+    var video = ctrl.toggleVideo();
+    if (!video) $('#pause').html('Unpause');
+    else $('#pause').html('Pause');
+  }
+
 
   render() {
     console.log('In Render');
@@ -107,7 +127,7 @@ class VideoContainer extends Component {
     }
 
     if (this.props.videoSession !== null && this.props.videoSession !== undefined){
-      this.appendIt();
+     // this.appendIt();
       if (this.props.teacherCall) {
 
         console.log('Time to Experiment: ')
@@ -147,7 +167,14 @@ class VideoContainer extends Component {
 
     return (
       <div>
-        <div id="vid-box"></div>
+
+        <VideoPlayer data={this.props}/>
+
+        <span className="input-group-btn">
+            <button type="submit" onClick={this.makeCall} className='btn btn-lg'>Start Video</button>
+        </span>
+
+
       </div>
     );
   }
