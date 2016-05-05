@@ -34,11 +34,12 @@ class LoginView extends Component {
       modalActions: this.props.userModalActions,
       videoActions: this.props.videoActions
     });
+
+    // TODO make a socket call to inform others you're online 
   }
 
   onInputChange(event) {
     this.setState({ term: event.target.value });
-
   }
 
   onFormSubmit(event) {

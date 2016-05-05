@@ -19,7 +19,9 @@ export default function(store) {
 
 
   // Sets the client's username
-  function setUsername (username) { socket.emit('add user', username); }
+  function setUsername (username) {
+    socket.emit('add user', username);
+  };
 
   // Sets teacher-selected video user and session
   function setTeacherSelectedVideoUser (classUserPac) {
