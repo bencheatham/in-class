@@ -42,6 +42,7 @@ class LoginView extends Component {
       userActions: this.props.userActions
     });
 
+
     let username = this.props.loginState.username;
     this.props.userActions.userLogin(username);
     this.emitGetAllUsersFromClass();
