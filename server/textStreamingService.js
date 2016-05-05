@@ -40,8 +40,10 @@ module.exports = function initializeChatStreaming (server) {
 	  this.disconnect();
 	}
 
- function tellUsersStudentIsOnVideo (userPac) {
-   this.broadcast.emit('newClassVideoUser', userPac );
+
+ function tellUsersStudentIsOnVideo (classUserPac) {
+   this.broadcast.emit('newClassVideoUser', classUserPac );
+
  }
 
 	var socketEvents = {

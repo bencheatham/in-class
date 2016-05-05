@@ -62,9 +62,9 @@ class LoginView extends Component {
   render() {
     return (
       <div>
-        <VideoContainer />
         <Drawer />
         <TeacherPanel />
+        <VideoContainer />
 
       </div>
     );

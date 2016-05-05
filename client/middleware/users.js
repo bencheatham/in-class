@@ -13,12 +13,15 @@ export default function(store) {
   let isTyping = false;
   let lastTypingTime;
 
+
   // Prevents input from having injected markup
   function cleanInput (input) { return $('<div/>').text(input).text(); }
 
   function newClassVideoUser(userPac) {
-    console.log(userPac.username + 'isOnVideoChat', userPac)
-    store.dispatch(actions.addVideoSession(userPac));
+    //userPac.videoSession = $(userPac.videoSession)[0]
+    console.log(userPac.speaker + ' isOnVideoChat', userPac)
+    //store.dispatch(actions.addClassVideoSession(userPac));
+
   }
 
   function login (data) {
@@ -34,7 +37,9 @@ export default function(store) {
 
   function userJoined (data) {
     console.log(data.username + ' joined', data);
-    store.dispatch(actions.userJoinedClass(data));
+    if(store){
+      store.dispatch(actions.userJoinedClass(data));
+    }
     //userJoinedClass(data);
   }
 

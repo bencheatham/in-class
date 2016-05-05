@@ -1,6 +1,8 @@
 import { USER_CALL_USER } from '../constants/VideoConstants';
 import { TEACHER_SELECT_STUDENT_VIDEO } from '../constants/VideoConstants';
 import { ADD_VIDEO_SESSION, GET_USER_VIDEO, MAKE_CALL } from '../constants/VideoConstants';
+import { EMIT_TEACHER_VIDEO_SESSION } from '../constants/VideoConstants';
+import { ADD_CLASS_VIDEO_SESSION } from '../constants/VideoConstants';
 import extend from 'lodash/extend';
 
 // helper method for add video session to state
@@ -25,6 +27,8 @@ let initState = {
   videos: {},
   makeCall: true
 }
+
+
 
 export default function(state = initState, action) {
 
@@ -62,6 +66,23 @@ export default function(state = initState, action) {
         makeCall: action.isAllow
       });
 
+    // return Object.assign({}, state, {
+    //   videoSession: action.payload
+    // });
+
+  case EMIT_TEACHER_VIDEO_SESSION:
+
+    return state;
+
+  case ADD_CLASS_VIDEO_SESSION:
+
+    return Object.assign({}, state, {
+      classVideoSession: action.payload.videoSession,
+      classVideoSpeaker: action.payload.presenter,
+      classVideoTeacher: action.payload.teacher
+    });
+
+      
     default:
       return state;
   }
