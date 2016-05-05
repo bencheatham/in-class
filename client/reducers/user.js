@@ -1,6 +1,7 @@
 import { USER_LOGIN } from '../constants/ActionTypes';
 import { USER_JOINED_CLASS } from '../constants/ActionTypes';
 import { USER_LEFT_CLASS } from '../constants/ActionTypes';
+import * as types from '../constants/ActionTypes';
 
 
 let initState = {
@@ -15,28 +16,33 @@ export default function(state = initState, action) {
   userObj.users = [];
 
   switch(action.type) {
-  case USER_LOGIN:
-    return Object.assign({}, state, {
-      users: [action.payload, ...state.users],
-      username: action.payload
-    });
-
-  case USER_JOINED_CLASS:
-    if(action.payload !== state.username){
+    case USER_LOGIN:
       return Object.assign({}, state, {
         users: [action.payload, ...state.users],
+        username: action.payload
       });
-    }
-    return state;
 
-  case USER_LEFT_CLASS:
-    userObj.users = userObj.users.filter(function(user) {
-      user !== action.payload;
-    })
+    case USER_JOINED_CLASS:
+      if(action.payload !== state.username){
+        return Object.assign({}, state, {
+          users: [action.payload, ...state.users],
+        });
+      }
+      return state;
 
-    return userObj;
+    case USER_LEFT_CLASS:
+      userObj.users = userObj.users.filter(function(user) {
+        user !== action.payload;
+      });
+      return userObj;
 
+    // set the state of users
+    case types.USERS_SET_USERS:
+      return Object.assign({}, state, {
+        users: action.users
+      });
 
+    default:
+      return state;
   }
-  return state;
 }

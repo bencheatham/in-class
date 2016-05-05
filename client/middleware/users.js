@@ -17,11 +17,23 @@ export default function(store) {
 
   const socket = io.connect(`${SERVER_URL}`);
 
+  function initializeWebSockets(actions) {
+    let userActions = actions.userActions;
+
+    console.log('user actions', userActions);
+    socket.on('users_updateUsers', data => {
+      userActions.setUsers(data.users);
+    });
+  }
 
   // Sets the client's username
   function setUsername (username) {
-    socket.emit('add user', username);
+    socket.emit('users_addUser', username);
   };
+
+  function getAllUsers() {
+    socket.emit('users_getUsers');
+  }
 
   // Sets teacher-selected video user and session
   function setTeacherSelectedVideoUser (classUserPac) {
@@ -39,7 +51,6 @@ export default function(store) {
     console.log(userPac.username + 'isOnVideoChat', userPac)
     store.dispatch(actions.addVideoSession(userPac));
   }
-
 
   function login (data) {
     connected = true;
@@ -75,10 +86,10 @@ export default function(store) {
     'set username': setUsername,
     'send message': sendMessage,
     'clean input': cleanInput,
-    'teacherSelectedVideoUser': setTeacherSelectedVideoUser
-
+    'teacherSelectedVideoUser': setTeacherSelectedVideoUser,
+    'getAllUsers': getAllUsers,
+    'initializeWebSockets': initializeWebSockets
   };
-
 
   var socketEvents = {
     'login': login,

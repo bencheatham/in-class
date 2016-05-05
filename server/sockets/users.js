@@ -1,20 +1,16 @@
 var _ = require('underscore');
-var services = require('../users/services');
+var services = require('../users/services.js');
 
 var socketEvents = {
-  'users_emitOnlineUsers': emitOnlineUsers
+  'users_getUsers': getUsers,
+  'users_addUser': addUser
 };
 
 function addUser(username) {
-  this.username = username;
-  ++numUsers;
-  this.emit('login', { numUsers: numUsers });
-  // echo globally (all clients) that a person has connected
-  this.broadcast.emit('user joined', { username: this.username, numUsers: numUsers });
-  console.log('add user: ', username, numUsers);
-}
+  services.addUser(username);
+};
 
-function emitOnlineUsers() {
+function getUsers() {
   var users = services.getUsers();
 
   this.emit('users_updateUsers', {users: users} );
