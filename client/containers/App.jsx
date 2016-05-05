@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {logoutAndRedirect} from '../modules/auth/actions';
+//import {logoutAndRedirect} from '../modules/auth/actions';
 
 //import '../styles/core.scss';
 
@@ -12,22 +12,25 @@ import {logoutAndRedirect} from '../modules/auth/actions';
 //      isAuthenticated: state.auth.isAuthenticated
 //     };
 // })
-export default class CoreLayout extends Component {
+export default class App extends Component {
 
 render () {
 
-  const {dispatch} = this.props;
+ // const {dispatch} = this.props;
+   console.log('in app render')
+   console.log(this.props.children)
 
     return (
       <div>
+                          {this.props.children}
+
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="navbar-header">
-                <Link className="navbar-brand" to="/">React Redux JWT Auth Example</Link>
+                <Link className="navbar-brand" to="/">In Class - Enhancing Teacher-Student Experience</Link>
             </div>
             <div id="navbar">
                 <ul className="nav navbar-nav navbar-right">
-                    <li><Link to="/protected">Protected Content</Link></li>
                     <li><Link to="/login">Login</Link></li>
                     {this.props.isAuthenticated
                      ? <li><a href='#' onClick={() => this.props.dispatch(logoutAndRedirect())}>Logout</a> </li>

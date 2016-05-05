@@ -106,7 +106,7 @@ class VideoContainer extends Component {
       });
 
       if (ctrl){
-        resolve(ctrl)
+        resolve(ctrl);
       }
 
       });

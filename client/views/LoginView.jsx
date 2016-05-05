@@ -14,15 +14,17 @@ import { Button } from 'react-bootstrap';
 require('../stylesheets/styles.scss');
 
 
-class LoginView extends Component {
+export default class LoginView extends Component {
 
   constructor(props) {
     super(props);
     this.state = { term: '' };
 
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.videoCallUser = this.videoCallUser.bind(this);
+
+    // this.onInputChange = this.onInputChange.bind(this);
+    // this.onFormSubmit = this.onFormSubmit.bind(this);
+    // this.videoCallUser = this.videoCallUser.bind(this);
+    // //this.initializeWebSockets = initializeWebSockets.bind(this);  
 
     this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
@@ -35,53 +37,48 @@ class LoginView extends Component {
       videoActions: this.props.videoActions
     });
   }
+  // // componentDidMount() {
+  // //   this.initializeWebSockets();
+  // // }
 
-  onInputChange(event) {
-    this.setState({ term: event.target.value });
+  // onInputChange(event) {
+  //   this.setState({ term: event.target.value });
 
-  }
+  // }
 
-  onFormSubmit(event) {
-    const userActions = this.props.userActions;
+  // onFormSubmit(event) {
+  //   const userActions = this.props.userActions;
 
-   // event.preventDefault();
-    userActions.userLogin(this.state.term);
-  }
+  //  // event.preventDefault();
+  //   userActions.userLogin(this.state.term);
+  // }
 
-  // @deprecated
-  makeCall(user) {
-    if (!window.phone) alert("Login First!");
-    else {
-      console.log('dialing here');
-      window.phone.dial(user);
-    }
-  }
 
-  // @deprecated
-  videoCallUser(user){
-    const videoActions = this.props.videoActions;
+  // videoCallUser(user){
+  //   const videoActions = this.props.videoActions;
 
-    let ball = {
-      calledUser: user,
-      callingUser: this.props.username
-    };
+  //   let ball = {
+  //     calledUser: user,
+  //     callingUser: this.props.username
+  //   };
 
-    videoActions.userCallUser(ball);
-    this.makeCall(user);
-  }
 
-  // @deprecated
-  renderUserList(users) {
-    return users.map((user) => {
-      return (
-        <li
-          key={user}
-          onClick={() => this.videoCallUser(user)}
-          className="list-group-item user-video-link">
-          {user} Joined the Class.</li>
-      );
-    });
-  };
+  //   videoActions.userCallUser(ball);
+  // }
+
+
+  // renderUserList(users) {
+  //  console.log('HEREERERE', users)
+  //   return users.map((user) => {
+  //     return (
+  //       <li 
+  //         key={user}
+  //         onClick={() => this.videoCallUser(user)}
+  //         className="list-group-item user-video-link">
+  //         {user} Joined the Class.</li>
+  //     );
+  //   });
+  // }
 
   addUserToUserModal() {
     if (!this.props.username.trim()) return;
@@ -101,7 +98,6 @@ class LoginView extends Component {
             <button type="submit" className="btn btn-secondary">Submit</button>
           </span>
         </form>
-
 
 
         <button onClick={this.addUserToUserModal}>Post Question</button>
