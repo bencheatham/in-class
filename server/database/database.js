@@ -20,7 +20,7 @@ module.exports = function (test) {
 
   var create = [
     'CREATE TABLE IF NOT EXISTS links (PRIMARY KEY(url), title TEXT, url TEXT UNIQUE, created TEXT)',
-    'CREATE TABLE IF NOT EXISTS users (PRIMARY KEY(username), username TEXT UNIQUE, password TEXT, userType TEXT, created TEXT)',
+    'CREATE TABLE IF NOT EXISTS users (PRIMARY KEY(username), username TEXT UNIQUE, password TEXT, usertype TEXT, created TEXT)',
     'CREATE TABLE IF NOT EXISTS quizzes (PRIMARY KEY(title), username TEXT, title TEXT, created TEXT)',
     'CREATE TABLE IF NOT EXISTS answers (teachername TEXT, username TEXT, title TEXT, answers TEXT, created TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizzes(title))',
     'CREATE TABLE IF NOT EXISTS questions (username TEXT, title TEXT, index INTEGER, question TEXT, choices TEXT, answer TEXT, FOREIGN KEY(title) REFERENCES quizzes(title))',

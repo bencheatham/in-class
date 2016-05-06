@@ -15,7 +15,7 @@ describe('Database Unit Tests', function() {
   });
 
   it('should insert items into the database', function() {
-    return expect(db.insertInto('users', {username: 'louie', password: 'pass', userType: 'student', created: String(Date.now())}))
+    return expect(db.insertInto('users', {username: 'louie', password: 'pass', usertype: 'student', created: String(Date.now())}))
     .to.eventually.equal('saved');
   });
 
