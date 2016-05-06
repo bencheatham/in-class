@@ -64,6 +64,7 @@ module.exports = function initializeChatStreaming (server) {
 	];
 
 	var allSocketEvents = _.reduce(socketList, function(memo, eventList){
+		console.log('socket events', eventList);
 		return _.extend(memo, eventList);
 	}, socketEvents);
 
