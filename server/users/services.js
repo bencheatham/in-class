@@ -11,10 +11,14 @@ function addUser(user) {
 function removeUser(user) {
   if (!user) return;
 
+  console.log('removeUser', user);
   var index = users.indexOf(user);
+  console.log('index', index);
+
   if (index !== -1) {
     users.splice(index, 1);
   }
+  console.log('ending', users);
 };
 
 function getUsers() {

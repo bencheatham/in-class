@@ -13,12 +13,13 @@ function addUser(username) {
 
 function getUsers() {
   var users = services.getUsers();
-
+  console.log('getUsers', users);
   this.emit('users_updateUsers', {users: users} );
   this.broadcast.emit('users_updateUsers', {users: users} );
 };
 
 function removeUser(user) {
+  console.log('remove user', user);
   services.removeUser(user);
   // TODO separation of concern: should push the broadcast to somewhere else
   getUsers.bind(this)();
