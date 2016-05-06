@@ -8,12 +8,13 @@ var socketEvents = {
 };
 
 function addUser(username) {
+  console.log('server-socket: addUser', username);
   services.addUser(username);
 };
 
 function getUsers() {
   var users = services.getUsers();
-  console.log('getUsers', users);
+  console.log('server-socket: getUsers', users);
   this.emit('users_updateUsers', {users: users} );
   this.broadcast.emit('users_updateUsers', {users: users} );
 };
