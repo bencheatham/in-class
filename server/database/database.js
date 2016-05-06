@@ -8,11 +8,11 @@ module.exports = function (test) {
 
   var clean = [
     'DROP TABLE IF EXISTS users_links_join',
-    'DROP TABLE IF EXISTS users_quizes_join',
+    'DROP TABLE IF EXISTS users_quizzes_join',
     'DROP TABLE IF EXISTS links',
     'DROP TABLE IF EXISTS answers',
     'DROP TABLE IF EXISTS questions',
-    'DROP TABLE IF EXISTS quizes',
+    'DROP TABLE IF EXISTS quizzes',
     'DROP TABLE IF EXISTS users'
 
 
@@ -20,12 +20,12 @@ module.exports = function (test) {
 
   var create = [
     'CREATE TABLE IF NOT EXISTS links (PRIMARY KEY(url), title TEXT, url TEXT UNIQUE, created TEXT)',
-    'CREATE TABLE IF NOT EXISTS users (PRIMARY KEY(username), username TEXT UNIQUE, password TEXT,created TEXT)',
-    'CREATE TABLE IF NOT EXISTS quizes (PRIMARY KEY(title), username TEXT, title TEXT, created TEXT)',
-    'CREATE TABLE IF NOT EXISTS answers (PRIMARY KEY(username, title), username TEXT, title TEXT, answers TEXT, created TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizes(title))',
-    'CREATE TABLE IF NOT EXISTS questions (username TEXT, title TEXT, index INTEGER, question TEXT, choices TEXT, answer TEXT, FOREIGN KEY(title) REFERENCES quizes(title))',
+    'CREATE TABLE IF NOT EXISTS users (PRIMARY KEY(username), username TEXT UNIQUE, password TEXT, usertype TEXT, created TEXT)',
+    'CREATE TABLE IF NOT EXISTS quizzes (PRIMARY KEY(title), username TEXT, title TEXT, created TEXT)',
+    'CREATE TABLE IF NOT EXISTS answers (teachername TEXT, username TEXT, title TEXT, answers TEXT, created TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizzes(title))',
+    'CREATE TABLE IF NOT EXISTS questions (username TEXT, title TEXT, index INTEGER, question TEXT, choices TEXT, answer TEXT, FOREIGN KEY(title) REFERENCES quizzes(title))',
     'CREATE TABLE IF NOT EXISTS users_links_join (PRIMARY KEY(username, url), username TEXT, url TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(url) REFERENCES links(url))',
-    'CREATE TABLE IF NOT EXISTS users_quizes_join (PRIMARY KEY(username, title), username TEXT, title TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizes(title))'
+    'CREATE TABLE IF NOT EXISTS users_quizzes_join (PRIMARY KEY(username, title), username TEXT, title TEXT, FOREIGN KEY(username) REFERENCES users(username), FOREIGN KEY(title) REFERENCES quizzes(title))'
   ];
 
 

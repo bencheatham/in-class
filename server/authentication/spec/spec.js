@@ -28,7 +28,7 @@ describe('Authentication Unit Tests', function() {
 
   it('should create a session token and save it as a cookie', function () {
     return expect(
-      axios.post('http://localhost:8000/signup?test=true', {username: 'louie', password: 'password123'})
+      axios.post('http://localhost:8000/signup?test=true', {username: 'louie', password: 'password123', usertype: 'student'})
       .then(function (res) { 
         cookie = res.headers['set-cookie'][0].split(';')[0];
         return Promise.resolve(res.status);
