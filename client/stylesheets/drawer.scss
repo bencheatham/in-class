@@ -7,6 +7,9 @@
     box-sizing: border-box;
     transition: -webkit-transform ease 250ms;
     transition: transform ease 250ms;
+
+    z-index: 2;
+    top: 0;
   }
 
   #panels {
@@ -16,9 +19,6 @@
     right: $drawer-width*-1;
     width: $drawer-width;
     height:100%;
-    z-index:2;
-    top:0;
-
 
     &.visible {
       transform: translate3d($drawer-width*-1, 0, 0);
@@ -26,7 +26,11 @@
   }
 
   #controls {
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 10px;
+
+    background:	#FFFFFF;
 
     &.visible {
       transform: translate3d($drawer-width*-1, 0, 0);
