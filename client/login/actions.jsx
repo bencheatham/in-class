@@ -13,12 +13,12 @@ export function signinUser(username, password){
     .then(response => {
       dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.userType });
       dispatch(authError(''));
-      if (response.data.type === 'student'){
-        hashHistory.push('/class/student');
-      } else {
-        hashHistory.push('/class/teacher');
-      }
-        hashHistory.push('/quiz');
+      // if (response.data.type === 'student'){
+      //   hashHistory.push('/class/student');
+      // } else {
+      //   hashHistory.push('/class/teacher');
+      // }
+       hashHistory.push('/quiz');
     })
     .catch((error)=>{
       dispatch(authError(error.data));

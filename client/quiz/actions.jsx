@@ -26,7 +26,7 @@ export function submitQuiz (quizTitle,quizData) {
 }
 
 export function getQuizzes (){
-  return axios.get('/fetch', {params: {file: 'manifest'}})
+  return axios.get('/fetch', {params: {title: 'manifest'}})
   .then(function(response){
     console.log('response from API',response);
       return {
@@ -52,23 +52,12 @@ export function storePopQuiz (data){
   }
 }
 
-export function startQuiz (quizName) {
-  
-  return axios.get('/fetch', {params: {file: quizName}})
-  .then(function(response){
-    var downloadedQuizzes = response.data;
+export function startQuiz (quiz) {
+    console.log(quiz);
     return {
       type: START_QUIZ,
-      storedQuizzes: downloadedQuizzes,
+      storedQuizzes: quiz,
     }
-  })
-  .catch(function(response){
-    console.log('fetch error',response);
-    return {
-      type: START_QUIZ,
-      storedQuizzes: downloadedQuizzes,
-    }
-  })
 }
 
 export function addQuizForm () {

@@ -6,6 +6,8 @@ var questionEvents = {
   'question-submitted': questionSubmitted,
   'upvote': upvote,
   'init-questions': initializeQuestions,
+  'connection': () => { console.log('connection'); return;},
+  'reconnection': () => { console.log('reconnection'); return;},
 }
 
 function initializeQuestions (){

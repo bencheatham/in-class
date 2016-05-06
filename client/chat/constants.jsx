@@ -1,1 +1,2 @@
 export const CHAT_MESSAGE = 'CHAT_MESSAGE';
+export const INITIALIZE_CHAT = 'INITIALIZE_CHAT';

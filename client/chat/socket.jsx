@@ -1,6 +1,9 @@
-import { socket } from '../common/socket';
+import { connectToWebSockets } from '../common/socket';
+
+var socket;
 
 export function initializeWebSockets() {
+  socket = connectToWebSockets();
 
   socket.on('chatMessage-submitted', data => {
     console.log('web socket event')

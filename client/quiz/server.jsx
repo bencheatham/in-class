@@ -5,9 +5,9 @@ var quizEvents = {
   'pop-quiz': broadcastPopQuiz,
 }
 
-function broadcastPopQuiz(quizName){
-  console.log('pop quiz!!!',quizName);
-  this.broadcast.emit('pop-quiz', { file: quizName})
+function broadcastPopQuiz(quiz){
+  console.log('pop quiz!!!',quiz);
+  this.broadcast.emit('pop-quiz', { quiz: quiz})
 }
 
 exports.module = {
