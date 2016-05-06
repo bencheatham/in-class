@@ -3,8 +3,8 @@ import io from 'socket.io-client';
 import { userJoinedClass } from '../actions/users';
 import { userLeftClass } from '../actions/users';
 import * as actions from '../actions/users';
-import { SERVER_URL } from '../constants/ActionTypes';
-
+// import { SERVER_URL } from '../constants/ActionTypes';
+import { socket } from '../common/socket';
 
 //const SERVER_URL = 'http://inclass-co.herokuapp.com/';//'http://localhost:8000';
 //const SERVER_URL = 'http://localhost:8000';
@@ -15,7 +15,7 @@ export default function(store) {
   let isTyping = false;
   let lastTypingTime;
 
-  const socket = io.connect(`${SERVER_URL}`);
+  // const socket = io.connect(`${SERVER_URL}`);
 
   function initializeWebSockets(actions) {
     let userActions = actions.userActions;
