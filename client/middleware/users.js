@@ -20,7 +20,6 @@ export default function(store) {
   function initializeWebSockets(actions) {
     let userActions = actions.userActions;
 
-    console.log('user actions', userActions);
     socket.on('users_updateUsers', data => {
       userActions.setUsers(data.users);
     });
@@ -33,11 +32,15 @@ export default function(store) {
 
   function getAllUsers() {
     socket.emit('users_getUsers');
-  }
+  };
 
   // Sets teacher-selected video user and session
   function setTeacherSelectedVideoUser (classUserPac) {
     socket.emit('teacherSelectedVideoUser', classUserPac);
+  };
+
+  function removeUserFromClass(user) {
+    socket.emit('users_removeUser', {user});
   }
 
   // Sends a chat message
@@ -69,6 +72,7 @@ export default function(store) {
     //userJoinedClass(data);
   }
 
+  // @deprecated
   function userLeft (data) {
     console.log(data.username + ' left', data);
     userLeftClass(data);
@@ -88,6 +92,7 @@ export default function(store) {
     'clean input': cleanInput,
     'teacherSelectedVideoUser': setTeacherSelectedVideoUser,
     'getAllUsers': getAllUsers,
+    'removeUserFromClass': removeUserFromClass,
     'initializeWebSockets': initializeWebSockets
   };
 

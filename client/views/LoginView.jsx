@@ -28,6 +28,8 @@ class LoginView extends Component {
     this.addUserToUserModal = this.addUserToUserModal.bind(this);
 
     this.initializeWebSockets = UserActions.initializeWebSockets.bind(this);
+    this.getUsersFromClass = UserActions.getUsersFromClass.bind(this);
+    this.removeUserFromClass = UserActions.removeUserFromClass.bind(this);
   }
 
   componentDidMount() {
@@ -35,20 +37,23 @@ class LoginView extends Component {
       modalActions: this.props.userModalActions,
       videoActions: this.props.videoActions
     });
-    console.log('here 0.5');
 
     this.initializeWebSockets({
       userActions: this.props.userActions
     });
-    console.log('here 0');
 
-    // TODO make a socket call to inform others you're online
     let username = this.props.loginState.username;
-    console.log('here 1');
     this.props.userActions.userLogin(username);
-    console.log('here 2');
-    this.props.userActions.getOnlineUsers();
-  }
+    this.getUsersFromClass();
+    this.removeUserFromClass(username);
+  };
+
+  componentWillUnmount() {
+    // TODO user dropped out
+    let username = this.props.loginState.username;
+    console.log('unmount username', username);
+    // this.props.userActions.removeUserFromClass(username);
+  };
 
   onInputChange(event) {
     this.setState({ term: event.target.value });

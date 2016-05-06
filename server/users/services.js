@@ -9,7 +9,12 @@ function addUser(user) {
 };
 
 function removeUser(user) {
+  if (!user) return;
 
+  var index = users.indexOf(user);
+  if (index !== -1) {
+    users.splice(index, 1);
+  }
 };
 
 function getUsers() {

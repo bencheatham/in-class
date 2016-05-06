@@ -15,6 +15,8 @@ export default function(state = initState, action) {
   let userObj = {};
   userObj.users = [];
 
+  let users = state.users;
+
   switch(action.type) {
     case USER_LOGIN:
       return Object.assign({}, state, {

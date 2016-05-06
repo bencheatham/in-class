@@ -19,6 +19,7 @@ module.exports = function initializeChatStreaming (server) {
 
 	// store the username in the socket session for this client
 	function addUser (username) {
+		console.log('test add USERS in text STReamng serveice');
 	  this.username = username;
 	  ++numUsers;
 	  this.emit('login', { numUsers: numUsers });
