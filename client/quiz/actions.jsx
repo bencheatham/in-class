@@ -2,24 +2,25 @@ import axios from 'axios';
 import _ from 'underscore';
 import { EDIT_QUIZ, START_QUIZ, ALL_QUIZZES, ANSWER_QUESTION, ADD_QUIZFORM, QUIZ_SUBMISSION, QUIZ_FETCH, UPDATE_QUIZ } from './constants';
 
-export function submitQuiz (quizTitle,formData) {
+export function submitQuiz (quizTitle,quizData) {
+  var data= {title: quizTitle, questions: quizData};
+  console.log('action creator',data);
   
-  return axios.post('/save', {file:quizTitle, data: formData}).then(function(response){
+  return axios.post('/save', {quiz: data, update:false}).then(function(response){
     console.log('response from API',response);
     if (response.status === 201){
       return {
         type: QUIZ_SUBMISSION, 
-        form: formData, 
+        form: quizData, 
         title: quizTitle
       };
     }
   })
-  .catch(function(response){
-      console.log('error',response);
+  .catch(function(error){
+      console.log('error',error);
       return {
-        type: QUIZ_SUBMISSION, 
-        form: formData, 
-        title: quizTitle
+        type: 'ERROR_MESSAGE',
+        payload: error,
       }
   });
 }

@@ -18,19 +18,16 @@ class CreateQuiz extends Component {
   handleChange (e) {
     console.log(e);
     var form = {
+      index: this.props.id,
       question: this.refs.title.value,
+      choices: [this.refs.answer.value, this.refs.choice1.value,this.refs.choice2.value,this.refs.choice3.value],
       answer: this.refs.answer.value,
-      choice1: this.refs.choice1.value,
-      choice2: this.refs.choice2.value,
-      choice3: this.refs.choice3.value,
-      id: this.props.id
     }
 
     this.props.actions.updateQuiz(form);
   }
 
   render() {
-    // console.log(this.props.id);
     var data = this.props.quiz.quizzes[this.props.id];
    return (
      <div>
