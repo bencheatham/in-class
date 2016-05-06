@@ -43,8 +43,11 @@ class LoginView extends Component {
     });
 
     let username = this.props.loginState.username;
+    console.log('client: componentDidMount', username);
     this.props.userActions.userLogin(username);
+    console.log('======userLogin======');
     this.getUsersFromClass();
+    console.log('======getUsersFromClass======');
 
     window.addEventListener('beforeunload', () => {
       let username = this.props.loginState.username;
