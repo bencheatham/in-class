@@ -11,7 +11,8 @@ export function signinUser(username, password){
     
     axios.post('login', {username: username, password: password})
     .then(response => {
-      dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
+      console.log(response.data);
+      dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.userType });
       dispatch(authError(''));
       if (response.data.type === 'student'){
         hashHistory.push('/class/student');
@@ -29,10 +30,12 @@ export function signinUser(username, password){
 export function signupUser(username, password,usertype){
   
   return function(dispatch, getState){
+
     
-    axios.post('signup', { username, password, usertype})
+    axios.post('signup', { username:username, password:password, userType: usertype})
     .then(response => {
-      dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
+      console.log(response.data);
+      dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.userType });
       dispatch(authError(''));
       if (response.data.usertype === 'student'){
         hashHistory.push('/class/student');
@@ -76,7 +79,8 @@ export function checkAuth(path) {
     axios.get(SERVER_URL)
       .then((response) => {
         if (response.status === 200) {
-          dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype })
+          console.log('THIS IS THE DATA:', response.data);
+          dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.userType })
         }
         else {
           dispatch({ type: 'UNAUTH_USER' });

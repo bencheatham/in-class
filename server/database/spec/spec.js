@@ -15,7 +15,7 @@ describe('Database Unit Tests', function() {
   });
 
   it('should insert items into the database', function() {
-    return expect(db.insertInto('users', {username: 'louie', password: 'pass', created: String(Date.now())}))
+    return expect(db.insertInto('users', {username: 'louie', password: 'pass', userType: 'student', created: String(Date.now())}))
     .to.eventually.equal('saved');
   });
 
@@ -73,7 +73,7 @@ describe('Database Unit Tests', function() {
   });
 
   it('should insert answers into and fetch answers from the database', function() {
-    var username = 'louie';
+    var username = 'louie'; var teachername = 'james'
     var answers = {title: 'myQuiz', answers: [ 
       {index: 0, answer: 'red'}, 
       {index: 1, answer: 'baseball'}, 
@@ -82,11 +82,11 @@ describe('Database Unit Tests', function() {
 
     return expect(
       db.insertInto('users', {username: username, password: 'pass', created: String(Date.now())})
+      .then(function () { return db.insertInto('users', {username: teachername, password: 'pass', created: String(Date.now())}); })
       .then(function () { return db.insertInto('quizzes', {title: answers.title, created: Date.now()}); })
-      .then(function () { return db.insertInto('users_quizzes_join', {username: username, title: answers.title}); })
-      .then(function () { return db.insertInto('answers', {username: username, title: answers.title, answers: answers.answers.map(function (ans) { return '' + ans.index + ':' + ans.answer;}).join('+++'), created: Date.now()}); })
+      .then(function () { return db.insertInto('answers', {teachername: teachername, username: username, title: answers.title, answers: answers.answers.map(function (ans) { return '' + ans.index + ':' + ans.answer;}).join('+++'), created: Date.now()}); })
       .then(function () {
-        return db.fetch('answers', 'answers', 'username=\'' + username + '\' and title=\'' + answers.title + '\'')
+        return db.fetch('answers', 'answers', 'teachername=\'' + teachername + '\' and username=\'' + username + '\' and title=\'' + answers.title + '\'')
         .then(function (answers) { return answers[0].answers.split('+++'); });
       })
       .then(function (answers) {

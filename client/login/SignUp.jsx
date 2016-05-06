@@ -22,7 +22,7 @@ class SignUp extends Component {
     var username = this.refs.username.value;
     var password = this.refs.password.value;
     var usertype = this.refs.usertype.value;
-    console.log(usertype)
+    // console.log(usertype)
     this.props.actions.signupUser(username, password,usertype);
     return false;
   }

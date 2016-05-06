@@ -1,4 +1,4 @@
-const fs = require('fs');
+// const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const secret = 'when in class... do as the students do';
 const db = require(__dirname + '/database/database.js')();
