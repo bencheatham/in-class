@@ -39,13 +39,12 @@ export default function(store) {
     socket.emit('teacherSelectedVideoUser', classUserPac);
   };
 
-  function removeUserFromClass(user) {
-    socket.emit('users_removeUser', {user});
+  function removeUserFromClass(username) {
+    socket.emit('users_removeUser', username);
   }
 
   // Sends a chat message
   function sendMessage (message) { socket.emit('new message', cleanInput(message)); }
-
 
   // Prevents input from having injected markup
   function cleanInput (input) { return $('<div/>').text(input).text(); }

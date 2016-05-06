@@ -45,14 +45,20 @@ class LoginView extends Component {
     let username = this.props.loginState.username;
     this.props.userActions.userLogin(username);
     this.getUsersFromClass();
-    this.removeUserFromClass(username);
+
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.removeUserFromClass(username);
+    });
+
   };
 
   componentWillUnmount() {
-    // TODO user dropped out
-    let username = this.props.loginState.username;
-    console.log('unmount username', username);
-    // this.props.userActions.removeUserFromClass(username);
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.removeEventListener('beforeunload');
+    });
+
   };
 
   onInputChange(event) {
