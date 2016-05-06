@@ -45,8 +45,8 @@ class VideoContainer extends Component {
     // if not the same, just swap it
     if (newId !== id) {
       $('#vid-box').empty();
+      this.appendIt();
     }
-    this.appendIt();
   };
 
 
