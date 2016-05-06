@@ -13,8 +13,11 @@ export function userLogin(user) {
   };
 };
 
-export function getOnlineUsers() {
-  console.log('hits getOnlineUsers');
+export function removeUserFromClass(user) {
+  worker['removeUserFromClass'](user);
+};
+
+export function getUsersFromClass() {
   worker['getAllUsers']();
 };
 
@@ -41,9 +44,9 @@ export function userJoinedClass(data) {
   };
 }
 
-export function userLeftClass(data) {
+export function userLeftClass(user) {
   return {
     type: types.USER_LEFT_CLASS,
-    payload: data
+    user: user
   };
 }
