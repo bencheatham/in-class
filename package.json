@@ -5,8 +5,8 @@
   "description": "A tool for improving in-class student-teacher interactions",
   "main": "index.js",
   "scripts": {
-    "start": "pg_ctl start --pgdata=database/inclass --log=logfile && webpack --progress && node index.js",
-    "start-dev": "pg_ctl start --pgdata=database/inclass --log=logfile && npm run build && npm run MYjshint && ((sleep 25 && npm test) & nodemon index.js)",
+    "start": "webpack --progress && node -r dotenv/config index.js dotenv_config_path=.envProduction",
+    "start-dev": "pg_ctl start --pgdata=database/inclass --log=logfile && npm run build && npm run MYjshint && ((sleep 25 && npm test) & nodemon -r dotenv/config index.js dotenv_config_path=.envDevelopment)",
     "clean": "rm -rf dist/*",
     "wipe-db": "node server/database/initialize.js",
     "build": "npm run clean && npm run oldBuild",
@@ -14,7 +14,9 @@
     "MYjshint": "jshint **/*.js --show-non-errors",
     "oldBuild": "npm run copy && npm run concat",
     "copy": "cp -r client/text dist/ && cp -r client/thumbs dist/ && cp -r client/protected dist/ && cp -r client/authentication dist/auth && cp -r client/text dist/text",
-    "concat": "(cat node_modules/jquery/dist/jquery.min.js; echo '\n'; cat node_modules/underscore/underscore-min.js; echo '\n'; cat node_modules/socket.io-client/socket.io.js; echo '\n';) >> dist/vendors.js"
+    "concat": "(cat node_modules/jquery/dist/jquery.min.js; echo '\n'; cat node_modules/underscore/underscore-min.js; echo '\n'; cat node_modules/socket.io-client/socket.io.js; echo '\n';) >> dist/vendors.js",
+    "env-dev": "node -r dotenv/config index.js dotenv_config_path=.envDevelopment",
+    "env-prod": "node -r dotenv/config .envProduction"
   },
   "engines": {
     "npm": "2.15.3"
@@ -38,6 +40,7 @@
     "chai-as-promised": "^5.3.0",
     "cookie-parser": "^1.4.1",
     "css-loader": "^0.23.1",
+    "dotenv": "^2.0.0",
     "eslint": "2.2.0",
     "eslint-loader": "1.3.0",
     "express": "4.13.4",

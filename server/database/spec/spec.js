@@ -4,6 +4,7 @@ var chaiAsPromised = require('chai-as-promised');
 var expect = chai.expect;
 chai.use(chaiAsPromised);
 
+
 var db = require(__dirname + '/../database.js')('test');
 
 
