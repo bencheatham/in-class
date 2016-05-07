@@ -35,6 +35,7 @@ export default function quiz(state = initialState, action){
     case type.DISPLAY_RESULTS: 
       return {
         ...state,
+        quizResults: action.payload,
       }
     case type.ADD_QUIZFORM:   
       var newCount = state.questionForms + 1;

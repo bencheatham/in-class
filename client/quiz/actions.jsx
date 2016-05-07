@@ -126,6 +126,7 @@ export function fetchResults(quizName) {
     console.log('response from API',response);
       return {
         type: type.DISPLAY_RESULTS,
+        payload: response.data
       };
     
   })
