@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
-import { show } from '../actions/userVideoModal';
+import { bindActionCreators } from 'redux';
+
+import * as UserVideoModalActions from '../actions/userVideoModal';
 import * as QuestionModalActions from '../modules/questionModal/actions';
 
 import QuestionModal from '../modules/questionModal/QuestionModal';
@@ -18,19 +20,18 @@ class TeacherPanel extends React.Component {
   };
 
   showStudentVideo() {
-    this.props.dispatch(show());
+    this.props.userVideoModalActions.show();
   };
 
   showQuestionModal() {
-    this.props.dispatch(QuestionModalActions.show());
+    this.props.questionModalActions.show();
   };
 
   // TODO remove question modal for later
   render() {
     return(
       <div className="TeacherControlPanel">
-        <Button className="btn-success btn-circle btn-xl"
-            onClick={this.showStudentVideo}>
+        <Button className="btn-success btn-circle btn-xl" onClick={this.showStudentVideo}>
            <Glyphicon glyph="glyphicon glyphicon-film" />
         </Button>
 
@@ -46,6 +47,14 @@ function mapStateToProps(state) {
   };
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    userVideoModalActions: bindActionCreators(UserVideoModalActions, dispatch),
+    questionModalActions: bindActionCreators(QuestionModalActions, dispatch)
+  }
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(TeacherPanel);
