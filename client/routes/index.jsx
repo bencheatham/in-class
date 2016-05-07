@@ -18,6 +18,7 @@ import SignUp from '../login/SignUp';
 import SignOut from '../login/SignOut';
 import About from '../login/About';
 import SocketManager from '../common/SocketManager';
+import SimplePie from '../modules/graphs/components/pieChart';
 
 export default (
   <Route>
@@ -50,5 +51,8 @@ export default (
            component={TeacherQuiz} />
       <Route path="/chat"
            component={ChatContainer} />
+      <Route path="/hello" 
+           component={SimplePie}/>
+
   </Route>
 );
