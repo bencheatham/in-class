@@ -8,6 +8,8 @@ import extend from 'lodash/extend';
 // helper method for add video session to state
 function addVideoSession(videos, session) {
   let ret = extend({}, videos);
+  if (!session) return;
+
   let username = session.getAttribute('data-number');
   ret[username] = session;
 
@@ -85,7 +87,11 @@ export default function(state = initState, action) {
     return state;
 
 
-      
+    case MAKE_CALL:
+      return Object.assign({}, state, {
+        makeCall: action.isAllow
+      });
+
     default:
       return state;
   }

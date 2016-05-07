@@ -3,6 +3,7 @@ var quizSocketEvents = require('../client/quiz/server.jsx').module.quizEvents;
 var chatSocketEvents = require('../client/chat/server.jsx').module.chatEvents;
 var questionModal = require('./sockets/questionModal.js').module;
 var thumbSocketEvents = require('../client/thumbs/server.jsx').module.thumbEvents;
+var userSocketEvents = require('./sockets/users.js').module.socketEvents;
 
 var _ = require('underscore');
 
@@ -11,14 +12,13 @@ module.exports = function initializeChatStreaming (server) {
 	var io = require('socket.io')(server);
   var numUsers = 0;
 
+	// tell the client to execute 'new message'
 	function newMessage (message) {
-	  // console.log('new message: ', message);
-	  // tell the client to execute 'new message'
 	  this.broadcast.emit('new message', { username: this.username, message: message });
 	}
 
+	// store the username in the socket session for this client
 	function addUser (username) {
-	  // store the username in the socket session for this client
 	  this.username = username;
 	  ++numUsers;
 	  this.emit('login', { numUsers: numUsers });
@@ -38,12 +38,12 @@ module.exports = function initializeChatStreaming (server) {
 	  this.broadcast.emit('user left', { username: this.username, numUsers: numUsers });
 	  console.log('disconnect: ', this.username, numUsers);
 	  this.disconnect();
-	  // console.log(this);
 	}
 
 
  function tellUsersStudentIsOnVideo (classUserPac) {
    this.broadcast.emit('newClassVideoUser', classUserPac );
+
 
  }
 
@@ -52,7 +52,6 @@ module.exports = function initializeChatStreaming (server) {
 	  'add user': addUser,
 	  'typing': typing,
 	  'stop typing': stopTyping,
-	  // 'pong': pong,
 	  'disconnect': disconnect,
 	  'teacherSelectedVideoUser' : tellUsersStudentIsOnVideo
 	};
@@ -62,7 +61,8 @@ module.exports = function initializeChatStreaming (server) {
 		quizSocketEvents,
 		chatSocketEvents,
 		questionModal.socketEvents,
-		thumbSocketEvents
+		thumbSocketEvents,
+		userSocketEvents
 	];
 
 	var allSocketEvents = _.reduce(socketList, function(memo, eventList){
@@ -71,9 +71,7 @@ module.exports = function initializeChatStreaming (server) {
 
 	io.on('connection', function (socket) {
 		for (var key in allSocketEvents) { socket.on(key, allSocketEvents[key].bind(socket)); }
-		// var pingInterval = setInterval(ping.bind(socket), 60000);
 	});
 
 	return io;
-
 };
