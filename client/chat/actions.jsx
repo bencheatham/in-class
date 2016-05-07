@@ -1,4 +1,4 @@
-import { CHAT_MESSAGE } from './constants';
+import { CHAT_MESSAGE, INITIALIZE_CHAT} from './constants';
 
 export function submitChat(chatMessage) {
     
@@ -11,7 +11,7 @@ export function submitChat(chatMessage) {
 export function loadChatMessages(chatLog) {
     
   return {
-    type: CHAT_MESSAGE,
+    type: INITIALIZE_CHAT,
     chatMessage: chatLog,
   }
 }

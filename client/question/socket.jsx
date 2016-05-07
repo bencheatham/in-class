@@ -1,7 +1,10 @@
-import { socket } from '../common/socket';
+import { connectToWebSockets } from '../common/socket';
+
+var socket;
 
 export function initializeWebSockets() {
-
+  socket = connectToWebSockets();
+  
   socket.on('init-questions', (data) => {
     this.props.actions.loadQuestions(data.questionLog);
   });
@@ -18,6 +21,10 @@ export function initializeWebSockets() {
     this.props.actions.upvote(data.id, data.username);
   });
 };
+
+export function closeWebSockets(){
+  socket.disconnect();
+}
 
 export function emitNewQuestion(text,name){
   socket.emit('question-submitted', {

@@ -2,30 +2,31 @@ import axios from 'axios';
 import _ from 'underscore';
 import { EDIT_QUIZ, START_QUIZ, ALL_QUIZZES, ANSWER_QUESTION, ADD_QUIZFORM, QUIZ_SUBMISSION, QUIZ_FETCH, UPDATE_QUIZ } from './constants';
 
-export function submitQuiz (quizTitle,formData) {
+export function submitQuiz (quizTitle,quizData) {
+  var data= {title: quizTitle, questions: quizData};
+  console.log('action creator',data);
   
-  return axios.post('/save', {file:quizTitle, data: formData}).then(function(response){
+  return axios.post('/save', {quiz: data, update:false}).then(function(response){
     console.log('response from API',response);
     if (response.status === 201){
       return {
         type: QUIZ_SUBMISSION, 
-        form: formData, 
+        form: quizData, 
         title: quizTitle
       };
     }
   })
-  .catch(function(response){
-      console.log('error',response);
+  .catch(function(error){
+      console.log('error',error);
       return {
-        type: QUIZ_SUBMISSION, 
-        form: formData, 
-        title: quizTitle
+        type: 'ERROR_MESSAGE',
+        payload: error,
       }
   });
 }
 
 export function getQuizzes (){
-  return axios.get('/fetch', {params: {file: 'manifest'}})
+  return axios.get('/fetch', {params: {title: 'manifest'}})
   .then(function(response){
     console.log('response from API',response);
       return {
@@ -51,23 +52,12 @@ export function storePopQuiz (data){
   }
 }
 
-export function startQuiz (quizName) {
-  
-  return axios.get('/fetch', {params: {file: quizName}})
-  .then(function(response){
-    var downloadedQuizzes = response.data;
+export function startQuiz (quiz) {
+    console.log(quiz);
     return {
       type: START_QUIZ,
-      storedQuizzes: downloadedQuizzes,
+      storedQuizzes: quiz,
     }
-  })
-  .catch(function(response){
-    console.log('fetch error',response);
-    return {
-      type: START_QUIZ,
-      storedQuizzes: downloadedQuizzes,
-    }
-  })
 }
 
 export function addQuizForm () {

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as chatActions from './actions';
-import { initializeWebSockets, emitChatMessage, loadChatMessages } from './socket'
+import { initializeWebSockets, emitChatMessage, loadChatMessages, closeWebSockets } from './socket'
 import ChatMessage from './ChatMessage';
 
 class ChatBox extends Component {
@@ -13,11 +13,16 @@ class ChatBox extends Component {
     this.initializeWebSockets = initializeWebSockets.bind(this);  
     this.emitChatMessage = emitChatMessage.bind(this);
     this.loadChatMessages = loadChatMessages.bind(this);
+    this.closeWebSockets = closeWebSockets.bind(this);
   }
 
   componentDidMount() {
     this.initializeWebSockets();
     this.loadChatMessages();
+  }
+
+  componentWillUnmount(){
+    this.closeWebSockets();
   }
   
   handleEnter(event) {

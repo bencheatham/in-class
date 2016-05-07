@@ -3,6 +3,10 @@ dist
 database/**/*.sqlite3
 database/json/**/*.json
 database/inclass
+server/database/initializeHerokuPostgres.js
 logfile
 .DS_Store
 server/database_old
+npm-debug.log
+.envProduction
+

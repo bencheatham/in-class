@@ -11,19 +11,14 @@ export function signinUser(username, password){
 
     axios.post('login', {username: username, password: password})
     .then(response => {
-      console.log(response.data);
-      dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
-      // TODO need to broadcast online users
-
+      dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.userType });
       dispatch(authError(''));
-      if (response.data.type === 'student'){
-        hashHistory.push('/class/student');
-      } else {
-        hashHistory.push('/class/teacher');
-      }
-
-      // change the following to anywhere for testing
-      hashHistory.push('/video');
+      // if (response.data.type === 'student'){
+      //   hashHistory.push('/class/student');
+      // } else {
+      //   hashHistory.push('/class/teacher');
+      // }
+       hashHistory.push('/video');
     })
     .catch((error)=>{
       dispatch(authError(error.data));
@@ -66,14 +61,15 @@ export function authError(error){
 
 export function signoutUser (username) {
   return (dispatch,getState) => {
-    axios.post('signout', {username})
+    axios.post('logout', {username})
     .then(response => {
       hashHistory.push('/');
       dispatch({ type: 'UNAUTH_USER'});
     })
     .catch((error)=>{
       // dispatch(authError('Trying signing out'));
-      dispatch({ type: 'UNAUTH_USER'});
+      // dispatch({ type: 'UNAUTH_USER'});
+      console.log('error logging out',error)
     });
   }
 }
