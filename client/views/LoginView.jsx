@@ -22,11 +22,14 @@ class LoginView extends Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.videoCallUser = this.videoCallUser.bind(this);
 
     this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
     this.addUserToUserModal = this.addUserToUserModal.bind(this);
+
+    this.initializeWebSockets = UserActions.initializeWebSockets.bind(this);
+    this.getUsersFromClass = UserActions.getUsersFromClass.bind(this);
+    this.removeUserFromClass = UserActions.removeUserFromClass.bind(this);
   }
 
   componentDidMount() {
@@ -34,13 +37,36 @@ class LoginView extends Component {
       modalActions: this.props.userModalActions,
       videoActions: this.props.videoActions
     });
-  }
 
+    this.initializeWebSockets({
+      userActions: this.props.userActions
+    });
+
+    let username = this.props.loginState.username;
+    this.props.userActions.userLogin(username);
+    this.getUsersFromClass();
+
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.removeUserFromClass(username);
+    });
+
+  };
+
+  componentWillUnmount() {
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.removeEventListener('beforeunload');
+    });
+
+  };
+
+  // @deprecated
   onInputChange(event) {
     this.setState({ term: event.target.value });
-
   }
 
+  // @deprecated
   onFormSubmit(event) {
     const userActions = this.props.userActions;
 
@@ -49,40 +75,6 @@ class LoginView extends Component {
   }
 
   // @deprecated
-  makeCall(user) {
-    if (!window.phone) alert("Login First!");
-    else {
-      console.log('dialing here');
-      window.phone.dial(user);
-    }
-  }
-
-  // @deprecated
-  videoCallUser(user){
-    const videoActions = this.props.videoActions;
-
-    let ball = {
-      calledUser: user,
-      callingUser: this.props.username
-    };
-
-    videoActions.userCallUser(ball);
-    this.makeCall(user);
-  }
-
-  // @deprecated
-  renderUserList(users) {
-    return users.map((user) => {
-      return (
-        <li
-          key={user}
-          onClick={() => this.videoCallUser(user)}
-          className="list-group-item user-video-link">
-          {user} Joined the Class.</li>
-      );
-    });
-  };
-
   addUserToUserModal() {
     if (!this.props.username.trim()) return;
     this.emitAddNewUser(this.props.username);
@@ -91,22 +83,10 @@ class LoginView extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onFormSubmit} className="input-group">
-          <input
-            placeholder="Username"
-            className="form-control"
-            value={this.state.term}
-            onChange={this.onInputChange} />
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Submit</button>
-          </span>
-        </form>
-
         <div>
           <VideoContainer username={this.props.username} />
         </div>
 
-        <button onClick={this.addUserToUserModal}>Post Question</button>
         <Drawer />
         <TeacherPanel />
 
@@ -120,7 +100,8 @@ function mapStateToProps(state) {
   return {
     users: state.Users.users,
     username: state.Users.username,
-    calledUser: state.video.calledUser
+    calledUser: state.video.calledUser,
+    loginState: state.user
   };
 }
 
