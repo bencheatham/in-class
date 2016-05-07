@@ -29,9 +29,9 @@ class LoginView extends Component {
     this.addUserToUserModal = this.addUserToUserModal.bind(this);
 
     // list of user sockets call
-    this.initializeWebSockets = UserActions.initializeWebSockets.bind(this);
-    this.getUsersFromClass = UserActions.getUsersFromClass.bind(this);
-    this.removeUserFromClass = UserActions.removeUserFromClass.bind(this);
+    this.initializeWebSockets = UserSockets.initializeWebSockets.bind(this);
+    this.emitGetAllUsersFromClass = UserSockets.emitGetAllUsersFromClass.bind(this);
+    this.emitRemoveUserFromClass = UserSockets.emitRemoveUserFromClass.bind(this);
   }
 
   componentDidMount() {
@@ -46,11 +46,11 @@ class LoginView extends Component {
 
     let username = this.props.loginState.username;
     this.props.userActions.userLogin(username);
-    this.getUsersFromClass();
+    this.emitGetAllUsersFromClass();
 
     window.addEventListener('beforeunload', () => {
       let username = this.props.loginState.username;
-      this.removeUserFromClass(username);
+      this.emitRemoveUserFromClass(username);
     });
 
   };
@@ -60,7 +60,6 @@ class LoginView extends Component {
       let username = this.props.loginState.username;
       this.removeEventListener('beforeunload');
     });
-
   };
 
   // @deprecated

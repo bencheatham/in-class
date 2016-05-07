@@ -13,6 +13,7 @@ function addUser(username) {
 
 function getUsers() {
   var users = services.getUsers();
+  console.log('getUsers', users);
   this.emit('users_updateUsers', {users: users} );
   this.broadcast.emit('users_updateUsers', {users: users} );
 };

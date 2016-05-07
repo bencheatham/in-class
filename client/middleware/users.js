@@ -13,32 +13,6 @@ export default function(store) {
   let isTyping = false;
   let lastTypingTime;
 
-  function initializeWebSockets(actions) {
-    // let userActions = actions.userActions;
-    //
-    // socket.on('users_updateUsers', data => {
-    //   userActions.setUsers(data.users);
-    // });
-  }
-
-  // Sets the client's username
-  function setUsername (username) {
-    // socket.emit('users_addUser', username);
-  };
-
-  function getAllUsers() {
-    // socket.emit('users_getUsers');
-  };
-
-  // Sets teacher-selected video user and session
-  function setTeacherSelectedVideoUser (classUserPac) {
-    // socket.emit('teacherSelectedVideoUser', classUserPac);
-  };
-
-  function removeUserFromClass(username) {
-    // socket.emit('users_removeUser', username);
-  }
-
   // Prevents input from having injected markup
   function cleanInput (input) { return $('<div/>').text(input).text(); }
 
@@ -79,12 +53,7 @@ export default function(store) {
   }
 
   var clientActions = {
-    'set username': setUsername,
     'clean input': cleanInput,
-    'teacherSelectedVideoUser': setTeacherSelectedVideoUser,
-    'getAllUsers': getAllUsers,
-    'removeUserFromClass': removeUserFromClass,
-    'initializeWebSockets': initializeWebSockets
   };
 
   var socketEvents = {

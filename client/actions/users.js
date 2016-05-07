@@ -1,28 +1,12 @@
 import * as types from '../constants/ActionTypes';
-import initializeUsers from '../middleware/users';
-
-const worker = initializeUsers();
 
 export function userLogin(user) {
   if(!user || !user.trim()) return;
 
-  // worker['set username'](user);
   return {
     type: types.USER_LOGIN,
     payload: user
   };
-};
-
-export function removeUserFromClass(user) {
-  // worker['removeUserFromClass'](user);
-};
-
-export function getUsersFromClass() {
-  // worker['getAllUsers']();
-};
-
-export function initializeWebSockets(actions) {
-  // worker['initializeWebSockets'](actions);
 };
 
 // set the users state
