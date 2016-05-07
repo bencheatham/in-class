@@ -1,4 +1,6 @@
 
+console.log(process.env.NODE_ENV);
+
 const app = require('./server/configuration.js');
 const server = require('http').createServer(app);
 const port = process.env.PORT || 8000;

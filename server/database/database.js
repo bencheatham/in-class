@@ -1,10 +1,27 @@
 
 module.exports = function (test) {
-
   var pg = require('pg');
-  var location = 'postgres://postgres:inclassDatabasePassword611@localhost/'
-  var conString = test === 'test' ? location + 'test': location + 'in-class';
-   
+
+
+  if (process.env.NODE_ENV === 'production') {
+    pg.defaults.ssl = true;
+    var conString = 
+      process.env.POSTGRES_DB_TYPE + '://' + 
+      process.env.POSTGRES_DB_USER + ':' +
+      process.env.POSTGRES_DB_PASSWORD + ':' + 
+      process.env.POSTGRES_DB_LOCATION;
+  }
+  if (process.env.NODE_ENV === 'development') {
+    var conString = 
+      process.env.POSTGRES_DB_TYPE + '://' + 
+      process.env.POSTGRES_DB_USER + ':' +
+      process.env.POSTGRES_DB_PASSWORD + '@' + 
+      process.env.POSTGRES_DB_LOCATION;
+  } 
+  if (test === 'test') {
+    var conString = 'postgres://postgres:inclassDatabasePassword611@localhost/test'
+  }
+      
 
   var clean = [
     'DROP TABLE IF EXISTS users_links_join',
