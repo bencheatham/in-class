@@ -110,7 +110,21 @@ const saveAnswers = (request, response, username, answers) => {
 
 const fetchAnswers = (request, response, username, title) => {
   //username is actually the teachername in this case
-  return db.fetch('answers', 'answers', 'teachername=\'' + username + '\' and title=\'' + title + '\'')
+  return db.fetch('answers', 'answers, username', 'teachername=\'' + username + '\' and title=\'' + title + '\'')
+  .then((answers) => {
+    var data = {title: title};
+    answers = answers.map((studentAnswers) => {
+      var studentname = studentAnswers.username; delete studentAnswers.username; studentAnswers.studentname = studentname;
+      studentAnswers.answers = 
+        studentAnswers
+        .answers
+        .split('+++')
+        .map((val) => { var result = val = val.split(':'); return {val: val[1], index: val[0]};});
+        return studentAnswers;
+    });
+      data.answers = answers;
+    return Promise.resolve(data);
+  })
   .then((answers) => response.status(200).send(answers))
   .catch((error) => response.status(400).send('error: ' + 'some issue fetching the answers...'));
   
