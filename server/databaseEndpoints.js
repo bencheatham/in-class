@@ -124,7 +124,7 @@ const deleteQuiz = (request, response, username, title, database) => {
   .then(() => database.deleteFrom('quizzes', 'title=\'' + title + '\''))
   .then(() => response.status(200).send('deleted quiz'))
   .catch(() => response.status(400).send('error: ' + 'some issue deleting the quiz...'));
-}
+};
 
 module.exports = (app) => {
 
