@@ -24,13 +24,13 @@ module.exports = function (test) {
       
 
   var clean = [
-    'DROP TABLE IF EXISTS users_links_join',
-    'DROP TABLE IF EXISTS users_quizzes_join',
-    'DROP TABLE IF EXISTS links',
-    'DROP TABLE IF EXISTS answers',
-    'DROP TABLE IF EXISTS questions',
-    'DROP TABLE IF EXISTS quizzes',
-    'DROP TABLE IF EXISTS users'
+    'DROP TABLE IF EXISTS users_links_join CASCADE',
+    'DROP TABLE IF EXISTS users_quizzes_join CASCADE',
+    'DROP TABLE IF EXISTS links CASCADE',
+    'DROP TABLE IF EXISTS answers CASCADE',
+    'DROP TABLE IF EXISTS questions CASCADE',
+    'DROP TABLE IF EXISTS quizzes CASCADE',
+    'DROP TABLE IF EXISTS users CASCADE'
 
 
   ];

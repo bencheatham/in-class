@@ -8,7 +8,7 @@
     "start": "webpack --progress && node -r dotenv/config index.js dotenv_config_path=.envProduction",
     "start-dev": "pg_ctl start --pgdata=database/inclass --log=logfile && npm run build && npm run MYjshint && ((sleep 25 && npm test) & nodemon -r dotenv/config index.js dotenv_config_path=.envDevelopment)",
     "clean": "rm -rf dist/*",
-    "wipe-db": "node server/database/initialize.js",
+    "wipe-db": "node -r dotenv/config server/database/initialize.js dotenv_config_path=.envDevelopment",
     "build": "npm run clean && npm run oldBuild",
     "test": "mocha server/spec/**/*.js server/database/spec/**/*.js server/authentication/spec/**/*.js",
     "MYjshint": "jshint **/*.js --show-non-errors",
