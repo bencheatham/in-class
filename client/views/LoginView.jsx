@@ -61,10 +61,12 @@ class LoginView extends Component {
 
   };
 
+  // @deprecated
   onInputChange(event) {
     this.setState({ term: event.target.value });
   }
 
+  // @deprecated
   onFormSubmit(event) {
     const userActions = this.props.userActions;
 
@@ -72,6 +74,7 @@ class LoginView extends Component {
     userActions.userLogin(this.state.term);
   }
 
+  // @deprecated
   addUserToUserModal() {
     if (!this.props.username.trim()) return;
     this.emitAddNewUser(this.props.username);
@@ -80,17 +83,6 @@ class LoginView extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onFormSubmit} className="input-group">
-          <input
-            placeholder="Username"
-            className="form-control"
-            value={this.state.term}
-            onChange={this.onInputChange} />
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Submit</button>
-          </span>
-        </form>
-
         <div>
           <VideoContainer username={this.props.username} />
         </div>
