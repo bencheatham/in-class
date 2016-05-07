@@ -1,6 +1,9 @@
-import { socket } from '../common/socket';
+import { connectToWebSockets } from '../common/socket';
+
+var socket;
 
 export function initializeWebSockets() {
+  socket = connectToWebSockets();
 
   socket.on('thumbCheck', () => {
     this.props.actions.thumbCheck();
@@ -10,6 +13,10 @@ export function initializeWebSockets() {
     this.props.actions.thumb(data.id,data.username,data.value);
   });
 };
+
+export function closeWebSockets(){
+  socket.disconnect();
+}
 
 export function emitThumbEvent(value,name,id){
   socket.emit('thumb-student', {

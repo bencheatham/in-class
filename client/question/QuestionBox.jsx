@@ -24,7 +24,6 @@ class QuestionBox extends Component {
 
   componentWillUnmount(){
     this.closeWebSockets();
-    console.log('unmounting...')
   }
   
   handleEnter(event) {

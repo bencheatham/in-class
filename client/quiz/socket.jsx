@@ -1,8 +1,11 @@
-import { socket } from '../common/socket';
 import axios from 'axios';
+import { connectToWebSockets } from '../common/socket';
+
+var socket;
 
 export function initializeWebSockets() {
-
+  socket = connectToWebSockets();
+  
   socket.on('pop-quiz', data => {
     console.log('downloading pop-quiz',data)
     this.props.actions.startQuiz(data.quiz);

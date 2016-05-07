@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Route } from 'react-router';
 import Home from '../containers/Home';
@@ -18,6 +17,7 @@ import RequireAuth from '../login/auth';
 import SignUp from '../login/SignUp';
 import SignOut from '../login/SignOut';
 import About from '../login/About';
+import SocketManager from '../common/SocketManager';
 
 export default (
   <Route>
