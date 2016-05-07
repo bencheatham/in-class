@@ -21,12 +21,9 @@ class LoginView extends Component {
     super(props);
     this.state = { term: '' };
 
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-
+    // question modal actions
     this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
-    this.addUserToUserModal = this.addUserToUserModal.bind(this);
 
     // list of user sockets call
     this.initializeWebSockets = UserSockets.initializeWebSockets.bind(this);
@@ -35,10 +32,11 @@ class LoginView extends Component {
   }
 
   componentDidMount() {
-    this.initQuestionModalSocket({
-      modalActions: this.props.userModalActions,
-      videoActions: this.props.videoActions
-    });
+    // TODO: disable the question queue for now
+    // this.initQuestionModalSocket({
+    //   modalActions: this.props.userModalActions,
+    //   videoActions: this.props.videoActions
+    // });
 
     this.initializeWebSockets({
       userActions: this.props.userActions
@@ -52,7 +50,6 @@ class LoginView extends Component {
       let username = this.props.loginState.username;
       this.emitRemoveUserFromClass(username);
     });
-
   };
 
   componentWillUnmount() {
@@ -62,32 +59,10 @@ class LoginView extends Component {
     });
   };
 
-  // @deprecated
-  onInputChange(event) {
-    this.setState({ term: event.target.value });
-  }
-
-  // @deprecated
-  onFormSubmit(event) {
-    const userActions = this.props.userActions;
-
-    event.preventDefault();
-    userActions.userLogin(this.state.term);
-  }
-
-  // @deprecated
-  addUserToUserModal() {
-    if (!this.props.username.trim()) return;
-    this.emitAddNewUser(this.props.username);
-  };
-
   render() {
     return (
       <div>
-        <div>
-          <VideoContainer username={this.props.username} />
-        </div>
-
+        <VideoContainer />
         <Drawer />
         <TeacherPanel />
 

@@ -1,12 +1,19 @@
-import { socket } from '../common/socket';
+import { connectToWebSockets } from '../common/socket';
+
+var socket;
 
 export function initializeWebSockets(actions) {
-  let userActions = actions.userActions;
+  socket = connectToWebSockets();
 
+  let userActions = actions.userActions;
   socket.on('users_updateUsers', data => {
     userActions.setUsers(data.users);
   });
-}
+};
+
+export function closeWebSockets(){
+  socket.disconnect();
+};
 
 // emit socket call to add user to class
 export function emitAddUserToClass (user) {
@@ -26,4 +33,4 @@ export function setTeacherSelectedVideoUser (classUserPac) {
 // emit socket call to remove user from class
 export function emitRemoveUserFromClass(user) {
   socket.emit('users_removeUser', user);
-}
+};
