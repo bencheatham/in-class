@@ -8,19 +8,16 @@ var socketEvents = {
 };
 
 function addUser(username) {
-  console.log('server-socket: addUser', username);
   services.addUser(username);
 };
 
 function getUsers() {
   var users = services.getUsers();
-  console.log('server-socket: getUsers', users);
   this.emit('users_updateUsers', {users: users} );
   this.broadcast.emit('users_updateUsers', {users: users} );
 };
 
 function removeUser(user) {
-  console.log('remove user', user);
   services.removeUser(user);
   // TODO separation of concern: should push the broadcast to somewhere else
   getUsers.bind(this)();
