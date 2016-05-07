@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'underscore';
-import { EDIT_QUIZ, START_QUIZ, ALL_QUIZZES, ANSWER_QUESTION, ADD_QUIZFORM, QUIZ_SUBMISSION, QUIZ_FETCH, UPDATE_QUIZ } from './constants';
+import * as type from './constants';
 
 export function submitQuiz (quizTitle,quizData) {
   var data= {title: quizTitle, questions: quizData};
@@ -10,7 +10,7 @@ export function submitQuiz (quizTitle,quizData) {
     console.log('response from API',response);
     if (response.status === 201){
       return {
-        type: QUIZ_SUBMISSION, 
+        type: type.QUIZ_SUBMISSION, 
         form: quizData, 
         title: quizTitle
       };
@@ -19,7 +19,7 @@ export function submitQuiz (quizTitle,quizData) {
   .catch(function(error){
       console.log('error',error);
       return {
-        type: 'ERROR_MESSAGE',
+        type: type.ERROR_MESSAGE,
         payload: error,
       }
   });
@@ -30,7 +30,7 @@ export function getQuizzes (){
   .then(function(response){
     console.log('response from API',response);
       return {
-        type: ALL_QUIZZES,
+        type: type.ALL_QUIZZES,
         quizzes: response.data
       };
     
@@ -38,7 +38,7 @@ export function getQuizzes (){
   .catch(function(response){
       console.log('error',response);
       return {
-        type: ALL_QUIZZES,
+        type: type.ALL_QUIZZES,
       }
   });
 }
@@ -47,29 +47,29 @@ export function storePopQuiz (data){
   // student fetches list of all his or her quizzes
   console.log('data')
   return {
-    type: QUIZ_FETCH,
+    type: type.QUIZ_FETCH,
     quiz: data,
   }
 }
 
-export function startQuiz (quiz) {
+export function storePopQuiz(quiz) {
     console.log(quiz);
     return {
-      type: START_QUIZ,
-      storedQuizzes: quiz,
+      type: type.START_QUIZ,
+      quiz: quiz,
     }
 }
 
 export function addQuizForm () {
   return {
-    type: ADD_QUIZFORM,
+    type: type.ADD_QUIZFORM,
   }
 }
 
 export function updateQuiz (formData) {
 
  return {
-  type: UPDATE_QUIZ,
+  type: type.UPDATE_QUIZ,
   formData: formData,
  }
 }
@@ -80,14 +80,14 @@ export function editQuiz (quizName) {
   .then(function(response){
     var downloadedQuiz = response.data;
     return {
-      type: EDIT_QUIZ,
+      type: type.EDIT_QUIZ,
       quiz: downloadedQuiz,
     }
   })
   .catch(function(response){
     console.log('fetch error',response);
     return {
-      type: EDIT_QUIZ,
+      type: type.EDIT_QUIZ,
       quiz: downloadedQuiz,
     }
   })
@@ -103,7 +103,28 @@ export function answerQuestion (answer,lastQuestion) {
   }
 
   return {
-    type: ANSWER_QUESTION,
+    type: type.ANSWER_QUESTION,
+    answer: answer
+  }
+}
+
+export function getAnswers (quizName) {
+   return axios.get('/fetch', {params: {title: quizName, answers: true}})
+  .then(function(response){
+    console.log('response from API',response);
+      return {
+        type: type.STORE_RESULTS,
+        payload: response.data
+      };
+    
+  })
+  .catch(function(response){
+      console.log('error',response);
+      return {}
+  });
+
+  return {
+    type: type.ANSWER_QUESTION,
     answer: answer
   }
 }

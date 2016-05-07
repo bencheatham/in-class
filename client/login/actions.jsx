@@ -11,7 +11,7 @@ export function signinUser(username, password){
 
     axios.post('login', {username: username, password: password})
     .then(response => {
-      dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.userType });
+      dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
       dispatch(authError(''));
       // if (response.data.type === 'student'){
       //   hashHistory.push('/class/student');

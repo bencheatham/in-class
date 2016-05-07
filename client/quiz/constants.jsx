@@ -6,3 +6,7 @@ export const ANSWER_QUESTION = 'ANSWER_QUESTION';
 export const START_QUIZ = 'START_QUIZ';
 export const ALL_QUIZZES = 'ALL_QUIZZES';
 export const EDIT_QUIZ = 'EDIT_QUIZ';
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const ERROR_MESSAGE = 'ERROR_MESSAGE';
+export const DISPLAY_RESULTS = 'DISPLAY_RESULTS';

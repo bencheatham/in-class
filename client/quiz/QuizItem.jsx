@@ -6,7 +6,7 @@ import Login from '../login/Login'
 import Video from '../video/Video'
 import Drawer from '../containers/Drawer'
 import { submitQuiz, updateQuiz, editQuiz } from './actions'
-import { fetchQuiz } from './socket'
+import { fetchQuiz, seeResults} from './socket'
 
 class QuizItem extends Component {
 
@@ -16,8 +16,11 @@ class QuizItem extends Component {
     this.editQuiz = this.editQuiz.bind(this); 
   }
 
-  sendPopQuiz (e) {
+  sendPopQuiz () {
     fetchQuiz(this.props.name);
+  }
+  seeResults () {
+    fetchResults(this.props.name);
   }
 
   editQuiz () {
@@ -30,6 +33,8 @@ class QuizItem extends Component {
      {this.props.name} 
      <button onClick={this.sendPopQuiz}> Send Pop Quiz</button>
      <button onClick={this.editQuiz}> Edit Quiz</button>
+     <button onClick={this.editQuiz}> View Quiz</button>
+     <button onClick={this.seeResults}> See Results</button>
     </div>
    );
   };
@@ -38,7 +43,6 @@ class QuizItem extends Component {
 function mapStateToProps(state){
   return {
     user: state.user,
-    quiz: state.quiz,
   }
 }
 

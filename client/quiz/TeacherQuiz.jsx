@@ -53,8 +53,8 @@ class TeacherQuiz extends Component {
 function mapStateToProps(state){
   return {
     user: state.user,
-    quiz: state.quiz,
-    quizzes: state.quiz.quizzes,
+    quiz: state.teacherQuiz,
+    quizzes: state.teacherQuiz.quizzes,
     status: state.studentQuiz.status
   }
 }
