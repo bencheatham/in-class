@@ -1,3 +1,4 @@
 export const UPVOTE = 'UPVOTE';
 export const DOWNVOTE = 'DOWNVOTE';
 export const QUESTION = 'QUESTION';
+export const INITIALIZE_QUESTIONS = 'INITIALIZE_QUESTIONS';

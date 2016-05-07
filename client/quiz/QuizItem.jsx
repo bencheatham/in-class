@@ -6,7 +6,7 @@ import Login from '../login/Login'
 import Video from '../video/Video'
 import Drawer from '../containers/Drawer'
 import { submitQuiz, updateQuiz, editQuiz } from './actions'
-import { emitQuiz } from './socket'
+import { fetchQuiz } from './socket'
 
 class QuizItem extends Component {
 
@@ -17,7 +17,7 @@ class QuizItem extends Component {
   }
 
   sendPopQuiz (e) {
-    emitQuiz(this.props.name);
+    fetchQuiz(this.props.name);
   }
 
   editQuiz () {

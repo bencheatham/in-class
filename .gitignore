@@ -6,3 +6,4 @@ database/inclass
 logfile
 .DS_Store
 server/database_old
+npm-debug.log

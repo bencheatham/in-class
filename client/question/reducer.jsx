@@ -1,9 +1,7 @@
 //import _ from 'underscore';
 var _ = require('underscore')
 
-export const UPVOTE = 'UPVOTE';
-export const DOWNVOTE = 'DOWNVOTE';
-export const QUESTION = 'QUESTION';
+import { UPVOTE, QUESTION, INITIALIZE_QUESTIONS } from './constants';
 
 var initialState = {
   questions: [],
@@ -24,6 +22,11 @@ export function questions(state = initialState, action){
         }
         return question; 
       });
+      return {
+        questions: updatedQuestions,
+      }
+    case INITIALIZE_QUESTIONS:
+      var updatedQuestions = action.questionLog;
       return {
         questions: updatedQuestions,
       }

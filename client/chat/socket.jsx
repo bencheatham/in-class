@@ -1,7 +1,10 @@
-import { socket } from '../common/socket';
+import { connectToWebSockets } from '../common/socket';
+
+var socket;
 
 export function initializeWebSockets() {
-
+  socket = connectToWebSockets();
+  
   socket.on('chatMessage-submitted', data => {
     console.log('web socket event')
     this.props.actions.submitChat(data.chatMessage);
@@ -11,7 +14,12 @@ export function initializeWebSockets() {
     console.log('downloading chats')
     this.props.actions.loadChatMessages(data.chatLog);
   });
+
 };
+
+export function closeWebSockets(){
+  socket.disconnect();
+}
 
 export function emitChatMessage(text,name){
   

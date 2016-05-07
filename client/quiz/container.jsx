@@ -18,6 +18,7 @@ class QuizContainer extends Component {
   }
 
   handleSubmission (){
+    console.log(this.refs.title.value,this.props.quiz.quizzes);
     this.props.actions.submitQuiz(this.refs.title.value,this.props.quiz.quizzes);
   }
 
