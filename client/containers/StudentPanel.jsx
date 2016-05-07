@@ -18,10 +18,11 @@ class StudentPanel extends React.Component {
     this.displayModal = this.displayModal.bind(this);
     this.displayTeacherThumbButton = this.displayTeacherThumbButton.bind(this);
     this.displayThumb = this.displayThumb.bind(this);
+    this.openQuizModal = this.openQuizModal.bind(this);
   };
 
-  displayQuiz(){
-    // this.props.quizActions.displayQuiz();
+  openQuizModal(){
+    this.props.quizActions.openQuizModal();
   }
 
   displayThumb(){
@@ -52,13 +53,11 @@ class StudentPanel extends React.Component {
   }
 
   displayQuizButton(){
-    //if (!(this.props.storedQuizzes.length > 0)){
       return (
-        <Button className="btn-warning btn-circle btn-xl">
+        <Button onClick={this.openQuizModal}  className="btn-warning btn-circle btn-xl">
           <Glyphicon glyph="glyphicon glyphicon-question-sign" />
         </Button>
       )
-    //}
   }
 
   displayModal(){

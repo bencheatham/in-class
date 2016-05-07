@@ -5,8 +5,9 @@ import _ from 'underscore'
 import Login from '../login/Login'
 import Video from '../video/Video'
 import Drawer from '../containers/Drawer'
-import { submitQuiz, updateQuiz, editQuiz } from './actions'
+import { fetchResults, submitQuiz, updateQuiz, editQuiz } from './actions'
 import { fetchQuiz, seeResults} from './socket'
+import { Button } from 'react-bootstrap';
 
 class QuizItem extends Component {
 
@@ -14,13 +15,15 @@ class QuizItem extends Component {
     super(props);
     this.sendPopQuiz = this.sendPopQuiz.bind(this);
     this.editQuiz = this.editQuiz.bind(this); 
+    this.seeResults = this.seeResults.bind(this);
   }
 
   sendPopQuiz () {
     fetchQuiz(this.props.name);
   }
+
   seeResults () {
-    fetchResults(this.props.name);
+    this.props.actions.fetchResults(this.props.name);
   }
 
   editQuiz () {
@@ -31,10 +34,10 @@ class QuizItem extends Component {
    return (
      <div> 
      {this.props.name} 
-     <button onClick={this.sendPopQuiz}> Send Pop Quiz</button>
-     <button onClick={this.editQuiz}> Edit Quiz</button>
-     <button onClick={this.editQuiz}> View Quiz</button>
-     <button onClick={this.seeResults}> See Results</button>
+     <Button onClick={this.sendPopQuiz}> Send</Button>
+     <Button onClick={this.editQuiz}> Edit</Button>
+     <Button onClick={this.editQuiz}> View </Button>
+     <Button onClick={this.seeResults}> See Results</Button>
     </div>
    );
   };
@@ -48,7 +51,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    actions: bindActionCreators({ submitQuiz, updateQuiz, editQuiz },dispatch),
+    actions: bindActionCreators({ fetchResults, submitQuiz, updateQuiz, editQuiz },dispatch),
   }
   
   

@@ -55,7 +55,6 @@ class StudentQuiz extends Component {
     return (
       <div>
         {quizzes}
-        <button onClick={this.handleFetch}>Fetch</button>
       </div>
      );
  };

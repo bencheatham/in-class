@@ -108,19 +108,32 @@ export function answerQuestion (answer,lastQuestion) {
   }
 }
 
-export function getAnswers (quizName) {
+export function openQuizModal(){
+  return {
+    type: type.OPEN_MODAL, 
+  }
+}
+
+export function closeQuizModal(){
+  return {
+    type: type.CLOSE_MODAL, 
+  }
+}
+
+export function fetchResults(quizName) {
    return axios.get('/fetch', {params: {title: quizName, answers: true}})
   .then(function(response){
     console.log('response from API',response);
       return {
-        type: type.STORE_RESULTS,
-        payload: response.data
+        type: type.DISPLAY_RESULTS,
       };
     
   })
   .catch(function(response){
       console.log('error',response);
-      return {}
+      return {
+        type: type.DISPLAY_RESULTS,
+      }
   });
 
   return {

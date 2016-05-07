@@ -10,3 +10,4 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const ERROR_MESSAGE = 'ERROR_MESSAGE';
 export const DISPLAY_RESULTS = 'DISPLAY_RESULTS';
+export const BEGIN_QUIZ = 'BEGIN_QUIZ';
