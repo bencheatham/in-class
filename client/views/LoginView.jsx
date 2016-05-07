@@ -11,6 +11,7 @@ import VideoContainer from '../modules/video/containers/VideoContainer';
 import * as UserModalActions from '../modules/questionModal/actions';
 import * as questionModalSockets from '../modules/questionModal/socket';
 import { Button } from 'react-bootstrap';
+import * as UserSockets from '../users/socket';
 require('../stylesheets/styles.scss');
 
 
@@ -27,6 +28,7 @@ class LoginView extends Component {
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
     this.addUserToUserModal = this.addUserToUserModal.bind(this);
 
+    // list of user sockets call
     this.initializeWebSockets = UserActions.initializeWebSockets.bind(this);
     this.getUsersFromClass = UserActions.getUsersFromClass.bind(this);
     this.removeUserFromClass = UserActions.removeUserFromClass.bind(this);

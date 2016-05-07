@@ -15,4 +15,3 @@ export function emitQuiz(quizName){
       file: quizName
     });
 }
-

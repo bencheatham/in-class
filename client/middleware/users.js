@@ -3,7 +3,6 @@ import io from 'socket.io-client';
 import { userJoinedClass } from '../actions/users';
 import { userLeftClass } from '../actions/users';
 import * as actions from '../actions/users';
-import { socket } from '../common/socket';
 
 //const SERVER_URL = 'http://inclass-co.herokuapp.com/';//'http://localhost:8000';
 //const SERVER_URL = 'http://localhost:8000';
@@ -15,33 +14,30 @@ export default function(store) {
   let lastTypingTime;
 
   function initializeWebSockets(actions) {
-    let userActions = actions.userActions;
-
-    socket.on('users_updateUsers', data => {
-      userActions.setUsers(data.users);
-    });
+    // let userActions = actions.userActions;
+    //
+    // socket.on('users_updateUsers', data => {
+    //   userActions.setUsers(data.users);
+    // });
   }
 
   // Sets the client's username
   function setUsername (username) {
-    socket.emit('users_addUser', username);
+    // socket.emit('users_addUser', username);
   };
 
   function getAllUsers() {
-    socket.emit('users_getUsers');
+    // socket.emit('users_getUsers');
   };
 
   // Sets teacher-selected video user and session
   function setTeacherSelectedVideoUser (classUserPac) {
-    socket.emit('teacherSelectedVideoUser', classUserPac);
+    // socket.emit('teacherSelectedVideoUser', classUserPac);
   };
 
   function removeUserFromClass(username) {
-    socket.emit('users_removeUser', username);
+    // socket.emit('users_removeUser', username);
   }
-
-  // Sends a chat message
-  function sendMessage (message) { socket.emit('new message', cleanInput(message)); }
 
   // Prevents input from having injected markup
   function cleanInput (input) { return $('<div/>').text(input).text(); }
@@ -84,7 +80,6 @@ export default function(store) {
 
   var clientActions = {
     'set username': setUsername,
-    'send message': sendMessage,
     'clean input': cleanInput,
     'teacherSelectedVideoUser': setTeacherSelectedVideoUser,
     'getAllUsers': getAllUsers,
@@ -102,9 +97,9 @@ export default function(store) {
     'newClassVideoUser': newClassVideoUser
   };
 
-  for (var key in socketEvents) {
-    socket.on(key, socketEvents[key].bind(socket));
-  }
+  // for (var key in socketEvents) {
+  //   socket.on(key, socketEvents[key].bind(socket));
+  // }
 
   return clientActions;
 
