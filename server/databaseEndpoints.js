@@ -116,6 +116,15 @@ const fetchAnswers = (request, response, username, title) => {
   
 };
 
+const deleteQuiz = (request, response, username, title, database) => {
+  //username is actually the teachername in this case
+  return database.deleteFrom('answers', 'teachername=\'' + username + '\' and title=\'' + title + '\'')
+  .then(() => database.deleteFrom('questions', 'title=\'' + title + '\''))
+  .then(() => database.deleteFrom('users_quizzes_join', 'title=\'' + title + '\''))
+  .then(() => database.deleteFrom('quizzes', 'title=\'' + title + '\''))
+  .then(() => response.status(200).send('deleted quiz'))
+  .catch(() => response.status(400).send('error: ' + 'some issue deleting the quiz...'));
+}
 
 module.exports = (app) => {
 
@@ -123,11 +132,12 @@ module.exports = (app) => {
     var title = request.body.title;
     var test = request.body.test;
     var database = test ? dbTest : db;
-    return database.deleteFrom('questions', 'title=\'' + title + '\'')
-    .then(() => database.deleteFrom('users_quizzes_join', 'title=\'' + title + '\''))
-    .then(() => database.deleteFrom('quizzes', 'title=\'' + title + '\''))
-    .then(() => response.status(200).send('deleted quiz'))
-    .catch(() => response.status(400).send('error: ' + 'some issue deleting the quiz...'));
+    verifyUsername(request,response)
+    .catch((error) => response.status(400).send('error: ' + 'invalid token...'))
+    .then((username) => {
+      console.log('username: ', username);
+      return deleteQuiz(request, response, username, title, database);
+    });
   });
 
   app.post('/save', (request, response) => {
