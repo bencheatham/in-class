@@ -66,10 +66,6 @@ export default function(store) {
     'newClassVideoUser': newClassVideoUser
   };
 
-  // for (var key in socketEvents) {
-  //   socket.on(key, socketEvents[key].bind(socket));
-  // }
-
   return clientActions;
 
 }

@@ -1,12 +1,11 @@
 import * as types from '../constants/ActionTypes';
+import * as sockets from '../users/socket';
 
 export function userLogin(user) {
   if(!user || !user.trim()) return;
 
-  return {
-    type: types.USER_LOGIN,
-    payload: user
-  };
+  sockets.emitAddUserToClass(user);
+  return { type: types.USER_LOGIN, payload: user};
 };
 
 // set the users state
@@ -15,22 +14,13 @@ export function setUsers(users) {
 }
 
 export function selectUser(user){
-  return {
-    type: types.SELECT_USER,
-    payload: user
-  };
+  return { type: types.SELECT_USER, payload: user };
 }
 
 export function userJoinedClass(data) {
-  return {
-    type: types.USER_JOINED_CLASS,
-    payload: data.username
-  };
+  return { type: types.USER_JOINED_CLASS, payload: data.username };
 }
 
 export function userLeftClass(user) {
-  return {
-    type: types.USER_LEFT_CLASS,
-    user: user
-  };
+  return { type: types.USER_LEFT_CLASS, user: user };
 }
