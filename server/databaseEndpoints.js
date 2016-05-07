@@ -119,7 +119,7 @@ const fetchAnswers = (request, response, username, title) => {
         studentAnswers
         .answers
         .split('+++')
-        .map((val) => { var result = val = val.split(':'); return {val: val[1], index: val[0]};});
+        .map((val) => { val = val.split(':'); return {val: val[1], index: val[0]};});
         return studentAnswers;
     });
       data.answers = answers;
