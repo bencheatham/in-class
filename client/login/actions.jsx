@@ -18,7 +18,7 @@ export function signinUser(username, password){
       // } else {
       //   hashHistory.push('/class/teacher');
       // }
-       hashHistory.push('/video');
+       hashHistory.push('/quiz');
     })
     .catch((error)=>{
       dispatch(authError(error.data));
@@ -42,7 +42,7 @@ export function signupUser(username, password,usertype){
       }
 
       // change the following to anywhere for testing
-      hashHistory.push('/video');
+      hashHistory.push('/quiz');
     })
     .catch((error)=>{
       dispatch(authError(error.data));

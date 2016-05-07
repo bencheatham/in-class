@@ -7,7 +7,6 @@ const initState = {
 function userVideoModal(state=initState, action){
   switch(action.type) {
     case actions.USER_VIDEO_MODAL_SHOW:
-      console.log('hit USER_VIDEO_MODAL_SHOW');
       return { visible: true };
     case actions.USER_VIDEO_MODAL_HIDE:
       return { visible: false};
