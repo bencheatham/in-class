@@ -6,9 +6,6 @@ const cookieParser = require('cookie-parser');
 var app = express();
 module.exports = app;
 
-var handler = require('./requestHandler.js');
-
-
 
 /////*****/////*****/////*****/////*****/////*****
 // middleware
