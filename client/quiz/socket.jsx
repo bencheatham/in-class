@@ -5,7 +5,7 @@ var socket;
 
 export function initializeWebSockets() {
   socket = connectToWebSockets();
-  
+
   socket.on('pop-quiz', data => {
     console.log('downloading pop-quiz',data)
     this.props.actions.startQuiz(data.quiz);
@@ -19,9 +19,8 @@ function emitQuiz(quiz){
     });
 }
 
-
 export function fetchQuiz(quizName){
-  
+
   axios.get('/fetch', {params: {title: quizName}})
   .then(function(response){
     console.log(response);
@@ -30,7 +29,5 @@ export function fetchQuiz(quizName){
   })
   .catch(function(response){
     console.log('fetch error',response);
-  }) 
+  })
 }
-
-

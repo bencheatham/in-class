@@ -11,6 +11,7 @@ import VideoContainer from '../modules/video/containers/VideoContainer';
 import * as UserModalActions from '../modules/questionModal/actions';
 import * as questionModalSockets from '../modules/questionModal/socket';
 import { Button } from 'react-bootstrap';
+import * as UserSockets from '../users/socket';
 require('../stylesheets/styles.scss');
 
 
@@ -20,93 +21,48 @@ class LoginView extends Component {
     super(props);
     this.state = { term: '' };
 
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.videoCallUser = this.videoCallUser.bind(this);
-
+    // question modal actions
     this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
-    this.addUserToUserModal = this.addUserToUserModal.bind(this);
+
+    // list of user sockets call
+    this.initializeWebSockets = UserSockets.initializeWebSockets.bind(this);
+    this.emitGetAllUsersFromClass = UserSockets.emitGetAllUsersFromClass.bind(this);
+    this.emitRemoveUserFromClass = UserSockets.emitRemoveUserFromClass.bind(this);
   }
 
   componentDidMount() {
-    this.initQuestionModalSocket({
-      modalActions: this.props.userModalActions,
-      videoActions: this.props.videoActions
+    // TODO: disable the question queue for now
+    // this.initQuestionModalSocket({
+    //   modalActions: this.props.userModalActions,
+    //   videoActions: this.props.videoActions
+    // });
+
+    this.initializeWebSockets({
+      userActions: this.props.userActions
     });
-  }
 
-  onInputChange(event) {
-    this.setState({ term: event.target.value });
+    let username = this.props.loginState.username;
+    this.props.userActions.userLogin(username);
+    this.emitGetAllUsersFromClass();
 
-  }
-
-  onFormSubmit(event) {
-    const userActions = this.props.userActions;
-
-    event.preventDefault();
-    userActions.userLogin(this.state.term);
-  }
-
-  // @deprecated
-  makeCall(user) {
-    if (!window.phone) alert("Login First!");
-    else {
-      console.log('dialing here');
-      window.phone.dial(user);
-    }
-  }
-
-  // @deprecated
-  videoCallUser(user){
-    const videoActions = this.props.videoActions;
-
-    let ball = {
-      calledUser: user,
-      callingUser: this.props.username
-    };
-
-    videoActions.userCallUser(ball);
-    this.makeCall(user);
-  }
-
-  // @deprecated
-  renderUserList(users) {
-    return users.map((user) => {
-      return (
-        <li
-          key={user}
-          onClick={() => this.videoCallUser(user)}
-          className="list-group-item user-video-link">
-          {user} Joined the Class.</li>
-      );
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.emitRemoveUserFromClass(username);
     });
   };
 
-  addUserToUserModal() {
-    if (!this.props.username.trim()) return;
-    this.emitAddNewUser(this.props.username);
+  componentWillUnmount() {
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.removeEventListener('beforeunload');
+    });
   };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.onFormSubmit} className="input-group">
-          <input
-            placeholder="Username"
-            className="form-control"
-            value={this.state.term}
-            onChange={this.onInputChange} />
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Submit</button>
-          </span>
-        </form>
-
-        <div>
-          <VideoContainer username={this.props.username} />
-        </div>
-
-        <button onClick={this.addUserToUserModal}>Post Question</button>
+        <VideoContainer />
         <Drawer />
         <TeacherPanel />
 
@@ -120,7 +76,8 @@ function mapStateToProps(state) {
   return {
     users: state.Users.users,
     username: state.Users.username,
-    calledUser: state.video.calledUser
+    calledUser: state.video.calledUser,
+    loginState: state.user
   };
 }
 

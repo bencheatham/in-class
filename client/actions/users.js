@@ -1,109 +1,26 @@
 import * as types from '../constants/ActionTypes';
-import initializeUsers from '../middleware/users';
-//import { pushState } from 'redux-router';
-
-
-const worker = initializeUsers();
-
+import * as sockets from '../users/socket';
 
 export function userLogin(user) {
+  if(!user || !user.trim()) return;
 
- worker['set username'](user);
+  sockets.emitAddUserToClass(user);
+  return { type: types.USER_LOGIN, payload: user};
+};
 
- return {
-   type: types.USER_LOGIN,
-   payload: user
- };
+// set the users state
+export function setUsers(users) {
+  return { type: types.USERS_SET_USERS, users: users };
 }
 
-
-
-
-// export function userLogin(username, password, redirect="/student-class-view") {
-//     return function(dispatch) {
-//         dispatch(loginUserRequest());
-//         return fetch('http://localhost:8000/auth/getToken/', {
-//             method: 'post',
-//             credentials: 'include',
-//             headers: {
-//                 'Accept': 'application/json',
-//                 'Content-Type': 'application/json'
-//             },
-//                 body: JSON.stringify({username: username, password: password})
-//             })
-//             .then(
-//               dispatch(pushState(null, redirect));
-//                worker['set username'](user);
-//             )
-//             .then(
-//                return {
-//                  type: types.USER_LOGIN,
-//                  payload: user
-//                };
-//               )
-//     }
-// }
-
-
-
 export function selectUser(user){
-  
-  console.log('IN selectUser: ', user);
-
- return {
-   type: types.SELECT_USER,
-   payload: user
- };
+  return { type: types.SELECT_USER, payload: user };
 }
 
 export function userJoinedClass(data) {
-
-  console.log('user joined action: ', data)
-
-  return {
-    type: types.USER_JOINED_CLASS,
-    payload: data.username
-  };
+  return { type: types.USER_JOINED_CLASS, payload: data.username };
 }
 
-export function userLeftClass(data) {
-
-  console.log('user left action: ', data)
-
-  return {
-   type: types.USER_LEFT_CLASS,
-   payload: data
-  };
+export function userLeftClass(user) {
+  return { type: types.USER_LEFT_CLASS, user: user };
 }
-
-// import axios from 'axios';
-
-
-// export default function(user) {
-
-//   axios.post('/user', {
-//     username: 'Fred',
-//     password: 'Flintstone'
-//   })
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (response) {
-//     console.log(response);
-//   });
-
-
-
-
-
-
-//   return {
-//     type: LOGIN_USER,
-//     payload: request
-//   }
-
-// }
-
-
-
-
