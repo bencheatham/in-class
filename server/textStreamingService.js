@@ -1,11 +1,16 @@
-var questionsModule = require('../client/question/server.jsx').module;
+var questionSocketEvents = require('../client/question/server.jsx').module.questionEvents;
+var quizSocketEvents = require('../client/quiz/server.jsx').module.quizEvents;
+var chatSocketEvents = require('../client/chat/server.jsx').module.chatEvents;
+var questionModal = require('./sockets/questionModal.js').module;
+var thumbSocketEvents = require('../client/thumbs/server.jsx').module.thumbEvents;
+
 var _ = require('underscore');
 
 module.exports = function initializeChatStreaming (server) {
-	
+
 	var io = require('socket.io')(server);
   var numUsers = 0;
-  
+
 	function newMessage (message) {
 	  // console.log('new message: ', message);
 	  // tell the client to execute 'new message'
@@ -51,7 +56,6 @@ module.exports = function initializeChatStreaming (server) {
 
  }
 
-
 	var socketEvents = {
 	  'new message': newMessage,
 	  'add user': addUser,
@@ -62,7 +66,17 @@ module.exports = function initializeChatStreaming (server) {
 	  'teacherSelectedVideoUser' : tellUsersStudentIsOnVideo
 	};
 
-	var allSocketEvents = _.extend(socketEvents,questionsModule.questionEvents);
+	var socketList = [
+		questionSocketEvents,
+		quizSocketEvents,
+		chatSocketEvents,
+		questionModal.socketEvents,
+		thumbSocketEvents
+	];
+
+	var allSocketEvents = _.reduce(socketList, function(memo, eventList){
+		return _.extend(memo, eventList);
+	}, socketEvents);
 
 	io.on('connection', function (socket) {
 		for (var key in allSocketEvents) { socket.on(key, allSocketEvents[key].bind(socket)); }

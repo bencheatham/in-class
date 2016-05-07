@@ -5,16 +5,12 @@ var questionLog = [];
 var questionEvents = {
   'question-submitted': questionSubmitted,
   'upvote': upvote,
-  'login': login,
+  'init-questions': initializeQuestions,
 }
 
-function login (data){
-  this.emit('login', {
-    username: data.username
-  })
-  this.broadcast.emit('login', {
-    username: data.username
-  })
+function initializeQuestions (){
+  console.log('sending all questions')
+  this.emit('init-questions', { questionLog: questionLog});
 }
 
 function upvote (data){
@@ -28,7 +24,6 @@ function upvote (data){
     this.emit('upvote', { id: id, username: username })
     this.broadcast.emit('upvote', { id: id, username: username })
     questionLog[id].upvotes.push(username);  
-  
     console.log('upvote received',questionLog[id].upvotes);
   }
 }
@@ -39,7 +34,7 @@ function questionSubmitted(question){
   })
   console.log('question about to be broadcasted',question)
 
-  this.emit('questionWithID', { question: question})
+  this.emit('question-returned-with-id', { question: question})
   this.broadcast.emit('question-submitted', { question: question});
   questionLog.push(question);
 }

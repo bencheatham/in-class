@@ -7,10 +7,11 @@ import * as UserActions from '../actions/users';
 import * as VideoActions from '../modules/video/actions';
 import Drawer from '../containers/Drawer';
 import TeacherPanel from '../containers/TeacherPanel';
-
 import VideoContainer from '../modules/video/containers/VideoContainer';
+import * as UserModalActions from '../modules/questionModal/actions';
+import * as questionModalSockets from '../modules/questionModal/socket';
+import { Button } from 'react-bootstrap';
 require('../stylesheets/styles.scss');
-//import { initializeWebSockets, emitNewVideoUser } from '../modules/video/api/socket';
 
 
 class LoginView extends Component {
@@ -19,17 +20,21 @@ class LoginView extends Component {
     super(props);
     this.state = { term: '' };
 
-
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.videoCallUser = this.videoCallUser.bind(this);
-    //this.initializeWebSockets = initializeWebSockets.bind(this);  
 
+    this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
+    this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
+    this.addUserToUserModal = this.addUserToUserModal.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.initializeWebSockets();
-  // }
+  componentDidMount() {
+    this.initQuestionModalSocket({
+      modalActions: this.props.userModalActions,
+      videoActions: this.props.videoActions
+    });
+  }
 
   onInputChange(event) {
     this.setState({ term: event.target.value });
@@ -43,6 +48,16 @@ class LoginView extends Component {
     userActions.userLogin(this.state.term);
   }
 
+  // @deprecated
+  makeCall(user) {
+    if (!window.phone) alert("Login First!");
+    else {
+      console.log('dialing here');
+      window.phone.dial(user);
+    }
+  }
+
+  // @deprecated
   videoCallUser(user){
     const videoActions = this.props.videoActions;
 
@@ -52,60 +67,51 @@ class LoginView extends Component {
     };
 
     videoActions.userCallUser(ball);
+    this.makeCall(user);
   }
 
-
+  // @deprecated
   renderUserList(users) {
-   console.log('HEREERERE', users)
     return users.map((user) => {
       return (
-        <li 
+        <li
           key={user}
           onClick={() => this.videoCallUser(user)}
           className="list-group-item user-video-link">
           {user} Joined the Class.</li>
       );
     });
-  }
+  };
 
+  addUserToUserModal() {
+    if (!this.props.username.trim()) return;
+    this.emitAddNewUser(this.props.username);
+  };
 
   render() {
-
-
-  console.log('did username get in', this.props.actions )
-
     return (
-
       <div>
-
         <form onSubmit={this.onFormSubmit} className="input-group">
           <input
             placeholder="Username"
             className="form-control"
             value={this.state.term}
             onChange={this.onInputChange} />
-
           <span className="input-group-btn">
             <button type="submit" className="btn btn-secondary">Submit</button>
           </span>
         </form>
 
-        <ul>
-        {this.renderUserList(this.props.users)}
+        <div>
+          <VideoContainer username={this.props.username} />
+        </div>
 
-        </ul>
-      <div>
+        <button onClick={this.addUserToUserModal}>Post Question</button>
         <Drawer />
         <TeacherPanel />
-        <VideoContainer username={this.props.username} />
 
       </div>
-
-    </div>
-
-
     );
-
   };
 }
 
@@ -121,11 +127,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
    userActions: bindActionCreators(UserActions, dispatch),
-   videoActions: bindActionCreators(VideoActions, dispatch)
+   videoActions: bindActionCreators(VideoActions, dispatch),
+   userModalActions: bindActionCreators(UserModalActions, dispatch)
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
-
-
-

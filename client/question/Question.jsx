@@ -19,8 +19,9 @@ class Question extends React.Component{
     var { question, actions, index, user } = this.props;
     return (<div>
       
-      <span onClick={() => this.handleClick(question.id)}> <span className="glyphicon glyphicon-search" aria-hidden="true"></span> [UPVOTE]</span>
-      {index + 1}. {question.username}: {question.text} ---
+      <span onClick={() => this.handleClick(question.id)}> 
+      <span className="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></span>
+       {question.username}: {question.text} ---
       votes: {question.upvotes.length}
       
       </div>)

@@ -6,10 +6,7 @@ import { selectUser } from '../actions/users';
 import * as UserActions from '../actions/users';
 import VideoContainer from '../modules/video/containers/VideoContainer';
 
- 
-
 class UserPage extends Component {
-
   constructor(props) {
     super(props);
     this.state = { term: '' };
@@ -34,10 +31,9 @@ class UserPage extends Component {
 
 
   renderUserList(users) {
-   console.log('HEREERERE', users)
     return users.map((user) => {
       return (
-        <li 
+        <li
           key={user}
           //onClick={() => this.props.selectUser(user)}
           className="list-group-item">
@@ -104,6 +100,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
-
-
-

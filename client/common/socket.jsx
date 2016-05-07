@@ -1,5 +1,23 @@
-import socket from 'socket.io-client';
-if (process.env.NODE_ENV === 'production') {var io = socket().connect('https://in-class.herokuapp.com');}
-else {var io = socket().connect('http://localhost:8000');}
+import io from 'socket.io-client';
+// import chatSocketListeners from '../chat/socket'
+// import questionSocketListeners from '../question/socket'
+// import quizSocketListeners from '../quiz/socket'
+// import thumbSocketListeners from '../thumbs/socket'
 
-export {io};
+var websocket;
+
+export function connectToWebSockets(){
+  websocket = (process.env.NODE_ENV === 'production')? io().connect('https://in-class.herokuapp.com'): io().connect('http://localhost:8000');
+  return websocket;
+}
+
+export function initiateWebSocketListeners (){
+  // chatSocketListeners(websocket);
+  // questionSocketListeners(socket);
+  // quizSocketListeners(socket);
+  // thumbSocketListeners(socket);
+}
+
+export function disconnectFromWebSocket (){
+  websocket.disconnet();
+}

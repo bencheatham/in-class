@@ -4,7 +4,7 @@ const chaiAsPromised = require('chai-as-promised');
 const expect = chai.expect;
 chai.use(chaiAsPromised);
 const axios = require('axios');
-const db = require(__dirname + '/../../database/database.js')(__dirname + '/../../../database/authentication-test.sqlite3');
+const db = require(__dirname + '/../../database/database.js')('test');
 
 var cookie;
 
@@ -15,7 +15,7 @@ describe('Authentication Unit Tests', function() {
 
   it('should block the protected page', function() {
     return expect(
-      axios.get('http://localhost:8000/protected')
+      axios.get('http://localhost:8000/authentication')
       .catch(function (error) { return Promise.resolve(error); })
       .then(function (res) { return Promise.resolve(res.status); })
     ).to.eventually.equal(400);
@@ -28,7 +28,7 @@ describe('Authentication Unit Tests', function() {
 
   it('should create a session token and save it as a cookie', function () {
     return expect(
-      axios.post('http://localhost:8000/signup?test=true', {username: 'louie', password: 'password123'})
+      axios.post('http://localhost:8000/signup?test=true', {username: 'louie', password: 'password123', usertype: 'student'})
       .then(function (res) { 
         cookie = res.headers['set-cookie'][0].split(';')[0];
         return Promise.resolve(res.status);
