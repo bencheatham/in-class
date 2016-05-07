@@ -2,28 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from 'react-bootstrap';
-import * as ModalActions from '../actions/userVideoModal';
+import StudentQuiz from './StudentQuiz';
 
-
-class Modal extends React.Component {
+class QuizModal extends React.Component {
 
   constructor(props){
     super(props);
-    this.hide = this.hide.bind(this);
-  };
-
-  hide() {
-    console.log('hiding')
-    //this.props.actions.hide();
-  };
+  }
 
   render() {
-    const { visible } = this.props;
-
-    return (<div>
-      <Modal>
+    var quiz = this.props.storedQuizzes;
+    var status = 1;
+    return (
+      <div>
+      <Modal show={false}>
         <Modal.Header>
-          <Modal.Title>Test</Modal.Title>
+          <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body>
         </Modal.Body>
@@ -37,19 +31,18 @@ class Modal extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    visible: state.userVideoModal.visible,
-    session: state.video.videoSession,
-    username: state.Users.username
+    displayModal: state.studentQuiz.displayModal,
+    storedQuizzes: state.studentQuiz.storedQuizzes
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(ModalActions, dispatch),
+    
   };
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Modal);
+)(QuizModal);

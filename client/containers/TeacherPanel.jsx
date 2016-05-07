@@ -34,8 +34,13 @@ class TeacherPanel extends React.Component {
         <Button className="btn-success btn-circle btn-xl" onClick={this.showStudentVideo}>
            <Glyphicon glyph="glyphicon glyphicon-film" />
         </Button>
+        <Button
+            onClick={this.showQuestionModal}>
+           <Glyphicon glyph="glyphicon glyphicon-film" />
+        </Button>
 
         <UserVideoModal />
+        <QuestionModal />
       </div>
     );
   };

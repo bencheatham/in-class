@@ -8,12 +8,15 @@ function emitThumbCheck () {
 }
 
 function emitThumbResponse (data) {
-  console.log('student submitted thumb event!')
-  teachers.forEach(function(teacher){
-      teacher.emit('thumb-student', {
-        thumb: data.thumb
-      });  
-  });
+  console.log('student submitted thumb event!',data.thumb);
+  thumbLog.push(data);
+  console.log(thumbLog);
+
+  // teachers.forEach(function(teacher){
+  //     teacher.emit('thumb-student', {
+  //       thumb: data.thumb
+  //     });  
+  // });
 }
 
 var thumbEvents = {

@@ -9,7 +9,6 @@ var questionEvents = {
 }
 
 function initializeQuestions (){
-  console.log('sending all questions')
   this.emit('init-questions', { questionLog: questionLog});
 }
 

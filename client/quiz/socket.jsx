@@ -7,8 +7,7 @@ export function initializeWebSockets() {
   socket = connectToWebSockets();
 
   socket.on('pop-quiz', data => {
-    console.log('downloading pop-quiz',data)
-    this.props.actions.startQuiz(data.quiz);
+    this.props.actions.storePopQuiz(data.quiz.quiz);
   });
 };
 

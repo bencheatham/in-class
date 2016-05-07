@@ -1,2 +1,4 @@
 export const THUMB_CHECK = 'THUMB_CHECK';
 export const THUMB_SUBMITTED = 'THUMB_SUBMITTED';
+export const BEGIN_THUMBCHECK = 'BEGIN_THUMBCHECK';
+export const HIDE_MODAL = 'HIDE_MODAL';

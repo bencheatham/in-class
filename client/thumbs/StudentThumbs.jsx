@@ -27,9 +27,9 @@ class StudentThumbs extends Component {
     var { username } = this.props;
     
     return (
-      <div> ThumbsBox
+      <div>
         <button value="up" onClick={this.handleClick}>Up</button>
-        <button value="neutral" onClick={this.handleClick} >Neutral</button>
+        <button value="neutral" onClick={this.handleClick}>Neutral</button>
         <button value="down" onClick={this.handleClick} >Down</button>
       </div>);
   }

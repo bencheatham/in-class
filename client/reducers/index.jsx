@@ -1,7 +1,7 @@
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import drawer from './drawer';
-import quiz from '../quiz/teacher-reducer';
+import teacherQuiz from '../quiz/teacher-reducer';
 import studentQuiz from '../quiz/student-reducer';
 import Users from './user';
 import questions from '../question/reducer';
@@ -14,7 +14,7 @@ import thumbsReducer from '../thumbs/reducer'
 
 const rootReducer = combineReducers({
   routing,
-  quiz,
+  teacherQuiz,
   Users,
   questions,
   drawer,
