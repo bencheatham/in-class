@@ -17,7 +17,7 @@ function handleLogin(req, res) {
     return void 0;
   }
 
-  database.fetch('users', 'password, usertype', 'username=\'' + username + '\'')
+  return database.fetch('users', 'password, usertype', 'username=\'' + username + '\'')
   .then(function (user) {
     // console.log(user);
     if (user.length === 1) {
@@ -36,14 +36,14 @@ function handleLogin(req, res) {
   })
   .then(function () {
     var token = jwt.sign({username: username, usertype: usertype}, secret);
-    res.cookie('authorization', 'Bearer ' + token).status(200).send({cookie: 'authorization=Bearer ' + token, username: username, usertype: usertype});
+    return res.cookie('authorization', 'Bearer ' + token).status(200).send({cookie: 'authorization=Bearer ' + token, username: username, usertype: usertype});
  
     console.log('usertype: ', usertype);
     
   })
   .catch(function (error){
     console.error(error);
-    res.status(400).send(error);
+    return res.status(400).send(error);
   });
 }
 
@@ -54,6 +54,7 @@ function handleSignup(req, res) {
   var test = req.query.test;
   var database = test ? dbTest : db;
 
+console.log('is test: ', test);
   
 
   if (typeof username !== 'string' || typeof username !== 'string') {
@@ -63,9 +64,10 @@ function handleSignup(req, res) {
 
 
   // check if username is taken then create new user if the name is unique
-  database.fetch('users', '*', 'username = "' + username + '"')
-  .catch((error) => [])
+  return database.fetch('users', 'username', 'username=\'' + username + '\'')
+  .catch((error) => {console.log('fetch error: ' + error); return [];})
   .then(function (existingUser) {
+console.log('existing: ', existingUser);
     if (existingUser.length > 0) {
       return Promise.reject('username already exists');
     } else {
@@ -77,15 +79,13 @@ function handleSignup(req, res) {
   })
   .then(function () {
     var token = jwt.sign({username: username, usertype: usertype}, secret);
-    res.cookie('authorization', 'Bearer ' + token).status(200).send({cookie: 'authorization=Bearer ' + token, username: username, usertype: usertype});
-
     console.log('usertype: ', usertype);
-
-    return Promise.resolve();
+    return res.cookie('authorization', 'Bearer ' + token).status(200).send({cookie: 'authorization=Bearer ' + token, username: username, usertype: usertype});
   })
   .catch(function (error){
     console.error(error);
-    res.status(400).send(error);
+    console.log('caught error');
+    return res.status(400).send(error);
   });
 }
 

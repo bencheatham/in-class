@@ -1,4 +1,7 @@
 
+
+
+
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const expect = chai.expect;
@@ -21,9 +24,8 @@ describe('Authentication Unit Tests', function() {
     ).to.eventually.equal(400);
   });
   
-  it('should wipe the test database before the following tests', function () {
-    db.initialize(true); // reset the tables;
-    expect(true).to.equal(true);
+  it('should wipe the test database before the following tests', function (done) {
+    db.initialize(true, done); // reset the tables;
   });
 
   it('should create a session token and save it as a cookie', function () {

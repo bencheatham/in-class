@@ -103,7 +103,12 @@ const fetchQuiz = (request, response, username, title, database) => {
 };
 
 const saveAnswers = (request, response, username, answers) => {
-  return db.insertInto('answers', {teachername: answers.teachername, username: username, title: answers.title, answers: answers.answers.map(function (ans) { return '' + ans.index + ':' + ans.answer;}).join('+++'), created: Date.now()})
+  return db.fetch('answers', '*', 'username=\'' + username + '\' and title=\'' + answers.title + '\'')
+  .then((results) => {
+    if (results.length > 0) { return Promise.reject('not a unique student answer'); }
+    return 'continue';
+  })
+  .then(() => db.insertInto('answers', {teachername: answers.teachername, username: username, title: answers.title, answers: answers.answers.map(function (ans) { return '' + ans.index + ':' + ans.answer;}).join('+++'), created: Date.now()}))
   .then(() => response.status(201).send('created'))
   .catch((error) => response.status(400).send('error: ' + 'some issue saving the answers...'));
 };
