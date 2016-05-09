@@ -12,6 +12,8 @@ function emitThumbResponse (data) {
   thumbLog.push(data);
   console.log(thumbLog);
 
+console.log(teachers);
+
   // teachers.forEach(function(teacher){
   //     teacher.emit('thumb-student', {
   //       thumb: data.thumb
