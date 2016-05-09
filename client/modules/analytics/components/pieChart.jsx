@@ -74,7 +74,7 @@ export default class SimplePie extends Component {
     //   }
     // });
 
-    return (<PieChart data={pieData} options={pieOptions}/>);
+    return (<PieChart data={pieData} options={pieOptions} width="600" height="250"/>);
   };
 
   // populateResults() {

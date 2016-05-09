@@ -18,9 +18,8 @@ import SignUp from '../login/SignUp';
 import SignOut from '../login/SignOut';
 import About from '../login/About';
 import SocketManager from '../common/SocketManager';
-import SimplePie from '../modules/analytics/components/pieChart';
-import SimpleBar from '../modules/analytics/components/barChart';
-import HonestBar from '../modules/analytics/components/HonestBar';
+import Analytics from '../modules/analytics/containers/analytics_container';
+
 
 export default (
   <Route>
@@ -54,7 +53,7 @@ export default (
       <Route path="/chat"
            component={ChatContainer} />
       <Route path="/hello" 
-           component={HonestBar}/>
+           component={Analytics}/>
 
   </Route>
 );
