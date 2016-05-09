@@ -7,12 +7,12 @@ import LoginView from '../views/LoginView';
 import Login from '../login/Login';
 import Quiz from '../containers/QuizPage';
 import StudentClassView from '../views/StudentClassView';
+import TeacherClassView from '../views/TeacherClassView';
 import UserPage from '../containers/UserPage';
 import axios from 'axios';
 import QuizContainer from '../quiz/container';
 import StudentQuiz from '../quiz/StudentQuiz';
 import TeacherQuiz from '../quiz/TeacherQuiz';
-import ChatContainer from '../chat/container';
 import RequireAuth from '../login/auth';
 import SignUp from '../login/SignUp';
 import SignOut from '../login/SignOut';
@@ -28,8 +28,6 @@ export default (
             component={RequireAuth(SignUp)} />
     <Route path="/sign-out"
             component={RequireAuth(SignOut)} />  
-    <Route path="/about"
-            component={RequireAuth(About)} />  
     <Route path="/video"
            component={LoginView} />
     <Route path="/quiz"
@@ -38,8 +36,10 @@ export default (
            component={RequireAuth(Thumbs)}/>
     <Route path="/question"
            component={QuestionContainer}/>
-    <Route path="/student-class"
-           component={StudentClassView}/>
+    <Route path="/classroom/student"
+           component={RequireAuth(StudentClassView)}/>
+    <Route path="/classroom/teacher"
+           component={RequireAuth(TeacherClassView)}/>       
     <Route path="/user"
            component={UserPage}/>
      <Route path="/create-quiz"
@@ -48,7 +48,5 @@ export default (
            component={StudentQuiz}/>
       <Route path="/send-quiz"
            component={TeacherQuiz} />
-      <Route path="/chat"
-           component={ChatContainer} />
   </Route>
 );

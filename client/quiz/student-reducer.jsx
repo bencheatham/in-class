@@ -1,41 +1,49 @@
-import { ANSWER_QUESTION, CLOSE_MODAL, QUIZ_FETCH,START_QUIZ } from './constants';
+import * as type from './constants';
 
 var dummyStoredQuizzes = {"title":"AnimalTalk","questions":[{"index":1,"question":"What is a dog?","choices":["Red","Green","Orange ","Yellow"],"answer":"Red"},{"index":1,"question":"What is a dog?","choices":["Red","Green","Orange ","Yellow"],"answer":"Red"}]}
 
 var initialState = {
   status: 0,
   answers: [],
-  storedQuizzes: dummyStoredQuizzes,
+  storedQuizzes: [],
   displayModal: false,
+  quizLive: false,
 }
 
 export default function quiz(state = initialState, action){
 
   switch (action.type) {
-    case START_QUIZ:
+    case type.STORE_QUIZ:
       var newStoredQuizzes = action.quiz;
-      var newCount = state.status + 1;
       return {
-        status: newCount,
-        answers: state.answers,
+        ...state,
+        status: 0,
+        answers: [],
         storedQuizzes: newStoredQuizzes,
-        displayModal: true,
+        quizLive: true,
       }
-    case ANSWER_QUESTION:   
+    case type.ANSWER_QUESTION:   
       var newCount = state.status + 1;
       var newAnswer = state.answers.concat(action.answer);
       return {
+        ...state,
         status: newCount,
         answers: newAnswer,
-        storedQuizzes: state.storedQuizzes,
-        displayModal: state.displayModal,
       }
-    case CLOSE_MODAL:
+    case type.OPEN_STUDENT_MODAL:
       return {
-        status: state.status,
-        answers:  state.status,
-        storedQuizzes: state.storedQuizzes,
+        ...state,
+        displayModal: true,
+    }
+    case type.CLOSE_STUDENT_MODAL:
+      return {
+        ...state,
         displayModal: false,
+    }
+    case type.END_QUIZ:
+      return {
+        ...state,
+        quizLive: false,
       }
     default: 
       return state;

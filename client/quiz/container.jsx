@@ -5,6 +5,7 @@ import Login from '../login/Login'
 import CreateQuiz from '../quiz/CreateQuiz'
 import Drawer from '../containers/Drawer'
 import { addQuizForm, submitQuiz, fetchQuiz} from './actions'
+import Header from '../login/Header';
 
 class QuizContainer extends Component {
   constructor (props){
@@ -29,6 +30,7 @@ class QuizContainer extends Component {
     }
     return (
       <div>
+        <Header />
         <span><h1>Create a new quiz.</h1></span>
         <span>Quiz title:</span>
         <input type="text" ref="title"></input>

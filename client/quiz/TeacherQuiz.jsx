@@ -9,13 +9,13 @@ import {initializeWebSockets} from './socket';
 class TeacherQuiz extends Component {
   constructor (props){
     super(props);
-    this.initializeWebSockets = initializeWebSockets.bind(this);
     this.handleFetch = this.handleFetch.bind(this);
     this.displayQuizList = this.displayQuizList.bind(this);
+    this.initializeWebSockets = initializeWebSockets.bind(this);
   }
   componentWillMount (){
-    this.initializeWebSockets();
     this.handleFetch();
+    this.initializeWebSockets();
   }
 
   handleFetch(){

@@ -1,72 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { userLogin } from '../actions/users';
-import { selectUser } from '../actions/users';
-import * as UserActions from '../actions/users';
-import VideoContainer from '../modules/video/containers/VideoContainer';
- 
+import StudentPanel from '../containers/StudentPanel';
+import Header from '../login/Header'; 
+import QuizModal from '../quiz/QuizModal';
+import { initializeWebSockets as initThumbWebSockets } from '../thumbs/socket';
+import { initializeWebSockets as initQuizWebSockets } from '../quiz/socket';
+import * as quizActions from '../quiz/actions';
+import * as thumbActions from '../thumbs/actions';
+import StudentThumbsModal from '../thumbs/StudentThumbsModal';
+import Drawer from '../containers/Drawer';
 
 class StudentClassview extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { term: '' };
-
-
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.initThumbWebSockets = initThumbWebSockets.bind(this);
+    this.initQuizWebSockets = initQuizWebSockets.bind(this);
   }
 
-  onInputChange(event) {
-    this.setState({ term: event.target.value });
-
+  componentWillMount () {
+    this.initThumbWebSockets();
+    this.initQuizWebSockets();
   }
-
-  onFormSubmit(event) {
-    const actions = this.props.actions;
-
-    event.preventDefault();
-    actions.userLogin(this.state.term);
-    //actions.userLogin(username);
-  }
-
-
-  renderUserList(users) {
-   console.log('HEREERERE', users)
-    return users.map((user) => {
-      return (
-        <li 
-          key={user}
-          //onClick={() => this.props.selectUser(user)}
-          className="list-group-item">
-          {user} Joined the Class.</li>
-      );
-  });
-  }
-
 
   render() {
 
-
-  console.log('did username get in', this.props.actions )
-
     return (
       <div>
-
-        <ul>
-        {this.renderUserList(this.props.users)}
-
-        </ul>
-
-        <div>
-        <VideoContainer />
-        </div>
-
-
+        <Header />
+        <StudentPanel />
+        <QuizModal />
+        <StudentThumbsModal />
+        <Drawer />
       </div>
-
-
     );
 
   };
@@ -74,19 +41,15 @@ class StudentClassview extends Component {
 
 function mapStateToProps(state) {
 
-   console.log('LETS LOOK AT STATE: ', state)
-
   return {
-    users: state.Users.users,
-    username: state.Users.username
+    
   };
 }
 
 function mapDispatchToProps(dispatch) {
-
   return {
-
-   actions: bindActionCreators(UserActions, dispatch)
+    quizActions: bindActionCreators(quizActions,dispatch),
+    thumbActions: bindActionCreators(thumbActions,dispatch),
   }
 }
 

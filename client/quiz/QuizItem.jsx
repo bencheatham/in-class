@@ -19,7 +19,7 @@ class QuizItem extends Component {
   }
 
   sendPopQuiz () {
-    fetchQuiz(this.props.name);
+    fetchQuiz(this.props.name, this.props.user.username);
   }
 
   seeResults () {

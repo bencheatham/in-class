@@ -5,7 +5,7 @@ import * as DrawerActions from '../actions/drawer';
 import Quiz from '../components/Quiz';
 require('../stylesheets/drawer.scss');
 import QuestionContainer from '../question/container';
-import ChatContainer from '../chat/container';
+import ChatBox from '../chat/ChatBox';
 
 class Drawer extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class Drawer extends React.Component {
           </div>
 
           <div id="panels" className={visibility ? " visible" : ""}>
-            <div style={{display: panel === PANEL_CHAT ? '' : 'none'}}><ChatContainer/></div>
+            <div style={{display: panel === PANEL_CHAT ? '' : 'none'}}><ChatBox/></div>
             <div style={{display: panel === PANEL_QUESTIONS ? '' : 'none'}}><QuestionContainer/></div>
           </div>
         </div>
