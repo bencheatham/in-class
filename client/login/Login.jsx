@@ -25,8 +25,9 @@ class Login extends Component {
   
   handleEnter(event) {
     if (event.keyCode === 13){
-      emitLogin(event);
-      this.props.actions.login(event.target.value)
+      var username = this.refs.username.value;
+      var password = this.refs.password.value;
+      this.props.actions.signinUser(username, password);
       event.target.value = '';
     }
   }

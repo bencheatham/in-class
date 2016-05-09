@@ -4,8 +4,7 @@ import * as type from './constants';
 
 export function submitQuiz (quizTitle,quizData) {
   var data= {title: quizTitle, questions: quizData};
-  console.log('action creator',data);
-  
+    
   return axios.post('/save', {quiz: data, update:false}).then(function(response){
     console.log('response from API',response);
     if (response.status === 201){
@@ -43,19 +42,9 @@ export function getQuizzes (){
   });
 }
 
-export function storePopQuiz (data){
-  // student fetches list of all his or her quizzes
-  console.log('data')
-  return {
-    type: type.QUIZ_FETCH,
-    quiz: data,
-  }
-}
-
 export function storePopQuiz(quiz) {
-    console.log(quiz);
     return {
-      type: type.START_QUIZ,
+      type: type.STORE_QUIZ,
       quiz: quiz,
     }
 }
@@ -92,31 +81,59 @@ export function editQuiz (quizName) {
     }
   })
 
- return {
-  
- }
+ return {};
 }
 
 export function answerQuestion (answer,lastQuestion) {
-  if (lastQuestion){
-    //postAnswers
-  }
+  
+  return (dispatch, getState) => {
+    
+    var quizLength = getState().studentQuiz.storedQuizzes.quiz.questions.length;
+    var currentStatus = getState().studentQuiz.status;
+    var teachername = getState().studentQuiz.storedQuizzes.teachername;
+    var quizTitle = getState().studentQuiz.storedQuizzes.quiz.title;
+    var lastQuestion = currentStatus + 1 === quizLength;
+    
+    dispatch ({
+        type: type.ANSWER_QUESTION,
+        answer: answer
+    });  
 
-  return {
-    type: type.ANSWER_QUESTION,
-    answer: answer
+    var answers = getState().studentQuiz.answers;
+    console.log('answers',answers);
+    
+    if (lastQuestion){
+      dispatch ({
+          type: type.END_QUIZ,
+      });
+
+      postAnswers(quizTitle,teachername,answers)
+
+    }
   }
 }
 
-export function openQuizModal(){
+export function openStudentQuizModal(){
   return {
-    type: type.OPEN_MODAL, 
+    type: type.OPEN_STUDENT_MODAL, 
   }
 }
 
-export function closeQuizModal(){
+export function closeStudentQuizModal(){
   return {
-    type: type.CLOSE_MODAL, 
+    type: type.CLOSE_STUDENT_MODAL, 
+  }
+}
+
+export function openTeacherQuizModal(){
+  return {
+    type: type.OPEN_TEACHER_MODAL, 
+  }
+}
+
+export function closeTeacherQuizModal(){
+  return {
+    type: type.CLOSE_TEACHER_MODAL, 
   }
 }
 
@@ -143,24 +160,31 @@ export function fetchResults(quizName) {
   }
 }
 
-export function postAnswers(){
-  //   return axios.post('/save', {file:quizTitle, data: formData}).then(function(response){
-    
-  //   if (response.status === 201){
-  //     return {
-  //       type: QUIZ_SUBMISSION, 
-  //       form: formData, 
-  //       title: quizTitle
-  //     };
-  //   }
-  // })
-  // .catch(function(response){
-  //     console.log('error',response);
-  //     return {
-  //       type: QUIZ_SUBMISSION, 
-  //       form: formData, 
-  //       title: quizTitle
-  //     }
-  // });
-  console.log('api save answers')
+export function postAnswers(quizTitle, teachername, answers){
+
+  answers = answers.map((answer,index) => {
+    return {
+      index: index,
+      answer: answer,
+    }
+  });
+  console.log(answers)
+  
+  var data = {
+    title: quizTitle,
+    teachername: teachername, 
+    answers: answers
+  };
+
+  console.log('posting answers',data)
+  return axios.post('/save', {answers: data}).then(function(response){
+    console.log(response)
+    if (response.status === 201){
+      return {};
+    }
+  })
+  .catch(function(response){
+      console.log('error',response);
+      return {}
+  });
 }

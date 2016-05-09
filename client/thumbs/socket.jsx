@@ -6,7 +6,7 @@ export function initializeWebSockets() {
   socket = connectToWebSockets();
 
   socket.on('thumbCheck', () => {
-    this.props.actions.thumbCheck();
+    this.props.thumbActions.thumbCheck();
   });
 
   socket.on('thumb-student', data => {    
@@ -32,5 +32,5 @@ export function emitThumbEvent(value,name,id){
 
 export function emitThumbCheck(username){
   socket.emit('thumbCheck', {username:username});
-  this.props.actions.thumbCheck();
+  this.props.thumbActions.openModal();
 }

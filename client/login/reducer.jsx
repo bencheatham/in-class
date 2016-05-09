@@ -3,45 +3,36 @@ var initialState = {
   username: null,
   authenticated: null,
   errorMessage: null,
-  userType: null,
+  usertype: null,
 }
 
 function userReducer(state = initialState, action){
   switch (action.type){
     case 'LOGIN':
       return { 
-        username: state.username,
-        authenticated: state.authenticated,
-        errorMessage: state.errorMessage,
-        userType: state.userType,
+        ...state,
       };
     case 'AUTH_USER':
       return { 
+        ...state,
         username: action.username,
+        usertype: action.usertype,
         authenticated: true,
-        errorMessage: state.errorMessage,
-        userType: state.userType,
       };
     case 'UNAUTH_USER':   
       return { 
+        ...state,
         username: null,
         authenticated: false,
-        errorMessage: state.errorMessage,
-        userType: state.userType,
       };
     case 'CHECK_AUTH': 
       return {
-        username: state.username,
+        ...state,        
         authenticated: true,
-        errorMessage: state.errorMessage,
-        userType: state.userType,
       }
     case 'AUTH_ERROR':   
-      return { 
-        username: state.username,
-        authenticated: state.authenticated,
-        errorMessage: action.errorMessage,
-        userType: state.userType,
+      return {     
+        errorMessage: action.errorMessage,    
       };
   }
   return state;

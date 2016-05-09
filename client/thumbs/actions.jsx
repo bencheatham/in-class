@@ -1,25 +1,31 @@
-import { HIDE_MODAL, BEGIN_THUMBCHECK, THUMB_CHECK, THUMB_SUBMITTED } from './constants';
+import * as type from './constants';
 
 export function submitThumb(){
   return {
-    type: THUMB_SUBMITTED,
+    type: type.THUMB_SUBMITTED,
   }
 }
 
 export function thumbCheck(){
   return {
-    type: THUMB_CHECK,
+    type: type.THUMB_CHECK,
+  }
+}
+
+export function openModal(){
+  return {
+    type: type.OPEN_MODAL,
   }
 }
 
 export function hideModal(){
   return {
-    type: HIDE_MODAL,
+    type: type.HIDE_MODAL,
   }
 }
 
 export function beginThumbCheck () {
   return {
-    type: BEGIN_THUMBCHECK,
+    type: type.BEGIN_THUMBCHECK,
   }
 }

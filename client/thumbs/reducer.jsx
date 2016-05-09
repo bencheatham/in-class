@@ -1,4 +1,4 @@
-import { THUMB_CHECK, THUMB_SUBMITTED, BEGIN_THUMBCHECK, HIDE_MODAL} from './constants';
+import * as type from './constants';
 
 var initialState = {
   thumbCheck: false,
@@ -8,22 +8,27 @@ var initialState = {
 export default function thumbsReducer(state = initialState, action){
 
   switch (action.type) {
-    case THUMB_CHECK: 
+    case type.THUMB_CHECK: 
       return {
         thumbCheck: true,
         displayModal: state.displayModal,
       };
-    case THUMB_SUBMITTED:
+    case type.THUMB_SUBMITTED:
       return {
         thumbCheck: false,
         displayModal: false,
       }
-    case BEGIN_THUMBCHECK:
+    case type.BEGIN_THUMBCHECK:
       return {
         thumbCheck: state.thumbCheck,
         displayModal: true,
       }
-    case HIDE_MODAL:
+    case type.OPEN_MODAL:
+      return {
+        thumbCheck: state.thumbCheck,
+        displayModal: true,
+      }
+    case type.HIDE_MODAL:
       return {
         thumbCheck: state.thumbCheck,
         displayModal: false,

@@ -50,13 +50,13 @@ export default function quiz(state = initialState, action){
         editingQuiz: !state.editingQuiz,
         quizToEdit: newQuizToEdit,
       }
-    case type.OPEN_MODAL:
+    case type.OPEN_TEACHER_MODAL:
       return {
           ...state,
           quizzes: action.quizzes,
           displayModal: true,
         };
-    case type.CLOSE_MODAL:
+    case type.CLOSE_TEACHER_MODAL:
       return {
         ...state,
         quizzes: action.quizzes,

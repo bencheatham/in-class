@@ -6,6 +6,7 @@ import Login from '../login/Login'
 import Video from '../video/Video'
 import Drawer from '../containers/Drawer'
 import { submitQuiz, updateQuiz } from './actions'
+import Header from '../login/Header';
 
 
 class CreateQuiz extends Component {

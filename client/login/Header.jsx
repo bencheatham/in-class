@@ -14,18 +14,19 @@ class Header extends Component {
   }
 
   renderLinks(){
+    var classroom = '/classroom/' + this.props.user.usertype; 
     if (this.props.authenticated){
       return (
         <div>
-          <Link to="about">About </Link>
-          <Link to="quiz">Classroom </Link>
+          <Link to="">Home </Link>
+          <Link to={classroom}>Classroom </Link>
           <Link to="sign-out">Sign Out</Link>
         </div>
       )
     } else {
       return (
         <div>
-          <Link to="about">About </Link>
+          <Link to="">Home </Link>
           <Link to="sign-in">Sign in </Link>
           <Link to="sign-up">Sign up </Link>
         </div>
@@ -43,7 +44,7 @@ function mapStateToProps(state) {
   return {
     errorMessage: state.user.errorMessage,
     authenticated: state.user.authenticated,
-    username: state.user.username,
+    user: state.user,
   }
 }
 
