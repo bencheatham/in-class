@@ -1,0 +1,3 @@
+
+
+export const UPDATE_QUIZ_RESULTS = "UPDATE_QUIZ_RESULTS";
