@@ -12,6 +12,10 @@ class VideoContainer extends Component {
     this.login = this.login.bind(this);
     this.makeCall = this.makeCall.bind(this);
     this.swapVideo = this.swapVideo.bind(this);
+
+    this.mute = this.mute.bind(this);
+    this.end = this.end.bind(this);
+    this.pause = this.pause.bind(this);
   }
 
   appendIt(){
@@ -37,12 +41,14 @@ class VideoContainer extends Component {
   };
 
   login(changeSession, videoActions) {
-    window.phone = PHONE({
+    var phone = window.phone = PHONE({
         number        : this.props.username || "Anonymous", // listen on username line else Anonymous
         publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
         subscribe_key : 'sub-c-107b4e72-082d-11e6-996b-0619f8945a4f',
         ssl : (('https:' == document.location.protocol) ? true : false)
     });
+
+    // var ctrl = window.ctrl = CONTROLLER(phone);
 
     phone.ready(function(){
       // TODO change this later
@@ -78,6 +84,26 @@ class VideoContainer extends Component {
     }
   }
 
+  end(){
+    ctrl.hangup();
+    window.phone = null;
+  }
+
+  mute(){
+    var audio = ctrl.toggleAudio();
+  }
+
+  pause(){
+    var video = ctrl.toggleVideo();
+  }
+
+  // TODO: disable this functionality for now
+  hide(){
+    this.end();
+    this.props.videoActions.addVideoSession("");
+    this.removeIt(" ")
+  }
+
   render() {
     console.log('In Render');
     this.login(this.changeSession, this.props.videoActions);
@@ -107,6 +133,11 @@ class VideoContainer extends Component {
 
     return (
       <div>
+        <div id="inCall">
+          <button id="end" onClick={this.end}>End</button>
+          <button id="mute" onClick={this.mute}>Mute</button>
+          <button id="pause" onClick={this.pause}>Pause</button>
+        </div>
         <div id="vid-box"></div>
       </div>
     );
