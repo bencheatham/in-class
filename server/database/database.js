@@ -103,7 +103,7 @@ module.exports = function (test) {
     // table should be a string of the table name
     // columns should be a string of the column names
     // where should be a sql string of the conditional options
-    var statement = 'SELECT ' + ( columns ? columns : '*' ) + ' FROM ' + table + ' WHERE ' + ( where ? where : '1 = 1');
+    var statement = 'SELECT ' + ( columns ? columns : '*' ) + ' FROM ' + table + ' WHERE ' + ( where ? where : '1=1');
 // console.log(statement);
     return new Promise(function (resolve, reject) {
       pg.connect(conString, function(error, client, done) {
