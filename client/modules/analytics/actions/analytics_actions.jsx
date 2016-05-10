@@ -3,100 +3,52 @@ import axios from 'axios';
 
 
 
-export function getQuizAnalytics (){
+export function getQuizAnalytics () {
+  let quizContainer = [];
+
+  let p1 = (quiz, obj) => axios.get('/fetch', {params: {title: quiz}})
+                .then((response) => {
+                  obj.quizTitle = quiz;
+                  obj.quizDetails = response.data;
+                });
+  let p2 = (quiz, obj) => axios.get('/fetch', {params: {title: quiz, answers: true}})
+                .then((response) => {
+                  obj.studentAnswers = response.data;
+                });
+
+  let fetchQuizData = (quizes, data) => {
+
+    console.log('heyy!!!!')
+    if(quizes.length > 0) {
+      let quiz = quizes.shift();
+      let obj = {};
+
+      return Promise.all([p1(quiz, obj), p2(quiz, obj)]).then(() => {
+        quizContainer.push(obj);
+        return fetchQuizData(quizes);
+      });
+
+    } else {
+
+      return {
+        type: types.ANALYZE_QUIZ_RESULTS,
+        payload: quizContainer
+      };
+
+    }
+  };
+
+
   return axios.get('/fetch', {params: {title: 'manifest'}})
   .then(function(response){
-    console.log('response from API',response);
 
-    let quizContainer = [];
+    let quizes = response.data.slice();
 
-    response.data.forEach((quiz) => {
-      let obj = {};
-      axios.get('/fetch', {params: {title: quiz}})
-        .then(function(response){
-          console.log('response from API',response);
-          obj.quizTitle = quiz;
-          obj.quizDetails = response.data;
+    return fetchQuizData(quizes);
 
+   });
 
-          axios.get('/fetch', {params: {title: quiz, answers: true}})
-            .then(function(response){
-              console.log('response from API',response);
-              obj.studentAnswers = response.data;
-              quizContainer.push(obj);
-
-
-            })
-           .catch(function(response){
-           });
-        }) 
-      .catch(function(response){
-      });
-    });
-
-
-
-
-
-      return {
-        type: type.ANALYZE_QUIZ_RESULTS,
-        quizzes: response.data
-      };
-    
-  })
-  .catch(function(response){
-      console.log('error',response);
-      return {
-        type: type.ANALYZE_QUIZ_RESULTS,
-      }
-  });
 }
-
-
-// export function getQuizDetails (){
-//   return axios.get('/fetch', {params: {title: 'myQuiz'}})
-//   .then(function(response){
-//     console.log('response from API',response);
-//       return {
-//         type: type.ALL_QUIZZES,
-//         quizzes: response.data
-//       };
-    
-//   })
-//   .catch(function(response){
-//       console.log('error',response);
-//       return {
-//         type: type.ALL_QUIZZES,
-//       }
-//   });
-// }
-
-
-// export function fetchResults(quizName) {
-//    return axios.get('/fetch', {params: {title: quizName, answers: true}})
-//   .then(function(response){
-//     console.log('response from API',response);
-//       return {
-//         type: type.DISPLAY_RESULTS,
-//         payload: response.data
-//       };
-    
-//   })
-//   .catch(function(response){
-//       console.log('error',response);
-//       return {
-//         type: type.DISPLAY_RESULTS,
-//       }
-//   });
-
-//   return {
-//     type: type.ANSWER_QUESTION,
-//     answer: answer
-//   }
-// }
-
-
-
 
 
 

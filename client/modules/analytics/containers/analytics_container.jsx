@@ -8,6 +8,8 @@ import * as AnalyticsActions from '../actions/analytics_actions';
 import PieChart from '../components/PieChart';
 import BarChart from '../components/BarChart';
 import ListQuizes from '../components/listQuizes';
+import ClassQuizSummary from '../components/ClassQuizSummary';
+import QuestionsSummary from '../components/QuestionsSummary';
 
 
 
@@ -21,14 +23,20 @@ class AnalyticsContainer extends Component {
 
   }
 
+  componentWillMount() {
+       this.props.analyticsActions.getQuizAnalytics();
+
+  }
+
  
   render() {
 
     return (
       <div>
         <ListQuizes data={this.props} />
-        <PieChart />
-        <BarChart />
+
+        <ClassQuizSummary data={this.props}/>
+        <QuestionsSummary data={this.props} />
       </div>
     );
   }

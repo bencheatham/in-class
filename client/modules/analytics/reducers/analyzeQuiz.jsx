@@ -1,4 +1,4 @@
-export function analyzeQuiz(quiz, responses){
+export default function analyzeQuiz(quiz, responses){
 
   let quizAddOns = {};
 
@@ -124,6 +124,10 @@ export function analyzeQuiz(quiz, responses){
   for(var key in addOns) {
    classScores[key] = addOns[key];
   }
+
+  classScores.title = responses.title;
+
+  console.log(classScores)
 
   return classScores;
 

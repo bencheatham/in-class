@@ -1,5 +1,5 @@
 import { ANALYZE_QUIZ_RESULTS } from '../constants/analytics_constants';
-//import _ from 'lodash';
+import _ from 'lodash';
 import analyzeQuiz from './analyzeQuiz';
 
 
@@ -9,11 +9,19 @@ let initState = {
 
 
 export default function(state = initState, action) {
-  
+
   switch(action.type) {
     case ANALYZE_QUIZ_RESULTS:
 
-      console.log(action.payload);
+      let analyzedQuizes = action.payload.map((quiz) => {
+
+        let quizDetails = quiz.quizDetails;
+        let quizResponses = quiz.studentAnswers;
+
+        return analyzeQuiz(quizDetails, quizResponses); 
+      });
+
+
 
 
            // let results = analyzeQuiz(quiz, responses);
@@ -106,68 +114,67 @@ export default function(state = initState, action) {
 
  
 
-          var quiz = {"title":"myQuiz",
-              "questions": 
-              [
-               { 
-                "index": 0,
-                "question":
-                "What is your favorite color?",
-                "choices": ["red","blue","yellow","purple"],
-                "answer":"red"},
+          // var quiz = {"title":"myQuiz",
+          //     "questions": 
+          //     [
+          //      { 
+          //       "index": 0,
+          //       "question":
+          //       "What is your favorite color?",
+          //       "choices": ["red","blue","yellow","purple"],
+          //       "answer":"red"},
                 
-               {
-                "index": 1,
-                "question": "What is your favorite sport?",
-                "choices": ["basketball","football","baseball","golf"],
-                "answer":"baseball"},
+          //      {
+          //       "index": 1,
+          //       "question": "What is your favorite sport?",
+          //       "choices": ["basketball","football","baseball","golf"],
+          //       "answer":"baseball"},
 
-                {
-                "index": 2,
-                "question": "What is your favorite drink?",
-                "choices": ["water","coffee","beer","wine"],
-                "answer": "water"}
-              ]
-            }
-
-
-          var responses = {
-              "title":"myQuiz",
-              "answers": [{"answers":
-                          [ {"val":"blue","index":"0"},
-                            {"val":"golf","index":"1"},
-                            {"val":"water","index":"2"}
-                          ],
-                          "studentname":"student1"},
-                          {"answers":
-                            [ {"val":"red","index":"0"},
-                              {"val":"baseball","index":"1"},
-                              {"val":"coffee","index":"2"}
-                            ],
-                          "studentname":"student2"},
-                          {"answers":
-                            [ {"val":"red","index":"0"},
-                              {"val":"football","index":"1"},
-                              {"val":"beer","index":"2"}
-                            ],
-                          "studentname":"student3"},
-                          {"answers":
-                            [ {"val":"yellow","index":"0"},
-                              {"val":"baseball","index":"1"},
-                              {"val":"water","index":"2"}
-                            ],
-                          "studentname":"student4"},
-                          {"answers":
-                            [ {"val":"purple","index":"0"},
-                              {"val":"football","index":"1"},
-                              {"val":"wine","index":"2"}
-                            ],
-                          "studentname":"student5"}
-                          ]
-            }
+          //       {
+          //       "index": 2,
+          //       "question": "What is your favorite drink?",
+          //       "choices": ["water","coffee","beer","wine"],
+          //       "answer": "water"}
+          //     ]
+          //   }
 
 
-      analyzedQuizes = [];
+          // var responses = {
+          //     "title":"myQuiz",
+          //     "answers": [{"answers":
+          //                 [ {"val":"blue","index":"0"},
+          //                   {"val":"golf","index":"1"},
+          //                   {"val":"water","index":"2"}
+          //                 ],
+          //                 "studentname":"student1"},
+          //                 {"answers":
+          //                   [ {"val":"red","index":"0"},
+          //                     {"val":"baseball","index":"1"},
+          //                     {"val":"coffee","index":"2"}
+          //                   ],
+          //                 "studentname":"student2"},
+          //                 {"answers":
+          //                   [ {"val":"red","index":"0"},
+          //                     {"val":"football","index":"1"},
+          //                     {"val":"beer","index":"2"}
+          //                   ],
+          //                 "studentname":"student3"},
+          //                 {"answers":
+          //                   [ {"val":"yellow","index":"0"},
+          //                     {"val":"baseball","index":"1"},
+          //                     {"val":"water","index":"2"}
+          //                   ],
+          //                 "studentname":"student4"},
+          //                 {"answers":
+          //                   [ {"val":"purple","index":"0"},
+          //                     {"val":"football","index":"1"},
+          //                     {"val":"wine","index":"2"}
+          //                   ],
+          //                 "studentname":"student5"}
+          //                 ]
+          //   }
+
+
 
 
 

@@ -8,11 +8,15 @@ export default class ListQuizes extends Component {
     console.log(props.data)
   };
 
+  componentWillMount() {
+       this.props.data.analyticsActions.getQuizAnalytics();
+
+  }
+
 
 
   render() {
 
-    this.props.data.analyticsActions.getQuizAnalytics();
 
     return (
      <div>

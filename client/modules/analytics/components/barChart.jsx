@@ -8,27 +8,47 @@ export default class SimpleBar extends Component {
   constructor(props){
     super(props);
 
+    console.log('in bar chart')
+
+    let labels;
+    let title;
+    let data;
+
+    console.log(this.props.data)
+
+    let obj = this.props.data
+    for(var key in obj){
+      if(key === "labels"){
+        labels = obj[key];
+      }
+      if(key === "title"){
+        title = obj[key];
+      }
+      if(key === "data"){
+        data = obj[key];
+      }
+    }
+
+    let data3 =  {
+        labels: labels,
+        datasets: [
+          {
+            label: title,
+            backgroundColor: "rgba(255,99,132,0.2)",
+            borderColor: "rgba(255,99,132,1)",
+            borderWidth: 1,
+            hoverBackgroundColor: "rgba(255,99,132,0.4)",
+            hoverBorderColor: "rgba(255,99,132,1)",
+            data: data
+          }
+        ]
+      }
+
+
+    console.log(data3)
+
+
     this.state = {
-      data: [
-        {
-         value: 5,
-         color: "#F7464A",
-         highlight: "#FF5A5E",
-         label: "Q1"
-        },
-        {
-         value: 3,
-         color: "#46BFBD", 
-         highlight: "#5AD3D1",
-         label: "Q2"
-        },
-        {
-         value: 2,
-         color: "#FDB45C", 
-         highlight: "#FFC870",
-         label: "Q3"
-        }
-      ],
       data2: {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -42,8 +62,11 @@ export default class SimpleBar extends Component {
             data: [65, 59, 80, 81, 56, 55, 40]
           }
         ]
-      }
+      },
+      data3: data3
     };
+
+    console.log(this.state.data3)
   };
 
   componentWillMount() {
@@ -51,7 +74,7 @@ export default class SimpleBar extends Component {
   };
 
   drawChart() {
-    const barData = this.state.data2;
+    const barData = this.state.data3;
     console.log(barData);
 
     var barOptions = {
@@ -110,7 +133,7 @@ export default class SimpleBar extends Component {
     return (
       <div>
         <ul className='collection' class="col s4" style={{display: 'inline-block',float:'left', margin: "10px 10px 10px 10px"}}>
-          <p style={{fontWeight:'bold', textAlign: 'center'}}>Bar Chart</p>
+          <p style={{fontWeight:'bold', textAlign: 'center'}}>{this.props.data.title}</p>
           {this.drawChart()}
         </ul>
       </div>
