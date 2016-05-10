@@ -1,17 +1,22 @@
-import { UPDATE_QUIZ_RESULTS } from '../constants/analytics_constants';
-import _ from 'lodash';
+import { ANALYZE_QUIZ_RESULTS } from '../constants/analytics_constants';
+//import _ from 'lodash';
 import analyzeQuiz from './analyzeQuiz';
 
 
-let initialState = {
+let initState = {
   analyzedQuizes: [], 
 };
 
 
 export default function(state = initState, action) {
+  
   switch(action.type) {
     case ANALYZE_QUIZ_RESULTS:
 
+      console.log(action.payload);
+
+
+           // let results = analyzeQuiz(quiz, responses);
       //count number of questions.
 
       //for each student
@@ -161,10 +166,8 @@ export default function(state = initState, action) {
                           ]
             }
 
-            let results = analyzeQuiz(quiz, responses);
 
-
-      analyzedQuizes = results;
+      analyzedQuizes = [];
 
 
 
@@ -172,7 +175,7 @@ export default function(state = initState, action) {
       analyzedQuizes: analyzedQuizes
     });
 
-  default
+  default:
     return state;
 
   };

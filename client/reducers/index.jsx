@@ -7,10 +7,12 @@ import Users from './user';
 import questions from '../question/reducer';
 import user from '../login/reducer';
 import userVideoModal from './userVideoModal';
-import questionModal from '../modules/questionModal/reducer'
+import questionModal from '../modules/questionModal/reducer';
 import video from '../modules/video/reducers/reducer_sessions';
 import {chatReducer as chat } from '../chat/reducer';
-import thumbsReducer from '../thumbs/reducer'
+import thumbsReducer from '../thumbs/reducer';
+import analyticsReducer from '../modules/analytics/reducers/analytics_reducer';
+
 
 const rootReducer = combineReducers({
   routing,
@@ -25,6 +27,7 @@ const rootReducer = combineReducers({
   studentQuiz,
   chat,
   thumbsReducer,
+  analyticsReducer
 });
 
 export default rootReducer;

@@ -7,6 +7,8 @@ import * as AnalyticsActions from '../actions/analytics_actions';
 
 import PieChart from '../components/PieChart';
 import BarChart from '../components/BarChart';
+import ListQuizes from '../components/listQuizes';
+
 
 
 class AnalyticsContainer extends Component {
@@ -24,6 +26,7 @@ class AnalyticsContainer extends Component {
 
     return (
       <div>
+        <ListQuizes data={this.props} />
         <PieChart />
         <BarChart />
       </div>
@@ -39,7 +42,8 @@ function mapStateToProps(state) {
     questionForms: state.teacherQuiz.questionForms,
     quizToEdit: state.teacherQuiz.quizToEdit,
     displayModal: state.teacherQuiz.displayModal,
-    quizResults: state.teacherQuiz.quizResults
+    quizResults: state.teacherQuiz.quizResults,
+    analyzedQuizes: state.analyticsReducer.analyzedQuizes
   };
 };
 
