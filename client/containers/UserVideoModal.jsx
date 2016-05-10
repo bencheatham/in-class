@@ -88,7 +88,6 @@ class UserVideoModal extends React.Component {
     // shouldn't make a call to yourself
     if (user === currentUser) return;
 
-    console.log(user);
     this.videoCallUser(user);
     this.hide();
   };
