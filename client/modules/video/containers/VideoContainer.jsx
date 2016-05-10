@@ -49,27 +49,20 @@ class VideoContainer extends Component {
 
     var ctrl = window.ctrl = CONTROLLER(phone);
 
-    ctrl.ready(function(){
-      // TODO change this later
-      //form.username.style.background="#55ff5b";
-    });
+    ctrl.ready(function(){ });
 
     // receives phone conversation back from PubNub
     ctrl.receive(function(session){
       session.connected(function(session) {
-        console.log('session ', session);
         changeSession(session.video, videoActions);
       });
 
       session.ended(function(session) {
-        console.log('session ', session);
         changeSession(session.video, videoActions);
       });
     });
 
     ctrl.videoToggled(function(session, isEnabled){
-      console.log('video toggled', isEnabled);
-      console.log('video session', session);
       ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
     });
 
@@ -106,7 +99,7 @@ class VideoContainer extends Component {
 
 
   render() {
-    // TODO need to investigate this further. This doesn't make sense to me to be called everytime.
+    // TODO need to investigate this further. This doesn't make sense to be called everytime.
     this.login(this.changeSession, this.props.videoActions);
 
     if (this.props.teacherSelectedUser) {
