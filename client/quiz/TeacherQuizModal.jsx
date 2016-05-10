@@ -19,7 +19,7 @@ class TeacherQuizModal extends React.Component {
   }
 
   createQuiz(){
-    hashHistory.push('/create-quiz')
+    hashHistory.push('/create-quiz');
   }
 
   render() {

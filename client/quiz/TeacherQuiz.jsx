@@ -19,7 +19,7 @@ class TeacherQuiz extends Component {
   }
 
   handleFetch(){
-    this.props.actions.getQuizzes();
+    this.props.actions.fetchQuizList();
   }
 
   displayQuizList(){
@@ -43,7 +43,7 @@ function mapStateToProps(state){
   return {
     user: state.user,
     quiz: state.teacherQuiz,
-    quizzes: state.teacherQuiz.quizzes,
+    quizzes: state.teacherQuiz.quizList,
     status: state.studentQuiz.status
   }
 }
