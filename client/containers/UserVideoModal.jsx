@@ -44,9 +44,8 @@ class UserVideoModal extends React.Component {
   makeCall(user) {
     if (!window.phone) {
       alert("Login First!");
-    } else {
-      window.phone.dial(user);
     }
+    ctrl.dial(user);
   }
 
   videoCallUser(user){
@@ -89,12 +88,7 @@ class UserVideoModal extends React.Component {
     // shouldn't make a call to yourself
     if (user === currentUser) return;
 
-    // if (videos[user]) {
-    //   this.props.videoActions.switchVideoByUsername(user);
-    // } else {
-    //   this.videoCallUser(user);
-    // }
-
+    console.log(user);
     this.videoCallUser(user);
     this.hide();
   };
@@ -114,7 +108,6 @@ class UserVideoModal extends React.Component {
       )
     });
   };
-
 
   render() {
     const { visible } = this.props;

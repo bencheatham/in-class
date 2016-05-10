@@ -30,10 +30,13 @@ class VideoContainer extends Component {
 
   appendVideo(session) {
     $('#vid-box').append(session);
+    // TODO: save the video to user state instead
+    this.props.videoActions.setControllerVisibility(true);
   };
 
   removeVideo() {
     $('#vid-box').html('');
+    this.props.videoActions.setControllerVisibility(false);
   }
 
   login(changeSession, videoActions) {
@@ -82,16 +85,15 @@ class VideoContainer extends Component {
   }
 
   end(){
-    ctrl.hangup();
-    window.phone = null;
+    window.ctrl.hangup();
   }
 
   mute(){
-    var audio = ctrl.toggleAudio();
+    var audio = window.ctrl.toggleAudio();
   }
 
   pause(){
-    var video = ctrl.toggleVideo();
+    var video = window.ctrl.toggleVideo();
   }
 
   // TODO: disable this functionality for now
@@ -107,6 +109,8 @@ class VideoContainer extends Component {
 
     // helper method to render controller
     function renderController() {
+
+      if (!this.props.showCtrl) return;
       return (
         <div id="inCall">
           <button id="end" onClick={this.end}>End</button>
@@ -118,8 +122,8 @@ class VideoContainer extends Component {
 
     return (
       <div>
-        {renderController.bind(this)()}
         <div id="vid-box"></div>
+        {renderController.bind(this)()}
       </div>
     );
   }
@@ -134,7 +138,7 @@ function mapStateToProps(state) {
     teacherCall: state.video.teacherCall,
     teacherSelectedUser: state.video.teacherSelectedUser,
     teacherName: state.video.teacherName,
-    makeCall: state.video.makeCall
+    showCtrl: state.video.showCtrl
   };
 }
 
