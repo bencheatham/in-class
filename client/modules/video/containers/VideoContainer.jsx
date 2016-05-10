@@ -10,8 +10,11 @@ class VideoContainer extends Component {
     this.changeSession = this.changeSession.bind(this);
     this.appendIt = this.appendIt.bind(this);
     this.login = this.login.bind(this);
-    this.makeCall = this.makeCall.bind(this);
     this.swapVideo = this.swapVideo.bind(this);
+
+    this.mute = this.mute.bind(this);
+    this.end = this.end.bind(this);
+    this.pause = this.pause.bind(this);
   }
 
   appendIt(){
@@ -37,49 +40,73 @@ class VideoContainer extends Component {
   };
 
   login(changeSession, videoActions) {
-    window.phone = PHONE({
+    var phone = window.phone = PHONE({
         number        : this.props.username || "Anonymous", // listen on username line else Anonymous
         publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
         subscribe_key : 'sub-c-107b4e72-082d-11e6-996b-0619f8945a4f',
         ssl : (('https:' == document.location.protocol) ? true : false)
     });
 
-    phone.ready(function(){
+    var ctrl = window.ctrl = CONTROLLER(phone);
+
+    ctrl.ready(function(){
       // TODO change this later
       //form.username.style.background="#55ff5b";
     });
 
     // receives phone conversation back from PubNub
-    phone.receive(function(session){
+    ctrl.receive(function(session){
       session.connected(function(session) {
-        console.log('INNNNN HERERERRERE');
-        console.log(session.video);
-
+        console.log('session ', session);
         changeSession(session.video, videoActions);
       });
 
       session.ended(function(session) {
+        console.log('session ', session);
         changeSession(session.video, videoActions);
       });
     });
+
+    ctrl.videoToggled(function(session, isEnabled){
+      console.log('video toggled', isEnabled);
+      console.log('video session', session);
+      ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
+    });
+
+    ctrl.audioToggled(function(session, isEnabled){
+      ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
+    });
+
+    return false;
   }
 
   changeSession(session, videoActions){
     videoActions.addVideoSession(session);
   }
 
-  // @deprecated
-  makeCall() {
-    console.log('IN MAKE CALL, ', this.props.calledUser);
-    if (!window.phone) alert("Login First!");
-    else {
-      console.log('dialing');
-      phone.dial(this.props.calledUser);
-    }
+  end(){
+    ctrl.hangup();
+    window.phone = null;
   }
 
+  mute(){
+    var audio = ctrl.toggleAudio();
+  }
+
+  pause(){
+    var video = ctrl.toggleVideo();
+  }
+
+  // TODO: disable this functionality for now
+  hide(){
+    this.end();
+    this.props.videoActions.addVideoSession("");
+    this.removeIt(" ")
+  }
+
+
   render() {
-    console.log('In Render');
+    // TODO need to investigate this further. This doesn't make sense to me to be called everytime.
     this.login(this.changeSession, this.props.videoActions);
 
     if (this.props.teacherSelectedUser) {
@@ -104,9 +131,20 @@ class VideoContainer extends Component {
       }
     }
 
+    // helper method to render controller
+    function renderController() {
+      return (
+        <div id="inCall">
+          <button id="end" onClick={this.end}>End</button>
+          <button id="mute" onClick={this.mute}>Mute</button>
+          <button id="pause" onClick={this.pause}>Pause</button>
+        </div>
+      );
+    };
 
     return (
       <div>
+        {renderController.bind(this)()}
         <div id="vid-box"></div>
       </div>
     );
