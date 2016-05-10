@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as VideoActions from '../../../modules/video/actions';
+import { Button } from 'react-bootstrap';
 
 class VideoContainer extends Component {
 
@@ -10,39 +11,33 @@ class VideoContainer extends Component {
     this.login = this.login.bind(this);
 
     // jquery actions for video management
-    // this.swapVideo = this.swapVideo.bind(this);
-    this.appendIt = this.appendIt.bind(this);
     this.removeVideo = this.removeVideo.bind(this);
     this.appendVideo = this.appendVideo.bind(this);
+    this.manageVideo = this.manageVideo.bind(this);
 
     // video controllers
-    // this.mute = this.mute.bind(this);
     this.end = this.end.bind(this);
-    // this.pause = this.pause.bind(this);
   }
 
-  appendIt(){
-    if(this.props.videoSession){
-      $('#vid-box').append(this.props.videoSession.outerHTML);
-    }
-  };
-
   appendVideo(session) {
-    // $('#vid-box').append(session);
     document.getElementById("vid-box").appendChild(session.video);
-
-    // TODO: save the video to user state instead
     this.props.videoActions.setControllerVisibility(true);
   };
 
   removeVideo() {
     $('#vid-box').html('');
     this.props.videoActions.setControllerVisibility(false);
-  }
+  };
+
+  // @deprecated
+  manageVideo(session) {
+    this.props.videoActions.addVideoSession(session);
+  };
 
   login() {
     let removeVideo = this.removeVideo;
     let appendVideo = this.appendVideo;
+    let manageVideo = this.manageVideo;
 
     var phone = window.phone = PHONE({
         number        : this.props.username || "Anonymous", // listen on username line else Anonymous
@@ -56,13 +51,10 @@ class VideoContainer extends Component {
     // receives phone conversation back from PubNub
     phone.receive(function(session){
       session.connected(function(session) {
-        console.log('hit append session', session);
         appendVideo(session);
       });
 
       session.ended(function(session) {
-        // TODO remove the div elements if session ended
-        console.log('hits ended');
         removeVideo();
       });
     });
@@ -78,11 +70,10 @@ class VideoContainer extends Component {
 
     // helper method to render controller
     function renderController() {
-
       if (!this.props.showCtrl) return;
       return (
         <div id="inCall">
-          <button id="end" onClick={this.end}>End</button>
+          <Button className="btn-danger" id="end" onClick={this.end}> End </Button>
         </div>
       );
     };
@@ -99,13 +90,8 @@ class VideoContainer extends Component {
 function mapStateToProps(state) {
   return {
     username: state.Users.username,
-    calledUser: state.video.calledUser,
-    callingUser: state.video.callingUser,
-    videoSession: state.video.videoSession,
-    teacherCall: state.video.teacherCall,
-    teacherSelectedUser: state.video.teacherSelectedUser,
-    teacherName: state.video.teacherName,
-    showCtrl: state.video.showCtrl
+    showCtrl: state.video.showCtrl,
+    session: state.video.videoSession,
   };
 }
 

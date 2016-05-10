@@ -8,7 +8,7 @@ function addVideoSession(videos, session) {
   let ret = extend({}, videos);
   if (!session) return;
 
-  let username = session.getAttribute('data-number');
+  let username = session.number;
   ret[username] = session;
 
   return ret;
