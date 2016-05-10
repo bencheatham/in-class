@@ -156,6 +156,28 @@ var quiz = {"title":"myQuiz",
     ]
   }
 
+var seedObj = {
+  question: "",
+  choices: []
+}
+
+var quizAddOns =  quiz.questions.reduce((accum1, item, idx) => {
+  
+  let tmp1 = {};
+  tmp1[item.question] = item.choices.reduce((accum2, item, idx) => {
+    let tmp2 = {};
+    tmp2[item] = 0;
+    accum2[idx] = tmp2;
+    return accum2
+  }, [] );
+ // f(tmp1)
+  accum1[Object.keys(tmp1)[0]] = tmp1[Object.keys(tmp1)[0]];
+  return accum1;
+  
+}, {} )
+
+
+
 
 var responses = {
     "title":"myQuiz",
@@ -193,6 +215,18 @@ var responses = {
   }
   
   
+let quizAddOns =  quiz.questions.reduce((accum1, item, idx) => {
+  
+  let tmp1 = {};
+  tmp1[item.question] = item.choices.reduce((accum2, item, idx) => {
+    accum2[item] = 0;
+    return accum2
+  }, {} );
+  accum1[Object.keys(tmp1)[0]] = tmp1[Object.keys(tmp1)[0]];
+  return accum1;
+  
+}, {} )
+  
 
 let checkQuizIndexes = () => {  
   return quiz.questions.reduce((accum, item, idx) => {
@@ -209,13 +243,17 @@ let initStudentData = {
   studentTotals: [],
   uniqueScoresObj: {},
   classPercentageAccum: 0,
-  classAverage: 0
+  classAverage: 0,
+  questionTally: {},
+  answerTally: quizAddOns
 }
 
 
 let classScores = responses.answers.reduce((accum1, item, idx) => {
 
-  currentStud = item.studentname;
+  let currentStud = item.studentname;
+  let answerTally = accum1.answerTally
+
   
   let one = item.answers.reduce((accum2, answer) => {
     accum2.studentname = currentStud;
@@ -224,8 +262,13 @@ let classScores = responses.answers.reduce((accum1, item, idx) => {
     } else {
         accum2.wrong += 1;
     }
+    
     return accum2;
   }, {right: 0, wrong: 0})
+  
+  item.answers.forEach((answer) => {
+    accum1.answerTally[quiz.questions[answer.index].question][answer.val] += 1;
+  })
   
 
   accum1.studentTotals[idx] = one
@@ -288,9 +331,6 @@ for(var key in addOns) {
 
 
 f(classScores)
-
-
-
 
 
 //for each question
