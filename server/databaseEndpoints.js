@@ -67,7 +67,8 @@ const saveQuiz = (request, response, username, quiz, update, database) => {
     // console.log('existing');
     if (existing.length > 0) {
       if (update) {
-        return database.deleteFrom('questions', 'title=\'' + quiz.title + '\'')
+        return database.deleteFrom('answers', 'teachername=\'' + username + '\' and title=\'' + quiz.title + '\'')
+        .then(() => database.deleteFrom('questions', 'title=\'' + quiz.title + '\''))
         .then(() => database.deleteFrom('users_quizzes_join', 'title=\'' + quiz.title + '\''))
         .then(() => database.deleteFrom('quizzes', 'title=\'' + quiz.title + '\''));
       }
@@ -154,7 +155,7 @@ module.exports = (app) => {
     verifyUsername(request,response)
     .catch((error) => response.status(400).send('error: ' + 'invalid token...'))
     .then((username) => {
-      console.log('username: ', username);
+      // console.log('username: ', username);
       return deleteQuiz(request, response, username, title, database);
     });
   });
