@@ -23,6 +23,17 @@ var initialState = {
 
 export default function quiz(state = initialState, action){
   switch (action.type) {
+    case type.QUIZ_SENT_TO_STUDENTS:
+      return {
+        ...state,
+        displayModal: false,
+      }
+    case type.QUIZ_SUCCESSFULLY_SAVED:
+      return {
+        ...state,
+        quizToEdit: {},
+        questionForms: 1,
+      }
     case type.FETCH_QUIZ_LIST: 
       return {
         ...state,
@@ -117,7 +128,6 @@ export default function quiz(state = initialState, action){
     case type.CLOSE_TEACHER_MODAL:
       return {
         ...state,
-        quizzes: action.quizzes,
         displayModal: false,
       };
     default: 

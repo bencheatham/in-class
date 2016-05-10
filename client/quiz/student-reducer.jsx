@@ -15,10 +15,9 @@ export default function quiz(state = initialState, action){
   switch (action.type) {
     case type.STORE_QUIZ:
       var newStoredQuizzes = action.quiz;
+      console.log('store quiz action')
       return {
         ...state,
-        status: 0,
-        answers: [],
         storedQuizzes: newStoredQuizzes,
         quizLive: true,
       }
@@ -43,6 +42,7 @@ export default function quiz(state = initialState, action){
     case type.END_QUIZ:
       return {
         ...state,
+        answers: [],
         quizLive: false,
       }
     default: 

@@ -21,6 +21,7 @@ class QuizItem extends Component {
   }
 
   sendPopQuiz () {
+    console.log('send pop quiz')
     fetchQuiz(this.props.name, this.props.user.username);
   }
   
@@ -41,8 +42,6 @@ class QuizItem extends Component {
      {this.props.name} 
      <Button onClick={this.sendPopQuiz}> Send</Button>
      <Button onClick={this.editQuiz}> Edit</Button>
-     <Button onClick={this.editQuiz}> View </Button>
-     <Button onClick={this.seeResults}> See Results</Button>
      <Button onClick={this.deleteQuiz}> Delete</Button>
     </div>
    );

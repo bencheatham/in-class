@@ -11,11 +11,9 @@ class TeacherQuiz extends Component {
     super(props);
     this.handleFetch = this.handleFetch.bind(this);
     this.displayQuizList = this.displayQuizList.bind(this);
-    this.initializeWebSockets = initializeWebSockets.bind(this);
   }
   componentWillMount (){
     this.handleFetch();
-    this.initializeWebSockets();
   }
 
   handleFetch(){

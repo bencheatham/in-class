@@ -21,7 +21,7 @@ class EditContainer extends Component {
   }
 
   handleSubmission (){
-    this.props.quizActions.saveQuizInDatabase(this.refs.title.value,this.props.quizToEdit,true);
+    this.props.quizActions.saveQuizInDatabase(this.props.quizToEdit.title,this.props.quizToEdit.questions,true);
   }
 
   renderQuizItems(){
@@ -38,7 +38,7 @@ class EditContainer extends Component {
   }
 
   render() {
-    console.log(this.props.quizToEdit);
+    
     return (
       <div>
         <Header />        

@@ -6,15 +6,13 @@ import { hashHistory } from 'react-router';
 /* teacher actions */
 export function saveQuizInDatabase (quizTitle,quizData,update) {
   var data= {title: quizTitle, questions: quizData};
-
+  console.log(data);
   return (dispatch,getState) => {
     axios.post('/save', {quiz: data, update: update}).then(function(response){
       console.log('response from API',response);
       if (response.status === 201){
         dispatch({
           type: type.QUIZ_SUCCESSFULLY_SAVED, 
-          form: quizData, 
-          title: quizTitle
         });
         hashHistory.push('/classroom/' + getState().user.usertype);
       }
@@ -44,9 +42,17 @@ export function fetchQuizList (){
 }
 
 export function storePopQuiz(quiz) {
-    return {
-      type: type.STORE_QUIZ,
-      quiz: quiz,
+    return (dispatch,getState) => {
+      if (getState().user.usertype === 'student'){
+        dispatch({
+          type: type.STORE_QUIZ,
+          quiz: quiz,
+        });
+      } else {
+        dispatch({
+          type: type.QUIZ_SENT_TO_STUDENTS
+        })
+      }
     }
 }
 
@@ -123,13 +129,14 @@ export function answerQuestion (answer,lastQuestion) {
     });  
 
     var answers = getState().studentQuiz.answers;
-    console.log('answers',answers);
     
     if (lastQuestion){
       dispatch ({
           type: type.END_QUIZ,
       });
 
+      let postData = {quizTitle, teachername, answers}
+      console.log(postData);
       postAnswers(quizTitle,teachername,answers)
 
     }
@@ -179,7 +186,6 @@ export function postAnswers(quizTitle, teachername, answers){
       answer: answer,
     }
   });
-  console.log(answers)
   
   var data = {
     title: quizTitle,
@@ -232,5 +238,13 @@ export function openStudentQuizModal(){
 export function closeStudentQuizModal(){
   return {
     type: type.CLOSE_STUDENT_MODAL, 
+  }
+}
+
+export function x(){
+  return (dispatch,getState) => {
+    dispatch({
+      type: type.QUIZ_SENT_TO_STUDENTS,
+    })  
   }
 }
