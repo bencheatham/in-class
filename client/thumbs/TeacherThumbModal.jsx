@@ -19,8 +19,11 @@ class ThumbsModal extends React.Component {
   }
 
   hideModal () {
-    this.props.actions.hideModal();
+    this.props.thumbActions.hideModal();
   }
+
+  
+
 
   render() {
     var displayModal = this.props.displayModal;
@@ -31,9 +34,26 @@ class ThumbsModal extends React.Component {
           <Modal.Title>Thumb Check</Modal.Title>
         </Modal.Header>
         <Modal.Body> 
-        You have successfully sent out a thumb check!     
+        You have successfully sent out a thumb check!
+        <table>
+        <tbody>
+          <tr>
+           <td>Thumbs Up</td>
+           <td>{this.props.thumbResults.up}</td>
+          </tr>
+          <tr>
+           <td>Thumbs Middle</td>
+           <td>{this.props.thumbResults.neutral}</td>
+          </tr>
+          <tr>
+           <td>Thumbs Down</td>
+           <td>{this.props.thumbResults.down}</td>
+          </tr>
+          </tbody>
+        </table>     
         </Modal.Body>
         <Modal.Footer>
+         <Button onClick={this.props.thumbActions.resetThumbResults}>Reset</Button>
          <Button onClick={this.hideModal}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -45,12 +65,13 @@ class ThumbsModal extends React.Component {
 function mapStateToProps(state) {
   return {
     displayModal: state.thumbsReducer.displayModal,
+    thumbResults: state.thumbsReducer.thumbResults
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(thumbActions,dispatch),
+    thumbActions: bindActionCreators(thumbActions,dispatch),
   };
 }
 
