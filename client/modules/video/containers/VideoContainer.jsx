@@ -10,14 +10,13 @@ class VideoContainer extends Component {
     this.changeSession = this.changeSession.bind(this);
     this.appendIt = this.appendIt.bind(this);
     this.login = this.login.bind(this);
-    this.makeCall = this.makeCall.bind(this);
     this.swapVideo = this.swapVideo.bind(this);
 
     this.mute = this.mute.bind(this);
     this.end = this.end.bind(this);
     this.pause = this.pause.bind(this);
   }
-
+  
   appendIt(){
     if(this.props.videoSession){
       $('#vid-box').append(this.props.videoSession.outerHTML);
@@ -48,40 +47,40 @@ class VideoContainer extends Component {
         ssl : (('https:' == document.location.protocol) ? true : false)
     });
 
-    // var ctrl = window.ctrl = CONTROLLER(phone);
+    var ctrl = window.ctrl = CONTROLLER(phone);
 
-    phone.ready(function(){
+    ctrl.ready(function(){
       // TODO change this later
       //form.username.style.background="#55ff5b";
     });
 
     // receives phone conversation back from PubNub
-    phone.receive(function(session){
+    ctrl.receive(function(session){
       session.connected(function(session) {
-        console.log('INNNNN HERERERRERE');
-        console.log(session.video);
-
+        console.log('session ', session);
         changeSession(session.video, videoActions);
       });
 
       session.ended(function(session) {
+        console.log('session ', session);
         changeSession(session.video, videoActions);
       });
     });
+
+    ctrl.videoToggled(function(session, isEnabled){
+      console.log('video toggled', isEnabled);
+      console.log('video session', session);
+      ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
+    });
+
+    ctrl.audioToggled(function(session, isEnabled){
+      ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
+    });
+    return false;
   }
 
   changeSession(session, videoActions){
     videoActions.addVideoSession(session);
-  }
-
-  // @deprecated
-  makeCall() {
-    console.log('IN MAKE CALL, ', this.props.calledUser);
-    if (!window.phone) alert("Login First!");
-    else {
-      console.log('dialing');
-      phone.dial(this.props.calledUser);
-    }
   }
 
   end(){
@@ -105,7 +104,6 @@ class VideoContainer extends Component {
   }
 
   render() {
-    console.log('In Render');
     this.login(this.changeSession, this.props.videoActions);
 
     if (this.props.teacherSelectedUser) {
