@@ -7,20 +7,52 @@ import TeacherQuizModal from '../quiz/TeacherQuizModal';
 import { initializeWebSockets as initThumbWebSockets } from '../thumbs/socket';
 import { initializeWebSockets as initQuizWebSockets } from '../quiz/socket';
 import Drawer from '../containers/Drawer';
+import * as UserSockets from '../users/socket';
+import * as UserActions from '../actions/users';
+import VideoContainer from '../modules/video/containers/VideoContainer';
 
 class TeacherClassview extends Component {
 
   constructor(props) {
     super(props);
+
+    // list of user sockets call
+    this.initializeWebSockets = UserSockets.initializeWebSockets.bind(this);
+    this.emitGetAllUsersFromClass = UserSockets.emitGetAllUsersFromClass.bind(this);
+    this.emitRemoveUserFromClass = UserSockets.emitRemoveUserFromClass.bind(this);
   }
 
-  componentWillMount () {
-  }
+  componentDidMount() {
+    this.initializeWebSockets({
+      userActions: this.props.userActions
+    });
+
+    let username = this.props.loginState.username;
+    this.props.userActions.userLogin(username);
+    this.emitGetAllUsersFromClass();
+
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.emitRemoveUserFromClass(username);
+    });
+  };
+
+  componentWillUnmount() {
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.removeEventListener('beforeunload');
+    });
+  };
 
   render () {
     return (
       <div>
         <Header />
+
+        <div>
+            <VideoContainer />
+        </div>
+
         <TeacherPanel />
         <TeacherQuizModal />
         <Drawer />
@@ -29,15 +61,17 @@ class TeacherClassview extends Component {
   };
 }
 
-const mapStateToProps = (state) => ({
+function mapStateToProps(state) {
+  return {
+    loginState: state.user
+  };
+};
 
-});
+function mapDispatchToProps(dispatch) {
+  return {
+   userActions: bindActionCreators(UserActions, dispatch),
+  }
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeacherClassview);
-
-
-
