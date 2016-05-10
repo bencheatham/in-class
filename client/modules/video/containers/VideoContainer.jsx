@@ -8,10 +8,15 @@ class VideoContainer extends Component {
   constructor(props) {
     super(props);
     this.changeSession = this.changeSession.bind(this);
-    this.appendIt = this.appendIt.bind(this);
     this.login = this.login.bind(this);
-    this.swapVideo = this.swapVideo.bind(this);
 
+    // jquery actions for video management
+    // this.swapVideo = this.swapVideo.bind(this);
+    this.appendIt = this.appendIt.bind(this);
+    this.removeVideo = this.removeVideo.bind(this);
+    this.appendVideo = this.appendVideo.bind(this);
+
+    // video controllers
     this.mute = this.mute.bind(this);
     this.end = this.end.bind(this);
     this.pause = this.pause.bind(this);
@@ -23,23 +28,19 @@ class VideoContainer extends Component {
     }
   };
 
-  swapVideo() {
-    // TODO swap the video if current session is not the same as the others
-    if (!this.props.videoSession) {
-      return;
-    }
-
-    let id = $('#vid-box video').attr('data-number');
-    let newId = this.props.videoSession.getAttribute('data-number');
-
-    // if not the same, just swap it
-    if (newId !== id) {
-      $('#vid-box').empty();
-    }
-    this.appendIt();
+  appendVideo(session) {
+    $('#vid-box').append(session);
   };
 
+  removeVideo() {
+    $('#vid-box').html('');
+  }
+
   login(changeSession, videoActions) {
+
+    let removeVideo = this.removeVideo;
+    let appendVideo = this.appendVideo;
+
     var phone = window.phone = PHONE({
         number        : this.props.username || "Anonymous", // listen on username line else Anonymous
         publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
@@ -54,11 +55,19 @@ class VideoContainer extends Component {
     // receives phone conversation back from PubNub
     ctrl.receive(function(session){
       session.connected(function(session) {
-        changeSession(session.video, videoActions);
+        // changeSession(session.video, videoActions);
+
+        console.log('hit append session', session);
+        appendVideo(session.video);
       });
 
       session.ended(function(session) {
-        changeSession(session.video, videoActions);
+        // TODO remove the div elements if session ended
+        console.log('hits ended');
+        console.log('this', this);
+        removeVideo();
+
+        // changeSession(session.video, videoActions);
       });
     });
 
@@ -70,7 +79,6 @@ class VideoContainer extends Component {
       ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
     });
 
-    return false;
   }
 
   changeSession(session, videoActions){
@@ -79,7 +87,7 @@ class VideoContainer extends Component {
 
   end(){
     ctrl.hangup();
-    window.phone = null;
+    // window.phone = null;
   }
 
   mute(){
@@ -97,32 +105,9 @@ class VideoContainer extends Component {
     this.removeIt(" ")
   }
 
-
   render() {
     // TODO need to investigate this further. This doesn't make sense to be called everytime.
     this.login(this.changeSession, this.props.videoActions);
-
-    if (this.props.teacherSelectedUser) {
-      let ball = {
-        calledUser: this.props.teacherSelectedUser,
-        callingUser: this.props.teacherName
-      };
-      this.props.videoActions.userCallUser(ball);
-    }
-
-    if (this.props.videoSession !== null){
-      this.swapVideo();
-
-      if (this.props.teacherCall) {
-        let classVideoPac = {
-          speaker: this.props.calledUser,
-          teacher: this.props.teacher,
-          videoSession: this.props.videoSession
-        };
-        console.log(classVideoPac)
-        this.props.videoActions.emitTeacherVideoSession(classVideoPac);
-      }
-    }
 
     // helper method to render controller
     function renderController() {
@@ -143,8 +128,6 @@ class VideoContainer extends Component {
     );
   }
 };
-
-
 
 function mapStateToProps(state) {
   return {
