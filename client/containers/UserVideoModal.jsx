@@ -45,7 +45,7 @@ class UserVideoModal extends React.Component {
     if (!window.phone) {
       alert("Login First!");
     }
-    ctrl.dial(user);
+    window.phone.dial(user);
   }
 
   videoCallUser(user){

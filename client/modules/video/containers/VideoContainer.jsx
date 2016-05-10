@@ -7,7 +7,6 @@ class VideoContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.changeSession = this.changeSession.bind(this);
     this.login = this.login.bind(this);
 
     // jquery actions for video management
@@ -17,9 +16,9 @@ class VideoContainer extends Component {
     this.appendVideo = this.appendVideo.bind(this);
 
     // video controllers
-    this.mute = this.mute.bind(this);
+    // this.mute = this.mute.bind(this);
     this.end = this.end.bind(this);
-    this.pause = this.pause.bind(this);
+    // this.pause = this.pause.bind(this);
   }
 
   appendIt(){
@@ -29,7 +28,9 @@ class VideoContainer extends Component {
   };
 
   appendVideo(session) {
-    $('#vid-box').append(session);
+    // $('#vid-box').append(session);
+    document.getElementById("vid-box").appendChild(session.video);
+
     // TODO: save the video to user state instead
     this.props.videoActions.setControllerVisibility(true);
   };
@@ -39,8 +40,7 @@ class VideoContainer extends Component {
     this.props.videoActions.setControllerVisibility(false);
   }
 
-  login(changeSession, videoActions) {
-
+  login() {
     let removeVideo = this.removeVideo;
     let appendVideo = this.appendVideo;
 
@@ -51,61 +51,30 @@ class VideoContainer extends Component {
         ssl : (('https:' == document.location.protocol) ? true : false)
     });
 
-    var ctrl = window.ctrl = CONTROLLER(phone);
-
-    ctrl.ready(function(){ });
+    phone.ready(function(){ });
 
     // receives phone conversation back from PubNub
-    ctrl.receive(function(session){
+    phone.receive(function(session){
       session.connected(function(session) {
         console.log('hit append session', session);
-        appendVideo(session.video);
+        appendVideo(session);
       });
 
       session.ended(function(session) {
         // TODO remove the div elements if session ended
         console.log('hits ended');
-        console.log('this', this);
         removeVideo();
       });
     });
-
-    ctrl.videoToggled(function(session, isEnabled){
-      ctrl.getVideoElement(session.number).toggle(isEnabled); // Hide video is stream paused
-    });
-
-    ctrl.audioToggled(function(session, isEnabled){
-      ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
-    });
-
-  }
-
-  changeSession(session, videoActions){
-    videoActions.addVideoSession(session);
   }
 
   end(){
-    window.ctrl.hangup();
-  }
-
-  mute(){
-    var audio = window.ctrl.toggleAudio();
-  }
-
-  pause(){
-    var video = window.ctrl.toggleVideo();
-  }
-
-  // TODO: disable this functionality for now
-  hide(){
-    this.end();
-    this.props.videoActions.addVideoSession("");
-    this.removeIt(" ")
+    window.phone.hangup();
   }
 
   render() {
     // TODO need to investigate this further. This doesn't make sense to be called everytime.
-    this.login(this.changeSession, this.props.videoActions);
+    this.login();
 
     // helper method to render controller
     function renderController() {
@@ -114,8 +83,6 @@ class VideoContainer extends Component {
       return (
         <div id="inCall">
           <button id="end" onClick={this.end}>End</button>
-          <button id="mute" onClick={this.mute}>Mute</button>
-          <button id="pause" onClick={this.pause}>Pause</button>
         </div>
       );
     };
