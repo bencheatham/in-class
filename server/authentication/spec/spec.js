@@ -40,7 +40,7 @@ describe('Authentication Unit Tests', function() {
 
   it('should use the cookie to access the protected page', function () {
     return expect(
-      axios.get('http://localhost:8000/protected', {headers: {cookie: cookie}})
+      axios.get('http://localhost:8000/authentication', {headers: {cookie: cookie}})
       .catch(function (val) {return Promise.resolve(val);})
       .then(function (res) { return Promise.resolve(res.status); })
     ).to.eventually.equal(200);

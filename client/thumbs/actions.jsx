@@ -29,3 +29,17 @@ export function beginThumbCheck () {
     type: type.BEGIN_THUMBCHECK,
   }
 }
+
+export function resetThumbResults () {
+  return {
+    type: type.THUMB_RESET
+  }
+}
+
+export function updateThumbResults (thumbResult) {
+  return {
+    type: type.THUMB_RESULT,
+    result: thumbResult
+    
+  }
+}
