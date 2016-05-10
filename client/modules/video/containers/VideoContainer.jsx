@@ -55,8 +55,6 @@ class VideoContainer extends Component {
     // receives phone conversation back from PubNub
     ctrl.receive(function(session){
       session.connected(function(session) {
-        // changeSession(session.video, videoActions);
-
         console.log('hit append session', session);
         appendVideo(session.video);
       });
@@ -66,8 +64,6 @@ class VideoContainer extends Component {
         console.log('hits ended');
         console.log('this', this);
         removeVideo();
-
-        // changeSession(session.video, videoActions);
       });
     });
 
@@ -87,7 +83,7 @@ class VideoContainer extends Component {
 
   end(){
     ctrl.hangup();
-    // window.phone = null;
+    window.phone = null;
   }
 
   mute(){
