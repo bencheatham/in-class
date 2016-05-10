@@ -1,31 +1,23 @@
 import { UPDATE_QUIZ_RESULTS } from '../constants/analytics_constants';
 import _ from 'lodash';
+import analyzeQuiz from './analyzeQuiz';
 
 
-let initState = {
-  results: []
+let initialState = {
+  analyzedQuizes: [], 
 };
-
-
-
 
 
 export default function(state = initState, action) {
   switch(action.type) {
-    case UPDATE_QUIZ_RESULTS:
+    case ANALYZE_QUIZ_RESULTS:
 
       //count number of questions.
 
       //for each student
         //for each question, did student answer correct?  y/n
 
-      //student name results
-      let results = {
-        student: {
-          name:
 
-        }
-      }
       //WHAT DO I CARE ABOUT??
       //for each question
         //how many students answered each answer
@@ -39,18 +31,57 @@ export default function(state = initState, action) {
         //output showing each student overall score as a bar
           //teacher only
 
+/*Results Object Looks like this:
+
+{ questions: 
+   { 'What is your favorite color?': { responses: [Object] },
+     'What is your favorite sport?': { responses: [Object] },
+     'What is your favorite drink?': { responses: [Object] } } }
+{ studentTotals: 
+   [ { right: 1, wrong: 2, studentname: 'student1', percentage: 33 },
+     { right: 2, wrong: 1, studentname: 'student2', percentage: 67 },
+     { right: 1, wrong: 2, studentname: 'student3', percentage: 33 },
+     { right: 2, wrong: 1, studentname: 'student4', percentage: 67 },
+     { right: 0, wrong: 3, studentname: 'student5', percentage: 0 } ],
+  uniqueScoresObj: { '0': 1, '33': 2, '67': 2, '100': 0 },
+  classPercentageAccum: 200,
+  classAverage: 40,
+  questionTally: {},
+  answerTally: 
+   { questions: 
+      { 'What is your favorite color?': [Object],
+        'What is your favorite sport?': [Object],
+        'What is your favorite drink?': [Object] } },
+  uniqueScores: [ '0', '33', '67', '100' ],
+  scoreData: [ 1, 2, 2, 0 ],
+  diffSquaredSum: 3156,
+  variance: 631,
+  stdDev: 25,
+  numStudents: 5,
+  classAvg: 40 }
+
+
+//result.answerTally.questions, object with following props:
+
+{ 'What is your favorite color?': 
+   { responses: { red: 2, blue: 1, yellow: 1, purple: 1 },
+     labels: [ 'red', 'blue', 'yellow', 'purple' ],
+     responseData: [ 2, 1, 1, 1 ] },
+  'What is your favorite sport?': 
+   { responses: { basketball: 0, football: 2, baseball: 2, golf: 1 },
+     labels: [ 'basketball', 'football', 'baseball', 'golf' ],
+     responseData: [ 0, 2, 2, 1 ] },
+  'What is your favorite drink?': 
+   { responses: { water: 2, coffee: 1, beer: 1, wine: 1 },
+     labels: [ 'water', 'coffee', 'beer', 'wine' ],
+     responseData: [ 2, 1, 1, 1 ] } }
+
+*/
 
 
 
-      let questionResponses = _.reduce(obj, (accum, item) => {
-        
-          if(accum[answer] === undefined){
-            accum[answer] = 1;
-          } else {
-            accum[answer] += 1;
-          }
-          return accum;
-        }, {})
+
+
 
 
       let newData = {
@@ -68,286 +99,77 @@ export default function(state = initState, action) {
         ]
       }
 
-  {"title":"myQuiz",
-    "questions": 
-    [{ 
-      "index": 0,
-      "question":
-      "What is your favorite color?",
-      "choices": ["red","blue","yellow","purple"],
-      "answer":"red"},
-      
-     {
-      "index": 1,
-      "question": "What is your favorite sport?",
-      "choices": ["basketball","football","baseball","golf"],
-      "answer":"baseball"},
+ 
 
-      {
-      "index": 2,
-      "question": "What is your favorite drink?",
-      "choices": ["water","coffee","beer","wine"],
-      "answer": "water"}
-    ]
-  }
+          var quiz = {"title":"myQuiz",
+              "questions": 
+              [
+               { 
+                "index": 0,
+                "question":
+                "What is your favorite color?",
+                "choices": ["red","blue","yellow","purple"],
+                "answer":"red"},
+                
+               {
+                "index": 1,
+                "question": "What is your favorite sport?",
+                "choices": ["basketball","football","baseball","golf"],
+                "answer":"baseball"},
 
-
-  {
-    "title":"myQuiz",
-    "answers": [{"answers":
-                [ {"val":"blue","index":"0"},
-                  {"val":"golf","index":"1"},
-                  {"val":"water","index":"2"}
-                ],
-                "studentname":"student1"},
-                {"answers":
-                  [ {"val":"red","index":"0"},
-                    {"val":"baseball","index":"1"},
-                    {"val":"coffee","index":"2"}
-                  ],
-                "studentname":"student2"},
-                {"answers":
-                  [ {"val":"red","index":"0"},
-                    {"val":"football","index":"1"},
-                    {"val":"beer","index":"2"}
-                  ],
-                "studentname":"student3"},
-                {"answers":
-                  [ {"val":"yellow","index":"0"},
-                    {"val":"baseball","index":"1"},
-                    {"val":"water","index":"2"}
-                  ],
-                "studentname":"student4"},
-                {"answers":
-                  [ {"val":"purple","index":"0"},
-                    {"val":"football","index":"1"},
-                    {"val":"wine","index":"2"}
-                  ],
-                "studentname":"student5"}
-                ]
-  }
+                {
+                "index": 2,
+                "question": "What is your favorite drink?",
+                "choices": ["water","coffee","beer","wine"],
+                "answer": "water"}
+              ]
+            }
 
 
-  //calculate student responses
+          var responses = {
+              "title":"myQuiz",
+              "answers": [{"answers":
+                          [ {"val":"blue","index":"0"},
+                            {"val":"golf","index":"1"},
+                            {"val":"water","index":"2"}
+                          ],
+                          "studentname":"student1"},
+                          {"answers":
+                            [ {"val":"red","index":"0"},
+                              {"val":"baseball","index":"1"},
+                              {"val":"coffee","index":"2"}
+                            ],
+                          "studentname":"student2"},
+                          {"answers":
+                            [ {"val":"red","index":"0"},
+                              {"val":"football","index":"1"},
+                              {"val":"beer","index":"2"}
+                            ],
+                          "studentname":"student3"},
+                          {"answers":
+                            [ {"val":"yellow","index":"0"},
+                              {"val":"baseball","index":"1"},
+                              {"val":"water","index":"2"}
+                            ],
+                          "studentname":"student4"},
+                          {"answers":
+                            [ {"val":"purple","index":"0"},
+                              {"val":"football","index":"1"},
+                              {"val":"wine","index":"2"}
+                            ],
+                          "studentname":"student5"}
+                          ]
+            }
 
-var f = function(val){console.log(val)}
-
-var quiz = {"title":"myQuiz",
-    "questions": 
-    [
-     { 
-      "index": 0,
-      "question":
-      "What is your favorite color?",
-      "choices": ["red","blue","yellow","purple"],
-      "answer":"red"},
-      
-     {
-      "index": 1,
-      "question": "What is your favorite sport?",
-      "choices": ["basketball","football","baseball","golf"],
-      "answer":"baseball"},
-
-      {
-      "index": 2,
-      "question": "What is your favorite drink?",
-      "choices": ["water","coffee","beer","wine"],
-      "answer": "water"}
-    ]
-  }
-
-var seedObj = {
-  question: "",
-  choices: []
-}
-
-var quizAddOns =  quiz.questions.reduce((accum1, item, idx) => {
-  
-  let tmp1 = {};
-  tmp1[item.question] = item.choices.reduce((accum2, item, idx) => {
-    let tmp2 = {};
-    tmp2[item] = 0;
-    accum2[idx] = tmp2;
-    return accum2
-  }, [] );
- // f(tmp1)
-  accum1[Object.keys(tmp1)[0]] = tmp1[Object.keys(tmp1)[0]];
-  return accum1;
-  
-}, {} )
+            let results = analyzeQuiz(quiz, responses);
 
 
-
-
-var responses = {
-    "title":"myQuiz",
-    "answers": [{"answers":
-                [ {"val":"blue","index":"0"},
-                  {"val":"golf","index":"1"},
-                  {"val":"water","index":"2"}
-                ],
-                "studentname":"student1"},
-                {"answers":
-                  [ {"val":"red","index":"0"},
-                    {"val":"baseball","index":"1"},
-                    {"val":"coffee","index":"2"}
-                  ],
-                "studentname":"student2"},
-                {"answers":
-                  [ {"val":"red","index":"0"},
-                    {"val":"football","index":"1"},
-                    {"val":"beer","index":"2"}
-                  ],
-                "studentname":"student3"},
-                {"answers":
-                  [ {"val":"yellow","index":"0"},
-                    {"val":"baseball","index":"1"},
-                    {"val":"water","index":"2"}
-                  ],
-                "studentname":"student4"},
-                {"answers":
-                  [ {"val":"purple","index":"0"},
-                    {"val":"football","index":"1"},
-                    {"val":"wine","index":"2"}
-                  ],
-                "studentname":"student5"}
-                ]
-  }
-  
-  
-let quizAddOns =  quiz.questions.reduce((accum1, item, idx) => {
-  
-  let tmp1 = {};
-  tmp1[item.question] = item.choices.reduce((accum2, item, idx) => {
-    accum2[item] = 0;
-    return accum2
-  }, {} );
-  accum1[Object.keys(tmp1)[0]] = tmp1[Object.keys(tmp1)[0]];
-  return accum1;
-  
-}, {} )
-  
-
-let checkQuizIndexes = () => {  
-  return quiz.questions.reduce((accum, item, idx) => {
-      if(item.index !== idx) { 
-        return accum = false 
-      } else {
-        return accum;
-      }
-    }, true); 
-}
-
-
-let initStudentData = {
-  studentTotals: [],
-  uniqueScoresObj: {},
-  classPercentageAccum: 0,
-  classAverage: 0,
-  questionTally: {},
-  answerTally: quizAddOns
-}
-
-
-let classScores = responses.answers.reduce((accum1, item, idx) => {
-
-  let currentStud = item.studentname;
-  let answerTally = accum1.answerTally
-
-  
-  let one = item.answers.reduce((accum2, answer) => {
-    accum2.studentname = currentStud;
-    if(answer.val === quiz.questions[answer.index].answer) {
-      accum2.right += 1;
-    } else {
-        accum2.wrong += 1;
-    }
-    
-    return accum2;
-  }, {right: 0, wrong: 0})
-  
-  item.answers.forEach((answer) => {
-    accum1.answerTally[quiz.questions[answer.index].question][answer.val] += 1;
-  })
-  
-
-  accum1.studentTotals[idx] = one
-  let percentage = Math.round(one.right / (one.right + one.wrong) * 100, 2);
-  accum1.studentTotals[idx].percentage = percentage;
-  
-  if(accum1.uniqueScoresObj[percentage] === undefined){
-    accum1.uniqueScoresObj[percentage] = 1;
-  } else {
-    accum1.uniqueScoresObj[percentage] += 1;  
-  }
-  if(accum1.uniqueScoresObj[100] === undefined){
-    accum1.uniqueScoresObj[100] = 0;
-  }
-    if(accum1.uniqueScoresObj[0] === undefined){
-    accum1.uniqueScoresObj[0] = 0;
-  }
-  
-  accum1.classPercentageAccum += percentage;
-  accum1.classAverage = Math.round(accum1.classPercentageAccum / accum1.studentTotals.length, 2);
-
-  return accum1
-
-}, initStudentData);
-
-
-let uniqueScores = [];
-let scoreData = [];
-for (var key in classScores.uniqueScoresObj) {
-  uniqueScores.push(key);
-  scoreData.push(classScores.uniqueScoresObj[key]);
-}
-
-classScores.uniqueScores = uniqueScores;
-classScores.scoreData = scoreData;
-
-
-let stdDeviationStart = {
-  diffSquaredSum: 0,
-  variance: 0,
-  stdDev: 0,
-  numStudents: classScores.studentTotals.length,
-  classAvg: classScores.classAverage
-}
-
-let addOns = classScores.studentTotals.reduce((accum, answer) => {
-  
-  accum.diffSquaredSum += Math.pow((answer.percentage - accum.classAvg), 2);
-  accum.variance = Math.round(accum.diffSquaredSum / accum.numStudents)
-  accum.stdDev = Math.round(Math.sqrt(accum.variance))
-  return accum;
-  
-}, stdDeviationStart)
-
-for(var key in addOns) {
-  classScores[key] = addOns[key];
-}
-
-
-
-
-f(classScores)
-
-
-//for each question
-  //put possible answers in object
-  //
-
-
-
-
-
-
-
+      analyzedQuizes = results;
 
 
 
     return Object.assign({}, state, {
-      results: 'hi five'
+      analyzedQuizes: analyzedQuizes
     });
 
   default
