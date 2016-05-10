@@ -154,7 +154,7 @@ module.exports = (app) => {
     verifyUsername(request,response)
     .catch((error) => response.status(400).send('error: ' + 'invalid token...'))
     .then((username) => {
-      console.log('username: ', username);
+      // console.log('username: ', username);
       return deleteQuiz(request, response, username, title, database);
     });
   });
