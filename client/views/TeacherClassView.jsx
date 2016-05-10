@@ -48,7 +48,6 @@ class TeacherClassview extends Component {
     return (
       <div>
         <Header />
-
         <div>
             <VideoContainer />
         </div>
