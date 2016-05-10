@@ -16,7 +16,7 @@ class VideoContainer extends Component {
     this.end = this.end.bind(this);
     this.pause = this.pause.bind(this);
   }
-  
+
   appendIt(){
     if(this.props.videoSession){
       $('#vid-box').append(this.props.videoSession.outerHTML);
@@ -76,6 +76,7 @@ class VideoContainer extends Component {
     ctrl.audioToggled(function(session, isEnabled){
       ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75); // 0.75 opacity is audio muted
     });
+
     return false;
   }
 
@@ -103,7 +104,9 @@ class VideoContainer extends Component {
     this.removeIt(" ")
   }
 
+
   render() {
+    // TODO need to investigate this further. This doesn't make sense to me to be called everytime.
     this.login(this.changeSession, this.props.videoActions);
 
     if (this.props.teacherSelectedUser) {
@@ -128,14 +131,20 @@ class VideoContainer extends Component {
       }
     }
 
-
-    return (
-      <div>
+    // helper method to render controller
+    function renderController() {
+      return (
         <div id="inCall">
           <button id="end" onClick={this.end}>End</button>
           <button id="mute" onClick={this.mute}>Mute</button>
           <button id="pause" onClick={this.pause}>Pause</button>
         </div>
+      );
+    };
+
+    return (
+      <div>
+        {renderController.bind(this)()}
         <div id="vid-box"></div>
       </div>
     );
