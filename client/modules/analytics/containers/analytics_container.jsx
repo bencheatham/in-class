@@ -17,16 +17,12 @@ class AnalyticsContainer extends Component {
 
   constructor(props) {
     super(props);
-
-    console.log(this.props)
-
-
-  }
+  };
 
   componentWillMount() {
        this.props.analyticsActions.getQuizAnalytics();
 
-  }
+  };
 
  
   render() {
@@ -36,10 +32,10 @@ class AnalyticsContainer extends Component {
         <ListQuizes data={this.props} />
 
         <ClassQuizSummary data={this.props}/>
-        <QuestionsSummary data={this.props} />
+        <QuestionsSummary data={this.props}/>
       </div>
     );
-  }
+  };
 };
 
 

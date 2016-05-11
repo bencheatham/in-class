@@ -18,7 +18,6 @@ export function getQuizAnalytics () {
 
   let fetchQuizData = (quizes, data) => {
 
-    console.log('heyy!!!!')
     if(quizes.length > 0) {
       let quiz = quizes.shift();
       let obj = {};

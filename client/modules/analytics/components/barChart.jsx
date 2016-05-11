@@ -8,13 +8,9 @@ export default class SimpleBar extends Component {
   constructor(props){
     super(props);
 
-    console.log('in bar chart')
-
     let labels;
     let title;
     let data;
-
-    console.log(this.props.data)
 
     let obj = this.props.data
     for(var key in obj){
@@ -42,10 +38,8 @@ export default class SimpleBar extends Component {
             data: data
           }
         ]
-      }
+      };
 
-
-    console.log(data3)
 
 
     this.state = {
@@ -65,8 +59,6 @@ export default class SimpleBar extends Component {
       },
       data3: data3
     };
-
-    console.log(this.state.data3)
   };
 
   componentWillMount() {
@@ -75,7 +67,6 @@ export default class SimpleBar extends Component {
 
   drawChart() {
     const barData = this.state.data3;
-    console.log(barData);
 
     var barOptions = {
       animatable: true,
