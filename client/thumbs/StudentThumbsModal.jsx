@@ -16,10 +16,11 @@ class ThumbsModal extends React.Component {
 
   submitThumb (value){
     this.emitThumbEvent(value);  
+    this.props.thumbActions.endThumbCheck();
   }
 
   hideModal () {
-    this.props.actions.hideModal();
+    this.props.thumbActions.hideModal();
   }
 
   render() {
@@ -32,17 +33,17 @@ class ThumbsModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
         <div>
-        <Button onClick={() => this.submitThumb('up')}>
+        <Button onClick={this.submitThumb.bind(null,'up')}>
           <Glyphicon className="glyphicon glyphicon-thumbs-up" />
         </Button>
         </div>
         <div>
-        <Button onClick={() => this.submitThumb('neutral')}>
+        <Button onClick={this.submitThumb.bind(null,'neutral')}>
           <Glyphicon className="glyphicon glyphicon-hand-right" />
         </Button>
         </div>
         <div>
-        <Button onClick={() => this.submitThumb('down')} value="down">
+        <Button onClick={this.submitThumb.bind(null,'down')} value="down">
           <Glyphicon className="glyphicon glyphicon-thumbs-down" />
         </Button>
         </div>
@@ -65,7 +66,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(thumbActions,dispatch),
+    thumbActions: bindActionCreators(thumbActions,dispatch),
   };
 }
 

@@ -26,6 +26,12 @@ export default function thumbsReducer(state = initialState, action){
         ...state,
         displayModal: true
       }
+    case type.END_THUMBCHECK:
+      return {
+        ...state,
+        displayModal: false,
+        thumbCheck: false
+      }
     case type.OPEN_MODAL:
       return {
         ...state,
