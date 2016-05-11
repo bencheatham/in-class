@@ -8,6 +8,8 @@ import { initializeWebSockets as initThumbWebSockets, closeWebSockets} from '../
 import { initializeWebSockets as initQuizWebSockets } from '../quiz/socket';
 import * as quizActions from '../quiz/actions';
 import Drawer from '../containers/Drawer';
+import TeacherDrawer from '../containers/TeacherDrawer';
+
 import * as UserSockets from '../users/socket';
 import * as UserActions from '../actions/users';
 import VideoContainer from '../modules/video/containers/VideoContainer';
@@ -64,8 +66,7 @@ class TeacherClassview extends Component {
 
         <TeacherPanel />
         <TeacherQuizModal />
-        <Drawer />
-        <AnalyticsContainer />
+        <TeacherDrawer />
       </div>
     );
   };

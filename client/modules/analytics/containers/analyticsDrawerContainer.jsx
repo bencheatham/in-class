@@ -7,20 +7,17 @@ import BarChart from '../components/BarChart';
 import ListQuizes from '../components/listQuizes';
 import ClassQuizSummary from '../components/ClassQuizSummary';
 import QuestionsSummary from '../components/QuestionsSummary';
-import Header from '../../../login/Header';
-import TeacherDrawer from '../../../containers/TeacherDrawer';
 
 
-class AnalyticsContainer extends Component {
+
+class AnalyticsDrawerContainer extends Component {
 
   constructor(props) {
     super(props);
   };
 
   componentWillMount() {
-
-    this.props.analyticsActions.getQuizAnalytics();
-    this.props.analyticsActions.fetchQuizList();
+       this.props.analyticsActions.fetchQuizList();
 
   };
 
@@ -31,9 +28,8 @@ class AnalyticsContainer extends Component {
 
     return (
       <div>
-        <Header />
-        <ClassQuizSummary data={this.props}/>
-        <QuestionsSummary data={this.props}/>
+        <ListQuizes data={this.props}/>
+
       </div>
     );
   };
@@ -49,8 +45,7 @@ function mapStateToProps(state) {
     displayModal: state.teacherQuiz.displayModal,
     quizResults: state.teacherQuiz.quizResults,
     analyzedQuizes: state.analyticsReducer.analyzedQuizes,
-    availableQuizes: state.analyticsReducer.availableQuizes,
-    selectedQuiz: state.analyticsReducer.selectedQuiz
+    availableQuizes: state.analyticsReducer.availableQuizes
   };
 };
 
@@ -61,4 +56,4 @@ function mapDispatchToProps(dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AnalyticsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AnalyticsDrawerContainer);

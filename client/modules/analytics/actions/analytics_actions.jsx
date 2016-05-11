@@ -51,4 +51,29 @@ export function getQuizAnalytics () {
 
 
 
+export function fetchQuizList (){
+  return axios.get('/fetch', {params: {title: 'manifest'}})
+  .then(function(response){
+      return {
+        type: types.FETCH_QUIZ_LIST,
+        quizList: response.data
+      };    
+  })
+  .catch(function(response){
+      console.log('error',response);
+      return {}
+  });
+}
+
+export function selectQuiz (quiz){
+
+      return {
+        type: types.SELECT_QUIZ,
+        payload: quiz
+      };    
+
+}
+
+
+
 

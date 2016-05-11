@@ -5,8 +5,8 @@ import * as AnalyticsActions from '../actions/analytics_actions';
 import PieChart from '../components/PieChart';
 import BarChart from '../components/BarChart';
 import ListQuizes from '../components/listQuizes';
-import ClassQuizSummary from '../components/ClassQuizSummary';
-import QuestionsSummary from '../components/QuestionsSummary';
+import SingleQuizSummary from '../components/singleQuizSummary';
+import SingleQuestionsSummary from '../components/singleQuestionsSummary';
 import Header from '../../../login/Header';
 import TeacherDrawer from '../../../containers/TeacherDrawer';
 
@@ -32,8 +32,8 @@ class AnalyticsContainer extends Component {
     return (
       <div>
         <Header />
-        <ClassQuizSummary data={this.props}/>
-        <QuestionsSummary data={this.props}/>
+        <SingleQuizSummary data={this.props}/>
+        <SingleQuestionsSummary data={this.props}/>
       </div>
     );
   };

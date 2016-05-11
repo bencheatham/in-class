@@ -1,9 +1,11 @@
-import { ANALYZE_QUIZ_RESULTS } from '../constants/analytics_constants';
+import { ANALYZE_QUIZ_RESULTS, FETCH_QUIZ_LIST, SELECT_QUIZ } from '../constants/analytics_constants';
 import _ from 'lodash';
 import analyzeQuiz from './analyzeQuiz';
 
 let initState = {
-  analyzedQuizes: [], 
+  analyzedQuizes: [],
+  availableQuizes: [],
+  selectedQuiz: null
 };
 
 export default function(state = initState, action) {
@@ -20,9 +22,22 @@ export default function(state = initState, action) {
       });
 
 
-    return Object.assign({}, state, {
-      analyzedQuizes: analyzedQuizes
+      return Object.assign({}, state, {
+        analyzedQuizes: analyzedQuizes
     });
+
+    case FETCH_QUIZ_LIST:
+
+      return Object.assign({}, state, {
+        availableQuizes: action.quizList
+    });
+
+    case SELECT_QUIZ:
+
+      return Object.assign({}, state, {
+        selectedQuiz: action.payload
+    });
+
 
   default:
     return state;
