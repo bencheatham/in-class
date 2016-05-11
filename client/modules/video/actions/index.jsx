@@ -69,3 +69,7 @@ export function emitTeacherVideoSession(classUserPac) {
   
 
 }
+
+export function setControllerVisibility(visible){
+  return { type: types.SET_CONTROLLER_VISIBILITY, visible: visible };
+}

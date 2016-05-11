@@ -1,8 +1,6 @@
 import { USER_CALL_USER } from '../constants/VideoConstants';
 import { TEACHER_SELECT_STUDENT_VIDEO } from '../constants/VideoConstants';
-import { ADD_VIDEO_SESSION, GET_USER_VIDEO, MAKE_CALL } from '../constants/VideoConstants';
-import { EMIT_TEACHER_VIDEO_SESSION } from '../constants/VideoConstants';
-import { ADD_CLASS_VIDEO_SESSION } from '../constants/VideoConstants';
+import { ADD_VIDEO_SESSION, GET_USER_VIDEO, MAKE_CALL, SET_CONTROLLER_VISIBILITY } from '../constants/VideoConstants';
 import extend from 'lodash/extend';
 
 // helper method for add video session to state
@@ -10,12 +8,11 @@ function addVideoSession(videos, session) {
   let ret = extend({}, videos);
   if (!session) return;
 
-  let username = session.getAttribute('data-number');
+  let username = session.number;
   ret[username] = session;
 
   return ret;
 }
-
 
 function getVideoByUsername(videos, username) {
   return videos[username];
@@ -26,13 +23,9 @@ let initState = {
   callingUser: null,
   videoSession: null,
   videos: {},
-  makeCall: true,   
-  classVideoSession: null,
-  classVideoSpeaker: null,
-  classVideoTeacher: null
+  makeCall: true,
+  showCtrl: false
 }
-
-
 
 export default function(state = initState, action) {
 
@@ -70,29 +63,10 @@ export default function(state = initState, action) {
         makeCall: action.isAllow
       });
 
-    // return Object.assign({}, state, {
-    //   videoSession: action.payload
-    // });
-
-  case EMIT_TEACHER_VIDEO_SESSION:
-
-    return state;
-
-  case ADD_CLASS_VIDEO_SESSION:
-
-    if(state.classVideoSession === null){
-      let obj = Object.assign({}, state, {
-            classVideoSession: action.payload.videoSession,
-            classVideoSpeaker: action.payload.presenter,
-            classVideoTeacher: action.payload.teacher
-          });
-
-      return obj;
-    }
-    return state;
-
-
-      
+    case SET_CONTROLLER_VISIBILITY:
+      return Object.assign({}, state, {
+        showCtrl: action.visible
+      });
     default:
       return state;
   }

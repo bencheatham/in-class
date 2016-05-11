@@ -9,17 +9,15 @@ import {initializeWebSockets} from './socket';
 class TeacherQuiz extends Component {
   constructor (props){
     super(props);
-    this.initializeWebSockets = initializeWebSockets.bind(this);
     this.handleFetch = this.handleFetch.bind(this);
     this.displayQuizList = this.displayQuizList.bind(this);
   }
   componentWillMount (){
-    this.initializeWebSockets();
     this.handleFetch();
   }
 
   handleFetch(){
-    this.props.actions.getQuizzes();
+    this.props.actions.fetchQuizList();
   }
 
   displayQuizList(){
@@ -43,7 +41,7 @@ function mapStateToProps(state){
   return {
     user: state.user,
     quiz: state.teacherQuiz,
-    quizzes: state.teacherQuiz.quizzes,
+    quizzes: state.teacherQuiz.quizList,
     status: state.studentQuiz.status
   }
 }

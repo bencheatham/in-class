@@ -10,7 +10,6 @@ class StudentQuiz extends Component {
   constructor (props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.handleFetch = this.handleFetch.bind(this);
     this.initializeWebSockets = initializeWebSockets.bind(this);
     
   }
@@ -18,15 +17,8 @@ class StudentQuiz extends Component {
     this.initializeWebSockets();
   }
 
-  handleClick (e){
-    var {storedQuizzes, status, actions} = this.props;
-    var answerForLastQuestion = (status === storedQuizzes.length);
-    actions.answerQuestion(e.target.value);  
-  }
-
-  handleFetch(){
-    let quizName = 'AnimalTalk';
-    this.props.actions.startQuiz(quizName);
+  handleClick (e){  
+    this.props.quizActions.answerQuestion(e.target.value);  
   }
 
   render() {
@@ -34,22 +26,21 @@ class StudentQuiz extends Component {
     var self = this;
     var quizzes;
   
-    var currentQuestion = status - 1;
-    // var currentQuestion = 0;
+    var currentQuestion = status;
 
-    if (status !== 0 && status <= storedQuizzes.questions.length){
+    if (status < storedQuizzes.questions.length){
       quizzes = [
           <div>{storedQuizzes.questions[currentQuestion].question}
             <div>
-              <button value={storedQuizzes.questions[currentQuestion].answer} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[0]}</button>
-              <button value={storedQuizzes.questions[currentQuestion].choice1} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[1]}</button>
-              <button value={storedQuizzes.questions[currentQuestion].choice2} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[2]}</button>
-              <button value={storedQuizzes.questions[currentQuestion].choice3} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[3]}</button>
+              <button value={storedQuizzes.questions[currentQuestion].choices[0]} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[0]}</button>
+              <button value={storedQuizzes.questions[currentQuestion].choices[1]} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[1]}</button>
+              <button value={storedQuizzes.questions[currentQuestion].choices[2]} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[2]}</button>
+              <button value={storedQuizzes.questions[currentQuestion].choices[3]} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[3]}</button>
             </div>
           </div>
         ];
-    } else if (status > storedQuizzes.length) {
-      quizzes = 'quiz complete'
+    } else {
+      quizzes = 'Thank you for completing the quiz!'
     }
 
     return (
@@ -64,14 +55,14 @@ function mapStateToProps(state){
   return {
     user: state.user,
     quiz: state.teacherQuiz,
-    storedQuizzes: state.studentQuiz.storedQuizzes,
+    storedQuizzes: state.studentQuiz.storedQuizzes.quiz,
     status: state.studentQuiz.status
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    actions: bindActionCreators(quizActions,dispatch)  
+    quizActions: bindActionCreators(quizActions,dispatch)  
   }
 }
 

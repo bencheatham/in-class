@@ -2,6 +2,7 @@ import { LOGIN } from './constants';
 import { routerMiddleware, push } from 'react-router-redux'
 import { returnStore } from '../main';
 import { hashHistory } from 'react-router';
+import { userLogin } from '../actions/users'
 import axios from 'axios';
 const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ;
 
@@ -11,14 +12,11 @@ export function signinUser(username, password){
 
     axios.post('login', {username: username, password: password})
     .then(response => {
+
       dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
       dispatch(authError(''));
-      // if (response.data.type === 'student'){
-      //   hashHistory.push('/class/student');
-      // } else {
-      //   hashHistory.push('/class/teacher');
-      // }
-       hashHistory.push('/video');
+
+      hashHistory.push('/classroom/' + response.data.usertype);
     })
     .catch((error)=>{
       dispatch(authError(error.data));
@@ -36,13 +34,13 @@ export function signupUser(username, password,usertype){
       dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
       dispatch(authError(''));
       if (response.data.usertype === 'student'){
-        hashHistory.push('/class/student');
+        hashHistory.push('/classroom/student');
       } else if ( response.data.usertype === 'teacher') {
-        hashHistory.push('/class/teacher');
+        hashHistory.push('/classroom/teacher');
       }
 
       // change the following to anywhere for testing
-      hashHistory.push('/video');
+      // hashHistory.push('/video');
     })
     .catch((error)=>{
       dispatch(authError(error.data));
@@ -74,14 +72,15 @@ export function signoutUser (username) {
   }
 }
 
-export function checkAuth(path) {
-
+export function checkAuth() {
+  
   return (dispatch, getState) => {
+    console.log(dispatch)
     axios.get(SERVER_URL)
       .then((response) => {
         if (response.status === 200) {
           console.log('THIS IS THE DATA:', response.data);
-          dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype })
+          dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
         }
         else {
           dispatch({ type: 'UNAUTH_USER' });

@@ -43,7 +43,7 @@ class QuestionBox extends Component {
     return (
       <div>
         {questions}
-        <input type="text" onKeyDown={this.handleEnter}></input> Ask
+        <input type="text" onKeyDown={this.handleEnter}></input> [ASK]
       </div>);
   }
 }
@@ -52,7 +52,6 @@ function mapStateToProps(state) {
   return {
     questions: state.questions.questions,
     username: state.user.username
-
   }
 }
 

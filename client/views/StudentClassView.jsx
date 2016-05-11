@@ -1,130 +1,89 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { userLogin } from '../actions/users';
-import { selectUser } from '../actions/users';
-import * as UserActions from '../actions/users';
-import * as VideoActions from '../modules/video/actions';
+import StudentPanel from '../containers/StudentPanel';
+import Header from '../login/Header';
+import QuizModal from '../quiz/QuizModal';
+import { initializeWebSockets as initThumbWebSockets } from '../thumbs/socket';
+import { initializeWebSockets as initQuizWebSockets } from '../quiz/socket';
+import * as quizActions from '../quiz/actions';
+import * as thumbActions from '../thumbs/actions';
+import StudentThumbsModal from '../thumbs/StudentThumbsModal';
 import Drawer from '../containers/Drawer';
-import TeacherPanel from '../containers/TeacherPanel';
-
+import * as UserSockets from '../users/socket';
+import * as UserActions from '../actions/users';
 import VideoContainer from '../modules/video/containers/VideoContainer';
-require('../stylesheets/styles.scss');
-//import { initializeWebSockets, emitNewVideoUser } from '../modules/video/api/socket';
 
 
-class LoginView extends Component {
+class StudentClassview extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { term: '' };
+    this.initThumbWebSockets = initThumbWebSockets.bind(this);
+    this.initQuizWebSockets = initQuizWebSockets.bind(this);
 
-
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.videoCallUser = this.videoCallUser.bind(this);
-    //this.initializeWebSockets = initializeWebSockets.bind(this);  
-
+    // list of user sockets call
+    this.initializeWebSockets = UserSockets.initializeWebSockets.bind(this);
+    this.emitGetAllUsersFromClass = UserSockets.emitGetAllUsersFromClass.bind(this);
+    this.emitRemoveUserFromClass = UserSockets.emitRemoveUserFromClass.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.initializeWebSockets();
-  // }
-
-  onInputChange(event) {
-    this.setState({ term: event.target.value });
-
-  }
-
-  onFormSubmit(event) {
-    const userActions = this.props.userActions;
-
-   // event.preventDefault();
-    userActions.userLogin(this.state.term);
-  }
-
-  videoCallUser(user){
-    const videoActions = this.props.videoActions;
-
-    let ball = {
-      calledUser: user,
-      callingUser: this.props.username
-    };
-
-    videoActions.userCallUser(ball);
-  }
-
-
-  renderUserList(users) {
-   console.log('HEREERERE', users)
-    return users.map((user) => {
-      return (
-        <li 
-          key={user}
-          onClick={() => this.videoCallUser(user)}
-          className="list-group-item user-video-link">
-          {user} Joined the Class.</li>
-      );
+  componentDidMount() {
+    this.initThumbWebSockets();
+    this.initQuizWebSockets();
+    this.initializeWebSockets({
+      userActions: this.props.userActions
     });
-  }
+
+    let username = this.props.loginState.username;
+    this.props.userActions.userLogin(username);
+    this.emitGetAllUsersFromClass();
+
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.emitRemoveUserFromClass(username);
+    });
+  };
+
+  componentWillUnmount() {
+    window.addEventListener('beforeunload', () => {
+      let username = this.props.loginState.username;
+      this.removeEventListener('beforeunload');
+    });
+  };
+
 
 
   render() {
-
-
-  console.log('did username get in', this.props.actions )
-
     return (
-
       <div>
+        <Header />
+        <div>
+            <VideoContainer />
+        </div>
 
-        <form onSubmit={this.onFormSubmit} className="input-group">
-          <input
-            placeholder="Username"
-            className="form-control"
-            value={this.state.term}
-            onChange={this.onInputChange} />
-
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Submit</button>
-          </span>
-        </form>
-
-        <ul>
-        {this.renderUserList(this.props.users)}
-
-        </ul>
-      <div>
+        <StudentPanel />
+        <QuizModal />
+        <StudentThumbsModal />
         <Drawer />
-        <TeacherPanel />
-        <VideoContainer />
-
       </div>
-
-    </div>
-
-
     );
 
   };
 }
 
 function mapStateToProps(state) {
-
   return {
-    users: state.Users.users,
-    username: state.Users.username,
-    calledUser: state.video.calledUser
+    loginState: state.user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-   userActions: bindActionCreators(UserActions, dispatch),
-   videoActions: bindActionCreators(VideoActions, dispatch)
+    quizActions: bindActionCreators(quizActions,dispatch),
+    thumbActions: bindActionCreators(thumbActions,dispatch),
+    userActions: bindActionCreators(UserActions, dispatch),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(StudentClassview);

@@ -7,18 +7,19 @@ import LoginView from '../views/LoginView';
 import Login from '../login/Login';
 import Quiz from '../containers/QuizPage';
 import StudentClassView from '../views/StudentClassView';
+import TeacherClassView from '../views/TeacherClassView';
 import UserPage from '../containers/UserPage';
 import axios from 'axios';
-import QuizContainer from '../quiz/container';
+import CreateQuizContainer from '../quiz/CreateQuizContainer';
 import StudentQuiz from '../quiz/StudentQuiz';
 import TeacherQuiz from '../quiz/TeacherQuiz';
-import ChatContainer from '../chat/container';
 import RequireAuth from '../login/auth';
 import SignUp from '../login/SignUp';
 import SignOut from '../login/SignOut';
 import About from '../login/About';
 import SocketManager from '../common/SocketManager';
 import Analytics from '../modules/analytics/containers/analytics_container';
+import EditContainer from '../quiz/EditContainer';
 
 
 export default (
@@ -29,9 +30,7 @@ export default (
     <Route path="/sign-up"
             component={RequireAuth(SignUp)} />
     <Route path="/sign-out"
-            component={RequireAuth(SignOut)} />  
-    <Route path="/about"
-            component={RequireAuth(About)} />  
+            component={RequireAuth(SignOut)} />
     <Route path="/video"
            component={LoginView} />
     <Route path="/quiz"
@@ -40,12 +39,14 @@ export default (
            component={RequireAuth(Thumbs)}/>
     <Route path="/question"
            component={QuestionContainer}/>
-    <Route path="/student-class"
-           component={StudentClassView}/>
+    <Route path="/classroom/student"
+           component={RequireAuth(StudentClassView)}/>
+    <Route path="/classroom/teacher"
+           component={RequireAuth(TeacherClassView)}/>       
     <Route path="/user"
            component={UserPage}/>
      <Route path="/create-quiz"
-           component={QuizContainer}/>
+           component={CreateQuizContainer}/>
      <Route path="/pop-quiz"
            component={StudentQuiz}/>
       <Route path="/send-quiz"
@@ -54,6 +55,7 @@ export default (
            component={ChatContainer} />
       <Route path="/hello" 
            component={Analytics}/>
-
+      <Route path="/edit"
+           component={EditContainer} />
   </Route>
 );

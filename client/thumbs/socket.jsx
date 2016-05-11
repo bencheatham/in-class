@@ -6,11 +6,15 @@ export function initializeWebSockets() {
   socket = connectToWebSockets();
 
   socket.on('thumbCheck', () => {
-    this.props.actions.thumbCheck();
+    this.props.thumbActions.thumbCheck();
+  });
+
+  socket.on('thumbResponse', (result) => {
+    this.props.thumbActions.updateThumbResults(result);
   });
 
   socket.on('thumb-student', data => {    
-    this.props.actions.thumb(data.id,data.username,data.value);
+    this.props.thumbActions.thumb(data.id,data.username,data.value);
   });
 };
 
@@ -27,10 +31,11 @@ export function emitThumbEvent(value,name,id){
       timestamp: Date.now(),
       id: id,
     });
-  this.props.actions.submitThumb();
+  this.props.thumbActions.submitThumb();
 }
 
 export function emitThumbCheck(username){
   socket.emit('thumbCheck', {username:username});
-  this.props.actions.thumbCheck();
+  this.props.thumbActions.openModal();
 }
+

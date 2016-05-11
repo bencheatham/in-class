@@ -16,65 +16,55 @@ class StudentPanel extends React.Component {
   constructor(props) {
     super(props);
     this.displayModal = this.displayModal.bind(this);
-    this.displayTeacherThumbButton = this.displayTeacherThumbButton.bind(this);
-    this.displayThumb = this.displayThumb.bind(this);
+    this.openThumbModal = this.openThumbModal.bind(this);
     this.openQuizModal = this.openQuizModal.bind(this);
   };
 
   openQuizModal(){
-    this.props.quizActions.openQuizModal();
+    this.props.quizActions.openStudentQuizModal();
   }
 
-  displayThumb(){
+  openThumbModal(){
     this.props.thumbActions.beginThumbCheck();
   }
 
-  displayStudentThumbButton(){
-    if (this.props.thumbCheck !== true){
+  displayThumbButton(){
+    var thumbCheckReady = this.props.thumbCheck;
+    
+    if (thumbCheckReady){
       return (
-        <Button onClick={this.displayThumb} className="btn-warning btn-circle btn-xl">
+        <Button onClick={this.openThumbModal} className="btn-warning btn-circle btn-xl">
              <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
         </Button>
       );
+   
     }
   }
 
-  displayTeacherThumbButton(){
-    // if (this.props.thumbCheck !== true){
-      return (
-        <Button onClick={this.displayThumb}>
-             <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
-        </Button>
-      );
-    //}
-  }
-
-  displayThumbCheckMessage () {
-  }
-
-  displayQuizButton(){
+  displayQuizButton(){  
+    var quizLive = this.props.quizLive;
+    if (quizLive){
       return (
         <Button onClick={this.openQuizModal}  className="btn-warning btn-circle btn-xl">
           <Glyphicon glyph="glyphicon glyphicon-question-sign" />
         </Button>
       )
+    }
   }
 
   displayModal(){
-    return (<div>
-        <StudentThumbsModal />
-        <QuizModal />
-        <TeacherQuizModal />
-      </div>
-    );
+    // return (<div>
+    //     <StudentThumbsModal />
+    //     <QuizModal />
+    //     <TeacherQuizModal />
+    //   </div>
+    // );
   }
   render() {
     
-
     return(
-      <div>
-        {this.displayModal()}
-        {this.displayStudentThumbButton()}
+      <div className="TeacherControlPanel">
+        {this.displayThumbButton()}
         {this.displayQuizButton()}
       </div>
     );
@@ -85,6 +75,7 @@ function mapStateToProps(state) {
   return {
     thumbCheck: state.thumbsReducer.thumbCheck,
     storedQuizzes: state.studentQuiz.storedQuizzes,
+    quizLive: state.studentQuiz.quizLive,
   };
 };
 

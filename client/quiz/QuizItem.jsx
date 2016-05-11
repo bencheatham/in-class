@@ -5,8 +5,9 @@ import _ from 'underscore'
 import Login from '../login/Login'
 import Video from '../video/Video'
 import Drawer from '../containers/Drawer'
-import { fetchResults, submitQuiz, updateQuiz, editQuiz } from './actions'
-import { fetchQuiz, seeResults} from './socket'
+import * as quizActions from './actions'
+import {fetchQuiz} from './socket'
+
 import { Button } from 'react-bootstrap';
 
 class QuizItem extends Component {
@@ -14,20 +15,25 @@ class QuizItem extends Component {
   constructor(props){
     super(props);
     this.sendPopQuiz = this.sendPopQuiz.bind(this);
-    this.editQuiz = this.editQuiz.bind(this); 
     this.seeResults = this.seeResults.bind(this);
+    this.deleteQuiz = this.deleteQuiz.bind(this);
+    this.editQuiz = this.editQuiz.bind(this);
   }
 
   sendPopQuiz () {
-    fetchQuiz(this.props.name);
+    console.log('send pop quiz')
+    fetchQuiz(this.props.name, this.props.user.username);
   }
-
-  seeResults () {
-    this.props.actions.fetchResults(this.props.name);
-  }
-
+  
   editQuiz () {
-    this.props.actions.editQuiz(this.props.name);
+    this.props.quizActions.loadQuiz(this.props.name);
+  }
+  seeResults () {
+    this.props.quizActions.fetchResults(this.props.name);
+  }
+
+  deleteQuiz() {
+    this.props.quizActions.deleteQuiz(this.props.name);
   }
 
   render() {
@@ -36,8 +42,7 @@ class QuizItem extends Component {
      {this.props.name} 
      <Button onClick={this.sendPopQuiz}> Send</Button>
      <Button onClick={this.editQuiz}> Edit</Button>
-     <Button onClick={this.editQuiz}> View </Button>
-     <Button onClick={this.seeResults}> See Results</Button>
+     <Button onClick={this.deleteQuiz}> Delete</Button>
     </div>
    );
   };
@@ -51,7 +56,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    actions: bindActionCreators({ fetchResults, submitQuiz, updateQuiz, editQuiz },dispatch),
+    quizActions: bindActionCreators(quizActions,dispatch),
   }
   
   

@@ -6,12 +6,10 @@ export function initializeWebSockets() {
   socket = connectToWebSockets();
   
   socket.on('chatMessage-submitted', data => {
-    console.log('web socket event')
     this.props.actions.submitChat(data.chatMessage);
   });
 
   socket.on('init-chat', data => {
-    console.log('downloading chats')
     this.props.actions.loadChatMessages(data.chatLog);
   });
 

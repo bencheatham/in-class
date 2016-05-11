@@ -54,7 +54,7 @@ function handleSignup(req, res) {
   var test = req.query.test;
   var database = test ? dbTest : db;
 
-console.log('is test: ', test);
+// console.log('is test: ', test);
   
 
   if (typeof username !== 'string' || typeof username !== 'string') {
@@ -67,7 +67,7 @@ console.log('is test: ', test);
   return database.fetch('users', 'username', 'username=\'' + username + '\'')
   .catch((error) => {console.log('fetch error: ' + error); return [];})
   .then(function (existingUser) {
-console.log('existing: ', existingUser);
+// console.log('existing: ', existingUser);
     if (existingUser.length > 0) {
       return Promise.reject('username already exists');
     } else {
@@ -79,7 +79,7 @@ console.log('existing: ', existingUser);
   })
   .then(function () {
     var token = jwt.sign({username: username, usertype: usertype}, secret);
-    console.log('usertype: ', usertype);
+    // console.log('usertype: ', usertype);
     return res.cookie('authorization', 'Bearer ' + token).status(200).send({cookie: 'authorization=Bearer ' + token, username: username, usertype: usertype});
   })
   .catch(function (error){

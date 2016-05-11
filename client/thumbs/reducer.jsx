@@ -1,32 +1,53 @@
-import { THUMB_CHECK, THUMB_SUBMITTED, BEGIN_THUMBCHECK, HIDE_MODAL} from './constants';
+import * as type from './constants';
+import _ from 'lodash';
 
 var initialState = {
   thumbCheck: false,
   displayModal: false,
-}
+  thumbResults: {up: 0, neutral: 0, down: 0}
+};
 
 export default function thumbsReducer(state = initialState, action){
 
   switch (action.type) {
-    case THUMB_CHECK: 
+    case type.THUMB_CHECK: 
       return {
-        thumbCheck: true,
-        displayModal: state.displayModal,
+        ...state,
+        thumbCheck: true
       };
-    case THUMB_SUBMITTED:
+    case type.THUMB_SUBMITTED:
       return {
+        ...state,
         thumbCheck: false,
-        displayModal: false,
+        displayModal: false
       }
-    case BEGIN_THUMBCHECK:
+    case type.BEGIN_THUMBCHECK:
       return {
-        thumbCheck: state.thumbCheck,
-        displayModal: true,
+        ...state,
+        displayModal: true
       }
-    case HIDE_MODAL:
+    case type.OPEN_MODAL:
       return {
-        thumbCheck: state.thumbCheck,
-        displayModal: false,
+        ...state,
+        displayModal: true
+      }
+    case type.HIDE_MODAL:
+      return {
+        ...state,
+        displayModal: false
+      }
+    case type.THUMB_RESET:
+      var thumbResults = {up: 0, neutral: 0, down: 0};
+      return {
+        ...state,
+        thumbResults
+      }
+    case type.THUMB_RESULT:
+      var thumbResults = _.extend({}, state.thumbResults);
+      thumbResults[action.result]++;
+      return {
+        ...state,
+        thumbResults
       }
     default: 
       return state;

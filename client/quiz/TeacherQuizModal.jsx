@@ -4,16 +4,22 @@ import { bindActionCreators } from 'redux';
 import { Modal, Button } from 'react-bootstrap';
 import TeacherQuiz from './TeacherQuiz';
 import * as quizActions from './actions';
+import {hashHistory} from 'react-router';
 
 class TeacherQuizModal extends React.Component {
 
   constructor(props){
     super(props);
     this.hideModal = this.hideModal.bind(this);
+    this.createQuiz = this.createQuiz.bind(this);
   }
   
   hideModal (){
-    this.props.actions.closeQuizModal();
+    this.props.quizActions.closeTeacherQuizModal();
+  }
+
+  createQuiz(){
+    hashHistory.push('/create-quiz');
   }
 
   render() {
@@ -22,13 +28,13 @@ class TeacherQuizModal extends React.Component {
       <div>
       <Modal show={displayModal}>
         <Modal.Header>
-          <Modal.Title>Your Saved Quizzes</Modal.Title>
+          <Modal.Title>My Quizzes</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <TeacherQuiz />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.hideModal}>Add quiz</Button>
+          <Button onClick={this.createQuiz}>Add quiz</Button>
           <Button onClick={this.hideModal}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -45,7 +51,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(quizActions,dispatch)
+    quizActions: bindActionCreators(quizActions,dispatch)
     
   };
 }

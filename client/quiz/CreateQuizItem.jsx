@@ -5,30 +5,30 @@ import _ from 'underscore'
 import Login from '../login/Login'
 import Video from '../video/Video'
 import Drawer from '../containers/Drawer'
-import { submitQuiz, updateQuiz } from './actions'
+import * as quizActions from './actions'
+import Header from '../login/Header';
 
-
-class CreateQuiz extends Component {
+class CreateQuizItem extends Component {
 
   constructor(props){
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);    
   }
 
   handleChange (e) {
-    console.log(e);
+    
     var form = {
-      index: this.props.id,
+      index: this.props.index,
       question: this.refs.title.value,
       choices: [this.refs.answer.value, this.refs.choice1.value,this.refs.choice2.value,this.refs.choice3.value],
       answer: this.refs.answer.value,
     }
 
-    this.props.actions.updateQuiz(form);
+    this.props.quizActions.updateQuestionData(form);
   }
-
+ 
   render() {
-    var data = this.props.quiz.quizzes[this.props.id];
+
    return (
      <div>
       Question: <input type="text" onChange={this.handleChange} ref="title"></input>
@@ -45,14 +45,15 @@ function mapStateToProps(state){
   return {
     user: state.user,
     quiz: state.teacherQuiz,
+    quizzes: state.teacherQuiz.quizzes,
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    actions: bindActionCreators({ submitQuiz, updateQuiz },dispatch),
+    quizActions: bindActionCreators(quizActions,dispatch),
   }
   
   
 }
-export default connect(mapStateToProps,mapDispatchToProps)(CreateQuiz);
+export default connect(mapStateToProps,mapDispatchToProps)(CreateQuizItem);
