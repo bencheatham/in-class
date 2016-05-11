@@ -44,9 +44,8 @@ class UserVideoModal extends React.Component {
   makeCall(user) {
     if (!window.phone) {
       alert("Login First!");
-    } else {
-      window.phone.dial(user);
     }
+    window.phone.dial(user);
   }
 
   videoCallUser(user){
@@ -61,6 +60,7 @@ class UserVideoModal extends React.Component {
     this.makeCall(user);
   }
 
+  // TODO need to investigate, it's fairly buggy
   startClass() {
     let users = this.props.userState.users;
     let currentUser = this.props.userState.username;
@@ -69,6 +69,7 @@ class UserVideoModal extends React.Component {
       if(currentUser === user) return;
       this.videoCallUser(user);
     });
+    this.hide();
   };
 
   getStartClassButton() {
@@ -83,9 +84,12 @@ class UserVideoModal extends React.Component {
   getUserVideo(user) {
     let currentUser = this.props.userState.username;
     let videos = this.props.videoState.videos;
-    if (videos[user] && currentUser !== user) {
-      this.props.videoActions.switchVideoByUsername(user);
-    }
+
+    // shouldn't make a call to yourself
+    if (user === currentUser) return;
+
+    this.videoCallUser(user);
+    this.hide();
   };
 
   getUserList() {
@@ -96,14 +100,13 @@ class UserVideoModal extends React.Component {
 
     return users.map((user) => {
       return (
-        <li className="list-group-item" onClick={this.getUserVideo.bind(this, user)}>
+        <li key={user} className="list-group-item" onClick={this.getUserVideo.bind(this, user)}>
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
           <span className="userId">{user}</span>
         </li>
       )
     });
   };
-
 
   render() {
     const { visible } = this.props;

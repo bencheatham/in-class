@@ -56,3 +56,7 @@ export function emitTeacherVideoSession(classUserPac) {
 //  worker['teacherSelectedVideoUser'](classUserPac);
 
 }
+
+export function setControllerVisibility(visible){
+  return { type: types.SET_CONTROLLER_VISIBILITY, visible: visible };
+}

@@ -2,11 +2,12 @@ import { LOGIN } from './constants';
 import { routerMiddleware, push } from 'react-router-redux'
 import { returnStore } from '../main';
 import { hashHistory } from 'react-router';
+import { userLogin } from '../actions/users'
 import axios from 'axios';
 const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://in-class.herokuapp.com/authentication' : 'http://localhost:8000/authentication' ;
 
 export function signinUser(username, password){
-  
+
   return function(dispatch, getState){
 
     axios.post('login', {username: username, password: password})
@@ -14,7 +15,7 @@ export function signinUser(username, password){
 
       dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
       dispatch(authError(''));
-  
+
       hashHistory.push('/classroom/' + response.data.usertype);
     })
     .catch((error)=>{
@@ -78,7 +79,7 @@ export function checkAuth(path) {
       .then((response) => {
         if (response.status === 200) {
           console.log('THIS IS THE DATA:', response.data);
-          dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype })
+          dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
         }
         else {
           dispatch({ type: 'UNAUTH_USER' });

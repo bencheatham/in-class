@@ -27,7 +27,7 @@ export default (
     <Route path="/sign-up"
             component={RequireAuth(SignUp)} />
     <Route path="/sign-out"
-            component={RequireAuth(SignOut)} />  
+            component={RequireAuth(SignOut)} />
     <Route path="/video"
            component={LoginView} />
     <Route path="/quiz"
