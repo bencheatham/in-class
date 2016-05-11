@@ -89,11 +89,14 @@ class UserVideoModal extends React.Component {
 
   getUserList() {
     let users = this.props.userState.users;
-    if (!users || users.length === 0) {
+    let currentUser = this.props.userState.username;
+
+    if (!users || users.length <= 1) {
       return (<div>Room is empty...</div>);
     }
 
     return users.map((user) => {
+      if (user === currentUser) return;
       return (
         <li key={user} className="list-group-item" onClick={this.getUserVideo.bind(this, user)}>
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
@@ -104,6 +107,12 @@ class UserVideoModal extends React.Component {
   };
 
   render() {
+
+    function renderCurrentUser(){
+      let currentUser = this.props.userState.username;
+      return (<div className="userTitle">Current Login: {currentUser}</div>);
+    };
+
     const { visible } = this.props;
     return (
       <Modal show={visible}>
@@ -111,6 +120,7 @@ class UserVideoModal extends React.Component {
           <Modal.Title>User Videos</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {renderCurrentUser.bind(this)()}
           <ul>
             {this.getUserList()}
           </ul>

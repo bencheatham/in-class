@@ -9,18 +9,14 @@ class VideoContainer extends Component {
 
   constructor(props) {
     super(props);
-    // this.login = this.login.bind(this);
-    this.login = VideoService.login;
+    this.login = VideoService.login.bind(this);
+    this.end = VideoService.end.bind(this);
+    this.mute = VideoService.mute.bind(this);
 
     // jquery actions for video management
     this.removeVideo = this.removeVideo.bind(this);
     this.appendVideo = this.appendVideo.bind(this);
     this.manageVideo = this.manageVideo.bind(this);
-
-    // video controllers
-    this.end = this.end.bind(this);
-    // this.end = service.end;
-    this.login();
   }
 
   appendVideo(session) {
@@ -38,10 +34,6 @@ class VideoContainer extends Component {
     this.props.videoActions.addVideoSession(session);
   };
 
-  end(){
-    window.phone.hangup();
-  };
-
   componentDidMount() {
     let username = this.props.username;
     console.log('username', username);
@@ -50,11 +42,18 @@ class VideoContainer extends Component {
 
   render() {
     // helper method to render controller
+
+    function renderMuteButton() {
+      let label = this.props.mute ? 'Unmute' : 'Mute';
+      return (<Button className="btn-warning" id="mute" onClick={this.mute}>{label}</Button>);
+    };
+
     function renderController() {
       if (!this.props.showCtrl) return;
       return (
         <div id="inCall">
-          <Button className="btn-danger" id="end" onClick={this.end}> End </Button>
+          <Button className="btn-danger" id="end" onClick={this.end}>End</Button>
+          {renderMuteButton.bind(this)()}
         </div>
       );
     };
@@ -73,6 +72,7 @@ function mapStateToProps(state) {
     username: state.user.username,
     showCtrl: state.video.showCtrl,
     session: state.video.videoSession,
+    mute: state.video.mute,
   };
 }
 
