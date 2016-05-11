@@ -37,7 +37,7 @@ export function login(username) {
 };
 
 
-export function makeCall() {
+export function makeCall(user) {
   if (!window.phone) {
     alert("Login First!");
   }

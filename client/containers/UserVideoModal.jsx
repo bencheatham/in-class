@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from '../actions/userVideoModal';
 import * as VideoActions from '../modules/video/actions';
+import * as VideoService from '../modules/video/api/service';
 
 require('../stylesheets/userVideoModal.scss');
 
@@ -18,10 +19,11 @@ class UserVideoModal extends React.Component {
     this.getUserList = this.getUserList.bind(this);
 
     this.startClass = this.startClass.bind(this);
-    this.makeCall = this.makeCall.bind(this);
     this.videoCallUser = this.videoCallUser.bind(this);
     this.getUserVideo = this.getUserVideo.bind(this);
     this.getStartClassButton = this.getStartClassButton.bind(this);
+
+    this.makeCall = VideoService.makeCall.bind(this);
   };
 
   hide() {
@@ -39,13 +41,6 @@ class UserVideoModal extends React.Component {
     videoActions.teacherSelectStudentVideo(ball);
 
     setTimeout(this.hide, 1500);
-  }
-
-  makeCall(user) {
-    if (!window.phone) {
-      alert("Login First!");
-    }
-    window.phone.dial(user);
   }
 
   videoCallUser(user){

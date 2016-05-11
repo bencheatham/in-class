@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as VideoActions from '../../../modules/video/actions';
 import { Button } from 'react-bootstrap';
-import * as service from '../api/service';
+import * as VideoService from '../api/service';
 
 class VideoContainer extends Component {
 
   constructor(props) {
     super(props);
     // this.login = this.login.bind(this);
-    this.login = service.login;
+    this.login = VideoService.login;
 
     // jquery actions for video management
     this.removeVideo = this.removeVideo.bind(this);
