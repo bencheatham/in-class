@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as VideoActions from '../../../modules/video/actions';
 import { Button } from 'react-bootstrap';
+import * as service from '../api/service';
 
 class VideoContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.login = this.login.bind(this);
+    // this.login = this.login.bind(this);
+    this.login = service.login;
 
     // jquery actions for video management
     this.removeVideo = this.removeVideo.bind(this);
@@ -17,6 +19,8 @@ class VideoContainer extends Component {
 
     // video controllers
     this.end = this.end.bind(this);
+    // this.end = service.end;
+    this.login();
   }
 
   appendVideo(session) {
@@ -34,40 +38,17 @@ class VideoContainer extends Component {
     this.props.videoActions.addVideoSession(session);
   };
 
-  login() {
-    let removeVideo = this.removeVideo;
-    let appendVideo = this.appendVideo;
-    let manageVideo = this.manageVideo;
-
-    var phone = window.phone = PHONE({
-        number        : this.props.username || "Anonymous", // listen on username line else Anonymous
-        publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
-        subscribe_key : 'sub-c-107b4e72-082d-11e6-996b-0619f8945a4f',
-        ssl : (('https:' == document.location.protocol) ? true : false)
-    });
-
-    phone.ready(function(){ });
-
-    // receives phone conversation back from PubNub
-    phone.receive(function(session){
-      session.connected(function(session) {
-        appendVideo(session);
-      });
-
-      session.ended(function(session) {
-        removeVideo();
-      });
-    });
-  }
-
   end(){
     window.phone.hangup();
+  };
+
+  componentDidMount() {
+    let username = this.props.username;
+    console.log('username', username);
+    this.login(username);
   }
 
   render() {
-    // TODO need to investigate this further. This doesn't make sense to be called everytime.
-    this.login();
-
     // helper method to render controller
     function renderController() {
       if (!this.props.showCtrl) return;
@@ -89,7 +70,7 @@ class VideoContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    username: state.Users.username,
+    username: state.user.username,
     showCtrl: state.video.showCtrl,
     session: state.video.videoSession,
   };

@@ -13,11 +13,7 @@ export function addPhone(phone) {
 }
 
 export function addVideoSession(session) {
-
- return {
-   type: types.ADD_VIDEO_SESSION,
-   payload: session
- };
+ return {type: types.ADD_VIDEO_SESSION, payload: session};
 }
 
 export function allowMakeCall(isAllow) {
