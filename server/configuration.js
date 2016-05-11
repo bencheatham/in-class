@@ -25,7 +25,7 @@ require(__dirname + '/authentication/authentication.js')(app); // initialize the
 var authenticationHandler = require(__dirname + '/authentication/authenticationHandler.js');
 
 // use express static to set the statically hosted files to the serve from the client directory
-// app.use('/', express.static(__dirname + '/../dist/'));
+app.use('/', express.static(__dirname + '/../dist/'));
 
 
 

@@ -29,6 +29,11 @@ export function beginThumbCheck () {
     type: type.BEGIN_THUMBCHECK,
   }
 }
+export function endThumbCheck () {
+  return {
+    type: type.END_THUMBCHECK
+  }
+}
 
 export function resetThumbResults () {
   return {
