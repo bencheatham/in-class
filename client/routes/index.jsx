@@ -10,7 +10,7 @@ import StudentClassView from '../views/StudentClassView';
 import TeacherClassView from '../views/TeacherClassView';
 import UserPage from '../containers/UserPage';
 import axios from 'axios';
-import QuizContainer from '../quiz/container';
+import CreateQuizContainer from '../quiz/CreateQuizContainer';
 import StudentQuiz from '../quiz/StudentQuiz';
 import TeacherQuiz from '../quiz/TeacherQuiz';
 import RequireAuth from '../login/auth';
@@ -18,6 +18,10 @@ import SignUp from '../login/SignUp';
 import SignOut from '../login/SignOut';
 import About from '../login/About';
 import SocketManager from '../common/SocketManager';
+import Analytics from '../modules/analytics/containers/analytics_container';
+import SingleQuizAnalytics from '../modules/analytics/containers/SingleQuizAnalyticsContainer';
+import EditContainer from '../quiz/EditContainer';
+
 
 export default (
   <Route>
@@ -42,11 +46,17 @@ export default (
            component={RequireAuth(TeacherClassView)}/>       
     <Route path="/user"
            component={UserPage}/>
-     <Route path="/create-quiz"
-           component={QuizContainer}/>
-     <Route path="/pop-quiz"
+    <Route path="/create-quiz"
+           component={CreateQuizContainer}/>
+    <Route path="/pop-quiz"
            component={StudentQuiz}/>
-      <Route path="/send-quiz"
+    <Route path="/send-quiz"
            component={TeacherQuiz} />
+    <Route path="/analytics" 
+           component={RequireAuth(Analytics)}/>
+    <Route path="/analytics/quiz" 
+           component={RequireAuth(SingleQuizAnalytics)}/>
+    <Route path="/edit"
+           component={EditContainer} />
   </Route>
 );

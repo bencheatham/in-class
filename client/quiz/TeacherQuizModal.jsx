@@ -15,11 +15,11 @@ class TeacherQuizModal extends React.Component {
   }
   
   hideModal (){
-    this.props.actions.closeTeacherQuizModal();
+    this.props.quizActions.closeTeacherQuizModal();
   }
 
   createQuiz(){
-    hashHistory.push('/create-quiz')
+    hashHistory.push('/create-quiz');
   }
 
   render() {
@@ -51,7 +51,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(quizActions,dispatch)
+    quizActions: bindActionCreators(quizActions,dispatch)
     
   };
 }

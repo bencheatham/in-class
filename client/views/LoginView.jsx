@@ -15,13 +15,12 @@ import * as UserSockets from '../users/socket';
 require('../stylesheets/styles.scss');
 
 
-class LoginView extends Component {
+export default class LoginView extends Component {
 
   constructor(props) {
     super(props);
     this.state = { term: '' };
 
-    // question modal actions
     this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
 
@@ -42,15 +41,19 @@ class LoginView extends Component {
       userActions: this.props.userActions
     });
 
+
     let username = this.props.loginState.username;
     this.props.userActions.userLogin(username);
     this.emitGetAllUsersFromClass();
+
 
     window.addEventListener('beforeunload', () => {
       let username = this.props.loginState.username;
       this.emitRemoveUserFromClass(username);
     });
   };
+
+
 
   componentWillUnmount() {
     window.addEventListener('beforeunload', () => {
@@ -62,9 +65,10 @@ class LoginView extends Component {
   render() {
     return (
       <div>
-        <VideoContainer />
+
         <Drawer />
         <TeacherPanel />
+        <VideoContainer />
 
       </div>
     );
