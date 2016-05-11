@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux';
 import Header from '../login/Header';
 import TeacherPanel from '../containers/TeacherPanel';
 import TeacherQuizModal from '../quiz/TeacherQuizModal';
-import { initializeWebSockets as initThumbWebSockets } from '../thumbs/socket';
+import { initializeWebSockets as initThumbWebSockets, closeWebSockets} from '../thumbs/socket';
 import { initializeWebSockets as initQuizWebSockets } from '../quiz/socket';
+import * as quizActions from '../quiz/actions';
 import Drawer from '../containers/Drawer';
 import * as UserSockets from '../users/socket';
 import * as UserActions from '../actions/users';
@@ -15,11 +16,19 @@ class TeacherClassview extends Component {
 
   constructor(props) {
     super(props);
-
     // list of user sockets call
     this.initializeWebSockets = UserSockets.initializeWebSockets.bind(this);
     this.emitGetAllUsersFromClass = UserSockets.emitGetAllUsersFromClass.bind(this);
     this.emitRemoveUserFromClass = UserSockets.emitRemoveUserFromClass.bind(this);
+    this.initQuizWebSockets = initQuizWebSockets.bind(this);
+    this.closeWebSockets = closeWebSockets.bind(this);
+  }
+
+  componentWillMount () {
+    this.initQuizWebSockets();
+  }
+
+  componentWillUnMount () {
   }
 
   componentDidMount() {
@@ -72,5 +81,8 @@ function mapDispatchToProps(dispatch) {
   }
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  quizActions: bindActionCreators(quizActions,dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeacherClassview);

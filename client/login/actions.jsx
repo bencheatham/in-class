@@ -72,9 +72,10 @@ export function signoutUser (username) {
   }
 }
 
-export function checkAuth(path) {
-
+export function checkAuth() {
+  
   return (dispatch, getState) => {
+    console.log(dispatch)
     axios.get(SERVER_URL)
       .then((response) => {
         if (response.status === 200) {

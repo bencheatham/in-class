@@ -11,15 +11,13 @@ class TeacherQuiz extends Component {
     super(props);
     this.handleFetch = this.handleFetch.bind(this);
     this.displayQuizList = this.displayQuizList.bind(this);
-    this.initializeWebSockets = initializeWebSockets.bind(this);
   }
   componentWillMount (){
     this.handleFetch();
-    this.initializeWebSockets();
   }
 
   handleFetch(){
-    this.props.actions.getQuizzes();
+    this.props.actions.fetchQuizList();
   }
 
   displayQuizList(){
@@ -43,7 +41,7 @@ function mapStateToProps(state){
   return {
     user: state.user,
     quiz: state.teacherQuiz,
-    quizzes: state.teacherQuiz.quizzes,
+    quizzes: state.teacherQuiz.quizList,
     status: state.studentQuiz.status
   }
 }

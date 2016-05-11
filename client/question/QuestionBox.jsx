@@ -52,7 +52,6 @@ function mapStateToProps(state) {
   return {
     questions: state.questions.questions,
     username: state.user.username
-
   }
 }
 
