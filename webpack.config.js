@@ -1,5 +1,5 @@
 
-require('dotenv').config({path: '.envProduction'});
+// require('dotenv').config({path: '.envProduction'});
 
 var webpack = require('webpack');
 var path = require('path');
