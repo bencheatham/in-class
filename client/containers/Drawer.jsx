@@ -6,6 +6,7 @@ import Quiz from '../components/Quiz';
 require('../stylesheets/drawer.scss');
 import QuestionContainer from '../question/container';
 import ChatBox from '../chat/ChatBox';
+import AnalyticsContainer from '../modules/analytics/containers/analytics_container';
 
 class Drawer extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class Drawer extends React.Component {
     const PANEL_CHAT = 'PANEL_CHAT';
     const PANEL_THUMB = 'PANEL_THUMB';
     const PANEL_QUESTIONS = 'PANEL_QUESTIONS';
+    const PANEL_ANALYTICS = 'PANEL_ANALYTICS';
 
     let id = 0;
 
@@ -34,12 +36,15 @@ class Drawer extends React.Component {
             <ul>
               <li onClick={() => actions.display(PANEL_CHAT) }> Chat </li>
               <li onClick={() => actions.display(PANEL_QUESTIONS) }> Questions </li>
+              <li onClick={() => actions.display(PANEL_ANALYTICS) }> Analytics </li>
+
             </ul>
           </div>
 
           <div id="panels" className={visibility ? " visible" : ""}>
             <div style={{display: panel === PANEL_CHAT ? '' : 'none'}}><ChatBox/></div>
             <div style={{display: panel === PANEL_QUESTIONS ? '' : 'none'}}><QuestionContainer/></div>
+            <div style={{display: panel === PANEL_ANALYTICS ? '' : 'none'}}><AnalyticsContainer/></div>
           </div>
         </div>
 

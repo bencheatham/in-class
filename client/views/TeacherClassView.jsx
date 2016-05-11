@@ -11,6 +11,7 @@ import Drawer from '../containers/Drawer';
 import * as UserSockets from '../users/socket';
 import * as UserActions from '../actions/users';
 import VideoContainer from '../modules/video/containers/VideoContainer';
+import AnalyticsContainer from '../modules/analytics/containers/analytics_container';
 
 class TeacherClassview extends Component {
 
@@ -64,6 +65,7 @@ class TeacherClassview extends Component {
         <TeacherPanel />
         <TeacherQuizModal />
         <Drawer />
+        <AnalyticsContainer />
       </div>
     );
   };

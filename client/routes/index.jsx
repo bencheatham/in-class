@@ -51,8 +51,6 @@ export default (
            component={StudentQuiz}/>
       <Route path="/send-quiz"
            component={TeacherQuiz} />
-      <Route path="/chat"
-           component={ChatContainer} />
       <Route path="/hello" 
            component={Analytics}/>
       <Route path="/edit"

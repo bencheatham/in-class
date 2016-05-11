@@ -83,11 +83,11 @@ export default function analyzeQuiz(quiz, responses){
   }, initStudentData);
 
 
-  for(var key1 in classScores.answerTally.questions) {
+  for(let key1 in classScores.answerTally.questions) {
     classScores.answerTally.questions[key1].labels = [];
     classScores.answerTally.questions[key1].responseData = [];
     
-    for(var key2 in classScores.answerTally.questions[key1].responses) {
+    for(let key2 in classScores.answerTally.questions[key1].responses) {
       classScores.answerTally.questions[key1].labels.push(key2);
       classScores.answerTally.questions[key1].responseData.push(quizAddOns.questions[key1].responses[key2]);
     }  
@@ -95,7 +95,7 @@ export default function analyzeQuiz(quiz, responses){
 
   let uniqueScores = [];
   let scoreData = [];
-  for (var key in classScores.uniqueScoresObj) {
+  for (let key in classScores.uniqueScoresObj) {
    uniqueScores.push(key);
    scoreData.push(classScores.uniqueScoresObj[key]);
   }
@@ -121,13 +121,11 @@ export default function analyzeQuiz(quiz, responses){
     
   }, stdDeviationStart);
 
-  for(var key in addOns) {
+  for(let key in addOns) {
    classScores[key] = addOns[key];
   }
 
   classScores.title = responses.title;
-
-  console.log(classScores)
 
   return classScores;
 

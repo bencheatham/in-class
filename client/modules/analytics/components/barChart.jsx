@@ -12,7 +12,8 @@ export default class SimpleBar extends Component {
     let title;
     let data;
 
-    let obj = this.props.data
+    let obj = this.props.data;
+
     for(var key in obj){
       if(key === "labels"){
         labels = obj[key];
@@ -61,10 +62,6 @@ export default class SimpleBar extends Component {
     };
   };
 
-  componentWillMount() {
-    //this.props.getTrendingOrgs();
-  };
-
   drawChart() {
     const barData = this.state.data3;
 
@@ -80,45 +77,9 @@ export default class SimpleBar extends Component {
       legendTemplate : "<ul className=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
     };
 
-    // var pieData = [];
-    // var count = 0;
-    // var colors = [
-    //   {color: "#F7464A", highlight: "#FF5A5E"},
-    //   {color: "#46BFBD", highlight: "#5AD3D1"},
-    //   {color: "#FDB45C", highlight: "#FFC870"},
-    //   {color: "#949FB1", highlight: "#A8B3C5"},
-    //   {color: "#4D5360", highlight: "#616774"}
-    // ];
-
-    // _.each(this.state.results, (item) => {
-    //   if(count < 5){
-    //     pieData.push({
-    //       value: item.instances,
-    //       color: colors[count].color, //"#F7464A", //
-    //       highlight: colors[count].highlight, //"#FF5A5E", //
-    //       label: item.org
-    //     });
-    //     count++;
-    //   }
-    // });
-
-    return (<BarChart data={barData} options={barOptions} width="600" height="250"/>);
+   // return (<BarChart data={barData} options={barOptions} width="600" height="250"/>);
+    return (<BarChart data={barData} options={barOptions} width="300" height="125"/>);
   };
-
-  // populateResults() {
-  //   //console.log('populateResults: ', this.props.orgs.data);
-  //   return _.reduce(this.props.orgs.data, (accum, item) => {
-
-  //     let html = (
-  //       <a href={item.url} target='_blank'><li className='collection-item' class="badge" key={item.key}>
-  //         <img className='imgTrendOrg' src={item.avatar} alt='org avatar' />
-  //         {item.org}  
-  //       </li></a>
-  //     );
-  //     accum.push(html);
-  //     return accum;
-  //   }, []);
-  // }
 
   render() {
     return (

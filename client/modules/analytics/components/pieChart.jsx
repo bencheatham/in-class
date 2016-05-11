@@ -33,12 +33,7 @@ export default class SimplePie extends Component {
     };
   };
 
-  componentWillMount() {
-    //this.props.getTrendingOrgs();
-  };
-
   drawChart() {
-    //const pieData = this.state.data;
 
     var pieOptions = {
       animatable: true,
@@ -74,23 +69,10 @@ export default class SimplePie extends Component {
       }
     });
 
-    return (<PieChart data={pieData} options={pieOptions} width="600" height="250"/>);
+    //return (<PieChart data={pieData} options={pieOptions} width="600" height="250"/>);
+    return (<PieChart data={pieData} options={pieOptions} width="300" height="125"/>);
+
   };
-
-  // populateResults() {
-  //   //console.log('populateResults: ', this.props.orgs.data);
-  //   return _.reduce(this.props.orgs.data, (accum, item) => {
-
-  //     let html = (
-  //       <a href={item.url} target='_blank'><li className='collection-item' class="badge" key={item.key}>
-  //         <img className='imgTrendOrg' src={item.avatar} alt='org avatar' />
-  //         {item.org}  
-  //       </li></a>
-  //     );
-  //     accum.push(html);
-  //     return accum;
-  //   }, []);
-  // }
 
   render() {
     return (

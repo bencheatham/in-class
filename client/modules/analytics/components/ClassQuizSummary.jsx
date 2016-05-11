@@ -14,6 +14,8 @@ export default class ClassQuizSummary extends Component {
 
     return this.props.data.analyzedQuizes.map((quizResult) => {
 
+      console.log(quizResult)
+
       let datapack = {
         title: quizResult.title, 
         labels: quizResult.uniqueScores, 
@@ -24,6 +26,11 @@ export default class ClassQuizSummary extends Component {
         <div key={quizResult.title}>
 
           <BarChart data={datapack} />
+
+          <p><strong>Class Average: </strong>{quizResult.classAverage}%</p>
+          <p><strong>Standard Deviation: </strong>{quizResult.stdDev}%</p>
+          <p><strong>Number of Students: </strong>{quizResult.numStudents}</p>
+
           <PieChart data={datapack} />
 
         </div>
