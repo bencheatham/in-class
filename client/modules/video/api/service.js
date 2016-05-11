@@ -10,7 +10,6 @@ function removeVideo() {
 
 function toggleMute() {
   let mute = this.props.mute;
-  console.log('mute', mute);
   this.props.videoActions.setMute(!mute);
 }
 
@@ -34,18 +33,15 @@ export function login(username) {
   // receives phone conversation back from PubNub
   ctrl.receive(function(session){
     session.connected(function(session) {
-      console.log('hit connected');
       appendVideo(session);
     });
 
     session.ended(function(session) {
-      console.log('hit ended');
       removeVideo(session);
     });
   });
 
   ctrl.audioToggled(function(session, isEnabled){
-    console.log('toggle audio');
     ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75);
   });
 };
@@ -62,7 +58,6 @@ export function end() {
 };
 
 export function mute() {
-  console.log('hit mute');
   window.ctrl.toggleAudio();
   toggleMute.bind(this)();
 };

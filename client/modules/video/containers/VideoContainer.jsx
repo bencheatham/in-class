@@ -36,7 +36,6 @@ class VideoContainer extends Component {
 
   componentDidMount() {
     let username = this.props.username;
-    console.log('username', username);
     this.login(username);
   }
 
