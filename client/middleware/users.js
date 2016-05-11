@@ -3,6 +3,9 @@ import io from 'socket.io-client';
 import { userJoinedClass } from '../actions/users';
 import { userLeftClass } from '../actions/users';
 import * as actions from '../actions/users';
+import * as vidActions from '../modules/video/actions';
+
+
 
 //const SERVER_URL = 'http://inclass-co.herokuapp.com/';//'http://localhost:8000';
 //const SERVER_URL = 'http://localhost:8000';
@@ -13,12 +16,17 @@ export default function(store) {
   let isTyping = false;
   let lastTypingTime;
 
+
   // Prevents input from having injected markup
   function cleanInput (input) { return $('<div/>').text(input).text(); }
 
   function newClassVideoUser(userPac) {
-    console.log(userPac.username + 'isOnVideoChat', userPac)
-    store.dispatch(actions.addVideoSession(userPac));
+    userPac.videoSession = $(userPac.videoSession)[0]
+    console.log(userPac.speaker + ' isOnVideoChat', userPac)
+    if(store){
+      store.dispatch(vidActions.addClassVideoSession(userPac));
+    }
+
   }
 
   function login (data) {
@@ -34,7 +42,9 @@ export default function(store) {
 
   function userJoined (data) {
     console.log(data.username + ' joined', data);
-    store.dispatch(actions.userJoinedClass(data));
+    if(store){
+      store.dispatch(actions.userJoinedClass(data));
+    }
     //userJoinedClass(data);
   }
 

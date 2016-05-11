@@ -10,7 +10,7 @@ import QuestionModal from '../modules/questionModal/QuestionModal';
 import UserVideoModal from './UserVideoModal';
 import TeacherThumbModal from '../thumbs/TeacherThumbModal';
 import { emitThumbCheck, initializeWebSockets as initThumbWebSockets} from '../thumbs/socket'
-
+import { hashHistory } from 'react-router';
 
 require('../stylesheets/styles.scss');
 
@@ -26,6 +26,7 @@ class TeacherPanel extends React.Component {
     this.displayVideoButton = this.displayVideoButton.bind(this);
     this.emitThumbCheck = emitThumbCheck.bind(this);
     this.initThumbWebSockets = initThumbWebSockets.bind(this);
+    this.openAnalytics = this.openAnalytics.bind(this);
   };
 
   componentWillMount() {
@@ -41,6 +42,10 @@ class TeacherPanel extends React.Component {
 
   openThumbModal() {
     this.emitThumbCheck(this.props.username);
+  };
+
+  openAnalytics() {
+    hashHistory.push('/analytics');
   };
 
   displayThumbsButton (){
@@ -67,12 +72,21 @@ class TeacherPanel extends React.Component {
     );
   }
 
+  displayAnalyticsButton (){
+    return (
+      <Button onClick={this.openAnalytics} className="btn-success btn-circle btn-xl">
+        <Glyphicon glyph="glyphicon glyphicon-signal" />
+      </Button>
+    );
+  }
+
   render() {
     return(
       <div className="TeacherControlPanel">
         {this.displayVideoButton()}
         {this.displayThumbsButton()}
         {this.displayQuizButton()}
+        {this.displayAnalyticsButton()}
         <UserVideoModal />
         <QuestionModal />
         <TeacherThumbModal />
@@ -92,7 +106,7 @@ function mapDispatchToProps(dispatch) {
   return {
     userVideoModalActions: bindActionCreators(UserVideoModalActions, dispatch),
     quizActions: bindActionCreators(quizActions, dispatch),
-    thumbActions: bindActionCreators(thumbActions, dispatch)
+    thumbActions: bindActionCreators(thumbActions, dispatch),
   }
 };
 
