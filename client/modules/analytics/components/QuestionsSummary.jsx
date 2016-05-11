@@ -59,6 +59,6 @@ export default class QuestionSummary extends Component {
       </div> 
 
     );
-  }
+  };
 
 }

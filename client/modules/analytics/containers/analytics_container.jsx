@@ -1,10 +1,7 @@
-
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as AnalyticsActions from '../actions/analytics_actions';
-
 import PieChart from '../components/PieChart';
 import BarChart from '../components/BarChart';
 import ListQuizes from '../components/listQuizes';
@@ -29,8 +26,6 @@ class AnalyticsContainer extends Component {
 
     return (
       <div>
-        <ListQuizes data={this.props} />
-
         <ClassQuizSummary data={this.props}/>
         <QuestionsSummary data={this.props}/>
       </div>
