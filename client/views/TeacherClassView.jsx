@@ -78,11 +78,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
    userActions: bindActionCreators(UserActions, dispatch),
+   quizActions: bindActionCreators(quizActions,dispatch)
   }
 };
-
-const mapDispatchToProps = (dispatch) => ({
-  quizActions: bindActionCreators(quizActions,dispatch)
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeacherClassview);
