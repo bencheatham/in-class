@@ -27,8 +27,6 @@ class AnalyticsContainer extends Component {
  
   render() {
 
-    console.log(this.props)
-
     return (
       <div>
         <Header />
@@ -36,7 +34,6 @@ class AnalyticsContainer extends Component {
           <div>
             <ClassQuizSummary data={this.props}/>
           </div>
-          <p></p>
           <div>
             <QuestionsSummary data={this.props}/>
           </div>

@@ -27,13 +27,15 @@ class AnalyticsContainer extends Component {
  
   render() {
 
-    console.log(this.props)
-
     return (
       <div>
         <Header />
-        <SingleQuizSummary data={this.props}/>
-        <SingleQuestionsSummary data={this.props}/>
+        <div>
+          <SingleQuizSummary data={this.props}/>
+        </div>
+        <div>
+          <SingleQuestionsSummary data={this.props}/>
+        </div>
       </div>
     );
   };
