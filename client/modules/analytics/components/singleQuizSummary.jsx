@@ -16,8 +16,6 @@ export default class SingleQuizSummary extends Component {
 
     let quizResult = this.props.data.analyzedQuizes[idx];
 
-    console.log(this.props)
-
     let datapack = {
       title: quizResult.title, 
       labels: quizResult.uniqueScores, 

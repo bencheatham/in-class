@@ -14,8 +14,6 @@ export default class ListQuizes extends Component {
   };
 
   openAnalytics(idx) {
-    console.log(this.props)
-    console.log(idx)
     this.props.data.analyticsActions.selectQuiz(idx);
     hashHistory.push('/analytics/quiz');
   };

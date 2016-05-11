@@ -14,8 +14,6 @@ export default class ClassQuizSummary extends Component {
 
     return this.props.data.analyzedQuizes.map((quizResult) => {
 
-      console.log(quizResult)
-
       let datapack = {
         title: quizResult.title, 
         labels: quizResult.uniqueScores, 
