@@ -6,11 +6,9 @@ import * as thumbActions from '../thumbs/actions';
 import * as quizActions from '../quiz/actions';
 import * as QuestionModalSockets from '../modules/questionModal/socket';
 import * as QuestionModalActions from '../modules/questionModal/actions';
-
 import QuizModal from '../quiz/QuizModal';
 import StudentThumbsModal from '../thumbs/StudentThumbsModal';
 import TeacherQuizModal from '../quiz/TeacherQuizModal';
-
 import { bindActionCreators } from 'redux'
 require('../stylesheets/styles.scss');
 

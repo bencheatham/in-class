@@ -26,14 +26,14 @@ class QuestionModal extends React.Component {
 
   getUserList(){
     let users = this.props.users;
-    
+
     if (!users) return;
     return users.map((user) => {
       return (
-        <div className="user">
+        <li key={user} className="list-group-item" >
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
-          <span className="userName">{user}</span>
-        </div>
+          <span className="userId">{user}</span>
+        </li>
       );
     });
   };
@@ -45,6 +45,8 @@ class QuestionModal extends React.Component {
     );
   }
 
+
+
   render() {
     const { visible } = this.props;
 
@@ -55,9 +57,9 @@ class QuestionModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <h4>Next:</h4>
-          <div>
+          <ul>
             {this.getUserList()}
-          </div>
+          </ul>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.hide}>Close</Button>

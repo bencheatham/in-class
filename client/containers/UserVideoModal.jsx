@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from '../actions/userVideoModal';
 import * as VideoActions from '../modules/video/actions';
 import * as VideoService from '../modules/video/api/service';
-
 require('../stylesheets/userVideoModal.scss');
 
 class UserVideoModal extends React.Component {

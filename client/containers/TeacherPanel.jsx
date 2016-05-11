@@ -91,6 +91,9 @@ class TeacherPanel extends React.Component {
   };
 
   displayHandraise() {
+    let handraiseUsers = this.props.handraiseUsers;
+    if (!handraiseUsers || handraiseUsers.length <= 0) return;
+
     return (
       <Button onClick={this.openHandraise} className="btn-danger btn-circle btn-xl">
         <Glyphicon glyph="glyphicon glyphicon glyphicon-flag" />
@@ -119,6 +122,7 @@ function mapStateToProps(state) {
   return {
     userVideoState: state.userVideoModal,
     username: state.user.username,
+    handraiseUsers: state.questionModal.users,
   };
 };
 
