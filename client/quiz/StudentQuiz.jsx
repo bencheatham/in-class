@@ -25,25 +25,26 @@ class StudentQuiz extends Component {
   }
 
   handleFetch(){
-    let quizName = 'Hello';
+    let quizName = 'AnimalTalk';
     this.props.actions.startQuiz(quizName);
-    console.log('fetch!')
   }
 
   render() {
     var {storedQuizzes, status} = this.props;
     var self = this;
     var quizzes;
+  
     var currentQuestion = status - 1;
+    // var currentQuestion = 0;
 
-    if (status !== 0 && status <= storedQuizzes.length){
+    if (status !== 0 && status <= storedQuizzes.questions.length){
       quizzes = [
-          <div>{storedQuizzes[currentQuestion].question}
+          <div>{storedQuizzes.questions[currentQuestion].question}
             <div>
-              <button value={storedQuizzes[currentQuestion].answer} onClick={self.handleClick}>{storedQuizzes[currentQuestion].answer}</button>
-              <button value={storedQuizzes[currentQuestion].choice1} onClick={self.handleClick}>{storedQuizzes[currentQuestion].choice1}</button>
-              <button value={storedQuizzes[currentQuestion].choice2} onClick={self.handleClick}>{storedQuizzes[currentQuestion].choice2}</button>
-              <button value={storedQuizzes[currentQuestion].choice3} onClick={self.handleClick}>{storedQuizzes[currentQuestion].choice3}</button>
+              <button value={storedQuizzes.questions[currentQuestion].answer} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[0]}</button>
+              <button value={storedQuizzes.questions[currentQuestion].choice1} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[1]}</button>
+              <button value={storedQuizzes.questions[currentQuestion].choice2} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[2]}</button>
+              <button value={storedQuizzes.questions[currentQuestion].choice3} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[3]}</button>
             </div>
           </div>
         ];
@@ -53,7 +54,6 @@ class StudentQuiz extends Component {
 
     return (
       <div>
-        <button onClick={this.handleFetch}>Fetch Your Quizzes</button>  
         {quizzes}
       </div>
      );
@@ -63,7 +63,7 @@ class StudentQuiz extends Component {
 function mapStateToProps(state){
   return {
     user: state.user,
-    quiz: state.quiz,
+    quiz: state.teacherQuiz,
     storedQuizzes: state.studentQuiz.storedQuizzes,
     status: state.studentQuiz.status
   }

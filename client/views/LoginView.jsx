@@ -21,8 +21,6 @@ export default class LoginView extends Component {
     super(props);
     this.state = { term: '' };
 
-
-
     this.initQuestionModalSocket = questionModalSockets.initializeWebSockets.bind(this);
     this.emitAddNewUser = questionModalSockets.emitAddNewUser.bind(this);
 
@@ -48,11 +46,14 @@ export default class LoginView extends Component {
     this.props.userActions.userLogin(username);
     this.emitGetAllUsersFromClass();
 
+
     window.addEventListener('beforeunload', () => {
       let username = this.props.loginState.username;
       this.emitRemoveUserFromClass(username);
     });
   }
+
+
 
   componentWillUnmount() {
     window.addEventListener('beforeunload', () => {

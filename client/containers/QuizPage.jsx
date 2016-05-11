@@ -5,6 +5,7 @@ import { show } from '../actions/quiz';
 import Header from '../login/Header';
 import Drawer from '../containers/Drawer';
 import TeacherPanel from '../containers/TeacherPanel';
+import StudentPanel from '../containers/StudentPanel';
 
 class QuizPage extends Component {
   render() {
@@ -12,7 +13,8 @@ class QuizPage extends Component {
      <div>
       <Header />
       <Drawer />
-      <TeacherPanel />
+      <StudentPanel />
+      
      </div>
    );
  };

@@ -44,7 +44,6 @@ module.exports = function initializeChatStreaming (server) {
  function tellUsersStudentIsOnVideo (classUserPac) {
    this.broadcast.emit('newClassVideoUser', classUserPac );
 
-
  }
 
 	var socketEvents = {

@@ -43,7 +43,7 @@ class QuizContainer extends Component {
 function mapStateToProps(state){
   return {
     user: state.user,
-    quiz: state.quiz,
+    quiz: state.teacherQuiz,
     storedQuizzes: state.storedQuizzes
   }
 }

@@ -92,6 +92,29 @@ export default function(state = initState, action) {
         makeCall: action.isAllow
       });
 
+    // return Object.assign({}, state, {
+    //   videoSession: action.payload
+    // });
+
+  case EMIT_TEACHER_VIDEO_SESSION:
+
+    return state;
+
+  case ADD_CLASS_VIDEO_SESSION:
+
+    if(state.classVideoSession === null){
+      let obj = Object.assign({}, state, {
+            classVideoSession: action.payload.videoSession,
+            classVideoSpeaker: action.payload.presenter,
+            classVideoTeacher: action.payload.teacher
+          });
+
+      return obj;
+    }
+    return state;
+
+
+      
     default:
       return state;
   }

@@ -16,6 +16,7 @@ export default function(store) {
   let isTyping = false;
   let lastTypingTime;
 
+
   // Prevents input from having injected markup
   function cleanInput (input) { return $('<div/>').text(input).text(); }
 

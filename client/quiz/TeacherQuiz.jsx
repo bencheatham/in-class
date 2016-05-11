@@ -11,40 +11,29 @@ class TeacherQuiz extends Component {
     super(props);
     this.initializeWebSockets = initializeWebSockets.bind(this);
     this.handleFetch = this.handleFetch.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.displayQuizList = this.displayQuizList.bind(this);
   }
   componentWillMount (){
     this.initializeWebSockets();
-  }
-
-  handleClick (e){
-    var {storedQuizzes, status, actions} = this.props;
-    console.log(e)
+    this.handleFetch();
   }
 
   handleFetch(){
     this.props.actions.getQuizzes();
   }
 
-  render() {
-    var {quizzes, status} = this.props;
-    var self = this;
-    var quizArray = quizzes.map((quiz,idx)=> {
-      return <QuizItem name={quiz} key={idx} /> 
-    });
-    
-    var editing;
-    //if (this.props.quiz.editingQuiz){
-      console.log(this.props.quiz.quizToEdit);
-    //}
-    var editingQuiz = this.props.quiz.quizToEdit.map((quiz)=>{
-      return <div>{quiz.question}></div>
-    })
+  displayQuizList(){
+    if (this.props.quizzes){
+      return this.props.quizzes.map((quiz,idx)=> {
+        return <QuizItem name={quiz} key={idx} /> 
+      });  
+    }
+  }
 
+  render() {
     return (
       <div>
-        <button onClick={this.handleFetch}>Download Quizzes</button>  
-        {quizArray}
+        {this.displayQuizList()}
       </div>
      );
  };
@@ -53,8 +42,8 @@ class TeacherQuiz extends Component {
 function mapStateToProps(state){
   return {
     user: state.user,
-    quiz: state.quiz,
-    quizzes: state.quiz.quizzes,
+    quiz: state.teacherQuiz,
+    quizzes: state.teacherQuiz.quizzes,
     status: state.studentQuiz.status
   }
 }

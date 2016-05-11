@@ -19,6 +19,8 @@ export function closeWebSockets(){
 }
 
 export function emitThumbEvent(value,name,id){
+  socket = connectToWebSockets();
+  
   socket.emit('thumb-student', {
       username : name,
       thumb: value,

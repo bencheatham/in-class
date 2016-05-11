@@ -1,23 +1,22 @@
-import { EDIT_QUIZ, QUIZ_SUBMISSION, QUIZ_FETCH, ADD_QUIZFORM, UPDATE_QUIZ} from './constants';
+import * as type from './constants';
 
 var initialState = {
   quizzes: [],
   questionForms: 1,
   editingQuiz: false,
   quizToEdit: [],
+  displayModal: false,
+  quizResults: [],
 }
 
 export default function quiz(state = initialState, action){
-
   switch (action.type) {
     case 'ALL_QUIZZES': 
       return {
+        ...state,
         quizzes: action.quizzes,
-        questionForms: state.questionForms,
-        editingQuiz: state.editingQuiz,
-        quizToEdit: state.quizToEdit,
       };
-    case UPDATE_QUIZ:
+    case type.UPDATE_QUIZ:
       var updatedQuizzes;
       if (state.quizzes.length < state.questionForms){
         updatedQuizzes = state.quizzes.concat(action.formData);  
@@ -29,29 +28,43 @@ export default function quiz(state = initialState, action){
             return quiz;
           })
         }
-      return {
+      return {        
+        ...state,
         quizzes: updatedQuizzes,
-        questionForms: state.questionForms,
-        editingQuiz: state.editingQuiz,
-        quizToEdit: state.quizToEdit,
       }
-    case ADD_QUIZFORM:   
-      var newCount = state.questionForms + 1;
+    case type.DISPLAY_RESULTS: 
       return {
-        quizzes: state.quizzes,
-        questionForms: newCount,
-        editingQuiz: state.editingQuiz,
-        quizToEdit: state.quizToEdit,
+        ...state,
+        quizResults: action.payload,
       }
-    case EDIT_QUIZ:   
+    case type.ADD_QUIZFORM:   
+      var newCount = state.questionForms + 1;
+      return {      
+        ...state,
+        questionForms: newCount,      
+      }
+    case type.EDIT_QUIZ:   
       var newQuizToEdit = state.quizToEdit.concat(action.quiz);
       return {
-        quizzes: state.quizzes,
-        questionForms: state.questionForms,
+        ...state,
         editingQuiz: !state.editingQuiz,
         quizToEdit: newQuizToEdit,
       }
+    case type.OPEN_MODAL:
+      return {
+          ...state,
+          quizzes: action.quizzes,
+          displayModal: true,
+        };
+    case type.CLOSE_MODAL:
+      return {
+        ...state,
+        quizzes: action.quizzes,
+        displayModal: false,
+      };
     default: 
       return state;
   }
 } 
+
+

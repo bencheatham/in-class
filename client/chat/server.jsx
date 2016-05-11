@@ -8,7 +8,6 @@ var chatEvents = {
 }
 
 function initializeChat (){
-  console.log('sending all chats')
   this.emit('init-chat', { chatLog: chatLog});
 }
 

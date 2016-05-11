@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { BarChart } from 'react-d3';
+
+//import { BarChart } from 'react-d3';
 
 
 
