@@ -32,8 +32,15 @@ class AnalyticsContainer extends Component {
     return (
       <div>
         <Header />
-        <ClassQuizSummary data={this.props}/>
-        <QuestionsSummary data={this.props}/>
+        <div>
+          <div>
+            <ClassQuizSummary data={this.props}/>
+          </div>
+          <p></p>
+          <div>
+            <QuestionsSummary data={this.props}/>
+          </div>
+        </div>
       </div>
     );
   };

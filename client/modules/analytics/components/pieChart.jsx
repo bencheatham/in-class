@@ -77,7 +77,7 @@ export default class SimplePie extends Component {
   render() {
     return (
       <div>
-        <ul className='collection' class="col s4" style={{display: 'inline-block',float:'left', margin: "10px 10px 10px 10px"}}>
+        <ul className='collection' className="col s4" style={{display: 'inline-block',float:'left', margin: "10px 10px 10px 10px"}}>
           <p style={{fontWeight:'bold', textAlign: 'center'}}>{this.props.data.title}</p>
           {this.drawChart()}
         </ul>
