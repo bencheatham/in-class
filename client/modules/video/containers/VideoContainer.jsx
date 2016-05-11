@@ -41,7 +41,6 @@ class VideoContainer extends Component {
 
   render() {
     // helper method to render controller
-
     function renderMuteButton() {
       let label = this.props.mute ? 'Unmute' : 'Mute';
       return (<Button className="btn-warning" id="mute" onClick={this.mute}>{label}</Button>);

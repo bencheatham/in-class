@@ -110,7 +110,7 @@ class UserVideoModal extends React.Component {
 
     function renderCurrentUser(){
       let currentUser = this.props.userState.username;
-      return (<div className="userTitle">Current Login: {currentUser}</div>);
+      return (<h5 className="userTitle">Current Login: {currentUser}</h5>);
     };
 
     const { visible } = this.props;

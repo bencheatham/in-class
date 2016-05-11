@@ -4,6 +4,9 @@ import { Button, Glyphicon } from 'react-bootstrap';
 import { show } from '../actions/userVideoModal';
 import * as thumbActions from '../thumbs/actions';
 import * as quizActions from '../quiz/actions';
+import * as QuestionModalSockets from '../modules/questionModal/socket';
+import * as QuestionModalActions from '../modules/questionModal/actions';
+
 import QuizModal from '../quiz/QuizModal';
 import StudentThumbsModal from '../thumbs/StudentThumbsModal';
 import TeacherQuizModal from '../quiz/TeacherQuizModal';
@@ -18,7 +21,17 @@ class StudentPanel extends React.Component {
     this.displayModal = this.displayModal.bind(this);
     this.openThumbModal = this.openThumbModal.bind(this);
     this.openQuizModal = this.openQuizModal.bind(this);
+    this.emitHandraiseUser = this.emitHandraiseUser.bind(this);
+
+    // socket calls for QuestionModal
+    this.emitAddNewUser = QuestionModalSockets.emitAddNewUser.bind(this);
   };
+
+  componentWillMount() {
+    QuestionModalSockets.initializeWebSockets.bind(this)({
+      modalActions: this.props.questionModalActions,
+    });
+  }
 
   openQuizModal(){
     this.props.quizActions.openStudentQuizModal();
@@ -37,7 +50,6 @@ class StudentPanel extends React.Component {
              <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
         </Button>
       );
-
     }
   }
 
@@ -61,10 +73,23 @@ class StudentPanel extends React.Component {
     // );
   }
 
-  render() {
+  emitHandraiseUser() {
+    let username = this.props.username;
+    this.emitAddNewUser(username);
+  };
 
+  displayHandraise() {
+    return (
+      <Button onClick={this.emitHandraiseUser} className="btn-danger btn-circle btn-xl">
+        <Glyphicon glyph="glyphicon glyphicon-flag" />
+      </Button>
+    );
+  }
+
+  render() {
     return(
       <div className="TeacherControlPanel">
+        {this.displayHandraise()}
         {this.displayThumbButton()}
         {this.displayQuizButton()}
       </div>
@@ -77,13 +102,15 @@ function mapStateToProps(state) {
     thumbCheck: state.thumbsReducer.thumbCheck,
     storedQuizzes: state.studentQuiz.storedQuizzes,
     quizLive: state.studentQuiz.quizLive,
+    username: state.user.username,
   };
 };
 
 function mapDispatchToProps(dispatch){
   return {
     thumbActions: bindActionCreators(thumbActions,dispatch),
-    quizActions: bindActionCreators(quizActions,dispatch)
+    quizActions: bindActionCreators(quizActions,dispatch),
+    questionModalActions: bindActionCreators(QuestionModalActions, dispatch)
   }
 }
 

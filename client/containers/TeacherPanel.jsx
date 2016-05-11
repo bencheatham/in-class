@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
-
 import * as UserVideoModalActions from '../actions/userVideoModal';
 import * as quizActions from '../quiz/actions';
 import * as thumbActions from '../thumbs/actions';
+import * as QuetionModalActions from '../modules/questionModal/actions'
+import * as QuestionModalSockets from '../modules/questionModal/socket';
 import QuestionModal from '../modules/questionModal/QuestionModal';
 import UserVideoModal from './UserVideoModal';
 import TeacherThumbModal from '../thumbs/TeacherThumbModal';
@@ -27,11 +28,16 @@ class TeacherPanel extends React.Component {
     this.emitThumbCheck = emitThumbCheck.bind(this);
     this.initThumbWebSockets = initThumbWebSockets.bind(this);
     this.openAnalytics = this.openAnalytics.bind(this);
+    this.openHandraise = this.openHandraise.bind(this);
   };
 
   componentWillMount() {
     this.initThumbWebSockets();
-  }
+    QuestionModalSockets.initializeWebSockets.bind(this)({
+      modalActions: this.props.questionModalActions,
+    });
+  };
+
   showStudentVideo() {
     this.props.userVideoModalActions.show();
   };
@@ -48,13 +54,17 @@ class TeacherPanel extends React.Component {
     hashHistory.push('/analytics');
   };
 
+  openHandraise() {
+    this.props.questionModalActions.show();
+  }
+
   displayThumbsButton (){
     return (
       <Button onClick={this.openThumbModal} className="btn-success btn-circle btn-xl">
         <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
       </Button>
     );
-  }
+  };
 
   displayQuizButton (){
     return (
@@ -62,7 +72,7 @@ class TeacherPanel extends React.Component {
         <Glyphicon glyph="glyphicon glyphicon-question-sign" />
       </Button>
     );
-  }
+  };
 
   displayVideoButton (){
     return (
@@ -70,7 +80,7 @@ class TeacherPanel extends React.Component {
         <Glyphicon glyph="glyphicon glyphicon-film" />
       </Button>
     );
-  }
+  };
 
   displayAnalyticsButton (){
     return (
@@ -78,7 +88,15 @@ class TeacherPanel extends React.Component {
         <Glyphicon glyph="glyphicon glyphicon-signal" />
       </Button>
     );
-  }
+  };
+
+  displayHandraise() {
+    return (
+      <Button onClick={this.openHandraise} className="btn-danger btn-circle btn-xl">
+        <Glyphicon glyph="glyphicon glyphicon glyphicon-flag" />
+      </Button>
+    );
+  };
 
   render() {
     return(
@@ -87,6 +105,8 @@ class TeacherPanel extends React.Component {
         {this.displayThumbsButton()}
         {this.displayQuizButton()}
         {this.displayAnalyticsButton()}
+        {this.displayHandraise()}
+
         <UserVideoModal />
         <QuestionModal />
         <TeacherThumbModal />
@@ -107,6 +127,7 @@ function mapDispatchToProps(dispatch) {
     userVideoModalActions: bindActionCreators(UserVideoModalActions, dispatch),
     quizActions: bindActionCreators(quizActions, dispatch),
     thumbActions: bindActionCreators(thumbActions, dispatch),
+    questionModalActions: bindActionCreators(QuetionModalActions, dispatch),
   }
 };
 
