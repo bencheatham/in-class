@@ -1,7 +1,7 @@
 import {reduce, each} from 'lodash';
 import React, {Component} from 'react';
 //import SearchItem from './searchitem';
-import Chart from 'chartjs';
+import Chart from 'chart.js';
 var BarChart = require('../../../../node_modules/react-chartjs/lib/bar');
 
 export default class SimpleBar extends Component {

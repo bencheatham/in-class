@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import BarChart from './BarChart';
-import PieChart from './PieChart';
+import BarChart from './barChart';
+import PieChart from './pieChart';
 
 
 export default class ClassQuizSummary extends Component {
