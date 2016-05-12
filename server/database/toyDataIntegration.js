@@ -2,6 +2,8 @@
 
 require('dotenv').config({path: '.envDevelopment'});
 
+// require('dotenv').config({path: '.envProduction'});
+
 const axios = require('axios');
 
 // const db = require('./database.js')();
