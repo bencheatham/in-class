@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as VideoActions from '../../../modules/video/actions';
 import { Button } from 'react-bootstrap';
+import * as VideoService from '../api/service';
 
 class VideoContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.login = this.login.bind(this);
+    this.login = VideoService.login.bind(this);
+    this.end = VideoService.end.bind(this);
+    this.mute = VideoService.mute.bind(this);
 
     // jquery actions for video management
     this.removeVideo = this.removeVideo.bind(this);
     this.appendVideo = this.appendVideo.bind(this);
     this.manageVideo = this.manageVideo.bind(this);
-
-    // video controllers
-    this.end = this.end.bind(this);
   }
 
   appendVideo(session) {
@@ -34,46 +34,24 @@ class VideoContainer extends Component {
     this.props.videoActions.addVideoSession(session);
   };
 
-  login() {
-    let removeVideo = this.removeVideo;
-    let appendVideo = this.appendVideo;
-    let manageVideo = this.manageVideo;
-
-    var phone = window.phone = PHONE({
-        number        : this.props.username || "Anonymous", // listen on username line else Anonymous
-        publish_key   : 'pub-c-566d8d42-99d0-4d21-bc72-6d376ed70567',
-        subscribe_key : 'sub-c-107b4e72-082d-11e6-996b-0619f8945a4f',
-        ssl : (('https:' == document.location.protocol) ? true : false)
-    });
-
-    phone.ready(function(){ });
-
-    // receives phone conversation back from PubNub
-    phone.receive(function(session){
-      session.connected(function(session) {
-        appendVideo(session);
-      });
-
-      session.ended(function(session) {
-        removeVideo();
-      });
-    });
-  }
-
-  end(){
-    window.phone.hangup();
+  componentDidMount() {
+    let username = this.props.username;
+    this.login(username);
   }
 
   render() {
-    // TODO need to investigate this further. This doesn't make sense to be called everytime.
-    this.login();
-
     // helper method to render controller
+    function renderMuteButton() {
+      let label = this.props.mute ? 'Unmute' : 'Mute';
+      return (<Button className="btn-warning" id="mute" onClick={this.mute}>{label}</Button>);
+    };
+
     function renderController() {
       if (!this.props.showCtrl) return;
       return (
         <div id="inCall">
-          <Button className="btn-danger" id="end" onClick={this.end}> End </Button>
+          <Button className="btn-danger" id="end" onClick={this.end}>End</Button>
+          {renderMuteButton.bind(this)()}
         </div>
       );
     };
@@ -89,9 +67,10 @@ class VideoContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    username: state.Users.username,
+    username: state.user.username,
     showCtrl: state.video.showCtrl,
     session: state.video.videoSession,
+    mute: state.video.mute,
   };
 }
 

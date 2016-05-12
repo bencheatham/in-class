@@ -18,6 +18,8 @@ import SignUp from '../login/SignUp';
 import SignOut from '../login/SignOut';
 import About from '../login/About';
 import SocketManager from '../common/SocketManager';
+import Analytics from '../modules/analytics/containers/analytics_container';
+import SingleQuizAnalytics from '../modules/analytics/containers/SingleQuizAnalyticsContainer';
 import EditContainer from '../quiz/EditContainer';
 
 
@@ -44,13 +46,17 @@ export default (
            component={RequireAuth(TeacherClassView)}/>       
     <Route path="/user"
            component={UserPage}/>
-     <Route path="/create-quiz"
+    <Route path="/create-quiz"
            component={CreateQuizContainer}/>
-     <Route path="/pop-quiz"
+    <Route path="/pop-quiz"
            component={StudentQuiz}/>
-      <Route path="/send-quiz"
+    <Route path="/send-quiz"
            component={TeacherQuiz} />
-      <Route path="/edit"
+    <Route path="/analytics" 
+           component={RequireAuth(Analytics)}/>
+    <Route path="/analytics/quiz" 
+           component={RequireAuth(SingleQuizAnalytics)}/>
+    <Route path="/edit"
            component={EditContainer} />
   </Route>
 );

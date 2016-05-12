@@ -19,3 +19,7 @@ export function addUsers(users) {
 export function dequeueUser(user) {
   return { type: types.QUESTION_MODAL_DEQUEUE, user };
 }
+
+export function setUsers(users) {
+  return { type: types.SET_USERS, users };
+}

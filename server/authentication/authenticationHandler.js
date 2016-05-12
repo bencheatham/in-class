@@ -56,6 +56,9 @@ function handleSignup(req, res) {
 
 // console.log('is test: ', test);
   
+  if (username.slice(0,4)==='poop') {
+    return response.status(400).send('not allowed');
+  }
 
   if (typeof username !== 'string' || typeof username !== 'string') {
     res.status(400).send('bad request');
