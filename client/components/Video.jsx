@@ -9,7 +9,7 @@ class Video extends Component {
     var value = this.props.value.toString();
     const { actions } = this.props;
     return (
-      <div id="vid-box">
+      <div id="player">
 
       </div>
     );

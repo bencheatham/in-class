@@ -1,12 +1,12 @@
-const VIDEO_TIMEOUT = 500;
+const VIDEO_TIMEOUT = 2000;
 
 function appendVideo(session) {
-  document.getElementById("vid-box").appendChild(session.video);
+  document.getElementById("player").appendChild(session.video);
   this.props.videoActions.setControllerVisibility(true);
 };
 
 function removeVideo() {
-  $('#vid-box').html('');
+  $('#player video').remove();
   this.props.videoActions.setControllerVisibility(false);
 };
 
@@ -49,14 +49,16 @@ export function login(username) {
 };
 
 export function hangupThenCall(user) {
-  makeCall();
+  makeCall(user);
 }
 
 export function makeCall(user) {
-  if (!window.phone) alert("Login First!");
-  window.ctrl.isStreaming(user, function(isOnline){
-    if(!isOnline)  window.ctrl.dial(user);
-  });
+  if (!window.phone) {
+    alert("Login First!");
+    return;
+  }
+
+  window.ctrl.dial(user);
 };
 
 export function end() {

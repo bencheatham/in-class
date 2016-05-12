@@ -11,7 +11,7 @@ export default class VideoPlayer extends Component {
   appendIt(){
 
     if(this.props.data.videoSession){
-     $('#vid-box').append(this.props.data.videoSession.outerHTML);
+     $('#player').append(this.props.data.videoSession.outerHTML);
     }
   };
 
@@ -27,7 +27,7 @@ export default class VideoPlayer extends Component {
 
 
    return (
-         <div id="vid-box">
+         <div id="player">
 
          </div>
 

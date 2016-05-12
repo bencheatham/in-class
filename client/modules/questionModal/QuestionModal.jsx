@@ -27,7 +27,6 @@ class QuestionModal extends React.Component {
   };
 
   getUserList(){
-
     function call(user) {
       this.hangupThenCall(user);
       ModalSockets.emitRemoveUser(user);

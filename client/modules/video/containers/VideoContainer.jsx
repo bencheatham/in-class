@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as VideoActions from '../../../modules/video/actions';
 import { Button } from 'react-bootstrap';
 import * as VideoService from '../api/service';
+require('../../../stylesheets/video.scss');
 
 class VideoContainer extends Component {
 
@@ -20,12 +21,12 @@ class VideoContainer extends Component {
   }
 
   appendVideo(session) {
-    document.getElementById("vid-box").appendChild(session.video);
+    document.getElementById("player").appendChild(session.video);
     this.props.videoActions.setControllerVisibility(true);
   };
 
   removeVideo() {
-    $('#vid-box').html('');
+    $('#player').html('');
     this.props.videoActions.setControllerVisibility(false);
   };
 
@@ -49,16 +50,19 @@ class VideoContainer extends Component {
     function renderController() {
       if (!this.props.showCtrl) return;
       return (
-        <div id="inCall">
-          <Button className="btn-danger" id="end" onClick={this.end}>End</Button>
-          {renderMuteButton.bind(this)()}
+        <div id="control-wrapper">
+          <div id="control">
+            <Button className="btn-danger" id="end" onClick={this.end}>End</Button>
+            {renderMuteButton.bind(this)()}
+          </div>
         </div>
       );
     };
 
     return (
-      <div>
-        <div id="vid-box"></div>
+      <div id="player-wrapper">
+        <div id="player">
+        </div>
         {renderController.bind(this)()}
       </div>
     );
