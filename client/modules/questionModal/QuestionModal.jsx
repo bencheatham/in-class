@@ -39,7 +39,6 @@ class QuestionModal extends React.Component {
   };
 
   getNextButton(){
-    // TODO if teacher view -> return 'next'; else, return nothing;
     return (
       <Button bsStyle="primary" onClick={this.getNextUser}>Next</Button>
     );
@@ -54,7 +53,7 @@ class QuestionModal extends React.Component {
           <Modal.Title>Upcoming Questions</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Next:</h4>
+          <strong>Next:</strong>
           <ul>
             {this.getUserList()}
           </ul>
