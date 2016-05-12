@@ -127,8 +127,8 @@ function submitThumbs (type) { emitThumbEvent(type, 'user'); }
 
 
 
-function connectToWebSockets(){ return socket = io().connect('http://localhost:8000'); }
-// function connectToWebSockets(){ return socket = io().connect('https://in-class.herokuapp.com'); }
+// function connectToWebSockets(){ return socket = io().connect('http://localhost:8000'); }
+function connectToWebSockets(){ return socket = io().connect('https://in-class.herokuapp.com'); }
 function disconnectFromWebSocket (){ socket.disconnect(); }
 
 function emitChatMessage(text,name){
