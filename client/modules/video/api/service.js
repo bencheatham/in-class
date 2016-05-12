@@ -46,10 +46,13 @@ export function login(username) {
   });
 };
 
+export function hangupThenCall(user) {
+  end();
+  makeCall(user);
+}
+
 export function makeCall(user) {
-  if (!window.phone) {
-    alert("Login First!");
-  }
+  if (!window.phone) alert("Login First!");
   window.ctrl.dial(user);
 };
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from './actions';
 import * as ModalSockets from './socket';
+import * as VideoService from '../video/api/service';
 
 require('../../stylesheets/questionModal.scss');
 
@@ -14,6 +14,8 @@ class QuestionModal extends React.Component {
     this.hide = this.hide.bind(this);
     this.getUserList = this.getUserList.bind(this);
     this.getNextUser = this.getNextUser.bind(this);
+
+    this.hangupThenCall = VideoService.hangupThenCall.bind(this);
   };
 
   hide() {
@@ -25,12 +27,18 @@ class QuestionModal extends React.Component {
   };
 
   getUserList(){
-    let users = this.props.users;
 
+    function call(user) {
+      this.hangupThenCall(user);
+      ModalSockets.emitRemoveUser(user);
+    };
+
+    let users = this.props.users;
     if (!users) return;
+
     return users.map((user) => {
       return (
-        <li key={user} className="list-group-item" >
+        <li key={user} className="list-group-item" onClick={call.bind(this, user)} >
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
           <span className="userId">{user}</span>
         </li>

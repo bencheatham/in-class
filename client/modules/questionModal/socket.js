@@ -15,19 +15,15 @@ export function initializeWebSockets(actions) {
   socket.on('questionModal_getNextUser', data => {
     if (data.user) {
       modalActions.dequeueUser(data.user);
-      // TODO grab the user name produce video selection
-      // ACTIONS needed to update the video session here!
-      // videoActions.switchVideoByUsername(data.user);
-
     } else {
       console.log('possible error detected');
       return;
     }
-
-    // TODO grab the user name produce video selection
-    // ACTIONS needed to update the video session here!
     modalActions.dequeueUser(data.user);
-    // videoActions.switchVideoByUsername(data.user);
+  });
+
+  socket.on('questionModal_setUsers', data => {
+    modalActions.setUsers(data.users);
   });
 };
 
@@ -41,4 +37,9 @@ export function emitAddNewUser(username) {
 
 export function dequeueUser() {
   socket.emit('questionModal_dequeueUser');
+};
+
+export function emitRemoveUser(username) {
+  if (!username) return;
+  socket.emit('questionModal_removeUser', {username});
 };

@@ -32,6 +32,11 @@ function userVideoModal(state=initState, action){
       if (ret.users.length > 0) ret.users.shift();
       return dequeue !== null ? ret : state;
 
+    case actions.SET_USERS:
+      return Object.assign({}, state, {
+        users: action.users
+      });
+
     default:
       return state;
   };
