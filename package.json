@@ -5,13 +5,15 @@
   "description": "A tool for improving in-class student-teacher interactions",
   "main": "index.js",
   "scripts": {
-    "start": "npm run clean && webpack --progress && node -r dotenv/config index.js dotenv_config_path=.envProduction",
-    "start-dev": "npm run clean && npm run jshint && ((sleep 25 && npm test) & nodemon -r dotenv/config index.js dotenv_config_path=.envDevelopment)",
+    "start": "npm run build && webpack --progress && node -r dotenv/config index.js dotenv_config_path=.envProduction",
+    "start-dev": "npm run build && npm run jshint && ((sleep 25 && npm test) & nodemon -r dotenv/config index.js dotenv_config_path=.envDevelopment)",
     "wipe-db": "node -r dotenv/config server/database/initialize.js dotenv_config_path=.envDevelopment",
     "toy-data": "node server/database/toyDataIntegration.js",
     "test": "mocha server/spec/**/*.js server/database/spec/**/*.js server/authentication/spec/**/*.js",
     "jshint": "jshint **/*.js --show-non-errors",
-    "clean": "rm -rf dist/*"
+    "build": "npm run clean && npm run copy",
+    "clean": "rm -rf dist/*",
+    "copy": "cp -r presentation dist/"
   },
   "engines": {
     "npm": "2.15.3"
