@@ -33,7 +33,6 @@ export default function(state = initState, action) {
 
   switch(action.type) {
     case USER_CALL_USER:
-
       return Object.assign({}, state, {
         calledUser: action.payload.calledUser,
         callingUser: action.payload.callingUser,

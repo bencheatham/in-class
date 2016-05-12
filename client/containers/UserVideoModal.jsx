@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from '../actions/userVideoModal';
 import * as VideoActions from '../modules/video/actions';
 import * as VideoService from '../modules/video/api/service';
-
 require('../stylesheets/userVideoModal.scss');
 
 class UserVideoModal extends React.Component {
@@ -15,7 +13,6 @@ class UserVideoModal extends React.Component {
     super(props);
 
     this.hide = this.hide.bind(this);
-    this.teacherVideoCallUser = this.teacherVideoCallUser.bind(this);
     this.getUserList = this.getUserList.bind(this);
 
     this.startClass = this.startClass.bind(this);
@@ -29,19 +26,6 @@ class UserVideoModal extends React.Component {
   hide() {
     this.props.actions.hide();
   };
-
-  teacherVideoCallUser(user){
-    const videoActions = this.props.videoActions;
-
-    let ball = {
-      teacherSelectedUser: user,
-      teacherName: this.props.username,
-    };
-
-    videoActions.teacherSelectStudentVideo(ball);
-
-    setTimeout(this.hide, 1500);
-  }
 
   videoCallUser(user){
     const videoActions = this.props.videoActions;
@@ -109,8 +93,8 @@ class UserVideoModal extends React.Component {
   render() {
 
     function renderCurrentUser(){
-      let currentUser = this.props.userState.username;
-      return (<div className="userTitle">Current Login: {currentUser}</div>);
+      let currentUser = this.props.username;
+      return (<strong>Current Login: {currentUser}</strong>);
     };
 
     const { visible } = this.props;
@@ -138,7 +122,7 @@ function mapStateToProps(state) {
   return {
     visible: state.userVideoModal.visible,
     session: state.video.videoSession,
-    username: state.Users.username,
+    username: state.user.username,
     userState: state.Users,
     videoState: state.video
   };

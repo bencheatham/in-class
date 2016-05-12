@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from './actions';
 import * as ModalSockets from './socket';
+import * as VideoService from '../video/api/service';
 
 require('../../stylesheets/questionModal.scss');
 
@@ -14,6 +14,8 @@ class QuestionModal extends React.Component {
     this.hide = this.hide.bind(this);
     this.getUserList = this.getUserList.bind(this);
     this.getNextUser = this.getNextUser.bind(this);
+
+    this.hangupThenCall = VideoService.hangupThenCall.bind(this);
   };
 
   hide() {
@@ -25,21 +27,26 @@ class QuestionModal extends React.Component {
   };
 
   getUserList(){
+
+    function call(user) {
+      this.hangupThenCall(user);
+      ModalSockets.emitRemoveUser(user);
+    };
+
     let users = this.props.users;
-    
     if (!users) return;
+
     return users.map((user) => {
       return (
-        <div className="user">
+        <li key={user} className="list-group-item" onClick={call.bind(this, user)} >
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
-          <span className="userName">{user}</span>
-        </div>
+          <span className="userId">{user}</span>
+        </li>
       );
     });
   };
 
   getNextButton(){
-    // TODO if teacher view -> return 'next'; else, return nothing;
     return (
       <Button bsStyle="primary" onClick={this.getNextUser}>Next</Button>
     );
@@ -54,10 +61,10 @@ class QuestionModal extends React.Component {
           <Modal.Title>Upcoming Questions</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Next:</h4>
-          <div>
+          <strong>Next:</strong>
+          <ul>
             {this.getUserList()}
-          </div>
+          </ul>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.hide}>Close</Button>
