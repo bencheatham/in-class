@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from '../actions/userVideoModal';
 import * as VideoActions from '../modules/video/actions';
+import * as VideoService from '../modules/video/api/service';
 
 require('../stylesheets/userVideoModal.scss');
 
@@ -18,10 +19,11 @@ class UserVideoModal extends React.Component {
     this.getUserList = this.getUserList.bind(this);
 
     this.startClass = this.startClass.bind(this);
-    this.makeCall = this.makeCall.bind(this);
     this.videoCallUser = this.videoCallUser.bind(this);
     this.getUserVideo = this.getUserVideo.bind(this);
     this.getStartClassButton = this.getStartClassButton.bind(this);
+
+    this.makeCall = VideoService.makeCall.bind(this);
   };
 
   hide() {
@@ -39,13 +41,6 @@ class UserVideoModal extends React.Component {
     videoActions.teacherSelectStudentVideo(ball);
 
     setTimeout(this.hide, 1500);
-  }
-
-  makeCall(user) {
-    if (!window.phone) {
-      alert("Login First!");
-    }
-    window.phone.dial(user);
   }
 
   videoCallUser(user){
@@ -94,11 +89,14 @@ class UserVideoModal extends React.Component {
 
   getUserList() {
     let users = this.props.userState.users;
-    if (!users || users.length === 0) {
+    let currentUser = this.props.userState.username;
+
+    if (!users || users.length <= 1) {
       return (<div>Room is empty...</div>);
     }
 
     return users.map((user) => {
+      if (user === currentUser) return;
       return (
         <li key={user} className="list-group-item" onClick={this.getUserVideo.bind(this, user)}>
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-user" /></span>
@@ -109,6 +107,12 @@ class UserVideoModal extends React.Component {
   };
 
   render() {
+
+    function renderCurrentUser(){
+      let currentUser = this.props.userState.username;
+      return (<div className="userTitle">Current Login: {currentUser}</div>);
+    };
+
     const { visible } = this.props;
     return (
       <Modal show={visible}>
@@ -116,6 +120,7 @@ class UserVideoModal extends React.Component {
           <Modal.Title>User Videos</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {renderCurrentUser.bind(this)()}
           <ul>
             {this.getUserList()}
           </ul>

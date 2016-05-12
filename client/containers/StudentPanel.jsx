@@ -30,18 +30,18 @@ class StudentPanel extends React.Component {
 
   displayThumbButton(){
     var thumbCheckReady = this.props.thumbCheck;
-    
+
     if (thumbCheckReady){
       return (
         <Button onClick={this.openThumbModal} className="btn-warning btn-circle btn-xl">
              <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
         </Button>
       );
-   
+
     }
   }
 
-  displayQuizButton(){  
+  displayQuizButton(){
     var quizLive = this.props.quizLive;
     if (quizLive){
       return (
@@ -60,8 +60,9 @@ class StudentPanel extends React.Component {
     //   </div>
     // );
   }
+
   render() {
-    
+
     return(
       <div className="TeacherControlPanel">
         {this.displayThumbButton()}
@@ -82,7 +83,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
   return {
     thumbActions: bindActionCreators(thumbActions,dispatch),
-    quizActions: bindActionCreators(quizActions,dispatch)  
+    quizActions: bindActionCreators(quizActions,dispatch)
   }
 }
 

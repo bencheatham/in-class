@@ -1,7 +1,7 @@
 import {reduce, each} from 'lodash';
 import React, {Component} from 'react';
 //import SearchItem from './searchitem';
-import Chart from 'chart.js';
+import Chart from 'chartjs';
 var PieChart = require('../../../../node_modules/react-chartjs/lib/pie');
 
 export default class SimplePie extends Component {
@@ -19,13 +19,13 @@ export default class SimplePie extends Component {
         },
         {
          value: 3,
-         color: "#46BFBD", 
+         color: "#46BFBD",
          highlight: "#5AD3D1",
          label: "Q2"
         },
         {
          value: 2,
-         color: "#FDB45C", 
+         color: "#FDB45C",
          highlight: "#FFC870",
          label: "Q3"
         }

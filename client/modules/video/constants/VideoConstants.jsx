@@ -9,3 +9,4 @@ export const GET_USER_VIDEO = 'GET_USER_VIDEO';
 export const MAKE_CALL = 'MAKE_CALL';
 
 export const SET_CONTROLLER_VISIBILITY = 'SET_CONTROLLER_VISIBILITY';
+export const SET_MUTE = 'SET_MUTE';
