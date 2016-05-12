@@ -28,6 +28,8 @@ function removeUser(user) {
   var idx = users.indexOf(user.username);
   if (idx !== -1) users.splice(idx, 1);
 
+  console.log('users', users);
+
   this.emit('questionModal_setUsers', {users: users});
   this.broadcast.emit('questionModal_setUsers', {users: users});
 };

@@ -1,3 +1,5 @@
+const VIDEO_TIMEOUT = 500;
+
 function appendVideo(session) {
   document.getElementById("vid-box").appendChild(session.video);
   this.props.videoActions.setControllerVisibility(true);
@@ -42,22 +44,26 @@ export function login(username) {
   });
 
   ctrl.audioToggled(function(session, isEnabled){
-    ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.75);
+    ctrl.getVideoElement(session.number).css("opacity",isEnabled ? 1 : 0.50);
   });
 };
 
 export function hangupThenCall(user) {
-  end();
-  makeCall(user);
+  makeCall();
 }
 
 export function makeCall(user) {
   if (!window.phone) alert("Login First!");
-  window.ctrl.dial(user);
+  window.ctrl.isStreaming(user, function(isOnline){
+    if(!isOnline)  window.ctrl.dial(user);
+  });
 };
 
 export function end() {
   window.ctrl.hangup();
+
+  // TODO if current state is mute / toggle them before close;
+  this.props.videoActions.setMute(false);
 };
 
 export function mute() {
