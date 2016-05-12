@@ -85,7 +85,6 @@ class StudentPanel extends React.Component {
           <Glyphicon glyph="glyphicon glyphicon-flag" />
         </Button>
       </OverlayTrigger>
-
     );
   }
 
