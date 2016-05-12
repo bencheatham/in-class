@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BarChart from './BarChart';
-import PieChart from './PieChart';
+import BarChart from './barChart';
+import PieChart from './pieChart';
 import _ from 'lodash';
 
 
