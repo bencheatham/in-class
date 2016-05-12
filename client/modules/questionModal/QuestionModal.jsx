@@ -45,8 +45,6 @@ class QuestionModal extends React.Component {
     );
   }
 
-
-
   render() {
     const { visible } = this.props;
 
