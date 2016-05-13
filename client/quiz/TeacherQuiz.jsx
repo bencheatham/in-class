@@ -6,6 +6,7 @@ import QuizItem from '../quiz/QuizItem'
 import * as quizActions from './actions'
 import {initializeWebSockets} from './socket';
 
+
 class TeacherQuiz extends Component {
   constructor (props){
     super(props);

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Modal, Button,Glyphicon } from 'react-bootstrap';
 import * as thumbActions from './actions';
 import * as socket from './socket';
-
+require('../stylesheets/sidebar.scss');
 class ThumbsModal extends React.Component {
 
   constructor(props){
@@ -22,38 +22,32 @@ class ThumbsModal extends React.Component {
     this.props.thumbActions.hideModal();
   }
 
-  
-
-
   render() {
     var displayModal = this.props.displayModal;
     return (
       <div>
       <Modal show={displayModal}>
         <Modal.Header>
-          <Modal.Title>Thumb Check</Modal.Title>
+          <Modal.Title>You have successfully sent out a thumb check!</Modal.Title>
         </Modal.Header>
         <Modal.Body> 
-        You have successfully sent out a thumb check!
-        <table>
-        <tbody>
-          <tr>
-           <td>Thumbs Up</td>
-           <td>{this.props.thumbResults.up}</td>
-          </tr>
-          <tr>
-           <td>Thumbs Middle</td>
-           <td>{this.props.thumbResults.neutral}</td>
-          </tr>
-          <tr>
-           <td>Thumbs Down</td>
-           <td>{this.props.thumbResults.down}</td>
-          </tr>
-          </tbody>
-        </table>     
+        <div>        
+          <Glyphicon className="thumb-icon glyphicon glyphicon-thumbs-up" />
+            
+            {this.props.thumbResults.up}
+        </div>
+        <div>        
+          <Glyphicon className="thumb-icon glyphicon glyphicon-hand-right" />
+          
+          {this.props.thumbResults.neutral} 
+        </div>
+        <div>
+          <Glyphicon className="thumb-icon glyphicon glyphicon-thumbs-down" />
+          {this.props.thumbResults.down} 
+        </div>
         </Modal.Body>
         <Modal.Footer>
-         <Button onClick={this.props.thumbActions.resetThumbResults}>Reset</Button>
+         <Button onClick={this.props.thumbActions.resetThumbResults} bsStyle="warning" bsSize="small" >Reset</Button>
          <Button onClick={this.hideModal}>Close</Button>
         </Modal.Footer>
       </Modal>

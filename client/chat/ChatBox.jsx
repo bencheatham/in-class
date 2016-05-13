@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import * as chatActions from './actions';
 import { initializeWebSockets, emitChatMessage, loadChatMessages, closeWebSockets } from './socket'
 import ChatMessage from './ChatMessage';
+import { Button } from 'react-bootstrap';
+require('../stylesheets/sidebar.scss');
 
 class ChatBox extends Component {
 
@@ -39,9 +41,9 @@ class ChatBox extends Component {
       });
 
     return (
-      <div>
+      <div className="chatBox">
         {chatMessages}
-        <input type="text" onKeyDown={this.handleEnter}></input> [SEND] 
+        <textarea type="text" className="text-input-for-modal" placeholder="Send a message" onKeyDown={this.handleEnter}></textarea>
       </div>);
   }
 }
