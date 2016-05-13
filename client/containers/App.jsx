@@ -6,12 +6,8 @@ export default class CoreLayout extends Component {
 
     return (
 
-      <div className="container">
-        <div className="row">
-          <div className="col-xs-12">
-            {this.props.children}
-          </div>
-        </div>
+      <div className="site-wrapper">
+          {this.props.children}
       </div>
 
     
