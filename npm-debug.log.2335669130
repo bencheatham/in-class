@@ -1,0 +1,25 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/5.9.0/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'test' ]
+2 info using npm@2.15.3
+3 info using node@v5.9.0
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info pretest in-class@1.0.0
+6 info test in-class@1.0.0
+7 verbose unsafe-perm in lifecycle true
+8 verbose stack Error: write EIO
+8 verbose stack     at exports._errnoException (util.js:890:11)
+8 verbose stack     at WriteWrap.afterWrite (net.js:771:14)
+9 verbose cwd /Users/bencheatham/Documents/dev/MKS/Thesis/in-class
+10 error Darwin 15.2.0
+11 error argv "/usr/local/Cellar/node/5.9.0/bin/node" "/usr/local/bin/npm" "test"
+12 error node v5.9.0
+13 error npm  v2.15.3
+14 error code EIO
+15 error errno EIO
+16 error syscall write
+17 error write EIO
+18 error If you need help, you may report this error at:
+18 error     <https://github.com/npm/npm/issues>
+19 verbose exit [ 1, true ]

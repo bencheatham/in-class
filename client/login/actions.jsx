@@ -28,12 +28,18 @@ export function signupUser(username, password,usertype){
 
   return function(dispatch, getState){
 
+
     axios.post('signup', { username:username, password:password, usertype: usertype})
     .then(response => {
       console.log(response.data);
       dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
       dispatch(authError(''));
+                  console.log('in the singup action!')
+            console.log(response.data.usertype)
+
+
       if (response.data.usertype === 'student'){
+
         hashHistory.push('/classroom/student');
       } else if ( response.data.usertype === 'teacher') {
         hashHistory.push('/classroom/teacher');

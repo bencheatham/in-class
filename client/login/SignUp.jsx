@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signinUser, signupUser } from './actions';
@@ -6,8 +6,10 @@ import { socket } from '../common/socket';
 import { initializeWebSockets, emitLogin} from './socket';
 import axios from 'axios';
 import {returnStore} from '../main';
-import { push } from 'react-router-redux'
+import { push } from 'react-router-redux';
 import Header from './Header';
+import { Form, FormGroup, FormControl, Input, Col, ControlLabel, Checkbox, Button } from 'react-bootstrap';
+
 
 class SignUp extends Component {
 
@@ -19,10 +21,9 @@ class SignUp extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    var username = this.refs.username.value;
-    var password = this.refs.password.value;
-    var usertype = this.refs.usertype.value;
-    // console.log(usertype)
+    var username = this.refs.username.getInputDOMNode().value;
+    var password = this.refs.password.getInputDOMNode().value;
+    var usertype = this.refs.usertype.getInputDOMNode().value;
     this.props.actions.signupUser(username, password,usertype);
     return false;
   }
@@ -33,24 +34,58 @@ class SignUp extends Component {
         <div className="alert alert-danger"> 
           <strong> Oops! </strong> {this.props.errorMessage}
         </div> 
-      )
+      );
     }
   }
   render(){
     return (
       <div>
-        <Header />
-        <form className="login" onSubmit={this.handleSubmit}>
-          <input className="username" ref="username" type="text" placeholder="username"/>
-          <input className="password" ref="password" type="password" placeholder="password"/>          
-          <select ref="usertype">
-            <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
-          </select>
-          <input type="submit" value="Sign up" name="SignUp"></input>
-          {this.renderAlert()}
-        </form>
-      </div>);
+        <div>
+          <Form horizontal callback={this.handleSubmit} >
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={2}>
+                Username
+              </Col>
+              <Col sm={4}>
+                <Input ref="username" type="username" placeholder="username" />
+              </Col>
+            </FormGroup>
+
+            <FormGroup controlId="formHorizontalPassword">
+              <Col componentClass={ControlLabel} sm={2}>
+                Password
+              </Col>
+              <Col sm={4}>
+                <Input ref="password" type="password" placeholder="password" />
+              </Col>
+            </FormGroup>
+
+            <FormGroup controlId="formControlsSelect">
+              <Col componentClass={ControlLabel} sm={2}>
+                Select Role
+              </Col>
+              <Col sm={4}>
+                <Input ref="usertype" type="select" componentClass="select" placeholder="student">
+                  <option value="student">student</option>
+                  <option value="teacher">teacher</option>
+                </Input>
+              </Col>
+            </FormGroup>
+
+
+            <FormGroup>
+              <Col smOffset={2} sm={10}>
+                <Button bsStyle="primary" bsSize="large" active value="Sign Up" type="submit" name="SignUp" onClick={this.handleSubmit} >
+                  Sign Up{this.renderAlert()}
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </div>
+      </div>
+
+
+      );
   }
 }
 
