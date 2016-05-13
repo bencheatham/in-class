@@ -30,11 +30,11 @@ class AnalyticsContainer extends Component {
     return (
       <div>
         <Header />
-        <div>
-          <div>
+        <div className="container-fluid">
+          <div className="container-fluid" className="row">
             <ClassQuizSummary data={this.props}/>
           </div>
-          <div>
+          <div className="container-fluid" className="row">
             <QuestionsSummary data={this.props}/>
           </div>
         </div>

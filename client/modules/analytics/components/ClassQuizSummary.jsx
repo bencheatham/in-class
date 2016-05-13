@@ -21,7 +21,7 @@ export default class ClassQuizSummary extends Component {
       };
 
       return (
-        <div key={quizResult.title}>
+        <div key={quizResult.title} >
 
           <BarChart data={datapack} />
 

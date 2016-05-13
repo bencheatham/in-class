@@ -35,7 +35,25 @@ module.exports = {
     {
       test: /bootstrap[\/\\]dist[\/\\]js[\/\\]umd[\/\\]/,
       loader: 'imports?jQuery=jquery'
-    }]
+    },
+    { 
+      // test: /\.(jpe?g|png|gif|svg)$/i,
+      // loaders: [
+      //     'url-loader?limit=8192'
+      // ]
+      // test: /\.(jpe?g|png|gif|svg)$/i,
+      // loaders: [
+      //   'file?hash=sha512&digest=hex&name=[hash].[ext]',
+      //   'image-webpack'
+      // ]
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      loaders: [
+          'url?limit=8192',
+          'imgages'
+      ]
+
+
+       }]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
