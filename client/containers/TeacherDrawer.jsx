@@ -7,7 +7,7 @@ require('../stylesheets/drawer.scss');
 import QuestionContainer from '../question/container';
 import ChatBox from '../chat/ChatBox';
 import AnalyticsContainer from '../modules/analytics/containers/analytics_container';
-import AnalyticsDrawerContainer from '../modules/analytics/containers/AnalyticsDrawerContainer';
+import AnalyticsDrawerContainer from '../modules/analytics/containers/analyticsDrawerContainer';
 
 
 class TeacherDrawer extends React.Component {
