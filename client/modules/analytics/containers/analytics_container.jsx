@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as AnalyticsActions from '../actions/analytics_actions';
-import PieChart from '../components/PieChart';
-import BarChart from '../components/BarChart';
+import PieChart from '../components/pieChart';
+import BarChart from '../components/barChart';
 import ListQuizes from '../components/listQuizes';
 import ClassQuizSummary from '../components/ClassQuizSummary';
 import QuestionsSummary from '../components/QuestionsSummary';
@@ -30,11 +30,11 @@ class AnalyticsContainer extends Component {
     return (
       <div>
         <Header />
-        <div>
-          <div>
+        <div className="container-fluid">
+          <div className="container-fluid" className="row">
             <ClassQuizSummary data={this.props}/>
           </div>
-          <div>
+          <div className="container-fluid" className="row">
             <QuestionsSummary data={this.props}/>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BarChart from './BarChart';
-import PieChart from './PieChart';
+import BarChart from './barChart';
+import PieChart from './pieChart';
 import _ from 'lodash';
 
 
@@ -16,7 +16,7 @@ export default class QuestionSummary extends Component {
     return this.props.data.analyzedQuizes.map((quizResult) => {
 
       return (
-        <div key={quizResult.title}>
+        <div key={quizResult.title} >
           <h2>{quizResult.title}</h2>
 
           {this.renderQuestion(quizResult.answerTally.questions)}

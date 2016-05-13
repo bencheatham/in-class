@@ -8,6 +8,7 @@ import { push } from 'react-router-redux'
 import { Link } from 'react-router'
 import Header from './Header';
 
+
 class SignOut extends Component {
 
   constructor(props) {

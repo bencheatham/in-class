@@ -19,7 +19,7 @@ import SignOut from '../login/SignOut';
 import About from '../login/About';
 import SocketManager from '../common/SocketManager';
 import Analytics from '../modules/analytics/containers/analytics_container';
-import SingleQuizAnalytics from '../modules/analytics/containers/SingleQuizAnalyticsContainer';
+import SingleQuizAnalytics from '../modules/analytics/containers/singleQuizAnalyticsContainer';
 import EditContainer from '../quiz/EditContainer';
 
 
