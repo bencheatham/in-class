@@ -26,7 +26,7 @@ export default class HomeView extends Component {
          <hr className="feature-divider"></hr>
              <div className="row featurette">
                <div className="col-md-7">
-                 <h2 className="featurette-heading">Thumb Check</h2>
+                 <h2 className="featurette-heading">Thumb Checks</h2>
                  <span class="muted">Real-time Comprehension Checks</span>
                  <p className="lead">Addresses difficulty of determining (in real-time) whether 
                  students understand material covered in presentation.</p>
