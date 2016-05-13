@@ -6,6 +6,7 @@ import TeacherQuiz from './TeacherQuiz';
 import * as quizActions from './actions';
 import {hashHistory} from 'react-router';
 
+
 class TeacherQuizModal extends React.Component {
 
   constructor(props){
@@ -34,7 +35,7 @@ class TeacherQuizModal extends React.Component {
         <TeacherQuiz />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.createQuiz}>Add quiz</Button>
+          <Button onClick={this.createQuiz} bsStyle="info" bsSize="small" >add quiz</Button>
           <Button onClick={this.hideModal}>Close</Button>
         </Modal.Footer>
       </Modal>

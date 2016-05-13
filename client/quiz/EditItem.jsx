@@ -36,12 +36,11 @@ class EditItem extends Component {
   render() {
    return (
      <div>
-      Question: <input type="text" onChange={this.handleChange} ref="title"value={this.props.quizData.question}></input>
-      Answer: <input onChange={this.handleChange} ref="answer" type="text" value={this.props.quizData.choices[0]}></input>
-      Choice 1: <input onChange={this.handleChange} ref="choice1" type="text" value={this.props.quizData.choices[1]}></input>
-      Choice 2: <input onChange={this.handleChange} ref="choice2" type="text" value={this.props.quizData.choices[2]}></input>
-      Choice 3: <input onChange={this.handleChange} ref="choice3" type="text" value={this.props.quizData.choices[3]}></input>
-    </div>
+     <input type="text" placeholder="Enter your question" onChange={this.handleChange} ref="title" value={this.props.quizData.question}></input>
+      <input onChange={this.handleChange} placeholder="Answer" ref="answer" type="text" value={this.props.quizData.choices[0]}></input>
+      <input onChange={this.handleChange} placeholder="Option" ref="choice1" type="text" value={this.props.quizData.choices[1]} ></input>
+      <input onChange={this.handleChange} placeholder="Option" ref="choice2" type="text" value={this.props.quizData.choices[2]}></input>
+      <input onChange={this.handleChange} placeholder="Option" ref="choice3" type="text" value={this.props.quizData.choices[3]}></input>    </div>
    );
   };
 }
