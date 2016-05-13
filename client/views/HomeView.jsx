@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import Header from '../login/Header';
+
 require('../stylesheets/homeview.scss');
 
 
@@ -10,6 +12,7 @@ export default class HomeView extends Component {
  render() {
    return (
      <div className="site-wrapper-inner">
+       <Header />
        <div className="cover-container">
          <div className="inner-cover">
           <span><h1 className="conver-heading"> InClass.co - Students Stay Engaged</h1></span>
