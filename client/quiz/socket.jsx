@@ -12,6 +12,10 @@ export function initializeWebSockets() {
   });
 };
 
+export function closeWebSockets(){
+  socket.disconnect();
+}
+
 function emitQuiz(quiz,username){
    socket.emit('pop-quiz', {
       quiz: quiz,

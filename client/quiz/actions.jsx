@@ -18,7 +18,6 @@ export function saveQuizInDatabase (quizTitle,quizData,update) {
       }
     })
     .catch(function(error){
-        
         return {
           type: type.ERROR_MESSAGE,
           payload: error,
@@ -36,8 +35,10 @@ export function fetchQuizList (){
       };    
   })
   .catch(function(response){
-      console.log('error',response);
-      return {}
+      console.log('error fetching all quizzes',response);
+      return {
+         type: 'FAILED_QUIZ_FETCH'
+      }
   });
 }
 
@@ -87,8 +88,10 @@ export function deleteQuiz (quizName) {
     }
   })
   .catch(function(response){
-    console.log('fetch error',response);
-    return {}
+    console.log('error deleting quiz',response);
+    return {
+      type: 'ERROR_DELETING QUIZ'
+    }
   })
 }
 
@@ -108,7 +111,7 @@ export function loadQuiz (quizName) {
       
     })
     .catch(function(response){
-      console.log('fetch error',response);
+      console.log('error fetching quiz names',response);
     })
   }
 }
@@ -166,7 +169,7 @@ export function fetchResults(quizName) {
     
   })
   .catch(function(response){
-      console.log('error',response);
+      console.log('error fetching results',response);
       return {
         type: type.DISPLAY_RESULTS_FROM_QUIZ,
       }
@@ -197,12 +200,16 @@ export function postAnswers(quizTitle, teachername, answers){
   return axios.post('/save', {answers: data}).then(function(response){
     console.log(response)
     if (response.status === 201){
-      return {};
+      return {
+         type: 'ANSWERS_STORED',
+      };
     }
   })
   .catch(function(response){
-      console.log('error',response);
-      return {}
+      console.log('error posting answer',response);
+      return {
+        type: 'ERROR_POSTING_ANSWERS',
+      }
   });
 }
 

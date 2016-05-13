@@ -32,22 +32,22 @@ class ThumbsModal extends React.Component {
         </Modal.Header>
         <Modal.Body> 
         <div>        
-          <Glyphicon className="thumb-icon glyphicon glyphicon-thumbs-up" />
+          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-thumbs-up" />
             
             {this.props.thumbResults.up}
         </div>
         <div>        
-          <Glyphicon className="thumb-icon glyphicon glyphicon-hand-right" />
+          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-hand-right" />
           
           {this.props.thumbResults.neutral} 
         </div>
         <div>
-          <Glyphicon className="thumb-icon glyphicon glyphicon-thumbs-down" />
+          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-thumbs-down" />
           {this.props.thumbResults.down} 
         </div>
         </Modal.Body>
         <Modal.Footer>
-         <Button onClick={this.props.thumbActions.resetThumbResults} bsStyle="warning" bsSize="small" >Reset</Button>
+         <Button onClick={this.props.thumbActions.resetThumbResults} bsStyle="warning" bsSize="small">Reset</Button>
          <Button onClick={this.hideModal}>Close</Button>
         </Modal.Footer>
       </Modal>
