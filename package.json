@@ -5,7 +5,7 @@
   "description": "A tool for improving in-class student-teacher interactions",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && webpack --progress && node -r dotenv/config index.js dotenv_config_path=.envProduction",
+    "start": "npm run build && node -r dotenv/config index.js dotenv_config_path=.envProduction",
     "start-dev": "npm run build && npm run jshint && ((sleep 25 && npm test) & nodemon -r dotenv/config index.js dotenv_config_path=.envDevelopment)",
     "wipe-db": "node -r dotenv/config server/database/initialize.js dotenv_config_path=.envDevelopment",
     "toy-data": "node server/database/toyDataIntegration.js",
