@@ -40,6 +40,7 @@ class SignUp extends Component {
   render(){
     return (
       <div>
+        <Header />
         <div>
           <Form horizontal callback={this.handleSubmit} >
             <FormGroup>

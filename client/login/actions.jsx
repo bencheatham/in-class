@@ -34,10 +34,6 @@ export function signupUser(username, password,usertype){
       console.log(response.data);
       dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
       dispatch(authError(''));
-                  console.log('in the singup action!')
-            console.log(response.data.usertype)
-
-
       if (response.data.usertype === 'student'){
 
         hashHistory.push('/classroom/student');
