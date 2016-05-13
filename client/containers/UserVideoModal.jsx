@@ -5,7 +5,7 @@ import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as ModalActions from '../actions/userVideoModal';
 import * as VideoActions from '../modules/video/actions';
 import * as VideoService from '../modules/video/api/service';
-require('../stylesheets/userVideoModal.scss');
+require('../stylesheets/userListModal.scss');
 
 class UserVideoModal extends React.Component {
 
@@ -105,7 +105,7 @@ class UserVideoModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           {renderCurrentUser.bind(this)()}
-          <ul>
+          <ul className="userList">
             {this.getUserList()}
           </ul>
         </Modal.Body>
