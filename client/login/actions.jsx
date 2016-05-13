@@ -40,9 +40,6 @@ export function signupUser(username, password,usertype){
       } else if ( response.data.usertype === 'teacher') {
         hashHistory.push('/classroom/teacher');
       }
-
-      // change the following to anywhere for testing
-      // hashHistory.push('/video');
     })
     .catch((error)=>{
       dispatch(authError(error.data));
@@ -77,7 +74,6 @@ export function signoutUser (username) {
 export function checkAuth() {
   
   return (dispatch, getState) => {
-    console.log(dispatch)
     axios.get(SERVER_URL)
       .then((response) => {
         if (response.status === 200) {

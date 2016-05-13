@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as questionActions from './actions';
-import { socket } from '../common/socket'
-import _ from 'underscore'
-import { emitUpvote } from './socket'
+import { socket } from '../common/socket';
+import _ from 'underscore';
+import { emitUpvote } from './socket';
+import { Glyphicon } from 'react-bootstrap';
 
 class Question extends React.Component{
   constructor(props) {
@@ -20,10 +21,10 @@ class Question extends React.Component{
     return (<div>
       
       <span onClick={() => this.handleClick(question.id)}> 
-      <span className="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></span>
-       {question.username}: {question.text} ---
-      votes: {question.upvotes.length}
-      
+        <Glyphicon glyph="glyphicon glyphicon-arrow-up" aria-hidden="true"/>
+        {question.upvotes.length}
+        </span>
+       {question.username}: {question.text}
       </div>)
   }
 }

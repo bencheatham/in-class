@@ -45,6 +45,5 @@ export function updateThumbResults (thumbResult) {
   return {
     type: type.THUMB_RESULT,
     result: thumbResult
-    
   }
 }

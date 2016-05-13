@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as thumbActions from './actions';
 import { socket } from '../common/socket'
-import { initializeWebSockets, emitThumbEvent } from './socket'
+import { initializeWebSockets, closeWebSockets, emitThumbEvent } from './socket'
 
 class StudentThumbs extends Component {
 
@@ -11,15 +11,18 @@ class StudentThumbs extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.initializeWebSockets = initializeWebSockets.bind(this);  
+    this.closeWebSockets = closeWebSockets.bind(this);
     this.emitThumbEvent = emitThumbEvent.bind(this)
   }
 
   componentDidMount() {
     this.initializeWebSockets();
   }
+  componentWillUnMount (){
+    this.closeWebSockets();
+  }
   
   handleClick(event) {
-    console.log(event.target.value)
     this.emitThumbEvent(event.target.value,this.props.username);
   }
 
