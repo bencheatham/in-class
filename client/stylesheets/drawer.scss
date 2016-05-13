@@ -7,7 +7,7 @@
     box-sizing: border-box;
     transition: -webkit-transform ease 250ms;
     transition: transform ease 250ms;
-    z-index: 2;
+    z-index: 8;
     top: 15%;
   }
 
@@ -17,7 +17,7 @@
     background:	#D3D3D3;
     right: $drawer-width*-1;
     width: $drawer-width;
-    height:100%;
+    height:85%;
 
     &.visible {
       transform: translate3d($drawer-width*-1, 0, 0);

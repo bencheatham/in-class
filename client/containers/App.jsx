@@ -6,7 +6,7 @@ export default class CoreLayout extends Component {
 
     return (
 
-      <div className="site-wrapper">
+      <div >
           {this.props.children}
       </div>
 
