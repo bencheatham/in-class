@@ -6,7 +6,7 @@ import CreateQuizItem from '../quiz/CreateQuizItem';
 import Drawer from '../containers/Drawer';
 import * as quizActions from './actions';
 import Header from '../login/Header';
-
+import { Button, Glyphicon } from 'react-bootstrap';
 class CreateQuizContainer extends Component {
   constructor (props){
     super(props);
@@ -35,12 +35,15 @@ class CreateQuizContainer extends Component {
     return (
       <div>
         <Header />
-        <span><h1>Create a new quiz.</h1></span>
-        <span>Quiz title:</span>
-        <input type="text" ref="title"></input>
-        <button onClick={this.handleSubmission}> Create Quiz</button>
+        <h3>Quiz Title:
+          <input placeholder="" type="text" ref="title"></input>
+          <Button onClick={this.handleSubmission} bsStyle="primary">Upload Quiz</Button>
+        </h3>
+        
         {this.renderQuizItems()}
-        <div onClick={this.handleClick}>[ + + + + +]</div>
+        <Button onClick={this.handleClick} className="btn-warning btn-circle btn-xl">
+          <Glyphicon glyph="glyphicon glyphicon-plus" />
+        </Button>
       </div>
      );
  };

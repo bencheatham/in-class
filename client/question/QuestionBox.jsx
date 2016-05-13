@@ -5,6 +5,7 @@ import * as questionActions from './actions';
 import { socket } from '../common/socket'
 import { initializeWebSockets, closeWebSockets, emitNewQuestion,loadQuestions } from './socket'
 import Question from './Question';
+require('../stylesheets/sidebar.scss');
 
 class QuestionBox extends Component {
 
@@ -43,7 +44,7 @@ class QuestionBox extends Component {
     return (
       <div>
         {questions}
-        <input type="text" onKeyDown={this.handleEnter}></input> [ASK]
+        <textarea className="text-input-for-modal" placeholder="Ask a question" onKeyDown={this.handleEnter}></textarea>
       </div>);
   }
 }

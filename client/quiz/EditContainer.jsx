@@ -6,6 +6,7 @@ import EditItem from '../quiz/EditItem';
 import Drawer from '../containers/Drawer';
 import * as quizActions from './actions';
 import Header from '../login/Header';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 class EditContainer extends Component {
   constructor (props){
@@ -42,12 +43,14 @@ class EditContainer extends Component {
     return (
       <div>
         <Header />        
-        <span><h1>Save Quiz</h1></span>
-        <span>Quiz title:</span>
+        <h3>Quiz Title:
         <input type="text" onChange={this.changeTitle} value={this.props.quizToEdit.title} ref="title"></input>
-        <button onClick={this.handleSubmission}> Save Quiz</button>
+        <Button onClick={this.handleSubmission} bsStyle="primary">Save Quiz</Button>
+        </h3>
         {this.renderQuizItems()}
-        <div onClick={this.handleClick}>[ + + + + +]</div>
+        <Button onClick={this.handleClick} className="btn-warning btn-circle btn-xl">
+          <Glyphicon glyph="glyphicon glyphicon-plus" />
+        </Button>
       </div>
      );
  };

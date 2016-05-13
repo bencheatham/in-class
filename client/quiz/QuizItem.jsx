@@ -7,8 +7,8 @@ import Video from '../video/Video'
 import Drawer from '../containers/Drawer'
 import * as quizActions from './actions'
 import {fetchQuiz} from './socket'
-
 import { Button } from 'react-bootstrap';
+require('../stylesheets/sidebar.scss');
 
 class QuizItem extends Component {
 
@@ -38,11 +38,11 @@ class QuizItem extends Component {
 
   render() {
    return (
-     <div> 
-     {this.props.name} 
-     <Button onClick={this.sendPopQuiz}> Send</Button>
-     <Button onClick={this.editQuiz}> Edit</Button>
-     <Button onClick={this.deleteQuiz}> Delete</Button>
+     <div className="quiz-item"> 
+     <span className="quiz-item">{this.props.name}</span>
+     <Button className="quiz-item" onClick={this.sendPopQuiz} bsStyle="success" bsSize="small"> send</Button>
+     <Button className="quiz-item" onClick={this.editQuiz} bsStyle="warning" bsSize="small"> edit</Button>
+     <Button className="quiz-item" onClick={this.deleteQuiz} bsStyle="danger" bsSize="small"> delete</Button>
     </div>
    );
   };

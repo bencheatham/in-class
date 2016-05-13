@@ -31,11 +31,11 @@ class CreateQuizItem extends Component {
 
    return (
      <div>
-      Question: <input type="text" onChange={this.handleChange} ref="title"></input>
-      Answer: <input onChange={this.handleChange} ref="answer" type="text"></input>
-      Choice 1: <input onChange={this.handleChange} ref="choice1" type="text"></input>
-      Choice 2: <input onChange={this.handleChange} ref="choice2" type="text"></input>
-      Choice 3: <input onChange={this.handleChange} ref="choice3" type="text"></input>
+      <input type="text" placeholder="Enter your question" onChange={this.handleChange} ref="title"></input>
+      <input onChange={this.handleChange} placeholder="Answer" ref="answer" type="text"></input>
+      <input onChange={this.handleChange} placeholder="Option" ref="choice1" type="text"></input>
+      <input onChange={this.handleChange} placeholder="Option" ref="choice2" type="text"></input>
+      <input onChange={this.handleChange} placeholder="Option" ref="choice3" type="text"></input>
     </div>
    );
   };
