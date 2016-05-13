@@ -15,10 +15,17 @@
   #panels {
     border-width: 1px;
     position: absolute;
-    background:	#D3D3D3;
+    background:	#F2F2F2;
     right: $drawer-width*-1;
     width: $drawer-width;
     height:95%;
+    box-shadow: 0 8px 16px 0 grey;
+
+    #panels-wrapper {
+      padding-top: 1em;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
 
     &.visible {
       transform: translate3d($drawer-width*-1, 0, 0);
@@ -37,10 +44,10 @@
   }
 
   ul {
-    width: 9em;
     list-style: none;
     padding-left: 0;
     margin-bottom: 0;
+    font-size: 3vw;
 
     li {
       border: 1px solid;
@@ -58,6 +65,7 @@
     li:hover {
       cursor: pointer;
       cursor: hand;
+      font-weight: bold;
     }
 
     :last-child {
@@ -69,8 +77,8 @@
     }
 
     .selected {
-      font-size: 150%;
       font-weight: bold;
+      background:	#F2F2F2;
     }
 
   }

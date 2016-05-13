@@ -38,8 +38,10 @@ class Drawer extends React.Component {
           </div>
 
           <div id="panels" className={visibility ? " visible" : ""}>
-            <div style={{display: panel === PANEL_CHAT ? '' : 'none'}}><ChatBox/></div>
-            <div style={{display: panel === PANEL_QUESTIONS ? '' : 'none'}}><QuestionContainer/></div>
+            <div id="panels-wrapper">
+              <div style={{display: panel === PANEL_CHAT ? '' : 'none'}}><ChatBox/></div>
+              <div style={{display: panel === PANEL_QUESTIONS ? '' : 'none'}}><QuestionContainer/></div>
+            </div>
           </div>
         </div>
 
