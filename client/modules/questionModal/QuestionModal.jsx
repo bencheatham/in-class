@@ -6,7 +6,7 @@ import * as ModalActions from './actions';
 import * as ModalSockets from './socket';
 import * as VideoService from '../video/api/service';
 
-require('../../stylesheets/questionModal.scss');
+require('../../stylesheets/userListModal.scss');
 
 class QuestionModal extends React.Component {
   constructor(props){
@@ -61,7 +61,7 @@ class QuestionModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <strong>Next:</strong>
-          <ul>
+          <ul className="userList">
             {this.getUserList()}
           </ul>
         </Modal.Body>
