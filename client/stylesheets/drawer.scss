@@ -8,8 +8,8 @@
     transition: -webkit-transform ease 250ms;
     transition: transform ease 250ms;
 
-    z-index: 2;
-    top: 0;
+    z-index: 8;
+    top: 20%;
   }
 
   #panels {
@@ -28,9 +28,8 @@
   #controls {
     position: absolute;
     right: 0;
-    top: 10px;
-
-    background:	#FFFFFF;
+    top: 30%;
+    background-color: transparent;
 
     &.visible {
       transform: translate3d($drawer-width*-1, 0, 0);
@@ -41,6 +40,7 @@
     width: $tabs-width;
     list-style: none;
     padding-left: 0;
+    margin-bottom: 0;
 
     li {
       border: 1px solid;
@@ -48,6 +48,7 @@
       padding: 6px 12px;
       position: relative;
       margin-bottom: -1px;
+      background-color: white;
     }
 
     :last-child {

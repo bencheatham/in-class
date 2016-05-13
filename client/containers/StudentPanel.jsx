@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Glyphicon, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Button, Glyphicon, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { show } from '../actions/userVideoModal';
 import * as thumbActions from '../thumbs/actions';
 import * as quizActions from '../quiz/actions';
@@ -20,6 +20,7 @@ class StudentPanel extends React.Component {
     this.openThumbModal = this.openThumbModal.bind(this);
     this.openQuizModal = this.openQuizModal.bind(this);
     this.emitHandraiseUser = this.emitHandraiseUser.bind(this);
+
 
     // socket calls for QuestionModal
     this.emitAddNewUser = QuestionModalSockets.emitAddNewUser.bind(this);
@@ -78,9 +79,8 @@ class StudentPanel extends React.Component {
 
   displayHandraise() {
     return (
-      <OverlayTrigger trigger="click" rootClose placement="top" overlay={
-          <Popover title="Notification Sent!"></Popover>
-        }>
+      <OverlayTrigger trigger="click" placement="top" rootClose
+        overlay={<Tooltip id="tooltip-notification">Notification Sent!</Tooltip>}>
         <Button onClick={this.emitHandraiseUser} className="btn-danger btn-circle btn-xl">
           <Glyphicon glyph="glyphicon glyphicon-flag" />
         </Button>
