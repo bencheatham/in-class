@@ -77,15 +77,10 @@ class StudentPanel extends React.Component {
     this.emitAddNewUser(username);
   };
 
-  displayTooltips(msg) {
-    if (!msg || !msg.trim()) return;
-    return (<Tooltip>{msg}</Tooltip>);
-  };
-
   displayHandraise() {
     return (
       <OverlayTrigger trigger="click" placement="top" rootClose
-        overlay={this.displayTooltips('Notification Sent!')}>
+        overlay={<Tooltip id="tooltip-notification">Notification Sent!</Tooltip>}>
         <Button onClick={this.emitHandraiseUser} className="btn-danger btn-circle btn-xl">
           <Glyphicon glyph="glyphicon glyphicon-flag" />
         </Button>
