@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route } from 'react-router';
-import Home from '../containers/Home';
+import { Route, IndexRoute } from 'react-router';
+import App from '../containers/App';
+import HomeView from '../views/HomeView';
 import Thumbs from '../containers/Thumbs';
 import QuestionContainer from '../question/container';
 import LoginView from '../views/LoginView';
@@ -24,8 +25,8 @@ import EditContainer from '../quiz/EditContainer';
 
 
 export default (
-  <Route>
-    <Route path="/" component={RequireAuth(About)}/>
+  <Route path='/' component={App}>
+    <IndexRoute component={HomeView}/>
     <Route path="/sign-in"
             component={RequireAuth(Login)} />
     <Route path="/sign-up"
