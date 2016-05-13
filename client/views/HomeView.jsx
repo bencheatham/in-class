@@ -12,16 +12,15 @@ export default class HomeView extends Component {
      <div className="site-wrapper-inner">
        <div className="cover-container">
          <div className="inner-cover">
-         <span><h1 className="conver-heading"> InClass.co - Students Stay Engaged</h1></span>
-         <div className="home-logo-splash" >
-           <img className="home-logo" src="/images/in-class-large.png" alt="In Class" />
-         </div>
+          <span><h1 className="conver-heading"> InClass.co - Students Stay Engaged</h1></span>
+          <div className="home-logo-splash" >
+            <img className="home-logo featurette-image img-responsive center-block" src="/images/in-class-large.png" alt="In Class" />
+          </div>
+        </div>
 
        <div className="container-marketing">
 
          <hr className="feature-divider"></hr>
-           <div className="featurette-divider">
-
              <div className="row featurette">
                <div className="col-md-7">
                  <h2 className="featurette-heading">Thumb Check</h2>
@@ -30,55 +29,65 @@ export default class HomeView extends Component {
                  students understand material covered in presentation.</p>
                </div>
                <div className="col-md-5">
-                 <img className="feature-image" src="/images/thumbs-up-thumbs-down.gif" alt="Thumb Check" />
+                 <img className="feature-image featurette-image img-responsive center-block" src="/images/thumbs-up-thumbs-down.gif" alt="Thumb Check" />
                </div>
+             </div>
 
-           </div>
-           <div className="featurette-divider">
-
-
-               <div className="col-md-7">
+           <hr className="featurette-divider"></hr>
+             <div className="row featurette">
+               <div className="col-md-7 col-md-push-5">
                  <h2 className="featurette-heading">Give Quizes</h2>
                  <span class="muted">Assess Student Comprehension With Real-time Quiz</span>
                  <p className="lead">Address difficulty of determining (in real-time) 
                   whether students understand material covered in presentation </p>
                </div>
+               <div className="col-md-5 col-md-pull-7">
+                 <img className="feature-image featurette-image img-responsive center-block" src="/images/quiz.png" alt="Quiz" />
+               </div>
+             </div>
+
+
+           <hr className="featurette-divider"></hr>
+             <div className="row featurette">
+               <div className="col-md-7">
+                 <h2 className="featurette-heading">Quiz Results Analytics</h2>
+                 <span class="muted">Get Instant Visualization of Quiz Results</span>
+                 <p className="lead">Understan in real-time the class' material comprehension with data Visualization.</p>
+               </div>
                <div className="col-md-5">
-                 <img className="feature-image" src="/images/quiz.png" alt="Quiz" />
+                 <img className="feature-image featurette-image img-responsive center-block" src="/images/analytics.jpg" alt="Analytics" />
                </div>
-           </div>
+             </div>
 
-
-               <div className="row">
-                 <div className="col-lg-4">
-                   <img className="feature-image" src="/images/analytics.jpg" alt="Analytics" />
-                   <h2>See Quiz Results</h2>
-                 </div>
-
+           <hr className="featurette-divider"></hr>
+             <div className="row featurette">
+               <div className="col-md-7 col-md-push-5">
+                 <h2 className="featurette-heading">Class Question Board</h2>
+                 <span class="muted">Let students post and upvote real-time questions</span>
+                 <p className="lead">Provides ability to ask questions as they arise and let the class upvote the question if it is relevant.</p>
                </div>
-
-               <div className="row">
-                 <div className="col-lg-4">
-                   <img className="feature-image" src="/images/questions.jpg" alt="Questions" />
-                   <h2>Peer Question Building</h2>
-                 </div>
-
+               <div className="col-md-5 col-md-pull-7">
+                 <img className="feature-image featurette-image img-responsive center-block" src="/images/questions.jpg" alt="Questions" />
                </div>
+             </div>
 
-               <div className="row">
-                 <div className="col-lg-4">
-                   <img className="feature-image" src="/images/class-chat.jpg" alt="Chat" />
-                   <h2>Class Chat</h2>
+           <hr className="featurette-divider"></hr>
+             <div className="row featurette">
+               <div className="col-md-7">
+                 <h2 className="featurette-heading">Class Chat</h2>
+                 <span class="muted">Students can have a live interactive chat.</span>
+                 <p className="lead">Addresses difficulty in sharing material in real-time.Students often have trouble taking notes at the same pace as the instructor. Students disrupting classroom with questions that can be easily answered by classmates.</p>
+               </div>
+               <div className="col-md-5">
+                   <img className="feature-image featurette-image img-responsive center-block" src="/images/class-chat.jpg" alt="Chat" />
                  </div>
-
                </div>
 
          </div>
        </div>
 
-         </div>
-       </div>
-    </div>
+     </div>
+
 
    );
  };
