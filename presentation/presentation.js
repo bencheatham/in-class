@@ -1,4 +1,5 @@
 
+/*globals io*/
 
 var socket;
 
@@ -38,7 +39,7 @@ function chat () {
     count = count ? count : 0;
     submitMessage(chatArray[count], users[users.length-1-count]);
     if (count < chatArray.length - 1) {
-      setTimeout(function () { chatRecurse(++count); }, Math.random() * 2000)
+      setTimeout(function () { chatRecurse(++count); }, Math.random() * 2000);
     }  
     else {
       console.log('chat done!');
@@ -55,11 +56,11 @@ function questions () {
     count = count ? count : 0;
     submitQuestion(questionsArray[count], users[count]);
     if (count < questionsArray.length - 1) {
-      setTimeout(function () { questionsRecurse(++count); }, Math.random() * 1000)
+      setTimeout(function () { questionsRecurse(++count); }, Math.random() * 1000);
     }  
     else {
       console.log('questions done!');
-      upVoteRecurse()
+      upVoteRecurse();
     }
   }
   function upVoteRecurse (count) {
@@ -67,7 +68,7 @@ function questions () {
     var index = Math.floor(Math.random()*questionsArray.length);
     submitUpVote(index);
     if (count < 20) {
-      setTimeout(function () { upVoteRecurse(++count); }, Math.random() * 1000)
+      setTimeout(function () { upVoteRecurse(++count); }, Math.random() * 1000);
     }  
     else {
       console.log('upvote done!');
@@ -89,13 +90,13 @@ function thumbs () {
   function thumbsRecurse (count) {
     count = count ? count : 0;
     for (var i = 0; i < Math.floor(Math.random() * 6); i++ ) {  
-      var type = thumbTypes[Math.floor(Math.random() * thumbTypes.length)]
+      var type = thumbTypes[Math.floor(Math.random() * thumbTypes.length)];
       submitThumbs(type, 'user');
       console.log(type);
     }
 
     if (count < 30) {
-      setTimeout(function () { thumbsRecurse(++count); }, Math.random() * 200)
+      setTimeout(function () { thumbsRecurse(++count); }, Math.random() * 200);
     }
     else {
       console.log('thumbs done!');
@@ -127,8 +128,8 @@ function submitThumbs (type) { emitThumbEvent(type, 'user'); }
 
 
 
-// function connectToWebSockets(){ return socket = io().connect('http://localhost:8000'); }
-function connectToWebSockets(){ return socket = io().connect('https://in-class.herokuapp.com'); }
+// function connectToWebSockets(){ return io().connect('http://localhost:8000'); }
+function connectToWebSockets(){ return io().connect('https://in-class.herokuapp.com'); }
 function disconnectFromWebSocket (){ socket.disconnect(); }
 
 function emitChatMessage(text,name){
