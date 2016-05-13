@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Glyphicon } from 'react-bootstrap';
+import { Button, Glyphicon, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import * as UserVideoModalActions from '../actions/userVideoModal';
 import * as quizActions from '../quiz/actions';
@@ -60,33 +60,41 @@ class TeacherPanel extends React.Component {
 
   displayThumbsButton (){
     return (
-      <Button onClick={this.openThumbModal} className="btn-success btn-circle btn-xl">
-        <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
-      </Button>
+      <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip-thumbs">Thumbs</Tooltip>}>
+        <Button onClick={this.openThumbModal} className="btn-success btn-circle btn-xl">
+          <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
+        </Button>
+      </OverlayTrigger>
     );
   };
 
   displayQuizButton (){
     return (
-      <Button onClick={this.openQuizModal} className="btn-success btn-circle btn-xl">
-        <Glyphicon glyph="glyphicon glyphicon-question-sign" />
-      </Button>
+      <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip-quiz">Quiz</Tooltip>}>
+        <Button onClick={this.openQuizModal} className="btn-success btn-circle btn-xl">
+          <Glyphicon glyph="glyphicon glyphicon-question-sign" />
+        </Button>
+      </OverlayTrigger>
     );
   };
 
   displayVideoButton (){
     return (
-      <Button className="btn-success btn-circle btn-xl" onClick={this.showStudentVideo}>
-        <Glyphicon glyph="glyphicon glyphicon-film" />
-      </Button>
+      <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip-video">Video</Tooltip>}>
+        <Button className="btn-success btn-circle btn-xl" onClick={this.showStudentVideo}>
+          <Glyphicon glyph="glyphicon glyphicon-film" />
+        </Button>
+      </OverlayTrigger>
     );
   };
 
   displayAnalyticsButton (){
     return (
-      <Button onClick={this.openAnalytics} className="btn-success btn-circle btn-xl">
-        <Glyphicon glyph="glyphicon glyphicon-signal" />
-      </Button>
+      <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip-analytics">Analytics</Tooltip>}>
+        <Button onClick={this.openAnalytics} className="btn-success btn-circle btn-xl">
+          <Glyphicon glyph="glyphicon glyphicon-signal" />
+        </Button>
+      </OverlayTrigger>
     );
   };
 
@@ -95,9 +103,11 @@ class TeacherPanel extends React.Component {
     if (!handraiseUsers || handraiseUsers.length <= 0) return;
 
     return (
-      <Button onClick={this.openHandraise} className="btn-danger btn-circle btn-xl">
-        <Glyphicon glyph="glyphicon glyphicon glyphicon-flag" />
-      </Button>
+      <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip-notification">Notification</Tooltip>}>
+        <Button onClick={this.openHandraise} className="btn-danger btn-circle btn-xl">
+          <Glyphicon glyph="glyphicon glyphicon glyphicon-flag" />
+        </Button>
+      </OverlayTrigger>
     );
   };
 
