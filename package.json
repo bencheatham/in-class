@@ -11,10 +11,9 @@
     "toy-data": "node server/database/toyDataIntegration.js",
     "test": "mocha server/spec/**/*.js server/database/spec/**/*.js server/authentication/spec/**/*.js",
     "jshint": "jshint **/*.js --show-non-errors",
-    "build": "npm run clean && npm run makedirs && npm run copy",
+    "build": "npm run clean && npm run copy",
     "clean": "rm -rf dist/*",
-    "makedirs": "mkdir dist/presentation",
-    "copy": "cp -r presentation/* dist/presentation"
+    "copy": "cp -r presentation dist/"
   },
   "engines": {
     "npm": "2.15.3"
