@@ -23,7 +23,7 @@ Software Engineer - Jason Wu
   <div>
     <div>
       <h2>Thumb Checks</h2>
-      <span>Real-time Comprehension Checks</span>
+      <b>Real-time Comprehension Checks</b>
       <p>Addresses difficulty of determining (in real-time) whether students understand material covered in presentation.</p>
     </div><div>
       <img src="/images/thumbs-up-thumbs-down.gif" width="200px" height="200px;">
@@ -33,7 +33,7 @@ Software Engineer - Jason Wu
   <div>
     <div>
       <h2>Give Quizes</h2>
-      <span>Assess Student Comprehension With Real-time Quiz</span>
+      <b>Assess Student Comprehension With Real-time Quiz</b>
       <p>Address difficulty of determining (in real-time) whether students understand material covered in presentation</p>
     </div><div>
       <img src="/images/quiz.png" width="200px" height="200px;">
@@ -43,7 +43,7 @@ Software Engineer - Jason Wu
   <div>
     <div>
       <h2>Quiz Results Analytics</h2>
-      <span>Get Instant Visualization of Quiz Results</span>
+      <b>Get Instant Visualization of Quiz Results</b>
       <p>Understang in real-time the class' material comprehension with data Visualization.</p>
     </div><div>
       <img src="/images/analytics.jpg" width="200px" height="200px;">
@@ -53,7 +53,7 @@ Software Engineer - Jason Wu
   <div>
     <div>
       <h2>Class Question Board</h2>
-      <span>Let students post and upvote real-time questions</span>
+      <b>Let students post and upvote real-time questions</b>
       <p>Provides ability to ask questions as they arise and let the class upvote the question if it is relevant.</p>
     </div><div>
       <img src="/images/questions.jpg" width="200px" height="200px;">
@@ -63,7 +63,7 @@ Software Engineer - Jason Wu
   <div>
     <div>
       <h2>Class Chat</h2>
-      <span>Students can have a live interactive chat.</span>
+      <b>Students can have a live interactive chat.</b>
       <p>Addresses difficulty in sharing material in real-time.Students often have trouble taking notes at the same pace as the instructor. Students disrupting classroom with questions that can be easily answered by classmates.</p>
     </div><div>
       <img src="/images/class-chat.jpg"  width="200px" height="200px;">
