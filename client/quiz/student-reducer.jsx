@@ -15,11 +15,11 @@ export default function quiz(state = initialState, action){
   switch (action.type) {
     case type.STORE_QUIZ:
       var newStoredQuizzes = action.quiz;
-      console.log('store quiz action')
       return {
         ...state,
         storedQuizzes: newStoredQuizzes,
         quizLive: true,
+        status: 0,
       }
     case type.ANSWER_QUESTION:   
       var newCount = state.status + 1;

@@ -42,19 +42,37 @@ export function fetchQuizList (){
   });
 }
 
-export function storePopQuiz(quiz) {
-    return (dispatch,getState) => {
-      if (getState().user.usertype === 'student'){
-        dispatch({
-          type: type.STORE_QUIZ,
-          quiz: quiz,
-        });
-      } else {
-        dispatch({
-          type: type.QUIZ_SENT_TO_STUDENTS
-        })
-      }
+export function storePopQuiz(quizData) {
+  console.log('quizData',quizData);
+  var questionsWithShuffledChoices = _.map(quizData.quiz.questions,(question)=>{
+    return {
+      answer: question.answer,
+      choices: _.shuffle(question.choices),
+      index: question.index,
+      question: question.question,
     }
+  })
+
+  var newQuiz = {
+    quiz: {
+      questions: questionsWithShuffledChoices,
+      title: quizData.quiz.title
+    },
+    teachername: quizData.teachername
+  }
+
+  return (dispatch,getState) => {
+    if (getState().user.usertype === 'student'){
+      dispatch({
+        type: type.STORE_QUIZ,
+        quiz: newQuiz,
+      });
+    } else {
+      dispatch({
+        type: type.QUIZ_SENT_TO_STUDENTS
+      })
+    }
+  }
 }
 
 export function addQuizForm () {

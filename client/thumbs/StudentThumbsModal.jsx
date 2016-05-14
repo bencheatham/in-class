@@ -43,8 +43,8 @@ class ThumbsModal extends React.Component {
         </Button>
         </div>
         <div>
-        <Button onClick={this.submitThumb.bind(null,'down')} value="down">
-          <Glyphicon glyph="glyphicon-thumbs-down" />
+        <Button onClick={this.submitThumb.bind(null,'down')}>
+          <Glyphicon glyph="glyphicon glyphicon-thumbs-down" />
         </Button>
         </div>
 
