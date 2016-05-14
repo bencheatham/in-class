@@ -25,8 +25,7 @@ SoftWare Engineer - Jason Wu
       <h2 class="featurette-heading">Thumb Checks</h2>
       <span class="muted">Real-time Comprehension Checks</span>
       <p class="lead">Addresses difficulty of determining (in real-time) whether students understand material covered in presentation.</p>
-    </div>
-    <div class="col-md-5">
+    </div><div class="col-md-5">
       <img class="feature-image featurette-image img-responsive center-block" src="/images/thumbs-up-thumbs-down.gif" alt="Thumb Check">
     </div>
   </div>
