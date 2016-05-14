@@ -12,7 +12,7 @@ class QuestionBox extends Component {
   constructor(props) {
     super(props);
     this.handleEnter = this.handleEnter.bind(this);
-    this.initializeWebSockets = initializeWebSockets.bind(this);  
+    this.initializeWebSockets = initializeWebSockets.bind(this);
     this.emitNewQuestion = emitNewQuestion.bind(this);
     this.loadQuestions = loadQuestions.bind(this);
     this.closeWebSockets = closeWebSockets.bind(this);
@@ -26,7 +26,7 @@ class QuestionBox extends Component {
   componentWillUnmount(){
     this.closeWebSockets();
   }
-  
+
   handleEnter(event) {
     if (event.keyCode === 13){
       this.emitNewQuestion(event.target.value,this.props.username);
@@ -42,7 +42,7 @@ class QuestionBox extends Component {
       });
 
     return (
-      <div>
+      <div id="question-box" className="content-box">
         {questions}
         <textarea className="text-input-for-modal" placeholder="Ask a question" onKeyDown={this.handleEnter}></textarea>
       </div>);

@@ -18,19 +18,44 @@ class Question extends React.Component{
 
   render() {
     var { question, actions, index, user } = this.props;
-    return (<div>
-        <span onClick={() => this.handleClick(question.id)}>
-        <Glyphicon  glyph="glyphicon glyphicon-arrow-up" aria-hidden="true"/>
-        {question.upvotes.length}
-        </span>
-       {question.username}: {question.text}
+
+    function displayDate(timestamp) {
+      let date = new Date(timestamp);
+      let hour = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+      let minute = date.getMinutes();
+      let period = date.getHours() > 12 ? 'PM' : 'AM';
+
+      let today = new Date();
+
+
+
+      let ret = hour + ':' + minute + ' ' + period;
+      return ret;
+    }
+
+
+    return (
+      <div className="question">
+        <div className="question-header">
+          <span className="icon">
+              <Glyphicon onClick={() => this.handleClick(question.id)} glyph="glyphicon glyphicon-arrow-up" aria-hidden="true"/>
+          </span>
+          <span className="upvote">
+              {question.upvotes.length}
+          </span>
+          <span className="username">{question.username}</span>
+          <span className="timestamp">{displayDate(question.timestamp)}</span>
+        </div>
+        <div className="question-body">
+          <span className="content">{question.text}</span>
+        </div>
       </div>)
   }
 }
 
 function mapStateToProps(state) {
   return {
-    questions: state.questions.questions, 
+    questions: state.questions.questions,
     user: state.user,
   }
 }
