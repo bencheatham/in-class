@@ -16,7 +16,7 @@ var initialState = {
   quizzes: [],
   questionForms: 1,
   quizList: null,
-  quizToEdit: {},
+  quizToEdit: null,
   displayModal: false,
   quizResults: [],
 }

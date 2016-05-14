@@ -30,13 +30,13 @@ class CreateQuizItem extends Component {
   render() {
 
    return (
-     <div>
-      <input type="text" placeholder="Enter your question" onChange={this.handleChange} ref="title"></input>
-      <input onChange={this.handleChange} placeholder="Answer" ref="answer" type="text"></input>
-      <input onChange={this.handleChange} placeholder="Option" ref="choice1" type="text"></input>
-      <input onChange={this.handleChange} placeholder="Option" ref="choice2" type="text"></input>
-      <input onChange={this.handleChange} placeholder="Option" ref="choice3" type="text"></input>
-    </div>
+     <tr>
+      <td><input type="text" placeholder="Enter your question" onChange={this.handleChange} ref="title"></input></td>
+      <td><input onChange={this.handleChange} placeholder="Answer" ref="answer" type="text"></input></td>
+      <td><input onChange={this.handleChange} placeholder="Option" ref="choice1" type="text"></input></td>
+      <td><input onChange={this.handleChange} placeholder="Option" ref="choice2" type="text"></input></td>
+      <td><input onChange={this.handleChange} placeholder="Option" ref="choice3" type="text"></input></td>
+    </tr>
    );
   };
 }
