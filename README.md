@@ -1,4 +1,4 @@
-# InClass
+# [InClass](https://in-class.herokuapp.com)
 A tool for improving in-class student-teacher interactions
 
 ## Introduction
@@ -9,13 +9,13 @@ Although laptops in classroom are ubiquitous, students are the only ones taking 
 
 ## Team
 
-Scrum Master - Louis Buchbinder
+Scrum Master - [Louis Buchbinder](https://github.com/louisbuchbinder)
 
-Product Owner - Ben Cheatham
+Product Owner - [Ben Cheatham](https://github.com/bencheatham)
 
-Software Engineer - Stephen Sullivan
+Software Engineer - [Stephen Sullivan](https://github.com/Sterv)
 
-Software Engineer - Jason Wu
+Software Engineer - [Jason Wu](https://github.com/chjasonwu)
 
 
 <div>
