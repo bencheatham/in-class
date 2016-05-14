@@ -1,7 +1,7 @@
 #player-wrapper {
   position: relative;
   width: 50%;
-  margin-left: 1%;
+  margin-left: 20vw;
 }
 
 #player {
@@ -21,6 +21,7 @@ video {
   top: 10px;
 
   button {
-    margin-left: 5px;
+    margin-left: 1vw;
+    bottom: 0;
   }
 }
