@@ -2,7 +2,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import api from '../../middleware/api';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 import ReduxPromise from 'redux-promise';
@@ -13,7 +12,7 @@ export default function configureStor(initialState) {
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(ReduxPromise, thunk, api, createLogger()),
+      applyMiddleware(ReduxPromise, thunk, createLogger()),
       DevTools.instrument()
     )
   );

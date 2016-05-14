@@ -8,9 +8,8 @@
     box-sizing: border-box;
     transition: -webkit-transform ease 250ms;
     transition: transform ease 250ms;
-
     z-index: 8;
-    top: 5%;
+    top: 20%;
   }
 
   #panels {
@@ -19,6 +18,7 @@
     background:	#F2F2F2;
     right: $drawer-width*-1;
     width: $drawer-width;
+<<<<<<< HEAD
     height:95%;
     box-shadow: 0 8px 16px 0 grey;
 
@@ -29,6 +29,9 @@
 
       font-size: 1.5vw;
     }
+=======
+    height:85%;
+>>>>>>> ee072bd693d6a08e0688d91d2f3669671b26c0e5
 
     &.visible {
       transform: translate3d($drawer-width*-1, 0, 0);
@@ -38,7 +41,7 @@
   #controls {
     position: absolute;
     right: 0;
-    top: 30%;
+    top: 20%;
     background-color: transparent;
 
     &.visible {

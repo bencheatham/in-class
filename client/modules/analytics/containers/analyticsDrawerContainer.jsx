@@ -26,6 +26,7 @@ class AnalyticsDrawerContainer extends Component {
 
     return (
       <div>
+
         <ListQuizes data={this.props}/>
 
       </div>

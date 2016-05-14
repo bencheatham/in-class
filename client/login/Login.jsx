@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signinUser } from './actions';
@@ -6,8 +6,9 @@ import { socket } from '../common/socket';
 import { initializeWebSockets, emitLogin} from './socket';
 import axios from 'axios';
 import {returnStore} from '../main';
-import { push } from 'react-router-redux'
+import { push } from 'react-router-redux';
 import Header from './Header';
+import { Form, FormGroup, FormControl, Input, Col, ControlLabel, Checkbox, Button } from 'react-bootstrap';
 
 class Login extends Component {
 
@@ -25,17 +26,19 @@ class Login extends Component {
   
   handleEnter(event) {
     if (event.keyCode === 13){
-      var username = this.refs.username.value;
-      var password = this.refs.password.value;
+      var username = this.refs.username.getInputDOMNode().value;
+      var password = this.refs.password.getInputDOMNode().value;
       this.props.actions.signinUser(username, password);
       event.target.value = '';
     }
   }
 
   handleSubmit(event) {
+    console.log('i am in here')
+    console.log(this.refs.username.getInputDOMNode().value)
     event.preventDefault();
-    var username = this.refs.username.value;
-    var password = this.refs.password.value;
+    var username = this.refs.username.getInputDOMNode().value;
+    var password = this.refs.password.getInputDOMNode().value;
     this.props.actions.signinUser(username, password);
     return false;
   }
@@ -50,15 +53,41 @@ class Login extends Component {
   }
   render(){
     return (
+
       <div>
         <Header />
-        <form className="login" onSubmit={this.handleSubmit}>
-          <input className="username" ref="username" type="text" placeholder="username"/>
-          <input className="password" ref="password" type="password" placeholder="password"/>          
-          <input type="submit" value="Sign in"name="Login"></input>
-          {this.renderAlert()}
-        </form>
-      </div>);
+
+        <div>
+          <Form horizontal callback={this.handleSubmit} >
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={2}>
+                Username
+              </Col>
+              <Col sm={4}>
+                <Input ref="username" type="username" placeholder="username" />
+              </Col>
+            </FormGroup>
+
+            <FormGroup controlId="formHorizontalPassword">
+              <Col componentClass={ControlLabel} sm={2}>
+                Password
+              </Col>
+              <Col sm={4}>
+                <Input ref="password" type="password" placeholder="password" />
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col smOffset={2} sm={10}>
+                <Button bsStyle="primary" bsSize="large" active value="Sign In" type="submit" name="Login" onClick={this.handleSubmit} >
+                  Sign in{this.renderAlert()}
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </div>
+      </div>
+      );
   }
 }
 

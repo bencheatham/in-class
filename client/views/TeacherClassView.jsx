@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux';
 import Header from '../login/Header';
 import TeacherPanel from '../containers/TeacherPanel';
 import TeacherQuizModal from '../quiz/TeacherQuizModal';
-import { initializeWebSockets as initThumbWebSockets, closeWebSockets} from '../thumbs/socket';
-import { initializeWebSockets as initQuizWebSockets } from '../quiz/socket';
 import * as quizActions from '../quiz/actions';
 import Drawer from '../containers/Drawer';
 import TeacherDrawer from '../containers/TeacherDrawer';
@@ -23,15 +21,6 @@ class TeacherClassview extends Component {
     this.initializeWebSockets = UserSockets.initializeWebSockets.bind(this);
     this.emitGetAllUsersFromClass = UserSockets.emitGetAllUsersFromClass.bind(this);
     this.emitRemoveUserFromClass = UserSockets.emitRemoveUserFromClass.bind(this);
-    this.initQuizWebSockets = initQuizWebSockets.bind(this);
-    this.closeWebSockets = closeWebSockets.bind(this);
-  }
-
-  componentWillMount () {
-    this.initQuizWebSockets();
-  }
-
-  componentWillUnMount () {
   }
 
   componentDidMount() {
@@ -40,9 +29,11 @@ class TeacherClassview extends Component {
     });
 
     let username = this.props.loginState.username;
-    this.props.userActions.userLogin(username);
-    this.emitGetAllUsersFromClass();
-
+    if (username){
+      this.props.userActions.userLogin(username);
+      this.emitGetAllUsersFromClass();
+    }
+    
     window.addEventListener('beforeunload', () => {
       let username = this.props.loginState.username;
       this.emitRemoveUserFromClass(username);

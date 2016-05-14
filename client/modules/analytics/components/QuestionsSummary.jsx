@@ -16,7 +16,7 @@ export default class QuestionSummary extends Component {
     return this.props.data.analyzedQuizes.map((quizResult) => {
 
       return (
-        <div key={quizResult.title}>
+        <div key={quizResult.title} >
           <h2>{quizResult.title}</h2>
 
           {this.renderQuestion(quizResult.answerTally.questions)}
