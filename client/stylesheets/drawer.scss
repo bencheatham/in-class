@@ -54,11 +54,18 @@ $break-large: 1024px;
       padding-left: 1em;
       padding-right: 1em;
 
-      font-size: 1.5vw;
+      @include respond-to(handhelds) {
+        font-size: 3vw;
+      }
+      @include respond-to(medium-screens) {
+        font-size: 3vw;
+      }
+      @include respond-to(wide-screens) {
+        font-size: 1.5vw;
+      }
     }
 
     &.visible {
-      // comparison here
       @include respond-to(handhelds) {
         transform: translate3d($drawer-width-medium*-1, 0, 0);
       }
@@ -88,8 +95,6 @@ $break-large: 1024px;
       @include respond-to(wide-screens) {
         transform: translate3d($drawer-width*-1, 0, 0);
       }
-
-      // transform: translate3d($drawer-width*-1, 0, 0);
     }
   }
 
@@ -97,7 +102,16 @@ $break-large: 1024px;
     list-style: none;
     padding-left: 0;
     margin-bottom: 0;
-    font-size: 1.5vw;
+
+    @include respond-to(handhelds) {
+      font-size: 3vw;
+    }
+    @include respond-to(medium-screens) {
+      font-size: 3vw;
+    }
+    @include respond-to(wide-screens) {
+      font-size: 1.5vw;
+    }
 
     li {
       border: 1px solid;
