@@ -31,7 +31,7 @@ class AnalyticsContainer extends Component {
       <div>
         <Header />
         <div className="container-fluid">
-          <ul className="container-fluid" className="row">
+          <ul className="list-group" >
             <ClassQuizSummary data={this.props}/>
           </ul>
         </div>

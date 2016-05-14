@@ -14,6 +14,8 @@ export default class SingleQuizSummary extends Component {
 
     let idx = this.props.data.selectedQuiz;
 
+    console.log(this.props.data)
+
     let quizResult = this.props.data.analyzedQuizes[idx];
 
     let datapack = {
