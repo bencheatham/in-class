@@ -1,5 +1,6 @@
 # [InClass](https://in-class.herokuapp.com) 
 A tool for improving in-class student-teacher interactions
+
 [https://in-class.herokuapp.com](https://in-class.herokuapp.com) - Please be patient for heroku server.
 
 ## Introduction
