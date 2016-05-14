@@ -39,8 +39,8 @@ export default class QuestionSummary extends Component {
       };
 
       return (
-        <div key={key}>
-          <BarChart data={datapack} />
+        <div key={key} >
+          <BarChart data={datapack} questions={true} />
 
         </div>
 
@@ -54,8 +54,8 @@ export default class QuestionSummary extends Component {
 
     return (
 
-      <div>
-      {this.renderQuizQuestionResults()}
+      <div >
+        {this.renderQuizQuestionResults()}
       </div> 
 
     );

@@ -31,10 +31,11 @@ export default class ClassQuizSummary extends Component {
       return (
         <li key={idx} className="list-group-item quiz-graph-li" onClick={this.openAnalytics.bind(this, idx)}>
           <div>
-            <div className="quiz-graph-li-title">
-              <h2>myQuiz</h2>
-            </div>
+
             <div>
+              <div className="quiz-graph">
+                <h2>myQuiz</h2>
+              </div>
               <div className="quiz-graph quiz-graph-pie" >
                 <PieChart data={datapack} />
               </div>
