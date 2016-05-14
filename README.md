@@ -102,7 +102,46 @@ Software Engineer - [Jason Wu](https://github.com/chjasonwu)
 | Additional dependencies | Chart.js, WebRTC   |
 
 
+## Contributing
+See (Contributing)[/_CONTRIBUTING.md]
 
+```
+// Clone Repository
+git clone https://github.com/In-Class/in-class.git
+cd in-class
+
+
+// Install Dependencies
+$ npm install
+
+// Start in Development Mode
+$ npm run start-dev
+
+// or Production (Request .envProduction file to simulate environment)
+$ npm start
+
+// Run Tests
+$ npm test
+
+``` 
+make sure postgres is installed
+
+```
+// install postgres to your machine
+brew install postgres
+
+// initialize and start the postgres server
+pg_ctl init
+pg_ctl start --pgdata=database/inclass --log=logfile
+
+// create in-class and test database for your local machine
+createdb in-class
+createdb test
+
+// view database
+psql in-class
+
+```
 
 
 ## Project Doc Links

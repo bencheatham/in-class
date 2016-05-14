@@ -39,7 +39,7 @@ function chat () {
     count = count ? count : 0;
     submitMessage(chatArray[count], users[users.length-1-count]);
     if (count < chatArray.length - 1) {
-      setTimeout(function () { chatRecurse(++count); }, Math.random() * 2000);
+      setTimeout(function () { chatRecurse(++count); }, Math.random() * 3000);
     }  
     else {
       console.log('chat done!');
@@ -56,7 +56,7 @@ function questions () {
     count = count ? count : 0;
     submitQuestion(questionsArray[count], users[count]);
     if (count < questionsArray.length - 1) {
-      setTimeout(function () { questionsRecurse(++count); }, Math.random() * 1000);
+      setTimeout(function () { questionsRecurse(++count); }, Math.random() * 3000);
     }  
     else {
       console.log('questions done!');
@@ -67,8 +67,8 @@ function questions () {
     count = count ? count : 0;
     var index = Math.floor(Math.random()*questionsArray.length);
     submitUpVote(index);
-    if (count < 20) {
-      setTimeout(function () { upVoteRecurse(++count); }, Math.random() * 1000);
+    if (count < 10) {
+      setTimeout(function () { upVoteRecurse(++count); }, Math.random() * 2000);
     }  
     else {
       console.log('upvote done!');
