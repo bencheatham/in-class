@@ -33,6 +33,7 @@ export default function quiz(state = initialState, action){
         ...state,
         quizToEdit: {},
         questionForms: 1,
+        displayModal: false,
       }
     case type.FETCH_QUIZ_LIST: 
       return {
