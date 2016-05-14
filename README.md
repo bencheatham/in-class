@@ -22,7 +22,7 @@ SoftWare Engineer - Jason Wu
 
 ## Real-time Feedback Loops
 |**Feature**|**Problem**|**Solution**|
-| ------------- |:-------------:| -----:|
+| :-------------: |:-------------:| :-----:|
 | Thumb check      | Addresses difficulty of determining (in real-time) whether students understand material covered in presentation. | Teacher issues a thumb check during a presentation to assess whether students understand what is being taught. Results direct the teacher on whether he or she should elaborate on a topic or move on to the next one. |
 | Quiz      | Address difficulty of determining (in real-time) whether students understand material covered in presentation.      |   Teachers can upload and edit quizzes in the platform, and broadcast them in real-time to dial in on students’ understanding of the important details of the presentation. The results are visualized in the teacher’s dashboard. |
 
