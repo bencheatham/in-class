@@ -51,5 +51,5 @@ SoftWare Engineer - Jason Wu
 
 ## Project Doc Links
 
-Look at the project [Style Guide](/in-class/blob/master/_STYLE-GUIDE.md) for more information.
+Look at the project [Style Guide](/_STYLE-GUIDE.md) for more information.
 
