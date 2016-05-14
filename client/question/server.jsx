@@ -2,10 +2,16 @@ var _ = require('underscore');
 
 var questionLog = [];
 
+function wipeQuestionLog () { 
+  console.log('wipe the questions');
+  questionLog = []; 
+}
+
 var questionEvents = {
   'question-submitted': questionSubmitted,
   'upvote': upvote,
   'init-questions': initializeQuestions,
+  'wipe-questions': wipeQuestionLog
 }
 
 function initializeQuestions (){

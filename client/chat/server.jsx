@@ -2,9 +2,12 @@ var _ = require('underscore');
 
 var chatLog = [];
 
+function wipeChatLog () { chatLog = []; }
+
 var chatEvents = {
   'chatMessage-submitted': chatSubmitted,
   'init-chat': initializeChat,
+  'wipe-chat': wipeChatLog
 }
 
 function initializeChat (){

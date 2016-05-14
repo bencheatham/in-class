@@ -39,7 +39,7 @@ function chat () {
     count = count ? count : 0;
     submitMessage(chatArray[count], users[users.length-1-count]);
     if (count < chatArray.length - 1) {
-      setTimeout(function () { chatRecurse(++count); }, Math.random() * 2000);
+      setTimeout(function () { chatRecurse(++count); }, Math.random() * 3000);
     }  
     else {
       console.log('chat done!');
@@ -56,7 +56,7 @@ function questions () {
     count = count ? count : 0;
     submitQuestion(questionsArray[count], users[count]);
     if (count < questionsArray.length - 1) {
-      setTimeout(function () { questionsRecurse(++count); }, Math.random() * 1000);
+      setTimeout(function () { questionsRecurse(++count); }, Math.random() * 3000);
     }  
     else {
       console.log('questions done!');
@@ -67,8 +67,8 @@ function questions () {
     count = count ? count : 0;
     var index = Math.floor(Math.random()*questionsArray.length);
     submitUpVote(index);
-    if (count < 20) {
-      setTimeout(function () { upVoteRecurse(++count); }, Math.random() * 1000);
+    if (count < 10) {
+      setTimeout(function () { upVoteRecurse(++count); }, Math.random() * 2000);
     }  
     else {
       console.log('upvote done!');
@@ -113,6 +113,22 @@ var userId = (function () {
 })();
 
 
+function wipeQuestions(){
+  socket = connectToWebSockets();
+  socket.emit('wipe-questions',{});
+  // disconnectFromWebSocket();
+};
+
+function wipeChat(){
+  socket = connectToWebSockets();
+  socket.emit('wipe-chat',{});
+  // disconnectFromWebSocket();
+};
+
+
+
+
+
 function submitMessage (message, name) { emitChatMessage(message, name); } 
 
 
@@ -128,8 +144,8 @@ function submitThumbs (type) { emitThumbEvent(type, 'user'); }
 
 
 
-// function connectToWebSockets(){ return io().connect('http://localhost:8000'); }
-function connectToWebSockets(){ return io().connect('https://in-class.herokuapp.com'); }
+function connectToWebSockets(){ return io().connect('http://localhost:8000'); }
+// function connectToWebSockets(){ return io().connect('https://in-class.herokuapp.com'); }
 function disconnectFromWebSocket (){ socket.disconnect(); }
 
 function emitChatMessage(text,name){
