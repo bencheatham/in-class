@@ -2,6 +2,7 @@
  position: relative;
  float:left;
  padding: 10px;
+ position: inline-block;
 
 }
 
@@ -37,6 +38,36 @@
 .quiz-graph-li-title {
   text-align: center;
   padding-right: 60px;
+}
 
+.single-quiz-graph-title {
+  text-align: center;
+  padding-right: 80px;
+}
 
+.quiz-graph-group-div {
+  position: relative;
+  display: block;
+  padding: .75rem 1.25rem;
+}
+
+.quiz-graph-questions {
+  position: relative;
+  display: block;
+
+}
+
+.single-quiz-graph-container {
+ position: absolute;
+ display: inline-block;
+}
+
+.quiz-list-title {
+    margin: 0;
+    background: yellow;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }

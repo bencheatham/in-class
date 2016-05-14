@@ -9,9 +9,10 @@ import SingleQuizSummary from '../components/singleQuizSummary';
 import SingleQuestionsSummary from '../components/singleQuestionsSummary';
 import Header from '../../../login/Header';
 import TeacherDrawer from '../../../containers/TeacherDrawer';
+require('../../../stylesheets/analytics.scss');
 
 
-class AnalyticsContainer extends Component {
+class SingleQuizAnalyticsContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -28,13 +29,15 @@ class AnalyticsContainer extends Component {
   render() {
 
     return (
-      <div>
+      <div >
         <Header />
-        <div>
-          <SingleQuizSummary data={this.props}/>
-        </div>
-        <div>
-          <SingleQuestionsSummary data={this.props}/>
+        <div className="container-fluid single-quiz-graph-container" >
+          <div className="quiz-graph-group-div">
+            <SingleQuizSummary data={this.props}/>
+          </div>
+          <div className="quiz-graph-group-div">
+            <SingleQuestionsSummary data={this.props}/>
+          </div>
         </div>
       </div>
     );
@@ -63,4 +66,4 @@ function mapDispatchToProps(dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AnalyticsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleQuizAnalyticsContainer);

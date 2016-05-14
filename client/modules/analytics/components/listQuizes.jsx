@@ -30,7 +30,7 @@ export default class ListQuizes extends Component {
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-signal" /></span>
           <span className="quizId"> {quiz}</span>
         </li>
-      )
+      );
     });
   };
 
