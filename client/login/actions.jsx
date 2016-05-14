@@ -25,7 +25,7 @@ export function signinUser(username, password){
 }
 
 export function signupUser(username, password,usertype){
-
+  console.log(username,password,usertype);
   return function(dispatch, getState){
 
 
@@ -100,3 +100,10 @@ export function updateLogin(credentials){
     credentials: credentials
   }
 }
+
+export function toggleUserTypeInSignUp(credentials){
+  return {
+    type: 'TOGGLE_USERTYPE',
+  }
+}
+

@@ -5,7 +5,7 @@ var initialState = {
   errorMessage: null,
   usertype: null,
   credentials: {username: '', password: ''},
-  signUpForm: 'student',
+  isSignUpATeacher: false,
 }
 
 function userReducer(state = initialState, action){
@@ -33,6 +33,13 @@ function userReducer(state = initialState, action){
       return {
         ...state,
         credentials: {},
+      };
+    case 'TOGGLE_USERTYPE':
+      var isSignUpATeacher = !state.isSignUpATeacher;
+      return {
+        ...state,
+        isSignUpATeacher: isSignUpATeacher,
+        
       };
     case 'AUTH_USER':
       return {

@@ -1,7 +1,7 @@
  import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, signinUser, signupUser, updateLogin } from './actions';
+import { login, signinUser, signupUser, updateLogin, toggleUserTypeInSignUp } from './actions';
 import { socket } from '../common/socket';
 import { initializeWebSockets, emitLogin} from './socket';
 import axios from 'axios';
@@ -20,11 +20,18 @@ class SignUp extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.toggleUserType = this.toggleUserType.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    var usertype = this.refs.usertype.getInputDOMNode().value;
+    var usertype;
+    var isSignUpATeacher = this.props.isSignUpATeacher;
+    if (isSignUpATeacher){
+      usertype = 'teacher';
+    } else {
+      usertype = 'student';
+    }
     this.props.actions.signupUser(this.props.credentials.username, this.props.credentials.password,usertype);
     return false;
 
@@ -38,6 +45,9 @@ class SignUp extends Component {
         </div> 
       );
     }
+  }
+  toggleUserType () {
+    this.props.actions.toggleUserTypeInSignUp();
   }
 
   handleUsernameChange(e){
@@ -78,14 +88,10 @@ class SignUp extends Component {
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
-              <Col componentClass={ControlLabel} sm={2}>
-                Select Role
+              <Col componentClass={ControlLabel} sm={1}>
               </Col>
               <Col sm={4}>
-                <Input ref="usertype" type="select" componentClass="select" placeholder="student">
-                  <option value="student">student</option>
-                  <option value="teacher">teacher</option>
-                </Input>
+                <Checkbox onClick={this.toggleUserType}>   Check this box if you are a teacher</Checkbox>
               </Col>
             </FormGroup>
 
@@ -109,13 +115,14 @@ class SignUp extends Component {
 function mapStateToProps(state) {
   return {
     errorMessage: state.user.errorMessage,
-    credentials: state.user.credentials
+    credentials: state.user.credentials,
+    isSignUpATeacher: state.user.isSignUpATeacher,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({login, signinUser, signupUser, updateLogin}, dispatch)
+    actions: bindActionCreators({login, signinUser, signupUser, updateLogin, toggleUserTypeInSignUp}, dispatch)
   };
 }
 
