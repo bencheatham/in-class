@@ -29,7 +29,7 @@ SoftWare Engineer - Jason Wu
 
 ## Communication Channels
 |**Feature**|**Problem**|**Solution**|
-| ------------- |:-------------:| -----:|
+| :-------------: |:-------------:| :-----:|
 | Question     | Too many questions but not enough time to address each. Students too shy to ask questions. Students disrupting the classroom with questions that aren’t relevant for the entire class. | Students can share and upvote questions about the lecture. Teacher can select the questions in order of priority. |
 | Chat      | Addresses difficulty in sharing material in real-time. Students often have trouble taking notes at the same pace as the instructor. Students disrupting classroom with questions that can be easily answered by classmates.      |   Allows students to interact with each other without disrupting the classroom. For instance,students can message classroom to share notes or ask for clarification. Allow teacher and students to share resources (such as links to related material) in real-time. |
 | Video | Large lectures introduce a challenge for both students and lecturers. For teachers, who want to foster equal opportunity, it can be hard to notice and determine in which order students raised their hand. More importantly, it can be very difficult for members of the classroom to hear the student asking the question, if he or she does not have a microphone.      |    Students can enter a queue to ask a question which will be broadcasted from the front of the classrooms. Teacher can call an individual student and broadcast his or her video on the lecture screen.  |
@@ -37,7 +37,7 @@ SoftWare Engineer - Jason Wu
 ## Technology Stack
 
 |**Purpose**|**Implementation**| 
-| ------------- |:-------------:|
+| :-------------: |:-------------:|
 | Language     | Javascript | 
 | Build      | Webpack      |
 | Server-side | NodeJS, Express      |
