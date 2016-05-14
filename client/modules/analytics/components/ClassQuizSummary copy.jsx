@@ -23,7 +23,8 @@ export default class ClassQuizSummary extends Component {
       };
 
       return (
-        <li key={quizResult.title}  >
+        <div key={quizResult.title}  >
+          <div className="row" >
             <div className="quiz-graph quiz-graph-pie" >
               <PieChart data={datapack} />
             </div>
@@ -37,10 +38,13 @@ export default class ClassQuizSummary extends Component {
               <li className="list-group-item quiz-graph-li "><strong>Number of Students: </strong>{quizResult.numStudents}</li>
               </ul>
             </div>
+
+          </div>
           <div>
+            <SingleQuestionsSummary data={quizResult}/>
           </div>
 
-        </li>
+        </div>
       );
     });
   };
