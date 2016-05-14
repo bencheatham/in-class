@@ -1,5 +1,6 @@
 # [InClass](https://in-class.herokuapp.com) 
 A tool for improving in-class student-teacher interactions
+[https://in-class.herokuapp.com](https://in-class.herokuapp.com) - Please be patient for heroku server.
 
 ## Introduction
 Although laptops in classroom are ubiquitous, students are the only ones taking advantage of them. Classrooms have been slow to use these technologies to enhance a lecturer’s effectiveness in a physical classroom setting.  The platform **In Class** aims to enhance the classroom experience by increasing communication channels between students and the teacher and introducing feedback loops to assess whether students understand the presented material in real-time.
