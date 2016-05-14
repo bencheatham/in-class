@@ -26,7 +26,7 @@ Software Engineer - Jason Wu
       <span>Real-time Comprehension Checks</span>
       <p>Addresses difficulty of determining (in real-time) whether students understand material covered in presentation.</p>
     </div><div>
-      <img src="/images/thumbs-up-thumbs-down.gif" width="300px" height="300px;">
+      <img src="/images/thumbs-up-thumbs-down.gif" width="200px" height="200px;">
     </div>
   </div>
   <hr>
@@ -36,7 +36,7 @@ Software Engineer - Jason Wu
       <span>Assess Student Comprehension With Real-time Quiz</span>
       <p>Address difficulty of determining (in real-time) whether students understand material covered in presentation</p>
     </div><div>
-      <img src="/images/quiz.png" width="300px" height="300px;">
+      <img src="/images/quiz.png" width="200px" height="200px;">
     </div>
   </div>
   <hr>
@@ -46,7 +46,7 @@ Software Engineer - Jason Wu
       <span>Get Instant Visualization of Quiz Results</span>
       <p>Understang in real-time the class' material comprehension with data Visualization.</p>
     </div><div>
-      <img src="/images/analytics.jpg" width="300px" height="300px;">
+      <img src="/images/analytics.jpg" width="200px" height="200px;">
     </div>
   </div>
   <hr>
@@ -56,7 +56,7 @@ Software Engineer - Jason Wu
       <span>Let students post and upvote real-time questions</span>
       <p>Provides ability to ask questions as they arise and let the class upvote the question if it is relevant.</p>
     </div><div>
-      <img src="/images/questions.jpg" width="300px" height="300px;">
+      <img src="/images/questions.jpg" width="200px" height="200px;">
     </div>
   </div>
   <hr>
@@ -66,7 +66,7 @@ Software Engineer - Jason Wu
       <span>Students can have a live interactive chat.</span>
       <p>Addresses difficulty in sharing material in real-time.Students often have trouble taking notes at the same pace as the instructor. Students disrupting classroom with questions that can be easily answered by classmates.</p>
     </div><div>
-      <img src="/images/class-chat.jpg"  width="300px" height="300px;">
+      <img src="/images/class-chat.jpg"  width="200px" height="200px;">
     </div>
   </div>
 </div>
