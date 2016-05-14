@@ -36,6 +36,7 @@ SoftWare Engineer - Jason Wu
 
 ## Technology Stack
 
+| **Purpose**       | **Implementation** | 
 | ------------- |:-------------:|
 | Language     | Javascript | 
 | Build      | Webpack      |
