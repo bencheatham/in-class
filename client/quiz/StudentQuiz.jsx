@@ -4,17 +4,21 @@ import { bindActionCreators } from 'redux'
 import Login from '../login/Login'
 import Drawer from '../containers/Drawer'
 import * as quizActions from './actions'
-import {initializeWebSockets} from './socket';
+import {initializeWebSockets, closeWebSockets} from './socket';
 
 class StudentQuiz extends Component {
   constructor (props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.initializeWebSockets = initializeWebSockets.bind(this);
-    
+    this.closeWebSockets = closeWebSockets.bind(this);
   }
   componentWillMount (){
     this.initializeWebSockets();
+  }
+
+  componentWillUnMount (){
+    this.closeWebSockets();
   }
 
   handleClick (e){  

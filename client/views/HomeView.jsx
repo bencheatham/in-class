@@ -27,7 +27,7 @@ export default class HomeView extends Component {
              <div className="row featurette">
                <div className="col-md-7">
                  <h2 className="featurette-heading">Thumb Checks</h2>
-                 <span class="muted">Real-time Comprehension Checks</span>
+                 <span className="muted">Real-time Comprehension Checks</span>
                  <p className="lead">Addresses difficulty of determining (in real-time) whether 
                  students understand material covered in presentation.</p>
                </div>
@@ -40,7 +40,7 @@ export default class HomeView extends Component {
              <div className="row featurette">
                <div className="col-md-7 col-md-push-5">
                  <h2 className="featurette-heading">Give Quizes</h2>
-                 <span class="muted">Assess Student Comprehension With Real-time Quiz</span>
+                 <span className="muted">Assess Student Comprehension With Real-time Quiz</span>
                  <p className="lead">Address difficulty of determining (in real-time) 
                   whether students understand material covered in presentation </p>
                </div>
@@ -54,8 +54,8 @@ export default class HomeView extends Component {
              <div className="row featurette">
                <div className="col-md-7">
                  <h2 className="featurette-heading">Quiz Results Analytics</h2>
-                 <span class="muted">Get Instant Visualization of Quiz Results</span>
-                 <p className="lead">Understan in real-time the class' material comprehension with data Visualization.</p>
+                 <span className="muted">Get Instant Visualization of Quiz Results</span>
+                 <p className="lead">Understang in real-time the class' material comprehension with data Visualization.</p>
                </div>
                <div className="col-md-5">
                  <img className="feature-image featurette-image img-responsive center-block" src="/images/analytics.jpg" alt="Analytics" />
@@ -66,7 +66,7 @@ export default class HomeView extends Component {
              <div className="row featurette">
                <div className="col-md-7 col-md-push-5">
                  <h2 className="featurette-heading">Class Question Board</h2>
-                 <span class="muted">Let students post and upvote real-time questions</span>
+                 <span className="muted">Let students post and upvote real-time questions</span>
                  <p className="lead">Provides ability to ask questions as they arise and let the class upvote the question if it is relevant.</p>
                </div>
                <div className="col-md-5 col-md-pull-7">
@@ -78,7 +78,7 @@ export default class HomeView extends Component {
              <div className="row featurette">
                <div className="col-md-7">
                  <h2 className="featurette-heading">Class Chat</h2>
-                 <span class="muted">Students can have a live interactive chat.</span>
+                 <span className="muted">Students can have a live interactive chat.</span>
                  <p className="lead">Addresses difficulty in sharing material in real-time.Students often have trouble taking notes at the same pace as the instructor. Students disrupting classroom with questions that can be easily answered by classmates.</p>
                </div>
                <div className="col-md-5">

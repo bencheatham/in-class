@@ -2,8 +2,6 @@ import * as types from '../constants/ActionTypes';
 import * as sockets from '../users/socket';
 
 export function userLogin(user) {
-  if(!user || !user.trim()) return;
-
   sockets.emitAddUserToClass(user);
   return { type: types.USER_LOGIN, payload: user};
 };

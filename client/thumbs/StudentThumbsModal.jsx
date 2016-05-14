@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal, Button,Glyphicon } from 'react-bootstrap';
+import { Modal, Button, Glyphicon } from 'react-bootstrap';
 import * as thumbActions from './actions';
 import * as socket from './socket';
 
@@ -34,17 +34,17 @@ class ThumbsModal extends React.Component {
         <Modal.Body>
         <div>
         <Button onClick={this.submitThumb.bind(null,'up')}>
-          <Glyphicon className="glyphicon glyphicon-thumbs-up" />
+          <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
         </Button>
         </div>
         <div>
         <Button onClick={this.submitThumb.bind(null,'neutral')}>
-          <Glyphicon className="glyphicon glyphicon-hand-right" />
+          <Glyphicon glyph="glyphicon glyphicon-hand-right" />
         </Button>
         </div>
         <div>
         <Button onClick={this.submitThumb.bind(null,'down')} value="down">
-          <Glyphicon className="glyphicon glyphicon-thumbs-down" />
+          <Glyphicon glyph="glyphicon-thumbs-down" />
         </Button>
         </div>
 
