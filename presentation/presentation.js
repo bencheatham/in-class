@@ -113,6 +113,22 @@ var userId = (function () {
 })();
 
 
+function wipeQuestions(){
+  socket = connectToWebSockets();
+  socket.emit('wipe-questions',{});
+  // disconnectFromWebSocket();
+};
+
+function wipeChat(){
+  socket = connectToWebSockets();
+  socket.emit('wipe-chat',{});
+  // disconnectFromWebSocket();
+};
+
+
+
+
+
 function submitMessage (message, name) { emitChatMessage(message, name); } 
 
 
@@ -128,8 +144,8 @@ function submitThumbs (type) { emitThumbEvent(type, 'user'); }
 
 
 
-// function connectToWebSockets(){ return io().connect('http://localhost:8000'); }
-function connectToWebSockets(){ return io().connect('https://in-class.herokuapp.com'); }
+function connectToWebSockets(){ return io().connect('http://localhost:8000'); }
+// function connectToWebSockets(){ return io().connect('https://in-class.herokuapp.com'); }
 function disconnectFromWebSocket (){ socket.disconnect(); }
 
 function emitChatMessage(text,name){
