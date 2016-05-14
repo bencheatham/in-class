@@ -1,4 +1,4 @@
-# [InClass](https://in-class.herokuapp.com)
+# [InClass](https://in-class.herokuapp.com) he
 A tool for improving in-class student-teacher interactions
 
 ## Introduction
