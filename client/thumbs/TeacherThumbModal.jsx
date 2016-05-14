@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal, Button,Glyphicon } from 'react-bootstrap';
+import { Modal, Button,Glyphicon, Table } from 'react-bootstrap';
 import * as thumbActions from './actions';
 import * as socket from './socket';
 require('../stylesheets/sidebar.scss');
+
 class ThumbsModal extends React.Component {
 
   constructor(props){
@@ -31,20 +32,24 @@ class ThumbsModal extends React.Component {
           <Modal.Title>You have successfully sent out a thumb check!</Modal.Title>
         </Modal.Header>
         <Modal.Body> 
-        <div>        
-          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-thumbs-up" />
-            
+        <Table>
+        <tbody>
+        <tr>
+        <td>
+          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-thumbs-up" style={{color:'green'}} />            
             {this.props.thumbResults.up}
-        </div>
-        <div>        
-          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-hand-right" />
-          
-          {this.props.thumbResults.neutral} 
-        </div>
-        <div>
-          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-thumbs-down" />
-          {this.props.thumbResults.down} 
-        </div>
+        </td>
+        <td>
+          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-hand-right" style={{color:'orange'}}/>
+            {this.props.thumbResults.neutral} 
+        </td>
+        <td>
+          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-thumbs-down" style={{color:'red'}}/>
+            {this.props.thumbResults.down} 
+        </td>
+        </tr>
+        </tbody>
+        </Table>
         </Modal.Body>
         <Modal.Footer>
          <Button onClick={this.props.thumbActions.resetThumbResults} bsStyle="warning" bsSize="small">Reset</Button>

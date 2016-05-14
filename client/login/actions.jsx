@@ -25,7 +25,7 @@ export function signinUser(username, password){
 }
 
 export function signupUser(username, password,usertype){
-
+  console.log(username,password,usertype);
   return function(dispatch, getState){
 
 
@@ -76,6 +76,7 @@ export function checkAuth() {
   return (dispatch, getState) => {
     axios.get(SERVER_URL)
       .then((response) => {
+        console.log(response);
         if (response.status === 200) {
           console.log('THIS IS THE DATA:', response.data);
           dispatch({ type: 'AUTH_USER', username: response.data.username, usertype: response.data.usertype });
@@ -86,8 +87,23 @@ export function checkAuth() {
         }
       })
       .catch((error) => {
+        console.log('error checkAuth',error);
         dispatch({ type: 'UNAUTH_USER' });
         hashHistory.push('/sign-in')
       });
   }
 }
+
+export function updateLogin(credentials){
+  return {
+    type: 'UPDATE_LOGIN_FORM',
+    credentials: credentials
+  }
+}
+
+export function toggleUserTypeInSignUp(credentials){
+  return {
+    type: 'TOGGLE_USERTYPE',
+  }
+}
+

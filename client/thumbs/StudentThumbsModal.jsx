@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal, Button, Glyphicon } from 'react-bootstrap';
+import { Modal, Button, Glyphicon, Table } from 'react-bootstrap';
 import * as thumbActions from './actions';
 import * as socket from './socket';
+require('../stylesheets/sidebar.scss');
 
 class ThumbsModal extends React.Component {
 
@@ -29,25 +30,30 @@ class ThumbsModal extends React.Component {
       <div>
       <Modal show={displayModal}>
         <Modal.Header>
-          <Modal.Title>How are you feeling? </Modal.Title>
+          <Modal.Title>Thumb Check! How do you feel? </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-        <div>
+        <Modal.Body>   
+        <Table condensed>
+        <tbody>
+        <tr>
+        <td>
         <Button onClick={this.submitThumb.bind(null,'up')}>
-          <Glyphicon glyph="glyphicon glyphicon-thumbs-up" />
-        </Button>
-        </div>
-        <div>
+          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-thumbs-up" style={{color:'green'}}/>
+        </Button>              
+        </td>
+        <td>
         <Button onClick={this.submitThumb.bind(null,'neutral')}>
-          <Glyphicon glyph="glyphicon glyphicon-hand-right" />
+          <Glyphicon className="thumb-icon neutral" glyph="glyphicon glyphicon-hand-right" style={{color:'orange'}}/>
+        </Button>      
+        </td>
+        <td>
+        <Button onClick={this.submitThumb.bind(null,'down')}>
+          <Glyphicon className="thumb-icon" glyph="glyphicon glyphicon-thumbs-down" style={{color:'red'}}/>
         </Button>
-        </div>
-        <div>
-        <Button onClick={this.submitThumb.bind(null,'down')} value="down">
-          <Glyphicon glyph="glyphicon-thumbs-down" />
-        </Button>
-        </div>
-
+        </td>
+        </tr>
+        </tbody>     
+        </Table>   
         </Modal.Body>
         <Modal.Footer>
          <Button onClick={this.hideModal}>Close</Button>

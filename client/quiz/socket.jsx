@@ -7,7 +7,6 @@ export function initializeWebSockets() {
   socket = connectToWebSockets();
 
   socket.on('pop-quiz', data => {
-    console.log('pop-quiz event');
     this.props.quizActions.storePopQuiz(data.quiz);
   });
 };
@@ -17,6 +16,7 @@ export function closeWebSockets(){
 }
 
 function emitQuiz(quiz,username){
+  console.log('socket information',quiz,username)
    socket.emit('pop-quiz', {
       quiz: quiz,
       teachername: username,

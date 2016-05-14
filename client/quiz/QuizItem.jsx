@@ -7,7 +7,7 @@ import Video from '../video/Video'
 import Drawer from '../containers/Drawer'
 import * as quizActions from './actions'
 import {fetchQuiz} from './socket'
-import { Button } from 'react-bootstrap';
+import { Button, Col, Row, Grid, Table} from 'react-bootstrap';
 require('../stylesheets/sidebar.scss');
 
 class QuizItem extends Component {
@@ -21,13 +21,14 @@ class QuizItem extends Component {
   }
 
   sendPopQuiz () {
-    console.log('send pop quiz')
+    
     fetchQuiz(this.props.name, this.props.user.username);
   }
   
   editQuiz () {
     this.props.quizActions.loadQuiz(this.props.name);
   }
+
   seeResults () {
     this.props.quizActions.fetchResults(this.props.name);
   }
@@ -38,12 +39,12 @@ class QuizItem extends Component {
 
   render() {
    return (
-     <div className="quiz-item"> 
-     <span className="quiz-item">{this.props.name}</span>
-     <Button className="quiz-item" onClick={this.sendPopQuiz} bsStyle="success" bsSize="small"> send</Button>
-     <Button className="quiz-item" onClick={this.editQuiz} bsStyle="warning" bsSize="small"> edit</Button>
-     <Button className="quiz-item" onClick={this.deleteQuiz} bsStyle="danger" bsSize="small"> delete</Button>
-    </div>
+     <tr className="quiz-item">  
+      <td><span className="quiz-name">{this.props.name}</span></td>
+      <td><Button className="quiz-item" onClick={this.sendPopQuiz} bsStyle="success" bsSize="small">send</Button></td>
+      <td><Button className="quiz-item" onClick={this.editQuiz} bsStyle="warning" bsSize="small">edit</Button></td>
+      <td><Button className="quiz-item" onClick={this.deleteQuiz} bsStyle="danger" bsSize="small">delete</Button></td>
+    </tr>
    );
   };
 }

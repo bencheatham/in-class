@@ -12,10 +12,20 @@
 }
 
 .thumb-icon {
-  font-size: 22px;
+display: relative;
+  text-align: center;
+  font-size: 90px;
   margin: 10px;
 }
 
+.quiz-name {
+  margin: 4px;
+}
+
 .quiz-item {
-  margin: 3px;
+  margin: 5px;
+}
+
+.quiz-buttons {
+  margin: 4px;
 }

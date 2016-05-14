@@ -10,21 +10,26 @@ class QuizModal extends React.Component {
   constructor(props){
     super(props);
     this.hideModal = this.hideModal.bind(this);
+    this.renderTitle = this.renderTitle.bind(this);
   }
 
   hideModal (){
     this.props.actions.closeStudentQuizModal();
   }
+  renderTitle () {
+    if (this.props.storedQuizzes.teachername){
+     return this.props.storedQuizzes.quiz.title;  
+    }
+  }
 
   render() {
     var displayModal = this.props.displayModal;
-    // var quiz = this.props.storedQuizzes;
-    var status = 1;
+    
     return (
       <div>
       <Modal show={displayModal}>
         <Modal.Header>
-          <Modal.Title></Modal.Title>
+          <Modal.Title>{this.renderTitle()}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <StudentQuiz />
@@ -41,7 +46,9 @@ class QuizModal extends React.Component {
 function mapStateToProps(state) {
   return {
     displayModal: state.studentQuiz.displayModal,
-    storedQuizzes: state.studentQuiz.storedQuizzes
+    storedQuizzes: state.studentQuiz.storedQuizzes,
+    status: state.studentQuiz.status,
+
   };
 }
 

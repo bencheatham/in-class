@@ -5,6 +5,8 @@ import Login from '../login/Login'
 import Drawer from '../containers/Drawer'
 import * as quizActions from './actions'
 import {initializeWebSockets, closeWebSockets} from './socket';
+import { Button, ButtonGroup } from 'react-bootstrap';
+require('../stylesheets/sidebar.scss');
 
 class StudentQuiz extends Component {
   constructor (props){
@@ -22,6 +24,7 @@ class StudentQuiz extends Component {
   }
 
   handleClick (e){  
+    console.log(e.target.value);
     this.props.quizActions.answerQuestion(e.target.value);  
   }
 
@@ -29,18 +32,16 @@ class StudentQuiz extends Component {
     var {storedQuizzes, status} = this.props;
     var self = this;
     var quizzes;
-  
-    var currentQuestion = status;
+    
+    var currentQuestion = storedQuizzes.questions[status];
 
     if (status < storedQuizzes.questions.length){
       quizzes = [
-          <div>{storedQuizzes.questions[currentQuestion].question}
-            <div>
-              <button value={storedQuizzes.questions[currentQuestion].choices[0]} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[0]}</button>
-              <button value={storedQuizzes.questions[currentQuestion].choices[1]} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[1]}</button>
-              <button value={storedQuizzes.questions[currentQuestion].choices[2]} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[2]}</button>
-              <button value={storedQuizzes.questions[currentQuestion].choices[3]} onClick={self.handleClick}>{storedQuizzes.questions[currentQuestion].choices[3]}</button>
-            </div>
+          <div>{storedQuizzes.questions[status].question} <span className="quiz-status">({status} of {storedQuizzes.questions.length})</span>            
+              <div className="quiz-buttons"><Button bsStyle="primary" value={currentQuestion.choices[0]} onClick={self.handleClick}>1</Button><Button value={currentQuestion.choices[0]} onClick={self.handleClick}>{currentQuestion.choices[0]}</Button></div>
+              <div className="quiz-buttons"><Button bsStyle="primary" value={currentQuestion.choices[1]} onClick={self.handleClick}>2</Button><Button value={currentQuestion.choices[1]} onClick={self.handleClick}>{currentQuestion.choices[1]}</Button></div>
+              <div className="quiz-buttons"><Button bsStyle="primary" value={currentQuestion.choices[2]} onClick={self.handleClick}>3</Button><Button value={currentQuestion.choices[2]} onClick={self.handleClick}>{currentQuestion.choices[2]}</Button></div>
+              <div className="quiz-buttons"><Button bsStyle="primary" value={currentQuestion.choices[3]} onClick={self.handleClick}>4</Button><Button value={currentQuestion.choices[3]} onClick={self.handleClick}>{currentQuestion.choices[3]}</Button></div>
           </div>
         ];
     } else {

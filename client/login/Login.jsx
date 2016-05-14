@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { login, signinUser } from './actions';
+import { updateLogin, login, signinUser } from './actions';
 import { socket } from '../common/socket';
 import { initializeWebSockets, emitLogin} from './socket';
 import axios from 'axios';
@@ -18,6 +18,9 @@ class Login extends Component {
     this.initializeWebSockets = initializeWebSockets.bind(this);  
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderAlert = this.renderAlert;
+    this.handleChange = this.handleChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
   componentDidMount() {
@@ -34,12 +37,8 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    console.log('i am in here')
-    console.log(this.refs.username.getInputDOMNode().value)
     event.preventDefault();
-    var username = this.refs.username.getInputDOMNode().value;
-    var password = this.refs.password.getInputDOMNode().value;
-    this.props.actions.signinUser(username, password);
+    this.props.actions.signinUser(this.props.credentials.username, this.props.credentials.password);
     return false;
   }
   renderAlert(){
@@ -50,6 +49,19 @@ class Login extends Component {
         </div> 
       )
     }
+  }
+
+  handleUsernameChange(e){
+    this.handleChange(e.target.value,null)
+  }
+
+  handlePasswordChange(e){
+    this.handleChange(null,e.target.value)
+  }
+
+  handleChange(username,password){
+    let credentials = {username,password};
+    this.props.actions.updateLogin(credentials);
   }
   render(){
     return (
@@ -64,7 +76,7 @@ class Login extends Component {
                 Username
               </Col>
               <Col sm={4}>
-                <Input ref="username" type="username" placeholder="username" />
+                <FormControl onChange={this.handleUsernameChange} value={this.props.credentials.username} type="username" placeholder="username" />
               </Col>
             </FormGroup>
 
@@ -73,7 +85,7 @@ class Login extends Component {
                 Password
               </Col>
               <Col sm={4}>
-                <Input ref="password" type="password" placeholder="password" />
+                <FormControl onChange={this.handlePasswordChange} value={this.props.credentials.password} ref="password" type="password" placeholder="password" />
               </Col>
             </FormGroup>
 
@@ -94,12 +106,13 @@ class Login extends Component {
 function mapStateToProps(state) {
   return {
     errorMessage: state.user.errorMessage,
+    credentials: state.user.credentials,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({login, signinUser}, dispatch)
+    actions: bindActionCreators({updateLogin, login, signinUser}, dispatch)
   };
 }
 

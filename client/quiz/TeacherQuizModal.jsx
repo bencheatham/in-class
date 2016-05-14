@@ -5,6 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 import TeacherQuiz from './TeacherQuiz';
 import * as quizActions from './actions';
 import {hashHistory} from 'react-router';
+import {initializeWebSockets, closeWebSockets} from './socket';
 
 
 class TeacherQuizModal extends React.Component {
@@ -13,8 +14,12 @@ class TeacherQuizModal extends React.Component {
     super(props);
     this.hideModal = this.hideModal.bind(this);
     this.createQuiz = this.createQuiz.bind(this);
+    this.initializeWebSockets = initializeWebSockets.bind(this);
   }
   
+  componentWillMount (){
+    this.initializeWebSockets();
+  }
   hideModal (){
     this.props.quizActions.closeTeacherQuizModal();
   }
@@ -29,7 +34,7 @@ class TeacherQuizModal extends React.Component {
       <div>
       <Modal show={displayModal}>
         <Modal.Header>
-          <Modal.Title>My Quizzes</Modal.Title>
+          <Modal.Title>Your Quizzes</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <TeacherQuiz />

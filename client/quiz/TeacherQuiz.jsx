@@ -5,6 +5,7 @@ import QuizItem from '../quiz/QuizItem'
 // import Modal from '../quiz/Modal'
 import * as quizActions from './actions'
 import {initializeWebSockets} from './socket';
+import { Table } from 'react-bootstrap';
 
 
 class TeacherQuiz extends Component {
@@ -32,7 +33,11 @@ class TeacherQuiz extends Component {
   render() {
     return (
       <div>
-        {this.displayQuizList()}
+        <Table condensed hover>
+        <tbody>
+          {this.displayQuizList()}
+        </tbody>
+        </Table>
       </div>
      );
  };
