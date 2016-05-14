@@ -1,6 +1,5 @@
 .quiz-graph {
  position: relative;
- text-align: left;
  float:left;
  padding: 10px;
 
@@ -32,4 +31,12 @@
 
 .quiz-graph-li.list-group-item  {
  border: none;
+}
+
+
+.quiz-graph-li-title {
+  text-align: center;
+  padding-right: 60px;
+
+
 }
