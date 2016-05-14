@@ -117,13 +117,13 @@ function wipeQuestions(){
   socket = connectToWebSockets();
   socket.emit('wipe-questions',{});
   // disconnectFromWebSocket();
-};
+}
 
 function wipeChat(){
   socket = connectToWebSockets();
   socket.emit('wipe-chat',{});
   // disconnectFromWebSocket();
-};
+}
 
 
 
