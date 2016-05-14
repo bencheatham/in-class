@@ -69,7 +69,9 @@ Software Engineer - Jason Wu
       <img src="/images/class-chat.jpg"  width="200px" height="200px;">
     </div>
   </div>
+  <hr>
 </div>
+
 
 
 ## Real-time Feedback Loops
