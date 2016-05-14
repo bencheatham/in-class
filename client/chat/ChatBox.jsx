@@ -12,7 +12,7 @@ class ChatBox extends Component {
   constructor(props) {
     super(props);
     this.handleEnter = this.handleEnter.bind(this);
-    this.initializeWebSockets = initializeWebSockets.bind(this);  
+    this.initializeWebSockets = initializeWebSockets.bind(this);
     this.emitChatMessage = emitChatMessage.bind(this);
     this.loadChatMessages = loadChatMessages.bind(this);
     this.closeWebSockets = closeWebSockets.bind(this);
@@ -26,7 +26,7 @@ class ChatBox extends Component {
   componentWillUnmount(){
     this.closeWebSockets();
   }
-  
+
   handleEnter(event) {
     if (event.keyCode === 13){
       this.emitChatMessage(event.target.value,this.props.username);
@@ -41,7 +41,7 @@ class ChatBox extends Component {
       });
 
     return (
-      <div className="chatBox">
+      <div id="chatbox" className="content-box">
         {chatMessages}
         <textarea type="text" className="text-input-for-modal" placeholder="Send a message" onKeyDown={this.handleEnter}></textarea>
       </div>);

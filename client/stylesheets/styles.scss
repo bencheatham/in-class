@@ -3,15 +3,16 @@
 
 body {
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .TeacherControlPanel {
   position: fixed;
-  bottom: 20px;
-  left: 10px;
+  bottom: 3vh;
+  left: 3vw;
 
   button {
-    margin-left: 10px;
+    margin-left: 1vw;
   }
 }
 
