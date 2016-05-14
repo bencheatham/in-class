@@ -1,7 +1,23 @@
+$break-small: 320px;
+$break-large: 1024px;
+
+// mix in for responsive css
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $break-large) { @content; }
+  }
+}
+
 .drawer {
-  // $drawer-width: 400px;
   $drawer-width: 45vw;
-  $tabs-width: 200px;
+  $drawer-width-medium: 500px;
+
   display: block;
 
   >div {
@@ -16,11 +32,22 @@
     border-width: 1px;
     position: absolute;
     background:	#F2F2F2;
-    right: $drawer-width*-1;
-    width: $drawer-width;
-<<<<<<< HEAD
-    height:95%;
     box-shadow: 0 8px 16px 0 grey;
+    height:80%;
+
+    // comparison here
+    @include respond-to(handhelds) {
+      right: $drawer-width-medium*-1;
+      width: $drawer-width-medium;
+    }
+    @include respond-to(medium-screens) {
+      right: $drawer-width-medium*-1;
+      width: $drawer-width-medium;
+    }
+    @include respond-to(wide-screens) {
+      right: $drawer-width*-1;
+      width: $drawer-width;
+    }
 
     #panels-wrapper {
       padding-top: 1em;
@@ -29,12 +56,18 @@
 
       font-size: 1.5vw;
     }
-=======
-    height:85%;
->>>>>>> ee072bd693d6a08e0688d91d2f3669671b26c0e5
 
     &.visible {
-      transform: translate3d($drawer-width*-1, 0, 0);
+      // comparison here
+      @include respond-to(handhelds) {
+        transform: translate3d($drawer-width-medium*-1, 0, 0);
+      }
+      @include respond-to(medium-screens) {
+        transform: translate3d($drawer-width-medium*-1, 0, 0);
+      }
+      @include respond-to(wide-screens) {
+        transform: translate3d($drawer-width*-1, 0, 0);
+      }
     }
   }
 
@@ -45,7 +78,18 @@
     background-color: transparent;
 
     &.visible {
-      transform: translate3d($drawer-width*-1, 0, 0);
+      // comparison here
+      @include respond-to(handhelds) {
+        transform: translate3d($drawer-width-medium*-1, 0, 0);
+      }
+      @include respond-to(medium-screens) {
+        transform: translate3d($drawer-width-medium*-1, 0, 0);
+      }
+      @include respond-to(wide-screens) {
+        transform: translate3d($drawer-width*-1, 0, 0);
+      }
+
+      // transform: translate3d($drawer-width*-1, 0, 0);
     }
   }
 
@@ -59,6 +103,7 @@
       border: 1px solid;
       border-color: #aaa;
       border-right-color: transparent;
+      background-color: white;
 
       padding: 6px 8px;
       position: relative;

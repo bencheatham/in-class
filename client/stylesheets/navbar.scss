@@ -51,12 +51,12 @@ Responsive navbar-brand image CSS
   margin-left: 15px;
 }
 
-
-
-
+.navbar-static-top {
+  z-index: 3;
+}
 
 .navbar-nav>li>.dropdown-menu {
- z-index: 9999;
+ z-index: 3;
 }
 
 body {
