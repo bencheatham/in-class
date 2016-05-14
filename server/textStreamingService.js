@@ -8,8 +8,6 @@ var userSocketEvents = require('./sockets/users.js').module.socketEvents;
 var _ = require('underscore');
 
 
-questionSocketEvents.wipeQuestionLog
-
 
 
 module.exports = function initializeChatStreaming (server) {
