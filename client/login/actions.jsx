@@ -91,3 +91,10 @@ export function checkAuth() {
       });
   }
 }
+
+export function updateLogin(credentials){
+  return {
+    type: 'UPDATE_LOGIN_FORM',
+    credentials: credentials
+  }
+}
