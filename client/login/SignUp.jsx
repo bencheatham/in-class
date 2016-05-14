@@ -23,6 +23,7 @@ class SignUp extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     var usertype = this.refs.usertype.getInputDOMNode().value;
     this.props.actions.signupUser(this.props.credentials.username, this.props.credentials.password,usertype);
     return false;

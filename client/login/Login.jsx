@@ -37,7 +37,7 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    
+    event.preventDefault();
     this.props.actions.signinUser(this.props.credentials.username, this.props.credentials.password);
     return false;
   }
