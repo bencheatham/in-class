@@ -27,6 +27,12 @@ class AnalyticsContainer extends Component {
  
   render() {
 
+    if(this.props.analyzedQuizes === null || this.props.analyzedQuizes === undefined) {
+      return (
+        <div>Loading...</div>
+      );
+    }
+
     return (
       <div>
         <Header />

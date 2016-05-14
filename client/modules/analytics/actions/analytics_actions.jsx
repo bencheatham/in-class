@@ -66,7 +66,6 @@ export function fetchQuizList (){
 }
 
 export function selectQuiz (quiz){
-      console.log('in actions', quiz)
       return {
         type: types.SELECT_QUIZ,
         payload: quiz
