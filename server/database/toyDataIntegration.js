@@ -91,7 +91,7 @@ const answers = {
   Makersquare: {
     student1: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'no, it\'s a feature'}, {index: 2, answer: 'me'}]}},
     student2: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'I gots it'}, {index: 1, answer: 'no, it\'s a feature'}, {index: 2, answer: 'me'}]}},
-    student3: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it of the above'}, {index: 1, answer: 'yes'}, {index: 2, answer: 'me'}]}},
+    student3: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'yes'}, {index: 2, answer: 'me'}]}},
     student4: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'gots it?'}, {index: 1, answer: 'no, it\'s a feature'}, {index: 2, answer: 'machine'}]}},
     student5: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'no'}, {index: 2, answer: 'both'}]}}
   }

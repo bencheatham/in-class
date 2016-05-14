@@ -8,15 +8,16 @@ export default class SimpleBar extends Component {
   constructor(props){
     super(props);
 
-    let labels;
-    let title;
-    let data;
+    let printLabels,
+      title,
+      data;
 
     let obj = this.props.data;
+    const labels = ["A", "B", "C", "D"];
 
     for(var key in obj){
       if(key === "labels"){
-        labels = obj[key];
+       // printLabels = obj[key]
       }
       if(key === "title"){
         title = obj[key];
@@ -62,6 +63,20 @@ export default class SimpleBar extends Component {
     };
   };
 
+  renderLabels() {
+
+    const answerKeys = ["A", "B", "C", "D"];
+
+    return this.props.data.labels.map((label, idx) => {
+
+      return (
+          <li className="list-group-item list-group-item quiz-graph-li">{answerKeys[idx]}: {label}</li>
+      );
+
+    });
+
+  };
+
   drawChart() {
     const barData = this.state.data3;
 
@@ -82,14 +97,20 @@ export default class SimpleBar extends Component {
   };
   
   render() {
-        console.log(this.props)
 
     return (
-      <div>
-        <ul className='collection' className="col s4" style={{display: 'inline-block',float:'left', margin: "10px 10px 10px 10px"}}>
-          <p style={{fontWeight:'bold', textAlign: 'center'}}>{ this.props.questions ? this.props.data.title : ""  }</p>
-          {this.drawChart()}
-        </ul>
+      <div >
+        <div className="graph-top">
+          <ul className='collection' className="col s4" style={{display: 'inline-block',float:'left', margin: "10px 10px 10px 10px"}}>
+            <p style={{fontWeight:'bold', textAlign: 'center'}}>{ this.props.questions ? this.props.data.title : ""  }</p>
+            {this.drawChart()}
+          </ul>
+        </div>
+        <div className="graph-labels-bottom">
+          <div className="quiz-graph">
+            <ul className="list-group">{this.renderLabels()}</ul>
+          </div>
+        </div>
       </div>
     )
   };

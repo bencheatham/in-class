@@ -33,7 +33,7 @@ export default class ClassQuizSummary extends Component {
           <div>
 
             <div>
-              <div className="quiz-graph">
+              <div className="quiz-graph quiz-list-title">
                 <h2>myQuiz</h2>
               </div>
               <div className="quiz-graph quiz-graph-pie" >
