@@ -6,7 +6,6 @@ require('../stylesheets/aboutView.scss');
 
 export default class AboutView extends Component {
 
-
   render() {
     function getContributeDescription() {
       return (
@@ -50,7 +49,6 @@ export default class AboutView extends Component {
       );
     }
 
-
     return(
 
       <div id="about-view">
@@ -72,89 +70,72 @@ export default class AboutView extends Component {
             teacher and introducing feedback loops to assess whether students understand the presented material in real-time.
           </div>
         </div>
-        
-        <div className="sect">
+
+        <div id="dev-info" className="sect">
           <div className="title">Team</div>
-          <div className="content ">
+          <div className="content">
+            <div className="dev-card">
+              <img src="/images/louie.jpg"></img>
+              <div className="dev-content">
+                <div className="dev-header">
+                  <h4 className="name">Louis Buchbinder</h4>
+                </div>
+                <div className="dev-body">
+                  <p>Scrum Master</p>
+                  <Button bsStyle="primary">LinkedIn</Button>
+                  <Button className="github">Github</Button>
+                </div>
+              </div>
+            </div>
 
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <div className="dev-card">
-                      <img src="/images/louie.jpg"></img>
-                      <div className="dev-content">
-                        <div className="dev-header">
-                          <h4 className="name">Louis Buchbinder</h4>
-                        </div>
-                        <div className="dev-body">
-                          <p>Scrum Master</p>
-                          <Button bsStyle="primary">LinkedIn</Button>
-                          <Button className="github">Github</Button>
-                        </div>
-                      </div>
-                    </div>
+            <div className="dev-card ">
+              <img src="/images/ben.jpeg"></img>
+              <div className="dev-content">
+                <div className="dev-header">
+                  <h4 className="name">Ben Cheatham</h4>
+                </div>
+                <div className="dev-body">
+                  <p>Product Manager</p>
+                  <Button bsStyle="primary">LinkedIn</Button>
+                  <Button className="github">Github</Button>
+                </div>
+              </div>
+            </div>
 
-                  </td>
-                  <td>
-                    <div className="dev-card ">
-                      <img src="/images/ben.jpeg"></img>
-                      <div className="dev-content">
-                        <div className="dev-header">
-                          <h4 className="name">Ben Cheatham</h4>
-                        </div>
-                        <div className="dev-body">
-                          <p>Product Manager</p>
-                          <Button bsStyle="primary">LinkedIn</Button>
-                          <Button className="github">Github</Button>
-                        </div>
-                      </div>
-                    </div>
+            <div className="dev-card ">
+              <img src="/images/sterv.jpeg"></img>
+              <div className="dev-content">
+                <div className="dev-header">
+                  <h4 className="name">Stephen Sullivan</h4>
+                </div>
+                <div className="dev-body">
+                  <p>Software Engineer</p>
+                  <Button bsStyle="primary">LinkedIn</Button>
+                  <Button className="github">Github</Button>
+                </div>
+              </div>
+            </div>
 
-                  </td>
-                  <td>
-                    <div className="dev-card ">
-                      <img src="/images/sterv.jpeg"></img>
-                      <div className="dev-content">
-                        <div className="dev-header">
-                          <h4 className="name">Stephen Sullivan</h4>
-                        </div>
-                        <div className="dev-body">
-                          <p>Software Engineer</p>
-                          <Button bsStyle="primary">LinkedIn</Button>
-                          <Button className="github">Github</Button>
-                        </div>
-                      </div>
-                    </div>
+            <div className="dev-card ">
+              <img src="/images/jason.jpg"></img>
+              <div className="dev-content">
+                <div className="dev-header">
+                  <h4 className="name">Jason Wu</h4>
+                </div>
+                <div className="dev-body">
+                  <p>Software Engineer</p>
+                  <Button bsStyle="primary" href="https://www.linkedin.com/in/chjasonwu">LinkedIn</Button>
+                  <Button className="github" href="https://github.com/chjasonwu" >Github</Button>
+                </div>
+              </div>
+            </div>
 
-                  </td>
-                  <td>
-                    <div className="dev-card ">
-                      <img src="/images/jason.jpg"></img>
-                      <div className="dev-content">
-                        <div className="dev-header">
-                          <h4 className="name">Jason Wu</h4>
-                        </div>
-                        <div className="dev-body">
-                          <p>Software Engineer</p>
-                          <Button bsStyle="primary">LinkedIn</Button>
-                          <Button className="github">Github</Button>
-                        </div>
-                      </div>
-                    </div>
-
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
 
-
-
         <div className="sect">
           <div className="title">Real-time Feedback Loops</div>
-          <div className="content ">
+          <div className="content">
             <Table striped bordered condensed hover>
               <thead>
                 <tr>
@@ -263,8 +244,6 @@ export default class AboutView extends Component {
             </span>
           </div>
         </div>
-
-
 
       </div>
     );

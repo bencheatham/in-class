@@ -6,10 +6,11 @@
     margin-left: 10vw;
     margin-right: 10vw;
 
-    position: relative;
+    display: block;
   }
 
   .title {
+    display: -webkit-inline-box;
     font-size: 1.5em;
     font-weight: bolder;
   }
@@ -22,11 +23,10 @@
     text-align: justify;
     text-justify: inter-word;
   }
-
-
 }
 
 .dev-card {
+  float: left;
   position: relative;
   border-style: solid;
   border: 1px solid #e5e5e5;
@@ -35,6 +35,9 @@
   max-width: 16.5rem;
   display: block;
   background-color: #fff;
+
+  margin-right: 1rem;
+  margin-bottom: 2rem;
 
   img {
     border-radius: .25rem .25rem 0 0;
@@ -62,14 +65,9 @@
       border: 1px solid #CCC;
     }
 
-    button {
+    button, a {
       margin-right: 0.25rem;
     }
 
-    tr {
-      margin-right: 2rem;
-    }
   }
-
-
 }
