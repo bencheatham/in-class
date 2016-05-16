@@ -28,7 +28,7 @@ export default class HomeView extends Component {
                <div className="col-md-7 feature-summary">
                  <h2 className="featurette-heading">Thumb Checks</h2>
                  <span className="muted">Real-time Comprehension Checks</span>
-                 <p className="lead">Addresses difficulty of determining (in real-time) whether 
+                 <p className="lead">Addresses difficulty of determining (in real-time) whether
                  students understand material covered in presentation.</p>
                </div>
                <div className="col-md-5">
@@ -41,7 +41,7 @@ export default class HomeView extends Component {
                <div className="col-md-7 col-md-push-5">
                  <h2 className="featurette-heading">Give Quizes</h2>
                  <span className="muted">Assess Student Comprehension With Real-time Quiz</span>
-                 <p className="lead">Address difficulty of determining (in real-time) 
+                 <p className="lead">Address difficulty of determining (in real-time)
                   whether students understand material covered in presentation </p>
                </div>
                <div className="col-md-5 col-md-pull-7">
@@ -55,7 +55,7 @@ export default class HomeView extends Component {
                <div className="col-md-7">
                  <h2 className="featurette-heading">Quiz Results Analytics</h2>
                  <span className="muted">Get Instant Visualization of Quiz Results</span>
-                 <p className="lead">Understand in real-time the class' material comprehension with data Visualization.</p>
+                 <p className="lead">Real-Time Student Comprehension Analysis with Data Visualization.</p>
                </div>
                <div className="col-md-5">
                  <img className="feature-image featurette-image img-responsive center-block" src="/images/analytics.jpg" alt="Analytics" />
@@ -100,7 +100,7 @@ export default class HomeView extends Component {
 };
 //thumb image from http://www.marcresearch.com/blogs/merrill/2015/05/27/thumbs-up-or-thumbs-down-time-to-take-a-fun-quiz-and-let-me-know/
 
-         // <img 
-         // src={'http://d32ogoqmya1dw8.cloudfront.net/images/NAGTWorkshops/earlycareer/teaching/large_lecture.jpg'} 
-         // alt="boohoo" 
+         // <img
+         // src={'http://d32ogoqmya1dw8.cloudfront.net/images/NAGTWorkshops/earlycareer/teaching/large_lecture.jpg'}
+         // alt="boohoo"
          // className="img-responsive"/>

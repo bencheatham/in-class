@@ -13,7 +13,6 @@ export default class SingleQuestionsSummary extends Component {
   renderQuizQuestionResults() {
 
     let idx = this.props.data.selectedQuiz;
-
     let quizResult = this.props.data.analyzedQuizes[idx];
 
       return (
@@ -30,9 +29,9 @@ export default class SingleQuestionsSummary extends Component {
    return  _.map(questions, (question, key) => {
 
       let datapack = {
-        title: key, 
-        labels: question.labels, 
-        data: question.responseData 
+        title: key,
+        labels: question.labels,
+        data: question.responseData
       };
 
       return (

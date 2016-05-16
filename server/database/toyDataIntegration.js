@@ -88,7 +88,6 @@ const answers = {
     student4: {answers: {title:'Science Test', teachername: 'teacher1', answers: [{index: 0, answer: 'all of the above'}, {index: 1, answer: 'ethane'}, {index: 2, answer: 'by standing on the shoulders of giants'}]}},
     student5: {answers: {title:'Science Test', teachername: 'teacher1', answers: [{index: 0, answer: 'energy'}, {index: 1, answer: 'methane'}, {index: 2, answer: 'only with improved technology'}]}}
   },
-<<<<<<< HEAD
 
   'Makersquare IQ': {
     student1: {answers: {title:'Makersquare IQ', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'no, it\'s a feature'}, {index: 2, answer: 'me'}]}},
@@ -96,14 +95,6 @@ const answers = {
     student3: {answers: {title:'Makersquare IQ', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'yes'}, {index: 2, answer: 'me'}]}},
     student4: {answers: {title:'Makersquare IQ', teachername: 'teacher1', answers: [{index: 0, answer: 'gots it?'}, {index: 1, answer: 'no, it\'s a feature'}, {index: 2, answer: 'machine'}]}},
     student5: {answers: {title:'Makersquare IQ', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'no'}, {index: 2, answer: 'both'}]}}
-=======
-  Makersquare: {
-    student1: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'no, it\'s a feature'}, {index: 2, answer: 'me'}]}},
-    student2: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'I gots it'}, {index: 1, answer: 'no, it\'s a feature'}, {index: 2, answer: 'me'}]}},
-    student3: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'yes'}, {index: 2, answer: 'me'}]}},
-    student4: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'gots it?'}, {index: 1, answer: 'no, it\'s a feature'}, {index: 2, answer: 'machine'}]}},
-    student5: {answers: {title:'Makersquare', teachername: 'teacher1', answers: [{index: 0, answer: 'you don\'t gots it'}, {index: 1, answer: 'no'}, {index: 2, answer: 'both'}]}}
->>>>>>> f34225c12f36bac40e2bacc027208daaf63f79a8
   }
 };
 

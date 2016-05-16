@@ -8,7 +8,7 @@ const dbTest = require(__dirname + '/database/database.js')('test');
 
 function verifyUsername (request, response) {
   // console.log(request.cookies);
-  var auth = request.cookies.authorization; 
+  var auth = request.cookies.authorization;
   // console.log(auth);
   var token = auth ? auth.slice(7) : '';
   // console.log(token);
@@ -31,11 +31,11 @@ function fetchManifest (db, username) {
 }
 
 
-//////////  //////////  //////////  //////////  
-      //////////  //////////  //////////  //////////  
-//////////  //////////  //////////  //////////  
-      //////////  //////////  //////////  //////////        
-//////////  //////////  //////////  //////////  
+//////////  //////////  //////////  //////////
+      //////////  //////////  //////////  //////////
+//////////  //////////  //////////  //////////
+      //////////  //////////  //////////  //////////
+//////////  //////////  //////////  //////////
 
 
 function insertQuestions (db, title, questions, username) {
@@ -59,7 +59,7 @@ const saveQuiz = (request, response, username, quiz, update, database) => {
 
 // file must be a string
 // data must be an object
-  
+
   if (quiz.title === 'manifest') { response.status(400).send('error: ' + 'manifest is a reserved filename'); return void 0; }
   return database.fetch('quizzes', '*', 'title=\'' + quiz.title + '\'')
   .catch((error) => [])
@@ -87,7 +87,7 @@ const saveQuiz = (request, response, username, quiz, update, database) => {
 
 const fetchQuiz = (request, response, username, title, database) => {
   // console.log('hello');
-  if (title === 'manifest') { 
+  if (title === 'manifest') {
     // console.log('fetch manifest');
     fetchManifest(database, username)
     .then((files) => response.status(200).send(files));
@@ -121,7 +121,7 @@ const fetchAnswers = (request, response, username, title) => {
     var data = {title: title};
     answers = answers.map((studentAnswers) => {
       var studentname = studentAnswers.username; delete studentAnswers.username; studentAnswers.studentname = studentname;
-      studentAnswers.answers = 
+      studentAnswers.answers =
         studentAnswers
         .answers
         .split('+++')
@@ -133,7 +133,7 @@ const fetchAnswers = (request, response, username, title) => {
   })
   .then((answers) => response.status(200).send(answers))
   .catch((error) => response.status(400).send('error: ' + 'some issue fetching the answers...'));
-  
+
 };
 
 const deleteQuiz = (request, response, username, title, database) => {
@@ -192,7 +192,7 @@ module.exports = (app) => {
         return saveAnswers(request, response, username, answers);
       }
     });
-        
+
   });
 
   app.get('/fetch', (request, response) => {
@@ -200,7 +200,7 @@ module.exports = (app) => {
     var answers = request.query.answers;
     var test = request.query.test;
     var database = test ? dbTest : db;
-    
+
     var requestForQuiz = !answers;
     var requestForAnswers = !!answers;
 
@@ -210,8 +210,7 @@ module.exports = (app) => {
 
 
 // file must be a string
-
-
+    
     verifyUsername(request,response)
     .catch((error) => response.status(400).send('error: ' + 'invalid token...'))
     .then((username) => {
