@@ -57,21 +57,22 @@
 
 }
 
+.quiz-graph-class-quiz-summary {
+  position: relative;
+  display: block;
+}
+
 .single-quiz-graph-container {
  position: absolute;
  display: inline-block;
 }
 
 .quiz-list-title {
-    margin: 0;
     background: yellow;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+
 }
 
+/*used in BarGraph*/
 .graph-top {
   inline: block;
 }
@@ -79,4 +80,5 @@
 .graph-labels-bottom {
   inline: block;
 }
+
 
