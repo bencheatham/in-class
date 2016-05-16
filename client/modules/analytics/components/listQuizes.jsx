@@ -14,8 +14,9 @@ export default class ListQuizes extends Component {
   };
 
   openAnalytics(idx) {
-    this.props.data.analyticsActions.selectQuiz(idx);
-    hashHistory.push('/analytics/quiz');
+
+    this.props.data.analyticsActions.getQuizAndAnalyze(idx);
+
   };
 
   getQuizList() {
@@ -30,7 +31,7 @@ export default class ListQuizes extends Component {
           <span className="userIcon"><Glyphicon glyph="glyphicon glyphicon-signal" /></span>
           <span className="quizId"> {quiz}</span>
         </li>
-      )
+      );
     });
   };
 

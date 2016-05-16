@@ -17,13 +17,6 @@ class AnalyticsContainer extends Component {
     super(props);
   };
 
-  componentWillMount() {
-
-    this.props.analyticsActions.getQuizAnalytics();
-    this.props.analyticsActions.fetchQuizList();
-
-  };
-
  
   render() {
 
@@ -31,11 +24,8 @@ class AnalyticsContainer extends Component {
       <div>
         <Header />
         <div className="container-fluid">
-          <div className="container-fluid" className="row">
+          <div >
             <ClassQuizSummary data={this.props}/>
-          </div>
-          <div className="container-fluid" className="row">
-            <QuestionsSummary data={this.props}/>
           </div>
         </div>
       </div>

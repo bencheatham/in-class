@@ -23,16 +23,29 @@ export default class SingleQuizSummary extends Component {
     };
 
     return (
-      <div key={quizResult.title}>
-
-        <BarChart data={datapack} />
-
-        <p><strong>Class Average: </strong>{quizResult.classAverage}%</p>
-        <p><strong>Standard Deviation: </strong>{quizResult.stdDev}%</p>
-        <p><strong>Number of Students: </strong>{quizResult.numStudents}</p>
-
-        <PieChart data={datapack} />
-
+      <div>
+      <div key={quizResult.title} >
+          <div>
+            <div className="single-quiz-graph-title">
+              <h2>{quizResult.title} Results</h2>
+            </div>
+            <div>
+              <div className="quiz-graph quiz-graph-pie" >
+                <PieChart data={datapack} />
+              </div>
+              <div className="quiz-graph" >
+                <BarChart data={datapack} questions={false}  />
+              </div>
+              <div className="quiz-graph" >
+                <ul className="list-group  ">
+                  <li className="list-group-item quiz-graph-summary-li" ><strong>Class Average: </strong>{quizResult.classAverage}%</li>
+                  <li className="list-group-item quiz-graph-summary-li"><strong>Standard Deviation: </strong>{quizResult.stdDev}%</li>
+                  <li className="list-group-item quiz-graph-summary-li"><strong>Number of Students: </strong>{quizResult.numStudents}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   };
@@ -43,8 +56,9 @@ export default class SingleQuizSummary extends Component {
 
     return (
 
+
       <div>
-      {this.renderQuizResults()}
+        {this.renderQuizResults()}
       </div> 
 
     );

@@ -55,7 +55,7 @@ export default class HomeView extends Component {
                <div className="col-md-7">
                  <h2 className="featurette-heading">Quiz Results Analytics</h2>
                  <span className="muted">Get Instant Visualization of Quiz Results</span>
-                 <p className="lead">Understang in real-time the class material comprehension with data Visualization.</p>
+                 <p className="lead">Real-Time Student Comprehension Analysis with Data Visualization.</p>
                </div>
                <div className="col-md-5">
                  <img className="feature-image featurette-image img-responsive center-block" src="/images/analytics.jpg" alt="Analytics" />
