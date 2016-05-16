@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import * as UserVideoModalActions from '../actions/userVideoModal';
 import * as quizActions from '../quiz/actions';
 import * as thumbActions from '../thumbs/actions';
-import * as QuetionModalActions from '../modules/questionModal/actions'
+import * as QuetionModalActions from '../modules/questionModal/actions';
+import * as AnalyticsActions from '../modules/analytics/actions/analytics_actions';
 import * as QuestionModalSockets from '../modules/questionModal/socket';
 import QuestionModal from '../modules/questionModal/QuestionModal';
 import UserVideoModal from './UserVideoModal';
@@ -51,7 +52,8 @@ class TeacherPanel extends React.Component {
   };
 
   openAnalytics() {
-    hashHistory.push('/analytics');
+    this.props.analyticsActions.getQuizAndAnalyze();
+    //hashHistory.push('/analytics');
   };
 
   openHandraise() {
@@ -142,6 +144,7 @@ function mapDispatchToProps(dispatch) {
     quizActions: bindActionCreators(quizActions, dispatch),
     thumbActions: bindActionCreators(thumbActions, dispatch),
     questionModalActions: bindActionCreators(QuetionModalActions, dispatch),
+    analyticsActions: bindActionCreators(AnalyticsActions, dispatch)
   }
 };
 

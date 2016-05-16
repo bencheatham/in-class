@@ -48,7 +48,7 @@ export function getQuizAndAnalyze(quizData){
               payload: quizContainer
             });
 
-            if(quizData !== null || quizData !== undefined){
+            if(quizData !== undefined){
 
               console.log('yes!')
               console.log(quizData)

@@ -17,14 +17,6 @@ class AnalyticsContainer extends Component {
     super(props);
   };
 
-  componentWillMount() {
-
-    this.props.analyticsActions.getQuizAnalytics();
- //   this.props.analyticsActions.fetchQuizList();
- this.props.analyticsActions.getQuizAndAnalyze();
-
-  };
-
  
   render() {
 

@@ -9,12 +9,13 @@ export default class ClassQuizSummary extends Component {
 
   constructor(props) {
     super(props);
-    this.openAnalytics = this.openAnalytics.bind(this);
+    //this.openAnalytics = this.openAnalytics.bind(this);
 
   };
 
   openAnalytics(idx) {
-    this.props.data.analyticsActions.selectQuiz(idx);
+    this.props.data.analyticsActions.getQuizAndAnalyze(idx);
+   // this.props.data.analyticsActions.selectQuiz(idx);
    // hashHistory.push('/analytics/quiz');
   };
 
