@@ -34,6 +34,17 @@
  border: none;
 }
 
+.quiz-graph-legend-li.list-group-item  {
+ border: none;
+ padding: 2px 2px;
+ font-size: 16px;
+}
+
+.quiz-graph-summary-li.list-group-item  {
+ border: none;
+ padding: 2px 2px;
+}
+
 
 .quiz-graph-li-title {
   text-align: center;
@@ -98,5 +109,9 @@
   inline: block;
   font-size: 10px;
   text-align: center;
+}
+
+.answer-key-title {
+  font-size: 12px;
 }
 

@@ -79,7 +79,7 @@ export default class SimpleBar extends Component {
     return this.props.data.labels.map((label, idx) => {
 
       return (
-          <li key={idx} className="list-group-item list-group-item quiz-graph-li">{answerKeys[idx]}: {label}</li>
+          <li key={idx} className="list-group-item quiz-graph-legend-li">{answerKeys[idx]}: {label}</li>
       );
 
     });
@@ -117,6 +117,7 @@ export default class SimpleBar extends Component {
         </div>
         <div className="graph-labels-bottom">
           <div className="quiz-graph">
+            <p className="answer-key-title">{this.props.questions ? "Answer Key:" : ""}</p>
             <ul className="list-group">{this.renderLabels()}</ul>
           </div>
         </div>

@@ -38,9 +38,9 @@ export default class SingleQuizSummary extends Component {
               </div>
               <div className="quiz-graph" >
                 <ul className="list-group  ">
-                  <li className="list-group-item quiz-graph-li " ><strong>Class Average: </strong>{quizResult.classAverage}%</li>
-                  <li className="list-group-item quiz-graph-li "><strong>Standard Deviation: </strong>{quizResult.stdDev}%</li>
-                  <li className="list-group-item quiz-graph-li "><strong>Number of Students: </strong>{quizResult.numStudents}</li>
+                  <li className="list-group-item quiz-graph-summary-li" ><strong>Class Average: </strong>{quizResult.classAverage}%</li>
+                  <li className="list-group-item quiz-graph-summary-li"><strong>Standard Deviation: </strong>{quizResult.stdDev}%</li>
+                  <li className="list-group-item quiz-graph-summary-li"><strong>Number of Students: </strong>{quizResult.numStudents}</li>
                 </ul>
               </div>
             </div>
