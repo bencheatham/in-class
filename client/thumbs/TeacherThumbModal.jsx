@@ -29,7 +29,7 @@ class ThumbsModal extends React.Component {
       <div>
       <Modal show={displayModal}>
         <Modal.Header>
-          <Modal.Title>You have successfully sent out a thumb check!</Modal.Title>
+          <Modal.Title>Results from your thumb check!</Modal.Title>
         </Modal.Header>
         <Modal.Body> 
         <Table>

@@ -10,7 +10,6 @@ export default class SingleQuestionsSummary extends Component {
     super(props);
   };
 
-
   renderQuizQuestionResults() {
 
     let idx = this.props.data.selectedQuiz;

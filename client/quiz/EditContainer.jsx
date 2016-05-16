@@ -6,7 +6,9 @@ import EditItem from '../quiz/EditItem';
 import Drawer from '../containers/Drawer';
 import * as quizActions from './actions';
 import Header from '../login/Header';
-import { Button, Glyphicon } from 'react-bootstrap';
+import { Button, Glyphicon, Table } from 'react-bootstrap';
+import {hashHistory} from 'react-router';
+require('../stylesheets/sidebar.scss');
 
 class EditContainer extends Component {
   constructor (props){
@@ -15,6 +17,9 @@ class EditContainer extends Component {
     this.handleSubmission = this.handleSubmission.bind(this);
     this.renderQuizItems = this.renderQuizItems.bind(this);
     this.changeTitle = this.changeTitle.bind(this);
+  }
+
+  componentDidMount(){
   }
 
   handleClick (){
@@ -42,12 +47,22 @@ class EditContainer extends Component {
     
     return (
       <div>
-        <Header />        
-        <h3>Quiz Title:
-        <input type="text" onChange={this.changeTitle} value={this.props.quizToEdit.title} ref="title"></input>
-        <Button onClick={this.handleSubmission} bsStyle="primary">Save Quiz</Button>
+        <Header /> 
+
+        <h3>Quiz Title: <input type="text" onChange={this.changeTitle} value={this.props.quizToEdit.title} ref="title"></input> <Button onClick={this.handleSubmission} bsStyle="primary">Save Quiz</Button>
         </h3>
-        {this.renderQuizItems()}
+        <Table bordered>
+          <tbody>
+          <tr className="edit-top-row">
+            <td>Question</td>
+            <td>Answer</td>
+            <td>Option 1</td>
+            <td>Option 2</td>
+            <td>Option 3</td>
+          </tr>
+          {this.renderQuizItems()}
+          </tbody>
+        </Table>
         <Button onClick={this.handleClick} className="btn-warning btn-circle btn-xl">
           <Glyphicon glyph="glyphicon glyphicon-plus" />
         </Button>
