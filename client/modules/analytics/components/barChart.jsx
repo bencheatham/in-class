@@ -67,7 +67,10 @@ export default class SimpleBar extends Component {
   renderLabels() {
 
     if(!this.props.questions) {
-      return;
+      return (
+        <div className="graph-legend-description"><p>Result Percentagaes</p></div>
+
+      );
     }
 
 
