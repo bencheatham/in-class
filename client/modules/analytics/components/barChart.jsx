@@ -14,11 +14,7 @@ export default class SimpleBar extends Component {
 
     const labels = this.props.questions ? ["A", "B", "C", "D"] : this.props.data.labels;
 
-    console.log(labels)
     let obj = this.props.data;
-
-
-
 
     for(var key in obj){
       if(key === "labels"){
@@ -69,6 +65,11 @@ export default class SimpleBar extends Component {
   };
 
   renderLabels() {
+
+    if(!this.props.questions) {
+      return;
+    }
+
 
     const answerKeys = ["A", "B", "C", "D"];
 
