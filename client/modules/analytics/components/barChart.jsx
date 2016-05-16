@@ -68,7 +68,11 @@ export default class SimpleBar extends Component {
 
     if(!this.props.questions) {
       return (
-        <div className="graph-legend-description"><p>Result Percentagaes</p></div>
+        <div>
+          <div className="graph-legend-description">
+            <p>Result Percentagaes</p>
+          </div>
+        </div>
 
       );
     }

@@ -34,6 +34,10 @@
  border: none;
 }
 
+.quiz-graph-li.list-group-item:hover  {
+    opacity: 0.5;
+}
+
 .quiz-graph-legend-li.list-group-item  {
  border: none;
  padding: 2px 2px;
@@ -92,7 +96,7 @@
   padding-right: 10%;
   margin-bottom: 30px;
   margin-top: 5px;
-  color: red;
+  color: black;
 }
 
 
@@ -109,9 +113,14 @@
   inline: block;
   font-size: 10px;
   text-align: center;
+  float: none;
+  padding: 0px;
 }
+
+
 
 .answer-key-title {
   font-size: 12px;
+  margin-bottom: 0px;
 }
 
