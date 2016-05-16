@@ -13,17 +13,14 @@ export default class SingleQuestionsSummary extends Component {
   renderQuizQuestionResults() {
 
     let idx = this.props.data.selectedQuiz;
-
     let quizResult = this.props.data.analyzedQuizes[idx];
 
-      return (
-        <div key={quizResult.title}>
-          <h2>{quizResult.title}</h2>
-
-          {this.renderQuestion(quizResult.answerTally.questions)}
-
-        </div>
-      );
+    return (
+      <div key={quizResult.title}>
+        <h2>{quizResult.title}</h2>
+        {this.renderQuestion(quizResult.answerTally.questions)}
+      </div>
+    );
   };
 
   renderQuestion(questions) {
@@ -31,9 +28,9 @@ export default class SingleQuestionsSummary extends Component {
    return  _.map(questions, (question, key) => {
 
       let datapack = {
-        title: key, 
-        labels: question.labels, 
-        data: question.responseData 
+        title: key,
+        labels: question.labels,
+        data: question.responseData
       };
 
       return (
@@ -54,7 +51,7 @@ export default class SingleQuestionsSummary extends Component {
 
       <div>
       {this.renderQuizQuestionResults()}
-      </div> 
+      </div>
 
     );
   };
