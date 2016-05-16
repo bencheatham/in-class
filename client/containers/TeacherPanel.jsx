@@ -53,7 +53,6 @@ class TeacherPanel extends React.Component {
 
   openAnalytics() {
     this.props.analyticsActions.getQuizAndAnalyze();
-    //hashHistory.push('/analytics');
   };
 
   openHandraise() {

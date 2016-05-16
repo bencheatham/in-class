@@ -15,17 +15,11 @@ export default class ClassQuizSummary extends Component {
 
   openAnalytics(idx) {
     this.props.data.analyticsActions.getQuizAndAnalyze(idx);
-   // this.props.data.analyticsActions.selectQuiz(idx);
-   // hashHistory.push('/analytics/quiz');
   };
 
   renderQuizResults() {
 
-
-
     return this.props.data.analyzedQuizes.map((quizResult, idx) => {
-
-      console.log(quizResult)
 
       let datapack = {
         title: quizResult.title, 

@@ -35,8 +35,6 @@ export default class SingleQuestionsSummary extends Component {
         data: question.responseData 
       };
 
-      console.log(key)
-
       return (
         <div key={key} className="quiz-graph">
           <BarChart data={datapack} questions={true} />
@@ -50,11 +48,6 @@ export default class SingleQuestionsSummary extends Component {
 
 
   render() {
-    // if(this.props.analyzedQuizes === null || this.props.analyzedQuizes === undefined) {
-    //   return (
-    //     <div>Loading...</div>
-    //   );
-    // }
 
     return (
 

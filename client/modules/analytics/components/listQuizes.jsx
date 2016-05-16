@@ -14,10 +14,8 @@ export default class ListQuizes extends Component {
   };
 
   openAnalytics(idx) {
-    console.log('about to call action')
-    console.log(idx)
-   // this.props.data.analyticsActions.selectQuiz(idx);
-     this.props.data.analyticsActions.getQuizAndAnalyze(idx);
+
+    this.props.data.analyticsActions.getQuizAndAnalyze(idx);
 
   };
 
