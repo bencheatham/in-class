@@ -2,21 +2,28 @@ export default function analyzeQuiz(quiz, responses){
 
   let quizAddOns = {};
 
-  quizAddOns.questions =  quiz.questions.reduce((accum1, item, idx) => {
+
+  quizAddOns.questions =  quiz.questions.reduce((accum1, item1, idx) => {
     
-    let tmp1 = {};
-    tmp1[item.question] = item.choices.reduce((accum2, item, idx) => {
+    var tmp1 = {};
+
+
+    tmp1[item1.question] = item1.choices.reduce((accum2, item2) => {
      if(accum2.responses === undefined){
       accum2.responses = {};
      }
 
-     accum2.responses[item] = 0;
+     accum2.responses[item2] = 0;
      return accum2;
     }, {} );
+    
     accum1[Object.keys(tmp1)[0]] = tmp1[Object.keys(tmp1)[0]];
+
     return accum1;
     
   }, {} );
+
+
 
   let checkQuizIndexes = () => {  
     return quiz.questions.reduce((accum, item, idx) => {
@@ -86,11 +93,11 @@ export default function analyzeQuiz(quiz, responses){
   for(let key1 in classScores.answerTally.questions) {
     classScores.answerTally.questions[key1].labels = [];
     classScores.answerTally.questions[key1].responseData = [];
-    
+ 
     for(let key2 in classScores.answerTally.questions[key1].responses) {
       classScores.answerTally.questions[key1].labels.push(key2);
       classScores.answerTally.questions[key1].responseData.push(quizAddOns.questions[key1].responses[key2]);
-    }  
+    } 
   }
 
   let uniqueScores = [];

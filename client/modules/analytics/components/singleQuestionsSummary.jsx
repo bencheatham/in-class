@@ -15,12 +15,13 @@ export default class SingleQuestionsSummary extends Component {
     let idx = this.props.data.selectedQuiz;
     let quizResult = this.props.data.analyzedQuizes[idx];
 
-    return (
-      <div key={quizResult.title}>
-        <h2>{quizResult.title}</h2>
-        {this.renderQuestion(quizResult.answerTally.questions)}
-      </div>
-    );
+      return (
+        <div key={quizResult.title} >
+
+          {this.renderQuestion(quizResult.answerTally.questions)}
+
+        </div>
+      );
   };
 
   renderQuestion(questions) {
@@ -34,8 +35,8 @@ export default class SingleQuestionsSummary extends Component {
       };
 
       return (
-        <div key={key}>
-          <BarChart data={datapack} />
+        <div key={key} className="quiz-graph">
+          <BarChart data={datapack} questions={true} />
 
         </div>
 
@@ -49,9 +50,9 @@ export default class SingleQuestionsSummary extends Component {
 
     return (
 
-      <div>
-      {this.renderQuizQuestionResults()}
-      </div>
+      <div className="quiz-graph quiz-graph-questions">
+        {this.renderQuizQuestionResults()}
+      </div> 
 
     );
   };

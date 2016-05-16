@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-
+import { hashHistory } from 'react-router';
 import BarChart from './barChart';
 import PieChart from './pieChart';
-
+import SingleQuestionsSummary from '../components/singleQuestionsSummary';
+require('../../../stylesheets/analytics.scss');
 
 export default class ClassQuizSummary extends Component {
 
   constructor(props) {
     super(props);
+    this.openAnalytics = this.openAnalytics.bind(this);
+
+  };
+
+  openAnalytics(idx) {
+    this.props.data.analyticsActions.getQuizAndAnalyze(idx);
   };
 
   renderQuizResults() {
 
-    return this.props.data.analyzedQuizes.map((quizResult) => {
+    return this.props.data.analyzedQuizes.map((quizResult, idx) => {
 
       let datapack = {
         title: quizResult.title, 
@@ -21,17 +28,31 @@ export default class ClassQuizSummary extends Component {
       };
 
       return (
-        <div key={quizResult.title} >
+        <li key={idx} className="list-group-item quiz-graph-li" onClick={this.openAnalytics.bind(this, idx)}>
+          <div >
 
-          <BarChart data={datapack} />
 
-          <p><strong>Class Average: </strong>{quizResult.classAverage}%</p>
-          <p><strong>Standard Deviation: </strong>{quizResult.stdDev}%</p>
-          <p><strong>Number of Students: </strong>{quizResult.numStudents}</p>
+            <div className="quiz-graph-class-quiz-summary">
+              <div className="quiz-graph quiz-overview-list-item-title">
+                <h2>{quizResult.title}</h2>
+              </div>
 
-          <PieChart data={datapack} />
-
-        </div>
+              <div className="quiz-graph quiz-graph-pie" >
+                <PieChart data={datapack} />
+              </div>
+              <div className="quiz-graph" >
+                <BarChart data={datapack} questions={false}  />
+              </div>
+              <div className="quiz-graph" >
+                <ul className="list-group  ">
+                <li className="list-group-item quiz-graph-summary-li" ><strong>Class Average: </strong>{quizResult.classAverage}%</li>
+                <li className="list-group-item quiz-graph-summary-li"><strong>Standard Deviation: </strong>{quizResult.stdDev}%</li>
+                <li className="list-group-item quiz-graph-summary-li"><strong>Number of Students: </strong>{quizResult.numStudents}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
       );
     });
   };
@@ -41,10 +62,14 @@ export default class ClassQuizSummary extends Component {
   render() {
 
     return (
-
       <div>
-      {this.renderQuizResults()}
-      </div> 
+        <div className="quiz-overview-title">
+          <h3>Select Quiz for Question Results</h3>
+        </div>
+        <ul className="list-group" >
+          {this.renderQuizResults()}
+        </ul> 
+      </div>
 
     );
   };

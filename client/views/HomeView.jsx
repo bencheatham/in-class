@@ -15,17 +15,17 @@ export default class HomeView extends Component {
        <Header />
        <div className="cover-container">
          <div className="inner-cover">
-          <span><h1 className="conver-heading"> InClass.co - Students Stay Engaged</h1></span>
+          <span><h1 className="cover-heading"> Students Stay Engaged</h1></span>
           <div className="home-logo-splash" >
-            <img className="home-logo featurette-image img-responsive center-block" src="/images/in-class-large.png" alt="In Class" />
+
           </div>
         </div>
 
        <div className="container-marketing">
 
-         <hr className="feature-divider"></hr>
+         <hr className="feature-divider top-featurette"></hr>
              <div className="row featurette">
-               <div className="col-md-7">
+               <div className="col-md-7 feature-summary">
                  <h2 className="featurette-heading">Thumb Checks</h2>
                  <span className="muted">Real-time Comprehension Checks</span>
                  <p className="lead">Addresses difficulty of determining (in real-time) whether
@@ -55,7 +55,7 @@ export default class HomeView extends Component {
                <div className="col-md-7">
                  <h2 className="featurette-heading">Quiz Results Analytics</h2>
                  <span className="muted">Get Instant Visualization of Quiz Results</span>
-                 <p className="lead">Understang in real-time the class material comprehension with data Visualization.</p>
+                 <p className="lead">Real-Time Student Comprehension Analysis with Data Visualization.</p>
                </div>
                <div className="col-md-5">
                  <img className="feature-image featurette-image img-responsive center-block" src="/images/analytics.jpg" alt="Analytics" />

@@ -1,0 +1,126 @@
+.quiz-graph {
+ position: relative;
+ float:left;
+ padding: 10px;
+ position: inline-block;
+
+}
+
+.quiz-graph-bar {
+ position: relative;
+ text-align: center;
+ float:left;
+ padding: 40px;
+
+}
+
+.quiz-graph-pie {
+ position: relative;
+ text-align: left;
+ float:left;
+ padding: 10px;
+
+}
+
+.quiz-graph-summary {
+ position: relative;
+ text-align: center;
+ float:left;
+ padding: 40px;
+
+}
+
+.quiz-graph-li.list-group-item  {
+ border: none;
+}
+
+.quiz-graph-li.list-group-item:hover  {
+    opacity: 0.5;
+}
+
+.quiz-graph-legend-li.list-group-item  {
+ border: none;
+ padding: 2px 2px;
+ font-size: 16px;
+}
+
+.quiz-graph-summary-li.list-group-item  {
+ border: none;
+ padding: 2px 2px;
+}
+
+
+.quiz-graph-li-title {
+  text-align: center;
+  padding-right: 60px;
+}
+
+.single-quiz-graph-title {
+  text-align: center;
+  padding-right: 80px;
+}
+
+.quiz-graph-group-div {
+  position: relative;
+  display: block;
+  padding: .75rem 1.25rem;
+}
+
+.quiz-graph-questions {
+  position: relative;
+  display: block;
+
+}
+
+.quiz-graph-class-quiz-summary {
+  position: relative;
+  display: inline-block;
+}
+
+.single-quiz-graph-container {
+ position: absolute;
+ display: inline-block;
+}
+
+.quiz-overview-list-item-title {
+  margin: 0;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.quiz-overview-title {
+  text-align: center;
+  padding-right: 10%;
+  margin-bottom: 30px;
+  margin-top: 5px;
+  color: black;
+}
+
+
+/*used in BarGraph*/
+.graph-top {
+  inline: block;
+}
+
+.graph-labels-bottom {
+  inline: block;
+}
+
+.graph-legend-description {
+  inline: block;
+  font-size: 10px;
+  text-align: center;
+  float: none;
+  padding: 0px;
+}
+
+
+
+.answer-key-title {
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+

@@ -8,15 +8,17 @@ export default class SimpleBar extends Component {
   constructor(props){
     super(props);
 
-    let labels;
-    let title;
-    let data;
+    let printLabels,
+      title,
+      data;
+
+    const labels = this.props.questions ? ["A", "B", "C", "D"] : this.props.data.labels;
 
     let obj = this.props.data;
 
     for(var key in obj){
       if(key === "labels"){
-        labels = obj[key];
+       // printLabels = obj[key]
       }
       if(key === "title"){
         title = obj[key];
@@ -62,6 +64,32 @@ export default class SimpleBar extends Component {
     };
   };
 
+  renderLabels() {
+
+    if(!this.props.questions) {
+      return (
+        <div>
+          <div className="graph-legend-description">
+            <p>Result Percentagaes</p>
+          </div>
+        </div>
+
+      );
+    }
+
+
+    const answerKeys = ["A", "B", "C", "D"];
+
+    return this.props.data.labels.map((label, idx) => {
+
+      return (
+          <li key={idx} className="list-group-item quiz-graph-legend-li">{answerKeys[idx]}: {label}</li>
+      );
+
+    });
+
+  };
+
   drawChart() {
     const barData = this.state.data3;
 
@@ -80,14 +108,23 @@ export default class SimpleBar extends Component {
    // return (<BarChart data={barData} options={barOptions} width="600" height="250"/>);
     return (<BarChart data={barData} options={barOptions} width="300" height="125"/>);
   };
-
+  
   render() {
+
     return (
-      <div>
-        <ul className='collection' className="col s4" style={{display: 'inline-block',float:'left', margin: "10px 10px 10px 10px"}}>
-          <p style={{fontWeight:'bold', textAlign: 'center'}}>{this.props.data.title}</p>
-          {this.drawChart()}
-        </ul>
+      <div >
+        <div className="graph-top">
+          <ul className='collection' className="col s4" style={{display: 'inline-block',float:'left', margin: "10px 10px 10px 10px"}}>
+            <p style={{fontWeight:'bold', textAlign: 'center'}}>{ this.props.questions ? this.props.data.title : ""  }</p>
+            {this.drawChart()}
+          </ul>
+        </div>
+        <div className="graph-labels-bottom">
+          <div className="quiz-graph">
+            <p className="answer-key-title">{this.props.questions ? "Answer Key:" : ""}</p>
+            <ul className="list-group">{this.renderLabels()}</ul>
+          </div>
+        </div>
       </div>
     )
   };

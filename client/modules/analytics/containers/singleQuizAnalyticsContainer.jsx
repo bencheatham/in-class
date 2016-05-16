@@ -9,32 +9,27 @@ import SingleQuizSummary from '../components/singleQuizSummary';
 import SingleQuestionsSummary from '../components/singleQuestionsSummary';
 import Header from '../../../login/Header';
 import TeacherDrawer from '../../../containers/TeacherDrawer';
+require('../../../stylesheets/analytics.scss');
 
 
-class AnalyticsContainer extends Component {
+class SingleQuizAnalyticsContainer extends Component {
 
   constructor(props) {
     super(props);
   };
-
-  componentWillMount() {
-
-    this.props.analyticsActions.getQuizAnalytics();
-    this.props.analyticsActions.fetchQuizList();
-
-  };
-
  
   render() {
 
     return (
-      <div>
+      <div >
         <Header />
-        <div>
-          <SingleQuizSummary data={this.props}/>
-        </div>
-        <div>
-          <SingleQuestionsSummary data={this.props}/>
+        <div className="container-fluid single-quiz-graph-container" >
+          <div className="quiz-graph-group-div">
+            <SingleQuizSummary data={this.props}/>
+          </div>
+          <div className="quiz-graph-group-div">
+            <SingleQuestionsSummary data={this.props}/>
+          </div>
         </div>
       </div>
     );
@@ -57,10 +52,4 @@ function mapStateToProps(state) {
 };
 
 
-function mapDispatchToProps(dispatch) {
-  return {
-   analyticsActions: bindActionCreators(AnalyticsActions, dispatch)
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AnalyticsContainer);
+export default connect(mapStateToProps)(SingleQuizAnalyticsContainer);
