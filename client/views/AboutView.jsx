@@ -133,7 +133,10 @@ export default class AboutView extends Component {
           </div>
         </div>
 
+
+        
         <div className="sect">
+        
           <div className="title">Real-time Feedback Loops</div>
           <div className="content">
             <Table striped bordered condensed hover>
