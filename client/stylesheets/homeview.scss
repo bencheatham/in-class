@@ -55,5 +55,28 @@ h1 {
   line-height: 1.4;
 }
 
+.inner-cover {
+  background-image: url("/images/handsup.png");
+  background-size: 100% 100%;
+}
+
+.cover-heading {
+  padding: 40px;
+}
+
+hr.top-featurette {
+  margin-top: 0px;
+  margin-bottom: 2rem;
+}
+
+hr.featurette-divider {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-summary {
+ display: block-inline;
+ width: 35%;
+}
 
 
