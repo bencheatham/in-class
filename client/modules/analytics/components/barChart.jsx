@@ -12,8 +12,13 @@ export default class SimpleBar extends Component {
       title,
       data;
 
+    const labels = this.props.questions ? ["A", "B", "C", "D"] : this.props.data.labels;
+
+    console.log(labels)
     let obj = this.props.data;
-    const labels = ["A", "B", "C", "D"];
+
+
+
 
     for(var key in obj){
       if(key === "labels"){

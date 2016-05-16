@@ -41,7 +41,7 @@ export default class ClassQuizSummary extends Component {
                 <PieChart data={datapack} />
               </div>
               <div className="quiz-graph" >
-                <BarChart data={datapack}  />
+                <BarChart data={datapack} questions={false}  />
               </div>
               <div className="quiz-graph" >
                 <ul className="list-group  ">

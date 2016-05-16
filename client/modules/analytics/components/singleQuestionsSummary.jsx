@@ -14,7 +14,7 @@ export default class SingleQuestionsSummary extends Component {
 
     let idx = this.props.data.selectedQuiz;
 
-    let quizResult = idx === null? this.props.data : this.props.data.analyzedQuizes[idx];
+    let quizResult = this.props.data.analyzedQuizes[idx];
 
       return (
         <div key={quizResult.title} >
