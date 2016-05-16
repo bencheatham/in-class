@@ -70,7 +70,7 @@ export default class SimpleBar extends Component {
     return this.props.data.labels.map((label, idx) => {
 
       return (
-          <li className="list-group-item list-group-item quiz-graph-li">{answerKeys[idx]}: {label}</li>
+          <li key={idx} className="list-group-item list-group-item quiz-graph-li">{answerKeys[idx]}: {label}</li>
       );
 
     });

@@ -12,6 +12,12 @@ export default class SingleQuizSummary extends Component {
 
   renderQuizResults() {
 
+    // if(this.props.analyzedQuizes === null || this.props.analyzedQuizes === undefined) {
+    //   return (
+    //     <div>Loading...</div>
+    //   );
+    // }
+
     let idx = this.props.data.selectedQuiz;
 
     let quizResult = this.props.data.analyzedQuizes[idx];
@@ -55,6 +61,7 @@ export default class SingleQuizSummary extends Component {
   render() {
 
     return (
+
 
       <div>
         {this.renderQuizResults()}

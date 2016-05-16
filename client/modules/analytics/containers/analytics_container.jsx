@@ -20,18 +20,13 @@ class AnalyticsContainer extends Component {
   componentWillMount() {
 
     this.props.analyticsActions.getQuizAnalytics();
-    this.props.analyticsActions.fetchQuizList();
+ //   this.props.analyticsActions.fetchQuizList();
+ this.props.analyticsActions.getQuizAndAnalyze();
 
   };
 
  
   render() {
-
-    if(this.props.analyzedQuizes === null || this.props.analyzedQuizes === undefined) {
-      return (
-        <div>Loading...</div>
-      );
-    }
 
     return (
       <div>

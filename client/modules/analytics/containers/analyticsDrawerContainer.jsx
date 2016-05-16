@@ -24,12 +24,6 @@ class AnalyticsDrawerContainer extends Component {
  
   render() {
 
-    if(this.props.availableQuizes === null || this.props.availableQuizes === undefined) {
-      return (
-        <div>Loading...</div>
-      );
-    }
-
     return (
       <div>
 

@@ -17,22 +17,8 @@ class SingleQuizAnalyticsContainer extends Component {
   constructor(props) {
     super(props);
   };
-
-  componentWillMount() {
-
-    this.props.analyticsActions.getQuizAnalytics();
-    this.props.analyticsActions.fetchQuizList();
-
-  };
-
  
   render() {
-
-    if(this.props.analyzedQuizes === null || this.props.analyzedQuizes === undefined) {
-      return (
-        <div>Loading...</div>
-      );
-    }
 
     return (
       <div >
@@ -66,10 +52,4 @@ function mapStateToProps(state) {
 };
 
 
-function mapDispatchToProps(dispatch) {
-  return {
-   analyticsActions: bindActionCreators(AnalyticsActions, dispatch)
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingleQuizAnalyticsContainer);
+export default connect(mapStateToProps)(SingleQuizAnalyticsContainer);
